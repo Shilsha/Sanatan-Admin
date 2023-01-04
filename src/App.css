@@ -1,0 +1,316 @@
+.react-calendar {
+    width: 350px;
+    max-width: 100%;
+    background: #fee7cc !important;
+    border:none !important;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.125em;
+}
+
+
+.react-calendar__month-view__weekdays__weekday {
+    padding: 0.5em;
+    color: #991b1b !important;
+}
+/* .react-calendar__navigation button {
+    min-width: 44px;
+    background: #991b1b !important;
+    color: white;
+    border-radius: 10px;
+} */
+
+
+.react-calendar__navigation button {
+    min-width: 44px;
+    background: none !important;
+    color: none !important;
+    border-radius: none;
+    font-size: 17px;
+}
+.react-calendar__tile--active {
+    background: #f89f1d !important;
+    color: white;
+    border-radius: 10px !important;
+}
+
+.react-calendar__tile:enabled:hover, .react-calendar__tile:enabled:focus {
+    background-color: #991b1b !important;
+    border-radius: 10px !important;
+    color: white;
+}
+
+._svg_101a7_11 {
+    display: inline !important;
+  
+}
+._progress_101a7_1 {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    width: 80px !important;
+}
+
+
+.react-calendar__navigation {
+    display: flex;
+    height: 35px !important;
+    margin-bottom: unset !important;
+}
+
+.react-calendar__tile {
+    max-width: 100%;
+    padding: 9px 0.6667px;
+    background: none;
+    text-align: center;
+    line-height: 14px;
+}
+
+.ScrollStyle
+{
+    max-height: 90%;
+    overflow-y: scroll;
+   
+
+}
+
+
+.ScrollStyle::-webkit-scrollbar {
+    display: none;
+  }
+
+
+ .tables th{
+    background-color: #991b1b;
+    color: white;
+  }
+
+  /* .react-switch-bg{
+    height: 22px !important;
+    width: 56px;
+    margin: 0px;
+    position: relative;
+    background: #991b1b !important;
+    border-radius: 14px;
+    cursor: pointer;
+    transition:  0.25s ease 0s;
+  }
+
+  .react-switch-bg:first-child
+    {
+        height: 20px !important;
+        width: 30px;
+        position: absolute;
+        opacity: 1;
+        right: 0px;
+        top: 0px;
+        pointer-events: none;
+        transition: opacity 0.25s ease 0s;
+  
+}
+
+  .react-switch-bg:nth-child(2)
+    {
+        height: 20px !important;
+        width: 30px;
+        position: absolute;
+        opacity: 1;
+        right: 0px;
+        top: 0px;
+        pointer-events: none;
+        transition: opacity 0.25s ease 0s;
+  
+} */
+/* .tables tbody
+{
+    max-height: 30%;
+    overflow: scroll;
+    border: 2px solid red;
+   
+
+}
+
+
+.tables tbody::-webkit-scrollbar {
+    display: none;
+    border: 2px solid green;
+  } */
+
+
+  .tableWrap {
+    height: 590px;
+    /* border: 2px solid black; */
+    overflow: auto;
+  }
+  /* Set header to stick to the top of the container. */
+  thead tr th {
+    position: sticky;
+    top: 0;
+  }
+  
+  /* If we use border,
+  we must use table-collapse to avoid
+  a slight movement of the header row */
+  table {
+   border-collapse: collapse;
+  }
+  
+  /* Because we must set sticky on th,
+   we have to apply background styles here
+   rather than on thead */
+  th {
+    padding: 16px;
+    padding-left: 15px;
+    border-left: 1px dotted rgba(200, 209, 224, 0.6);
+    border-bottom: 1px solid #e8e8e8;
+    background: #ffc491;
+    text-align: left;
+    /* With border-collapse, we must use box-shadow or psuedo elements
+    for the header borders */
+    box-shadow: 0px 0px 0 2px #e8e8e8;
+  }
+  
+  /* Basic Demo styling */
+  table {
+    width: 100%;
+    font-family: sans-serif;
+  }
+  /* table td {
+    padding: 16px;
+  } */
+  tbody tr {
+    border-bottom: 2px solid #e8e8e8;
+  }
+  thead {
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.85);
+  }
+  tbody tr:hover {
+    background: #e6f7ff;
+  }
+
+  .ReactModal__Overlay .ReactModal__Overlay--after-open{
+
+      position: fixed !important;
+      inset: 0px !important;
+      background-color: rgba(239, 239, 240, 0.75) !important;
+      /* background-color: (239, 239, 240) !important ; */
+  
+  }
+
+
+  /* -----------------Switch button---------------------------------- */
+  
+
+.switch-wrapper > input[type="checkbox"] {
+  opacity: 0;
+  position: absolute;
+}
+
+.switch-wrapper > input[type="checkbox"] + .switch {
+  transform: translateX(5px);
+}
+.switch-wrapper > input[type="checkbox"]:checked + .switch {
+  transform: translateX(50%) translateX(-19px);
+}
+.switch-wrapper.large > input[type="checkbox"]:checked + .switch {
+  transform: translateX(50%) translateX(-35px);
+}
+.switch-wrapper > input[type="checkbox"]:disabled + .switch {
+  background: #ccc;
+}
+
+.switch-wrapper {
+  border-radius: 20px;
+  cursor: pointer;
+  height: 24px;
+  float: left;
+  overflow: hidden;
+  position: relative;
+  width: 48px;
+}
+.switch-wrapper.large {
+  height: 40px;
+  width: 80px;
+}
+.switch-wrapper > .switch {
+  color: #fff;
+  display: inline-block;
+  height: 100%;
+  left: -100%;
+  position: relative;
+  transition: 100ms linear;
+  width: 200%;
+}
+.switch-wrapper > .switch > .switch-handle {
+  background: #fff;
+  border-radius: 50%;
+  display: inline-block;
+  height: 14px;
+  left: 50%;
+  position: relative;
+  top: 4px;
+  width: 14px;
+  z-index: 3;
+}
+.switch-wrapper.large > .switch > .switch-handle {
+  height: 30px;
+  width: 30px;
+}
+.switch-label {
+  float: left;
+  line-height: 2.5rem;
+  margin-left: 10px;
+}
+.switch-wrapper.large + .switch-label {
+  line-height: 4rem;
+  margin-left: 15px;
+}
+
+/* --------------loader------------------ */
+.loader {
+	border-top-color: #3498db;
+	-webkit-animation: spinner 1.5s linear infinite;
+	animation: spinner 1.5s linear infinite;
+}
+
+@-webkit-keyframes spinner {
+	0% {
+		-webkit-transform: rotate(0deg);
+	}
+	100% {
+		-webkit-transform: rotate(360deg);
+	}
+}
+
+@keyframes spinner {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+
+tr:hover{
+  
+  cursor: pointer;
+}
+
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+.ReactModal__Overlay .ReactModal__Overlay--after-open{
+  background-color: #991b1b !important;
+
+
+}
+
+
+
+.active{
+  color: white;
+  border-radius: 5px;
+  background: #b87c14 !important;
+}
+
