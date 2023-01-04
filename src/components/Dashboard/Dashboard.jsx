@@ -98,7 +98,7 @@ function Dashboard() {
         setIsOpen(false);
     }
 
-    function openEdiotor(){
+    function openEdiotor() {
         setIsOpen(true);
     }
     return (
@@ -134,19 +134,19 @@ function Dashboard() {
                                     </div>
                                 </div>
 
-                                <FaEdit className='absolute bottom-2 right-2 text-orange-600 cursor-pointer' onClick={openEdiotor} size={30} />
+                                <FaEdit className='absolute bottom-2 right-2 text-red-800 cursor-pointer' onClick={openEdiotor} size={30} />
 
-                                                </div>
+                            </div>
                             <div className='border-2 col-span-5 p-5  rounded-lg bg-orange-400/20 shadow-xl '>
 
                                 <div className='grid grid-cols-2 gap-4 h-full place-content-center '>
                                     <div className='border border-red-800 bg-slate-300/20 rounded-xl flex justify-center items-center'>
-                                        <h1 className='text-4xl font-bold text-center text-orange-600 font-mono '><DigitalTime /></h1>
+                                        <h1 className='text-4xl font-bold text-center text-red-800 font-mono '><DigitalTime /></h1>
                                     </div>
                                     <div className='border border-red-800 text-center justify-center  bg-slate-300/20 rounded-xl '>
 
                                         <div className='py-8'>
-                                            <h1 className='text-2xl font-bold  text-orange-600 '> {moment(value).format('dddd')}</h1>
+                                            <h1 className='text-2xl font-bold  text-red-800 '> {moment(value).format('dddd')}</h1>
                                             <h2 className='text-xl font-bold  my-2'>{moment(value).format('DD')}</h2>
                                             <h1 className='text-2xl font-bold  text-orange-600'>September</h1>
                                             <h2 className='text-xl font-bold  my-2'>{moment(value).format('YYYY')}</h2>
@@ -167,7 +167,7 @@ function Dashboard() {
 
                                 <div className="row grid grid-cols-3 gap-4 "  >
 
-                                    <div className='rounded-lg  bg-pink-200/70 shadow-xl  px-4 h-[160px] ' >
+                                    <div className='rounded-lg  bg-orange-400/20 shadow-xl  px-4 h-[160px] ' >
                                         <div className='flex justify-between px-3 items-center my-3 '>
                                             <div className='bg-pink-500/70 rounded-full p-2'>
 
@@ -175,39 +175,39 @@ function Dashboard() {
                                             </div>
                                             <div className='flex flex-col '>
                                                 <Link to='/user'>
-                                                    <h1 className='text-orange-600 cursor-pointer py-4 text-3xl text-center 
+                                                    <h1 className='text-red-800 cursor-pointer py-4 text-3xl text-center 
                                                     font-bold underline underline-offset-8 '>User</h1>
 
                                                 </Link>
-                                                <h1 className='text-5xl font-mono  font-bold text-orange-600 text-center '>{userData?.data?.length}</h1>
+                                                <h1 className='text-5xl font-mono  font-bold text-red-800 text-center '>{userData?.data?.length}</h1>
                                             </div>
                                         </div>
 
                                     </div>
 
-                                    <div className='  rounded-lg  bg-blue-200/70 shadow-xl px-4 py-2 h-[160px]'>
+                                    <div className='  rounded-lg  bg-orange-400/20 shadow-xl px-4 py-2 h-[160px]'>
                                         <div className='flex justify-between px-3 items-center my-3 '>
                                             <div className='bg-blue-500/70  rounded-full p-2'>
                                                 <HiClipboardDocumentList className='cursor-pointer' size={60} />
                                             </div>
                                             <div className='flex flex-col '>
                                                 <Link to='/articles'>
-                                                    <h1 className='text-orange-600 py-4 text-3xl text-center font-bold underline underline-offset-8 '>Article</h1>
+                                                    <h1 className='text-red-800 py-4 text-3xl text-center font-bold underline underline-offset-8 '>Article</h1>
                                                 </Link>
 
-                                                <h1 className='text-5xl font-mono  font-bold text-orange-600 text-center '>{getArticle?.length}</h1>
+                                                <h1 className='text-5xl font-mono  font-bold text-red-800 text-center '>{getArticle?.length}</h1>
                                             </div>
                                         </div>
 
                                     </div>
-                                    <div className=' rounded-lg  bg-green-200/70 shadow-xl px-4 py-2 h-[160px] '>
+                                    <div className=' rounded-lg  bg-orange-400/20 shadow-xl px-4 py-2 h-[160px] '>
                                         <div className='flex justify-between px-3 items-center my-3 '>
                                             <div className='bg-green-500/70  rounded-full p-2'>
                                                 <GiArcheryTarget size={60} />
                                             </div>
                                             <div className='flex flex-col '>
-                                                <h1 className='text-orange-600 py-4 text-3xl text-center font-bold underline underline-offset-8 '>Hits</h1>
-                                                <h1 className='text-5xl font-mono  font-bold text-orange-600 text-center '>500</h1>
+                                                <h1 className='text-red-800 py-4 text-3xl text-center font-bold underline underline-offset-8 '>Hits</h1>
+                                                <h1 className='text-5xl font-mono  font-bold text-red-800 text-center '>500</h1>
                                             </div>
                                         </div>
 
@@ -217,41 +217,41 @@ function Dashboard() {
 
 
 
-                                    <div className=' rounded-lg  bg-yellow-200/70 shadow-xl px-4 py-2 h-[160px]'>
+                                    <div className=' rounded-lg  bg-orange-400/20 shadow-xl px-4 py-2 h-[160px]'>
                                         <div className='flex justify-between px-3 items-center my-3 '>
                                             <div className='bg-yellow-500/70 rounded-full p-2'>
                                                 <BsFillQuestionSquareFill size={60} />
                                             </div>
                                             <div className='flex flex-col '>
                                                 <Link to='/queries'>
-                                                    <h1 className='text-orange-600 py-4 text-3xl text-center font-bold underline underline-offset-8 '>Queries</h1>
+                                                    <h1 className='text-red-800 py-4 text-3xl text-center font-bold underline underline-offset-8 '>Queries</h1>
                                                 </Link>
-                                                <h1 className='text-5xl font-mono  font-bold text-orange-600 text-center '>{queriesLength?.length}</h1>
+                                                <h1 className='text-5xl font-mono  font-bold text-red-800 text-center '>{queriesLength?.length}</h1>
                                             </div>
                                         </div>
 
                                     </div>
-                                    <div className='rounded-lg  bg-purple-200/70 shadow-xl px-4 py-2 h-[160px]'>
+                                    <div className='rounded-lg  bg-orange-400/20 shadow-xl px-4 py-2 h-[160px]'>
                                         <div className='flex justify-between px-3 items-center my-3 '>
                                             <div className='bg-purple-500/70  rounded-full p-2'>
                                                 <RiShieldUserLine size={60} />
                                             </div>
                                             <div className='flex flex-col '>
-                                                <h1 className='text-orange-600 py-4 text-3xl text-center font-bold underline underline-offset-8 '>Logs</h1>
-                                                <h1 className='text-5xl font-mono  font-bold text-orange-600 text-center '>500</h1>
+                                                <h1 className='text-red-800 py-4 text-3xl text-center font-bold underline underline-offset-8 '>Logs</h1>
+                                                <h1 className='text-5xl font-mono  font-bold text-red-800 text-center '>500</h1>
                                             </div>
                                         </div>
 
                                     </div>
 
-                                    <div className='rounded-lg  bg-red-200/70 shadow-xl px-4 py-2 h-[160px]'>
+                                    <div className='rounded-lg bg-orange-400/20 shadow-xl px-4 py-2 h-[160px]'>
                                         <div className='flex justify-between px-3 items-center my-3 '>
                                             <div className='bg-purple-500/70  rounded-full p-2'>
                                                 <RiShieldUserLine size={60} />
                                             </div>
                                             <div className='flex flex-col '>
-                                                <h1 className='text-orange-600 py-4 text-3xl text-center font-bold underline underline-offset-8 '>Broadcast</h1>
-                                                <h1 className='text-5xl font-mono  font-bold text-orange-600 text-center '>500</h1>
+                                                <h1 className='text-red-800 py-4 text-3xl text-center font-bold underline underline-offset-8 '>Broadcast</h1>
+                                                <h1 className='text-5xl font-mono  font-bold text-red-800 text-center '>500</h1>
                                             </div>
                                         </div>
                                     </div>
@@ -271,7 +271,7 @@ function Dashboard() {
 
                                 <div className=''>
 
-                                    <h1 className='text-center text-orange-600  font-bold'>Panchang Period</h1>
+                                    <h1 className='text-center text-red-800  font-bold'>Panchang Period</h1>
 
 
                                     <div className='flex justify-between items-center px-4 '>
@@ -314,7 +314,7 @@ function Dashboard() {
                                 </div>
                                 <div className='w-[95%] mt-2 border-b-2 border-red-800 mx-auto'></div>
                                 <div className=' '>
-                                    <h1 className='text-center text-orange-600  font-bold'>Inausupicious Period</h1>
+                                    <h1 className='text-center text-red-800  font-bold'>Inausupicious Period</h1>
                                     <div className='flex justify-between items-center px-3 '>
                                         <div className=' text-sm'>
                                             <h3>Rahu kaal</h3>
@@ -328,7 +328,7 @@ function Dashboard() {
                                         </div>
                                     </div>
                                     <div className='w-[95%] mt-2 border-b-2 border-red-800 mx-auto'></div>
-                                    <h1 className='text-center text-orange-600  font-bold'>Lunar Month</h1>
+                                    <h1 className='text-center text-red-800  font-bold'>Lunar Month</h1>
                                     <div className='flex justify-between items-center px-3  '>
                                         <div className=' text-sm'>
                                             <h3>Amanta</h3>
@@ -362,7 +362,7 @@ function Dashboard() {
             </div>
 
             {/* ============================model=========================== */}
-            
+
             <Modal
                 isOpen={modalIsOpen}
                 // onAfterOpen={afterOpenModal}
@@ -373,7 +373,10 @@ function Dashboard() {
 
             >
 
-              <h1>nvfj</h1>
+
+                <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Thought</label>
+                <textarea id="message" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your thoughts here..."></textarea>
+
 
 
             </Modal>

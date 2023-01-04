@@ -85,22 +85,22 @@ function Sidebar() {
            </div>
 
             <div className='flex flex-col justify-between items-center -mt-52 gap-6  '>
-                {/* <div className='  rounded cursor-pointer hover:bg-red-800 text-orange-400 hover:text-white p-1'> */}
+                {/* <div className='  rounded cursor-pointer hover:bg-red-800 text-black hover:text-white p-1'> */}
 
                     <NavLink to='/dashboard'  >
-                        <CgMenuGridR className='text-orange-400  p-1 rounded cursor-pointer'  size={35} />
+                        <CgMenuGridR className='text-black  p-1 rounded cursor-pointer'  size={35} />
                     </NavLink>
 
 
                 {/* </div> */}
-                <p className='text-center text-[10px] -mt-4 font-bold text-orange-600'>Dashboard</p>
+                <p className='text-center text-[10px] -mt-4 font-bold text-black'>Dashboard</p>
 
                 <div class="dropdown inline-block ">
 
-                    <MdOutlineGroupAdd className=' cursor-pointer  text-orange-400 hover:text-orange-400 hover:bg-red-800 p-1 rounded' size={35} />
+                    <MdOutlineGroupAdd className=' cursor-pointer  text-black hover:text-black hover:bg-red-800 p-1 rounded' size={35} />
                     
-                    <p className='text-center  text-[10px]  font-bold text-orange-600'>Staff List </p>
-                    <ul class="dropdown-menu absolute hidden  rounded-lg  text-red-800  bg-white shadow-xl ml-8">
+                    <p className='text-center  text-[10px]  font-bold text-black'>Staff List </p>
+                    <ul class="dropdown-menu absolute hidden  rounded-lg  text-black bg-white shadow-xl ml-8">
                         <li class=""><a class="  hover:text-white hover:rounded-lg  hover:bg-red-800 py-2 
                         px-4 block whitespace-no-wrap cursor-pointer " onClick={addStaff} >Add Staff</a></li>
                         <NavLink to='/adminlists'>
@@ -110,25 +110,25 @@ function Sidebar() {
 
                     </ul>
                 </div>
-                {/* <div className='  rounded cursor-pointer hover:bg-red-800 text-orange-400 hover:text-white p-1  '> */}
+                {/* <div className='  rounded cursor-pointer hover:bg-red-800 text-black hover:text-white p-1  '> */}
                     <NavLink to='/user'>
-                        <RiShieldUserLine className='text-orange-400  ' size={35} />
+                        <RiShieldUserLine className='text-black  ' size={35} />
                     </NavLink>
                 {/* </div> */}
-                <p className='text-center -mt-6 text-[10px]  font-bold text-orange-600'>Users</p>
-                {/* <div className='  rounded cursor-pointer hover:bg-red-800 text-orange-400  hover:text-white p-1  '> */}
+                <p className='text-center -mt-6 text-[10px]  font-bold text-black'>Users</p>
+                {/* <div className='  rounded cursor-pointer hover:bg-red-800 text-black  hover:text-white p-1  '> */}
                     <NavLink to='/articles'>
-                        <HiClipboardDocumentList className=' text-orange-400'  size={35} />
+                        <HiClipboardDocumentList className=' text-black'  size={35} />
                     </NavLink>
                 {/* </div> */}
-                <p className='text-center -mt-6 text-[10px]  font-bold text-orange-600'>Articles</p>
-                {/* <div className='  rounded cursor-pointer hover:bg-red-800 text-orange-400  hover:text-white p-1  '> */}
+                <p className='text-center -mt-6 text-[10px]  font-bold text-black'>Articles</p>
+                {/* <div className='  rounded cursor-pointer hover:bg-red-800 text-black  hover:text-white p-1  '> */}
                     <NavLink to='/queries'>
-                        <BsFillQuestionSquareFill className='text-orange-400 ' size={30} />
+                        <BsFillQuestionSquareFill className='text-black ' size={30} />
                     </NavLink>
                     
                 {/* </div> */}
-                <p className='text-center -mt-6 text-[10px]  font-bold text-orange-600'>Queries</p>
+                <p className='text-center -mt-6 text-[10px]  font-bold text-black'>Queries</p>
 
 
 
@@ -137,9 +137,9 @@ function Sidebar() {
             
 
             <div className=' justify-center  rounded-full'>
-                <TbLogout className='text-orange-400  p-1 hover:bg-red-800 rounded-lg hover:text-white  cursor-pointer'
+                <TbLogout className='text-black  p-1 hover:bg-red-800 rounded-lg hover:text-white  cursor-pointer'
                 onClick={logout} size={35} />
-                <p className='text-center text-[10px]  font-bold text-orange-600' >Logout</p>
+                <p className='text-center text-[10px]  font-bold text-black' >Logout</p>
 
            
             </div>

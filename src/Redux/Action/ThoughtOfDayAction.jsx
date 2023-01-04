@@ -11,7 +11,7 @@ export const getThoughtOfDay = () => {
         //     payload: true,
         //   });
         let OPTIONS = {
-            url: `${baseUrl}/api/get_thought?thoughtId=11&todayDate=`,
+            url: `${baseUrl}/api/get_thought?thoughtId=2&todayDate=`,
             method: "GET",
             headers: {
                 'Accept': 'application/json'
@@ -21,6 +21,7 @@ export const getThoughtOfDay = () => {
             .then((res) => {
 
                 dispatch( getThoughtOfDayPre(res.data));
+                // console.log(res.data,'thoo')
 
             })
 
