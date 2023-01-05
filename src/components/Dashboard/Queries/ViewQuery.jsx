@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import Loader from '../../Loader/Loader'
 import Modal from 'react-modal';
-
+import {AiOutlineClose} from 'react-icons/ai'
 import { updateQueries } from '../../../Redux/Action/QueriesAction'
 const customStyles = {
     content: {
@@ -128,11 +128,11 @@ function ViewQuery() {
                                         <div className=''><strong> Create Date:</strong> <span className='text-lg font-sans text-gray-600'>{singleQuery?.createdDate}</span></div>
                                         <p className=''><strong>Admin ID : </strong>{singleQuery?.adminId}</p>
                                     </div>
-                                    <div>
+                                    <div >
                                         <div className=''><strong> Email: </strong><span className='text-lg text-gray-600'>{singleQuery?.email}</span></div>
 
-                                        <div className=''><strong> Modify Date:</strong> <span className='text-lg font-sans text-gray-600'>{singleQuery?.updatedDate}</span></div>
-                                        <p className=''><strong>Admin Name : </strong>{singleQuery?.assigneeName}</p>
+                                        <div className='mb-4'><strong> Modify Date:</strong> <span className='text-lg font-sans text-gray-600'>{singleQuery?.updatedDate}</span></div>
+                                        {/* <p className=''><strong>Admin Name : </strong>{singleQuery?.assigneeName}</p> */}
                                     </div>
 
 
@@ -177,13 +177,21 @@ function ViewQuery() {
                                                 </p>
                                                <div className='  w-[60%]'>
                                              <div className='flex justify-center pt-1'>
-                                             <p className='text-sm px-2 '><strong>Comment: </strong></p>
+                                             <p className='text-sm px-2 '><strong className='text-red-800'>Response: </strong></p>
                                                 <textarea id="message" value={singleQuery?.comment} rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-100 rounded-lg" />
                                              </div>
                                                 <div className='flex justify-end items-center mt-2 gap-10'>
 
-                                                    <p className='text-xs'><strong>Admin ID : </strong>{singleQuery?.adminId}</p>
-                                                    <p className='text-xs'><strong>Admin Name : </strong>{singleQuery?.assigneeName}</p>
+                                                    <p className='text-xs '><strong className='text-red-800'>Rssp by : </strong>
+                                                    {/* {singleQuery?.adminId} */}
+                                                    {singleQuery?.adminId}&nbsp;&nbsp;&nbsp;
+                                                        {singleQuery?.assigneeName}
+                                                    </p>
+                                                    {/* <p className='text-xs'>
+
+                                                        <strong>Admin Name : </strong>
+                                                        {singleQuery?.adminId}&nbsp;&nbsp;&nbsp;
+                                                        {singleQuery?.assigneeName}</p> */}
                                                 </div>
                                                </div>
                                             </div>
@@ -240,8 +248,11 @@ function ViewQuery() {
 
 
             <div className='bg-white rounded-lg shadow-xl p-5'>
+            <AiOutlineClose onClick={closeModal} className="relative top-0 left-[98%] shadow hover:text-red-800 cursor-pointer" size={25} />
+            
                 <h1 className='text-xl text-center font-bold text-red-800'>Your Message</h1>
                 <form onSubmit={handleResolve} >
+              
                     <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your message</label>
                     <textarea id="message" value={solvedMsg} rows="2" onChange={(e) => setSolvedMsg(e.target.value)} class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg" />
 

@@ -29,7 +29,7 @@ import { toast } from 'react-toastify';
 // api/get_registeredUsers?enabled=0&page=0&size=10'
 
 // ----------------------------GET USER---------------------------------------------
-export const GetArticles = (type = 'PUBLISH') => {
+export const GetArticles = (type = 'OPEN') => {
 
   const baseUrl = `http://sanatanjyoti-env.eba-ab3znppq.ap-south-1.elasticbeanstalk.com/article/filter?category=All&keyword=&articleType=${type}&page=0&size=20`
 

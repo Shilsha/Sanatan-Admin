@@ -9,7 +9,7 @@ import Progress from 'react-circle-progress-bar'
 import { HiClipboardDocumentList } from 'react-icons/hi2'
 import { GiArcheryTarget } from 'react-icons/gi'
 import { BsFillQuestionSquareFill, BsCaretDownFill } from 'react-icons/bs'
-
+import {AiOutlineClose} from 'react-icons/ai'
 import { RiShieldUserLine } from 'react-icons/ri'
 import Charts from '../Chart/Charts';
 import { Chart2 } from '../Chart/Chart2';
@@ -22,10 +22,11 @@ import DigitalTime from '../Screen/DigitalTime';
 import { GetUser } from '../../Redux/Action/GetUserActions'
 import { GetArticles } from '../../Redux/Action/GetArticlesAction'
 import { getAllQueries } from '../../Redux/Action/QueriesAction'
-import { getThoughtOfDay } from '../../Redux/Action/ThoughtOfDayAction'
+import { getThoughtOfDay ,updateThoughtOfDay} from '../../Redux/Action/ThoughtOfDayAction'
 import side1 from '../../Assets/images/sanatandark.png'
 import { FaEdit } from 'react-icons/fa'
 import Modal from 'react-modal';
+import Loader from '../Loader/Loader';
 const customStyles = {
     content: {
         top: '50%',
@@ -45,6 +46,7 @@ const customStyles = {
 };
 function Dashboard() {
     const [modalIsOpen, setIsOpen] = React.useState(false);
+    const [thoughtText,setThoughtText]=useState('')
     const userId = 620015;
     const apiKey = 'd4e435906f8bdaf9aa6bcfe9f7f6474d';
     const dispatch = useDispatch();
@@ -56,8 +58,10 @@ function Dashboard() {
     const getArticle = useSelector((state) => state.GetArticlesReducer.result.data)
     const queriesLength = useSelector((state) => state.getAllQueriesReducer.result.data)
     // console.log(queriesLength,'lenght')
-    const thought = useSelector((state) => state.thoughtOfDayReducer.result.data)
-    console.log(thought?.thoughtOfTheDay, 'thought')
+    const thought = useSelector((state) => state.thoughtOfDayReducer.result)
+    console.log(thought,' thought')
+    const thought2 = useSelector((state) => state.thoughtOfDayReducer.result)
+    console.log(thought2, 'thought2')
     const [value, onChange] = useState(new Date());
     const requestOptions1 = {
         method: 'POST',
@@ -89,6 +93,9 @@ function Dashboard() {
         dispatch(GetArticles('OPEN'))
         dispatch(getAllQueries("INPROGRESS"))
         dispatch(getThoughtOfDay())
+        if(thought){
+
+        }
     }, [])
     // console.log(userData.data.length,'userdata')
     // console.log(getArticle.length,'article open')
@@ -100,6 +107,24 @@ function Dashboard() {
 
     function openEdiotor() {
         setIsOpen(true);
+    }
+
+    // ========================thought handler=================
+
+    const thoughtSubmitHandler=(e)=>{
+        e.preventDefault()
+
+        const data={
+            thoughtId :2,
+            thoughtOfTheDay:thoughtText
+        
+        }
+        console.log(data,'thought of day is ')
+        dispatch(updateThoughtOfDay(data))
+        setIsOpen(false);
+        window.location.reload(true)
+        // window.location.href(true)
+
     }
     return (
         <>
@@ -125,16 +150,18 @@ function Dashboard() {
 
                                         <img src={side1} alt="logo" className='w-12' />
                                         <h2 className=' text-lg font-extrabold underline underline-offset-8 text-center  
-                                 text-transparent bg-clip-text bg-gradient-to-br from-orange-400 to-red-600 px-4 '>Thought Of The Day</h2>
+                                 text-red-800 px-4 '>Thought Of The Day</h2>
                                         <img src={side1} alt="logo" className='w-12' />
                                     </div>
-                                    <hr className='mx-auto w-[40%] text-transparent -mt-2  bg-gradient-to-br from-orange-400 to-red-600   h-1' />
+                                    {/* <hr className='mx-auto w-[40%] text-transparent -mt-2  bg-gradient-to-br from-orange-400 to-red-600   h-1' /> */}
                                     <div className='p-5'>
-                                        <p className="text-sm "> {thought?.thoughtOfTheDay}</p>
+                                        <p className="text-sm ">
+                                            {!thought?<Loader/>:thought?.data?.thoughtOfTheDay}
+                                             </p>
                                     </div>
                                 </div>
 
-                                <FaEdit className='absolute bottom-2 right-2 text-red-800 cursor-pointer' onClick={openEdiotor} size={30} />
+                                <FaEdit className='absolute bottom-2 right-2 text-red-800 cursor-pointer' onClick={openEdiotor} size={25} />
 
                             </div>
                             <div className='border-2 col-span-5 p-5  rounded-lg bg-orange-400/20 shadow-xl '>
@@ -148,7 +175,7 @@ function Dashboard() {
                                         <div className='py-8'>
                                             <h1 className='text-2xl font-bold  text-red-800 '> {moment(value).format('dddd')}</h1>
                                             <h2 className='text-xl font-bold  my-2'>{moment(value).format('DD')}</h2>
-                                            <h1 className='text-2xl font-bold  text-orange-600'>September</h1>
+                                            <h1 className='text-2xl font-bold  text-red-800'>September</h1>
                                             <h2 className='text-xl font-bold  my-2'>{moment(value).format('YYYY')}</h2>
                                         </div>
                                     </div>
@@ -176,7 +203,7 @@ function Dashboard() {
                                             <div className='flex flex-col '>
                                                 <Link to='/user'>
                                                     <h1 className='text-red-800 cursor-pointer py-4 text-3xl text-center 
-                                                    font-bold underline underline-offset-8 '>User</h1>
+                                                    font-bold underline underline-offset-8 '>Users</h1>
 
                                                 </Link>
                                                 <h1 className='text-5xl font-mono  font-bold text-red-800 text-center '>{userData?.data?.length}</h1>
@@ -192,7 +219,7 @@ function Dashboard() {
                                             </div>
                                             <div className='flex flex-col '>
                                                 <Link to='/articles'>
-                                                    <h1 className='text-red-800 py-4 text-3xl text-center font-bold underline underline-offset-8 '>Article</h1>
+                                                    <h1 className='text-red-800 py-4 text-3xl text-center font-bold underline underline-offset-8 '>Articles</h1>
                                                 </Link>
 
                                                 <h1 className='text-5xl font-mono  font-bold text-red-800 text-center '>{getArticle?.length}</h1>
@@ -370,15 +397,25 @@ function Dashboard() {
                 style={customStyles}
                 contentLabel="Example Modal"
                 className=""
+            >          <AiOutlineClose onClick={closeModal} className="relative top-0 left-[96%] hover:text-red-900 shadow-lg -mt-2 cursor-pointer" size={25} />
 
-            >
-
-
-                <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Thought</label>
-                <textarea id="message" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your thoughts here..."></textarea>
+                <h2 className=' text-lg font-bold underline underline-offset-8 text-center  
+                                 text-red-800 px-4 '>Thought Of The Day</h2>
 
 
+                <form onSubmit={thoughtSubmitHandler} >
+        
 
+                    <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your thought :</label>
+                    <textarea id="message" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your thoughts here..."
+                    value={thoughtText} onChange={(e)=>setThoughtText(e.target.value)} required></textarea>
+                  <div className='text-center mt-4'>
+                  <button class="bg-red-800 hover:bg-red-700 text-white font-bold py-1 shadow-xl  px-5 rounded focus:outline-none focus:shadow-outline" type="submit">
+                                    Submit
+                                </button>
+                  </div>
+
+                </form>
             </Modal>
 
         </>

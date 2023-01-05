@@ -11,7 +11,7 @@ function Navbar() {
       <div className='   rounded bg-orange-400/20 flex justify-between items-center shadow-lg border w-full  '>
         <div className=' p-2'>
           <h1 className='text-gray-800 '>Welcome,</h1>
-          <p className='font-bold text-orange-600'>Aidan Martin</p>
+          <p className='font-bold text-red-800'>Aidan Martin</p>
         </div>
 
         <div>
@@ -46,7 +46,7 @@ function Navbar() {
 
         <div className='flex justify-between items-center   w-[17%]  '>
           
-            <IoMdNotifications className='text-orange-600 text-2xl'  />
+            <IoMdNotifications className='text-red-800 text-2xl'  />
           <div className=' flex items-center px-2  bg-white rounded py-1 '>
               <h2>{userID?.email}</h2>
               <BiChevronDown size={18} />

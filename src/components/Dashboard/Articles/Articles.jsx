@@ -379,6 +379,7 @@ function Articles() {
                             className=""
 
                         >
+                            
 
                             <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 " onSubmit={handlePublishSubmit}>
                                 <AiOutlineClose onClick={closeModal} className="relative top-0 left-[100%] cursor-pointer" size={25} />
@@ -386,7 +387,7 @@ function Articles() {
 
                                 <div class="mb-4">
 
-                                    <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your message</label>
+                                    <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your message :</label>
                                     <textarea id="message" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your thoughts here..."
                                         value={publishText}
                                         onChange={(e) => setPublishText(e.target.value)}

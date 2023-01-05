@@ -258,18 +258,18 @@ function User() {
                                                         <>
 
                                                             <tr key={data.id} className="text-center ">
-                                                                <td class="border text-center">{data.userId}#</td>
+                                                                <td class="border text-center">{data.userId}</td>
                                                                 <td class="border text-start px-2 ">{data.fullName}
                                                                 </td>
                                                                 <td class="border text-start  text-[13px] px-2">{data.email} </td>
-                                                                <td class="border text-[13px] px-2">{data.mobileNo} </td>
+                                                                <td class="border text-[13px] px-2">{data.mobileNo==null?'---':data.mobileNo} </td>
 
                                                                 <td class="border text-[13px] px-2">
 
-                                                                    {moment.unix(data.createdDate / 1000).format("MM/DD/YYYY")}
+                                                                    {moment(data.createdDate).format("MM/DD/YYYY")}
                                                                 </td>
                                                                 <td class="border text-[13px] px-2">
-                                                                    {moment.unix(data.modifiedDate / 1000).format("MM/DD/YYYY")}
+                                                                    {moment(data.modifiedDate).format("MM/DD/YYYY")}
                                                                 </td>
 
 

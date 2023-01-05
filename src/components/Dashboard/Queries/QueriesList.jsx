@@ -330,7 +330,7 @@ function QueriesList() {
             >
 
                 <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 " onSubmit={HandleOnSubmit}>
-                    <AiOutlineClose onClick={closeModal} className="relative top-0 left-[100%] cursor-pointer" size={25} />
+                    <AiOutlineClose onClick={closeModal} className="relative top-0 left-[100%] shadow cursor-pointer" size={25} />
                     <h1 className='text-center font-sans  mb-4 text-4xl font-bold text-red-800'>Update Comment  </h1>
 
 
