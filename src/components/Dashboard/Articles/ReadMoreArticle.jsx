@@ -6,17 +6,18 @@ import { GetSingleArticle } from '../../../Redux/Action/GetArticlesAction'
 import Loader from '../../Loader/Loader';
 import Navbar from '../../Navbar/Navbar';
 import Sidebar from '../../Sidebar/Sidebar';
-import { AiFillHeart, AiOutlineComment } from 'react-icons/ai'
+import { AiFillHeart, AiOutlineComment,AiFillCaretDown  } from 'react-icons/ai'
+import { getSingleArticle } from '../../../Redux/Fetures/Reducers/GetSingleArticleSlice'
 function ReadMoreArticle() {
 
     const { id } = useParams();
     const dispatch = useDispatch()
 
-    const GetSingle = useSelector((state) => state.GetSignleArticleReducer.result.data)
+    const GetSingle = useSelector((state) => state.getArticle)
     console.log(GetSingle, 'get single user article')
 
     useEffect(() => {
-        dispatch(GetSingleArticle(id))
+        dispatch(getSingleArticle(id))
 
     }, [])
 
@@ -30,14 +31,14 @@ function ReadMoreArticle() {
                     <Navbar />
                     <div className=' my-4 mx-auto mr-4 border  shadow-xl  rounded-lg py-4  px-4 bg-blend-screen' >
                         <h1 className='text text-center font-bold text-2xl text-red-800'>Read Article</h1>
-                        {!GetSingle ? <><Loader /></> : <>
+                        {GetSingle.loading ? <><Loader /></> : <>
 
 
 
-                            <h1 className='text-xl font-bold  text-red-800'>Title:   <span className='text-lg'>{GetSingle?.title}</span></h1>
+                            <h1 className='text-xl font-bold  text-red-800'>Title:   <span className='text-lg'>{GetSingle?.result.title}</span></h1>
                             <h1 className='py-4 text-gray-700'
                                 dangerouslySetInnerHTML={{
-                                    __html: GetSingle?.content,
+                                    __html: GetSingle?.result.content,
                                 }}
 
                             >
@@ -46,14 +47,14 @@ function ReadMoreArticle() {
                             </h1>
 
                             <div className='flex my-4 '>
-                                <div className='flex'><p className='text-red-800 font-bold '>Posted by :</p>  <p className=' px-2'>{GetSingle?.author}</p>
-                                    <div  className='flex mx-8'>
-                                        <p className=' text-red-800 font-bold'>On :</p> <p className='px-2'> {GetSingle?.createdDate}</p> </div>
+                                <div className='flex'><p className='text-red-800 font-bold '>Posted by :</p>  <p className=' px-2'>{GetSingle?.result.author}</p>
+                                    <div className='flex mx-8'>
+                                        <p className=' text-red-800 font-bold'>On :</p> <p className='px-2'> {GetSingle?.result.createdDate}</p> </div>
                                 </div>
 
-                                <div className='flex mx-4'><p className='font-bold mx-2 text-red-800'>Subject :</p> {GetSingle?.subject}</div>
+                                <div className='flex mx-4'><p className='font-bold mx-2 text-red-800'>Subject :</p> {GetSingle?.result.subject}</div>
 
-                                <div className='flex'><p className='font-bold mx-2 text-red-800'>Category :</p> {GetSingle?.category}</div>
+                                <div className='flex'><p className='font-bold mx-2 text-red-800'>Category :</p> {GetSingle?.result.category}</div>
 
                             </div>
                             <hr className='h-1 bg-red-800' />
@@ -62,12 +63,21 @@ function ReadMoreArticle() {
 
 
                                 <div className='flex  items-center py-2 px-4'>
-                                    <AiFillHeart fill='' size={25} />
-                                    <span className='px-4'>{GetSingle?.likes}</span>
+                                  
+                                    <button type="button" class="text-white bg-[#3b5998] hover:bg-[#3b5998]/90 focus:ring-4 focus:outline-none focus:ring-[#3b5998]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#3b5998]/55 mr-2 mb-2">
+                                       
+                                       Show All Like
+                                       <AiFillCaretDown size={25}/>
+                                    </button>
+                                    <span className='px-4'>{GetSingle?.result.likes}</span>
                                 </div>
                                 <div className='flex items-center mx-8' >
-                                    <AiOutlineComment size={25} />
-                                    <span className='px-4'>{GetSingle?.commentCount}</span>
+                                <button type="button" class="text-white bg-[#3b5998] hover:bg-[#3b5998]/90 focus:ring-4 focus:outline-none focus:ring-[#3b5998]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#3b5998]/55 mr-2 mb-2">
+                                       
+                                       Show All Comment
+                                      <AiFillCaretDown size={25}/>
+                                    </button>
+                                    <span className='px-4'>{GetSingle?.result.commentCount}</span>
                                 </div>
                             </div>
 

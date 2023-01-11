@@ -2,7 +2,7 @@ import React from 'react'
 import Navbar from '../../Navbar/Navbar'
 import Sidebar from '../../Sidebar/Sidebar'
 import { BsSearch, BsThreeDots } from 'react-icons/bs'
-import { BiFilter } from 'react-icons/bi'
+import { BiFilter, BiSkipNext, BiSkipPrevious } from 'react-icons/bi'
 import { AiOutlinePlus, AiFillDelete, AiTwotoneEdit, AiOutlineClose } from 'react-icons/ai'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -13,9 +13,11 @@ import moment from 'moment'
 import Modal from 'react-modal';
 import { MdHeight } from 'react-icons/md'
 
-import { updateSingleUser ,deleteSingleUser} from '../../../Redux/Action/GetUserActions'
+import { updateSingleUser, deleteSingleUser } from '../../../Redux/Action/GetUserActions'
 import Loader from '../../Loader/Loader'
-import { ToastContainer } from 'react-toastify'
+import { toast, ToastContainer } from 'react-toastify'
+import { getUser, deleteUser } from '../../../Redux/Fetures/Reducers/GetUserSlice'
+
 
 
 const customStyles = {
@@ -47,11 +49,6 @@ function User() {
     const IndexOfLastPost = currentPage * PostPerPage;
     const IndexOfFirstPage = IndexOfLastPost - PostPerPage;
     const CurrentPost = Posts.slice(IndexOfFirstPage, IndexOfLastPost)
-    const [header, setHeader] = useState({
-        page: '0',
-        size: '10'
-
-    })
 
     const [form, setForm] = useState({
         name: 'stark',
@@ -70,10 +67,11 @@ function User() {
 
     })
 
-
     const [page, setPage] = useState(0)
     const [buttonPre, setButtonPre] = useState(false)
     const [buttonNext, setButtonNext] = useState(false)
+    const [types, setTypes] = useState(true)
+
 
     // console.log(updateForm,'upadte form')
 
@@ -84,13 +82,17 @@ function User() {
 
 
     useEffect(() => {
-        dispatch(GetUser())
+        const data = {
+            page: page,
+            type: types
+        }
+        dispatch(getUser(data))
     }, [])
 
 
 
-    const userData = useSelector((state) => state.GetUserReducer.result.result)
-    // console.log(userData?.data, "user data")
+    const userData = useSelector((state) => state.user)
+    console.log(userData, "usr data")
 
 
 
@@ -101,40 +103,25 @@ function User() {
 
     }
 
-    // --------------------next and prev button ---------------------------
-    const next = () => {
-        setPage(page + 1)
-        console.log(page, 'length')
-    }
-
-    const prev = () => {
-        setPage(page - 1)
-
-    }
 
 
 
-    useEffect(() => {
-
-        if (page >= 0) {
-            setButtonPre(false)
-
-            dispatch(GetUser(page))
-
+    // ===================change user type====================
+    const setUserType = (type) => {
+        setTypes(type)
+        console.log(types,'22')
+        const data={
+            page:page,
+            type:type
         }
-        else {
-            setButtonPre(true)
+        dispatch(getUser(data))
+        toast.success("User Type has changed")
 
-        }
-
-
-    }, [page])
-
-
-    useEffect(() => {
-    //    console.log(userData?.data,'next comment')
-        userData?.data.length != 0 ? setButtonNext(false) : setButtonNext(true)
-    }, [userData])
+    }
+    // useEffect(() => {
+    // //    console.log(userData?.result.data,'next comment')
+    //     userData?.result.data.length != 0 ? setButtonNext(false) : setButtonNext(true)
+    // }, [userData])
 
 
     // -----------------------------onclick model----------------------------------------
@@ -175,22 +162,61 @@ function User() {
 
 
     // ---------------------------deleteSingleUser-----------------------
-    const handleDeleteSingleUser=(id)=>{
-       
-            dispatch(deleteSingleUser((id)))
-            window.Location.href()
+    const handleDeleteSingleUser = (id) => {
+
+        dispatch(deleteUser((id)))
+
 
     }
+
+    console.log(types,'types')
+
+    // --------------------next and prev button ---------------------------
+    const next = () => {
+        setPage(page + 1)
+
+    }
+
+    const prev = () => {
+        setPage(page - 1)
+
+    }
+
+
+
+    useEffect(() => {
+
+
+        const data = {
+            page: page,
+            type: types
+        }
+      
+        console.log(page, 'length')
+        if (page > 0) {
+            console.log('bada hia')
+            setButtonPre(false)
+
+
+        } else {
+            console.log('chhoota hai')
+            setButtonPre(true)
+        }
+
+        dispatch(getUser(data))
+
+    }, [page])
+
     return (
         <>
-  <ToastContainer />
+            <ToastContainer />
             <div className='container   w-[100%] h-[100vh] flex flex-col-2 gap-4  '>
                 <Sidebar />
 
                 <div className=' w-[91%]'>
                     <Navbar />
                     <div className=' my-6 mx-auto '>
-                       
+
                         <div className='flex justify-between items-center pb-4 '>
                             <div className='flex justify-between w-[40%]'>
                                 <div class=" relative  w-[75%] text-gray-600 ">
@@ -209,13 +235,16 @@ function User() {
                                 </button>
                             </div>
                             <div>
-                                <button class="inline-flex items-center px-4 py-[10px] bg-red-800 hover:bg-red-700 text-white text-sm font-medium rounded-md">
+                                <select id="countries" className="bg-gray-50 border border-gray-400 text-gray-900 
+                                text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700
+                                 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    onChange={(e) => setUserType(e.target.value)}     >
+                                    <option disabled={true} selected={true}>Select User Type</option>
+                                    <option value="true">Active</option>
+                                    <option value="false">Inactive</option>
+                                </select>
 
 
-                                    {/* <AiOutlinePlus className='mx-1 ' size={20} /> */}
-                                    Users
-
-                                </button>
                             </div>
                         </div>
                         <div className="tableWrap">
@@ -247,64 +276,50 @@ function User() {
 
 
                                     {
-                                        !userData ? <>
+                                        userData?.loading ? <>
                                             <Loader />
-                                        </> : <>
-                                            {
-                                                (userData?.data.filter((user) => user.fullName?.toLowerCase().includes(FilterSearch)))?.map((data) => {
+                                        </> :
 
-                                                    // userData?.data.map((data) => {
-                                                    return (
-                                                        <>
-
-                                                            <tr key={data.id} className="text-center ">
-                                                                <td class="border text-center">{data.userId}</td>
-                                                                <td class="border text-start px-2 ">{data.fullName}
-                                                                </td>
-                                                                <td class="border text-start  text-[13px] px-2">{data.email} </td>
-                                                                <td class="border text-[13px] px-2">{data.mobileNo==null?'---':data.mobileNo} </td>
-
-                                                                <td class="border text-[13px] px-2">
-
-                                                                    {moment(data.createdDate).format("MM/DD/YYYY")}
-                                                                </td>
-                                                                <td class="border text-[13px] px-2">
-                                                                    {moment(data.modifiedDate).format("MM/DD/YYYY")}
-                                                                </td>
-
-
-
-                                                                <td class="border text-center pt-1  ">
-                                                                    <label class="inline-flex  items-center cursor-pointer  ">
-                                                                        <input type="checkbox" value="" checked={data?.enabled} class="sr-only peer" />
-                                                                        <div class="w-11 h-6 relative   bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-red-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transit
-                                                                        ion-all dark:border-gray-600 peer-checked:bg-red-800"  ></div>
-                                                                    </label>
+                                            <>
+                                                {
+                                                    (userData?.result.filter((user) => user.fullName?.toLowerCase().includes(FilterSearch)))?.map((data) => {
+                                                        // userData?.result.map((data) => {
+                                                        return (
+                                                            <>
+                                                                <tr key={data.id} className="text-center ">
+                                                                    <td class="border text-center">{data.userId}</td>
+                                                                    <td class="border text-start px-2 ">{data.fullName}
+                                                                    </td>
+                                                                    <td class="border text-start  text-[13px] px-2">{data.email} </td>
+                                                                    <td class="border text-[13px] px-2">{data.mobileNo == null ? '---' : data.mobileNo} </td>
+                                                                    <td class="border text-[13px] px-2">
+                                                                        {moment(data.createdDate).format("MM/DD/YYYY")}
+                                                                    </td>
+                                                                    <td class="border text-[13px] px-2">
+                                                                        {moment(data.modifiedDate).format("MM/DD/YYYY")}
+                                                                    </td>
+                                                                    <td class="border text-center pt-1  ">
+                                                                        {JSON.stringify(data?.enabled)}
 
 
 
-                                                                </td>
-                                                                <td class=" px-4 flex justify-evenly items-center pt-1" >
-
-{/* 
-                                                                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 text-xs px-2 rounded" onClick={() => UpdateUser(data.userId, data.fullName, data.email, data.mobileNo)}>
-                                                                        Edit
-                                                                    </button> */}
-                                                                    <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 text-xs px-2 border  rounded" onClick={()=>handleDeleteSingleUser(data.userId)}>
-                                                                        Delete
-                                                                    </button>
-                                                                </td>
+                                                                    </td>
+                                                                    <td class=" px-4 flex justify-evenly items-center pt-1" >
+                                                                        <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 text-xs px-2 border  rounded" onClick={() => handleDeleteSingleUser(data.userId)}>
+                                                                            Delete
+                                                                        </button>
+                                                                    </td>
 
 
-                                                            </tr>
+                                                                </tr>
 
 
-                                                        </>
+                                                            </>
 
-                                                    )
-                                                })
-                                            }
-                                        </>
+                                                        )
+                                                    })
+                                                }
+                                            </>
                                     }
 
 
@@ -387,30 +402,19 @@ function User() {
                         </div>
                         {/* -----------------------------------------------pagination--------------------------------------------------------- */}
 
-                        <nav aria-label="Page navigation example " className='text-center  -bottom-4 relative'>
-                            <ul class="inline-flex -space-x-px ">
+                        <nav aria-label="Page navigation example " className='text-center     '>
+                            <ul class="inline-flex justify-center items-center ">
                                 <li>
-                                    <button class={`px-3 cursor-pointer py-2 ml-0 leading-tight text-white font-bold bg-red-800 disabled:opacity-50  rounded-lg mx-4 hover:bg-red-700  dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white`} disabled={buttonPre} onClick={prev} >Prev</button>
+                                    <button class={`px-3 inline-flex justify-center  items-center cursor-pointer py-2 ml-0 leading-tight text-white font-bold bg-red-800 disabled:opacity-50  rounded-lg mx-4 hover:bg-red-700  dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white`} disabled={buttonPre} onClick={prev} >
+                                        <BiSkipPrevious className='pt-1' size={25} />  Prev</button>
 
                                 </li>
-                              
-                                {/* {
-                                    PageNumbers.map((number) => {
-                                        return (
-                                            <>
-                                                <li>
-                                                    <a href="#" class="px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white " onClick={() => setCurrentPage(number)}>{number}</a>
-                                                </li>
 
-                                            </>
-                                        )
-                                    })
-                                } */}
+                                <li className=' mr-4 font-bold'>  {page + 1}</li>
                                 <li>
-                                    <button type='button' class="px-3 py-2 leading-tight text-white font-bold bg-red-800 disabled:opacity-50 rounded-l-lg hover:bg-red-700 rounded-r-lg   dark:hover:text-white" disabled={buttonNext} onClick={next}>Next</button>
+                                    <button type='button' class="px-3 py-2 inline-flex items-center justify-center  leading-tight text-white font-bold bg-red-800 disabled:opacity-50 rounded-l-lg hover:bg-red-700 rounded-r-lg   dark:hover:text-white" disabled={buttonNext} onClick={next}>Next <BiSkipNext className='pt-1' size={25} /></button>
 
-                                    {/* <button type="button" class="px-8 py-3 text-white bg-blue-600 rounded focus:outline-none "
-                                         onClick={next}>Next</button> */}
+
                                 </li>
                             </ul>
                         </nav>

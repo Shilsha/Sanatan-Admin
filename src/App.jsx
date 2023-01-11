@@ -10,6 +10,8 @@ import ReadMoreArticle from './components/Dashboard/Articles/ReadMoreArticle';
 import AdminUserList from './components/Dashboard/Admin/AdminUserList';
 import QueriesList from './components/Dashboard/Queries/QueriesList';
 import ViewQuery from './components/Dashboard/Queries/ViewQuery';
+import Logs from './components/Dashboard/Logs/Logs';
+import Hits from './components/Dashboard/Hits/Hits';
 function Routing() {
   return (
     <div> 
@@ -23,6 +25,8 @@ function Routing() {
           <Route exact path="/adminlists" element={<AdminUserList />} />
           <Route exact path="/queries" element={<QueriesList />} />
           <Route exact path="/queries/:id" element={<ViewQuery />} />
+          <Route exact path="/logs" element={<Logs />} />
+          <Route exact path="/hits" element={<Hits />} />
         </Routes>
       </Router>
 

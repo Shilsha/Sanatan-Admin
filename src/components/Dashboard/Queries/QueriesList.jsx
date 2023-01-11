@@ -3,7 +3,7 @@ import Navbar from '../../Navbar/Navbar'
 import Sidebar from '../../Sidebar/Sidebar'
 
 import { BsSearch, BsThreeDots } from 'react-icons/bs'
-import { BiFilter } from 'react-icons/bi'
+import { BiFilter, BiSkipNext, BiSkipPrevious } from 'react-icons/bi'
 import { AiOutlinePlus, AiFillDelete, AiTwotoneEdit, AiOutlineClose, AiFillEye } from 'react-icons/ai'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllQueries, updateQueries, deleteSingleQuery } from '../../../Redux/Action/QueriesAction'
@@ -11,6 +11,7 @@ import Loader from '../../Loader/Loader'
 import Modal from 'react-modal';
 import { toast, ToastContainer } from 'react-toastify'
 import { Link } from 'react-router-dom'
+import { getAllQueriesAction } from '../../../Redux/Fetures/Reducers/QueriesSlice'
 const customStyles = {
     content: {
         top: '50%',
@@ -43,22 +44,17 @@ function QueriesList() {
 
     const dispatch = useDispatch()
 
-    const allQueries = useSelector((state) => state.getAllQueriesReducer.result)
-    const allQueries2 = useSelector((state) => state.getAllQueriesReducer.result2)
+    const allQueries = useSelector((state) => state.query)
+    console.log(allQueries.result.numberOfElements, 'query')
 
     useEffect(() => {
-        dispatch(getAllQueries(types, page))
+        const data = {
+            page: page,
+            type: types,
+        }
+        dispatch(getAllQueriesAction(data))
 
     }, [])
-    useEffect(() => {
-        dispatch(getAllQueries(types, page))
-
-    }, [allQueries2])
-
-
-    // console.log(allQueries, 'res')
-    // console.log(allQueries2, 'res2')
-
 
     // ===============open and close model ========================
 
@@ -69,14 +65,7 @@ function QueriesList() {
         setIsOpen(false);
     }
 
-    const UpdateComment = (id, status, comment) => {
-        setIsOpen(true)
-        setId(id)
-        setStatus(status)
-        setComments(comment)
-        console.log(id, status, comment, 'show data')
 
-    }
 
     const handleStateChange = (e) => {
         setStatus(e.target.value)
@@ -105,30 +94,33 @@ function QueriesList() {
 
     ];
 
-    // ==================delete single comment======================
-    // const deleteSingleComment=(id)=>{
-    //     dispatch(deleteSingleQuery(id))
-    // }
+
 
 
 
     const SelectQueryType = (type) => {
         setTypes(type)
+        const data = {
+            page: page,
+            type: type
+        }
+        dispatch(getAllQueriesAction(data))
         toast.success('Your query type has changed.')
 
     }
 
 
-    useEffect(() => {
-        dispatch(getAllQueries(types, page))
-   
-    }, [types])
-
 
     // =====================filter search ===============================
     const filterSearch = () => {
-        console.log(FilterSearch)
-        dispatch(getAllQueries(types,page,FilterSearch))
+
+        const data = {
+            page: page,
+            type: types,
+            FilterSearch: FilterSearch
+        }
+        console.log(data, 'this is data')
+        dispatch(getAllQueriesAction(data))
     }
 
 
@@ -145,28 +137,40 @@ function QueriesList() {
 
     }
 
-    // console.log(allQueries.data, 'this islength page')
-
     useEffect(() => {
+        const data = {
+            page: page,
+            type: types,
+        }
 
-        page >= 1 ? setButtonPre(false) : setButtonPre(true)
-        dispatch(getAllQueries(types, page))
+        if (page > 0) {
+            console.log('bada hia')
+            setButtonPre(false)
+
+
+        } else {
+            console.log('chhoota hai')
+            setButtonPre(true)
+        }
+
+        dispatch(getAllQueriesAction(data))
+
+
 
     }, [page])
 
-    useEffect(() => {
-        // console.log(allQueries.data?.length, 'le')
-
-        allQueries.data?.length >= 16 ? setButtonNext(false) : setButtonNext(true)
-    }, [types])
 
     useEffect(() => {
-        // console.log(allQueries.data?.length, 'le2')
-
-        allQueries.data?.length >= 16 ? setButtonNext(false) : setButtonNext(true)
-    }, [allQueries])
-
-
+        if(allQueries.result.numberOfElements<16){
+            // console.log('chhota')
+            setButtonNext(true)
+    
+        }else{
+            // console.log('bada')
+            setButtonNext(false)
+        }
+    
+    }, [allQueries.result.numberOfElements])
 
     return (
         <>
@@ -217,105 +221,102 @@ function QueriesList() {
                             </div>
                         </div>
                         <div className='tableWrap'>
-                        <table class="shadow-lg tables  w-full rounded-xl  ">
-                            <thead className=''>
-                                <tr className=' table_head  '>
-                                    <th class="bg-blue-100 border  px-2 text-center">ID</th>
-                                    {/* <th class="bg-blue-100 border  px-2 text-center">Admin</th> */}
-                                    <th class="bg-blue-100 border text-center py-2">Name</th>
-                                    <th class="bg-blue-100 border text-center py-2">Email</th>
-                                    <th class="bg-blue-100 border text-center py-2">Message</th>
+                            <table class="shadow-lg tables  w-full rounded-xl  ">
+                                <thead className=''>
+                                    <tr className=' table_head  '>
+                                        <th class="bg-blue-100 border  px-2 text-center">ID</th>
+                                        {/* <th class="bg-blue-100 border  px-2 text-center">Admin</th> */}
+                                        <th class="bg-blue-100 border text-center py-2">Name</th>
+                                        <th class="bg-blue-100 border text-center py-2">Email</th>
+                                        <th class="bg-blue-100 border text-center py-2">Message</th>
 
-                                    <th class="bg-blue-100 border text-center py-2">Comment</th>
-                                    <th class="bg-blue-100 border text-center py-2">Phone No</th>
-                                    <th class="bg-blue-100 border text-center py-2"> Create Date</th>
-                                    {/* <th class="bg-blue-100 border text-center py-2">Token</th> */}
+                                        <th class="bg-blue-100 border text-center py-2">Comment</th>
+                                        <th class="bg-blue-100 border text-center py-2">Phone No</th>
+                                        <th class="bg-blue-100 border text-center py-2"> Create Date</th>
+                                        {/* <th class="bg-blue-100 border text-center py-2">Token</th> */}
 
-                                    <th class="bg-blue-100 border text-center py-2">Status</th>
-                                    <th class="bg-blue-100 border text-center py-2">View</th>
-                                </tr>
-                            </thead>
+                                        <th class="bg-blue-100 border text-center py-2">Status</th>
+                                        <th class="bg-blue-100 border text-center py-2">View</th>
+                                    </tr>
+                                </thead>
 
-                            <tbody>
-                                {
-                                    !allQueries ? <>
-                                        <Loader />
-                                    </> : <>
-                                        {
-                                            (allQueries?.data.filter((user) => user.name?.toLowerCase().includes(FilterSearch)))?.map((data) => {
+                                <tbody>
+                                    {
+                                        allQueries?.loading ? <>
+                                            <Loader />
+                                        </> :
+                                            <>
+                                                {
+                                                    // (allQueries?.result.content.filter((user) => user.name?.toLowerCase().includes(FilterSearch)))?.map((data) => {
 
-                                            // allQueries?.data.map((data) => {
-                                                return (
-                                                    <>
+                                                    allQueries?.result.content?.map((data) => {
 
-                                                        <tr key={data.id} className="text-center ">
-                                                            <td class="border text-center">{data.contactId}</td>
-                                                            <td class="border text-start px-2 ">{data.name}</td>
-                                                            <td class="border text-start px-2 ">{data.email}</td>
-                                                            <td class="border text-start px-2 ">{data.msg}</td>
-                                                            <td class="border text-start px-2 ">{data.comment}</td>
-                                                            <td class="border text-start px-2 ">{data.phoneNo}</td>
-                                                            <td class="border text-start px-2 ">{data.createdDate}</td>
-                                                            <td class="border text-start px-2 ">{data.status}</td>
+                                                        return (
+                                                            <>
 
-                                                            <td class=" px-4 flex border justify-evenly items-center pt-1" >
+                                                                <tr key={data.id} className="text-center ">
+                                                                    <td class="border text-center">{data.contactId}</td>
+                                                                    <td class="border text-start px-2 ">{data.name}</td>
+                                                                    <td class="border text-start px-2 ">{data.email}</td>
+                                                                    <td class="border text-start px-2 ">{data.msg}</td>
+                                                                    <td class="border text-start px-2 ">{data.comment}</td>
+                                                                    <td class="border text-start px-2 ">{data.phoneNo}</td>
+                                                                    <td class="border text-start px-2 ">{data.createdDate}</td>
+                                                                    <td class="border text-start px-2 ">{data.status}</td>
 
-                                                                <Link to={`${data.contactId}`}>
-                                                                    <AiFillEye size={25} className='text-blue-200 hover:text-blue-600' />
-                                                                </Link>
-                                                                {/* <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 text-xs px-2 rounded" onClick={() => UpdateComment(data.contactId,data.status,data.comment)} >
-                                                                Edit
-                                                            </button>
-                                                            <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 text-xs px-2 border  rounded"
-                                                            onClick={() => deleteSingleComment(data.contactId)} >
-                                                                Delete
-                                                            </button> */}
+                                                                    <td class=" px-4 flex  justify-evenly items-center pt-1" >
 
-                                                            </td>
+                                                                        <Link to={`${data.contactId}`}>
+                                                                            <AiFillEye size={25} className='text-blue-200 hover:text-blue-600' />
+                                                                        </Link>
+
+
+                                                                    </td>
 
 
 
 
-                                                        </tr>
+                                                                </tr>
 
 
-                                                    </>
+                                                            </>
 
-                                                )
-                                            })
-                                        }
-                                    </>
-                                }
+                                                        )
+                                                    })
+                                                }
+                                            </>
+                                    }
 
-                            </tbody>
+                                </tbody>
 
-                        </table>
+                            </table>
                         </div>
 
 
                     </div>
                     {/* ================================================next and Previous================================================== */}
 
-                    <div className='text-center'>
+                    <nav aria-label="Page navigation example " className='text-center     '>
+                        <ul class="inline-flex justify-center items-center ">
+                            <li>
+                                <button class={`px-3 inline-flex justify-center  items-center cursor-pointer py-2 ml-0 leading-tight text-white font-bold bg-red-800 disabled:opacity-50  rounded-lg mx-4 hover:bg-red-700  dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white`} disabled={buttonPre} onClick={prev} >
+                                    <BiSkipPrevious className='pt-1' size={25} />  Prev</button>
 
-                        <button class={`px-3 cursor-pointer py-2 ml-0 leading-tight text-white font-bold bg-red-800 disabled:opacity-50 
-                         rounded-lg mx-4 hover:bg-red-700  dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400
-                          dark:hover:bg-gray-700 dark:hover:text-white`}
-                            disabled={buttonPre} onClick={prev}
-                        >Prev</button>
-                        <button class={`px-3 cursor-pointer py-2 ml-0 leading-tight text-white font-bold bg-red-800 disabled:opacity-50 
-                         rounded-lg mx-4 hover:bg-red-700  dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400
-                          dark:hover:bg-gray-700 dark:hover:text-white`}
-                            disabled={buttonNext} onClick={next}
-                        >Next</button>
+                            </li>
+
+                            <li className=' mr-4 font-bold'>  {page + 1}</li>
+                            <li>
+                                <button type='button' class="px-3 py-2 inline-flex items-center justify-center  leading-tight text-white font-bold bg-red-800 disabled:opacity-50 rounded-l-lg hover:bg-red-700 rounded-r-lg   dark:hover:text-white" disabled={buttonNext} onClick={next}>Next <BiSkipNext className='pt-1' size={25} /></button>
 
 
-                    </div>
+                            </li>
+                        </ul>
+                    </nav>
 
                 </div>
 
 
-                
+
             </div>
 
 

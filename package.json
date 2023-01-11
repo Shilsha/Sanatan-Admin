@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.9.1",
     "axios": "^1.2.1",
     "chart.js": "^4.1.1",
     "env-cmd": "^10.1.0",
@@ -17,6 +18,7 @@
     "react-calendar": "^4.0.0",
     "react-chartjs-2": "^5.0.1",
     "react-circle-progress-bar": "^0.1.4",
+    "react-datepicker": "^4.8.0",
     "react-dom": "^18.2.0",
     "react-google-charts": "^4.0.0",
     "react-icons": "^4.7.1",

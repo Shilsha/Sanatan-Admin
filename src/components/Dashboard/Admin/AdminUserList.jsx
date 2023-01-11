@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Navbar from '../../Navbar/Navbar'
 import Sidebar from '../../Sidebar/Sidebar'
 import { BsSearch, BsThreeDots } from 'react-icons/bs'
-import { BiFilter } from 'react-icons/bi'
+import { BiFilter ,BiSkipNext,BiSkipPrevious} from 'react-icons/bi'
 import { AiOutlinePlus, AiFillDelete, AiTwotoneEdit, AiOutlineClose, AiOutlineWarning } from 'react-icons/ai'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
@@ -12,6 +12,8 @@ import Loader from '../../Loader/Loader'
 import { deleteSingleAdmin } from '../../../Redux/Action/AdminAction'
 import { ToastContainer } from 'react-toastify'
 import Modal from 'react-modal';
+import { getAdminList } from '../../../Redux/Fetures/Reducers/AdminListSlice'
+import {delelteAdmin} from '../../../Redux/Fetures/Reducers/AdminListSlice'
 const customStyles = {
     content: {
         top: '50%',
@@ -34,17 +36,23 @@ function AdminUserList() {
     const [FilterSearch, setFilterSearch] = useState('')
     const [modalIsOpen, setIsOpen] = React.useState(false);
     const [modalIsOpenUpdate, setModalIsOpenUpdate] = React.useState(false);
+    const [page, setPage] = useState(0)
+    const [buttonPre, setButtonPre] = useState(false)
+    const [buttonNext, setButtonNext] = useState(false)
     const[deleteId,setDeleteId]=useState('')
     const dispatch = useDispatch()
 
-    const allAdminList = useSelector((state) => state.getAllAdminReducer.result.data)
-    const allAdminList2 = useSelector((state) => state.getAllAdminReducer.result2)
-    console.log(allAdminList2, 'get all admin list')
+    const allAdminList = useSelector((state) => state.adminList)
+    // const allAdminList2 = useSelector((state) => state.getAllAdminReducer.result2)
+    console.log(allAdminList, 'get all admin list')
 
 
     useEffect(() => {
-        dispatch(getAllAdmin())
-    }, [allAdminList2])
+        const data={
+            page:page
+        }
+        dispatch(getAdminList(data))
+    }, [])
 
 
 
@@ -75,9 +83,57 @@ function AdminUserList() {
 
 
     const deleteAdmin = () => {
-        dispatch(deleteSingleAdmin(deleteId))
+        dispatch(delelteAdmin(deleteId))
         setIsOpen(false)
     }
+
+     // =====================prev and next=======================
+     const next = () => {
+        setPage(page + 1)
+
+    }
+
+    const prev = () => {
+        setPage(page - 1)
+
+    }
+
+
+    useEffect(() => {
+       
+       
+        const data={
+            page:page
+        }
+     
+        console.log(page, 'length')
+        if (page > 0 ) {
+            console.log('bada hia')
+            setButtonPre(false)
+
+
+        } else {
+            console.log('chhoota hai')
+            setButtonPre(true)
+        }
+
+        dispatch(getAdminList(data))
+
+    }, [page])
+
+
+    useEffect(() => {
+        if(allAdminList.result.length<16){
+            // console.log('chhota')
+            setButtonNext(true)
+    
+        }else{
+            // console.log('bada')
+            setButtonNext(false)
+        }
+    
+    }, [allAdminList.result])
+
 
     return (
 
@@ -135,12 +191,12 @@ function AdminUserList() {
                                 <tbody>
 
                                     {
-                                        !allAdminList ? <>
+                                        allAdminList.loading ? <>
                                             <Loader />
                                         </> : <>
                                             {
-                                                allAdminList.map((data) => {
-                                                    // (allAdminList?.filter((user) => user.email?.toLowerCase().includes(FilterSearch)))?.map((data)=>{
+                                                // allAdminList?.result.map((data) => {
+                                                    (allAdminList?.result.filter((user) => user.email?.toLowerCase().includes(FilterSearch)))?.map((data)=>{
                                                     return (
                                                         <>
                                                             <tr key={data.id} className="text-center ">
@@ -153,10 +209,7 @@ function AdminUserList() {
                                                                 <td class="border text-center">{data.createdDate}</td>
                                                                 <td class="border text-center">{JSON.stringify(data.adminStatus)}</td>
                                                                 <td class="border text-center">
-                                                                    {/* <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 text-xs px-2 rounded" 
-                                                                    onClick={()=>updateAdmin('update',data.adminId,data.adminName,data.role)}>
-                                                                        Edit
-                                                                    </button> */}
+                                                                  
                                                                     &nbsp;
                                                                     <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 text-xs px-2 border
                                                                       rounded"
@@ -180,6 +233,22 @@ function AdminUserList() {
                             </table>
 
                         </div>
+                        <nav aria-label="Page navigation example " className='text-center     '>
+                        <ul class="inline-flex justify-center items-center ">
+                            <li>
+                                <button class={`px-3 inline-flex justify-center  items-center cursor-pointer py-2 ml-0 leading-tight text-white font-bold bg-red-800 disabled:opacity-50  rounded-lg mx-4 hover:bg-red-700  dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white`} disabled={buttonPre} onClick={prev} >
+                                     <BiSkipPrevious className='pt-1' size={25}/>  Prev</button>
+
+                            </li>
+
+                            <li className=' mr-4 font-bold'>  {page + 1}</li>
+                            <li>
+                                <button type='button' class="px-3 py-2 inline-flex items-center justify-center  leading-tight text-white font-bold bg-red-800 disabled:opacity-50 rounded-l-lg hover:bg-red-700 rounded-r-lg   dark:hover:text-white" disabled={buttonNext} onClick={next}>Next <BiSkipNext className='pt-1' size={25}/></button>
+
+
+                            </li>
+                        </ul>
+                    </nav>
 
                     </div>
                 </div>

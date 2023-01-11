@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from '../../Navbar/Navbar'
 import Sidebar from '../../Sidebar/Sidebar'
-import { getSingleQuery } from '../../../Redux/Action/QueriesAction'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import Loader from '../../Loader/Loader'
 import Modal from 'react-modal';
 import {AiOutlineClose} from 'react-icons/ai'
 import { updateQueries } from '../../../Redux/Action/QueriesAction'
+import {getSingleQuery} from '../../../Redux/Fetures/Reducers/GetSingleQuerySlice'
+import {updateQueriesAction} from '../../../Redux/Fetures/Reducers/GetSingleQuerySlice'
+
 const customStyles = {
     content: {
         top: '50%',
@@ -32,22 +34,15 @@ function ViewQuery() {
     const [loader, setLoader] = useState(false)
     const { id } = useParams()
 
-    const singleQuery = useSelector((state) => state.getAllQueriesReducer.singleQuery.data)
-    const loading = useSelector((state) => state.getAllQueriesReducer.loading)
-    const singleQuery2 = useSelector((state) => state.getAllQueriesReducer.result2)
-    // console.log(singleQuery, 'res from view single query.')
-    // console.log(singleQuery2, 'res from view single loader query.')
-    // console.log(loading, 'loding')
+    const singleQuery = useSelector((state) => state.getQuery)
+    console.log(singleQuery.loading,'res')
 
-    const AdminId = JSON.parse(sessionStorage.getItem('user'))
-    // alert(userID.adminId,'admin')
+    const AdminId = JSON.parse(sessionStorage.getItem('user'))   
     const dispatch = useDispatch()
+  
     useEffect(() => {
-        dispatch(getSingleQuery(id))
-        setLoader(loading)
-    }, [singleQuery2])
-
-
+     dispatch(getSingleQuery(id))
+    }, [])
 
     // ===================model open close============================
     function closeModal() {
@@ -68,27 +63,31 @@ function ViewQuery() {
             adminId: AdminId.adminId,
             status: resRejStatus,
             comment: solvedMsg,
-            contactId: singleQuery.contactId,
+            contactId: singleQuery?.result.contactId,
         }
 
-        dispatch(updateQueries(datas))
+        // dispatch(updateQueries(datas))
+        dispatch(updateQueriesAction(datas))
         setIsOpen(false);
-
-        setLoader(true)
+        // setLoader(true)
+       
+        // setTimeout(() => {
+        //     setLoader(false)
+        //     window.location.reload()
+        // }, 5000);
     }
 
     // ==================================
     const assignToMe = () => {
         const datas = {
             adminId: AdminId.adminId,
-            contactId: singleQuery.contactId,
+            contactId: singleQuery?.result.contactId,
             status: 'INPROGRESS',
         }
 
-        dispatch(updateQueries(datas))
-        setLoader(true)
-
-
+        // dispatch(updateQueries(datas))
+        dispatch(updateQueriesAction(datas))
+       
 
     }
 
@@ -101,7 +100,7 @@ function ViewQuery() {
                 <h1 className='text-center font-bold mt-4 text-2xl text-red-800 '  >: Query {id}:</h1>
                 <hr className='w-[8%] mx-auto h-1 text-center  bg-red-800 ' />
 
-                {loader ? <><Loader /></> : <>
+                {singleQuery?.loading ? <><Loader /></> : <>
 
                     <div className='flex items-center  px-10  my-4'>
                         <div className='border border-red-800 w-[90%] shadow-xl rounded-xl px-4 mx-auto   bg-white/70'>
@@ -112,27 +111,27 @@ function ViewQuery() {
                                 <div className='flex  justify-around items-center my-4  px-10'>
 
                                     <div>
-                                        <div className=''> <strong>Id:</strong> <span className='text-xl text-gray-600'>{singleQuery?.contactId}</span></div>
-                                        <div className=''> <strong>Phone No:</strong> <span className='text-lg font-sans text-gray-600'>{singleQuery?.phoneNo}</span></div>
+                                        <div className=''> <strong>Id:</strong> <span className='text-xl text-gray-600'>{singleQuery?.result?.contactId}</span></div>
+                                        <div className=''> <strong>Phone No:</strong> <span className='text-lg font-sans text-gray-600'>{singleQuery?.result?.phoneNo}</span></div>
                                
                                             <div className='flex items-center '>
                                                 <h1 className='font-bold'>Assignee Name:</h1>
-                                                <p className='px-3 text-blue-500  font-bold  rounded-lg mx-2'>{singleQuery?.assigneeName ? singleQuery.assigneeName : null}</p>
+                                                <p className='px-3 text-blue-500  font-bold  rounded-lg mx-2'>{singleQuery?.result?.assigneeName ? singleQuery?.result.assigneeName : null}</p>
                                         
                                         </div>
 
                                     </div>
 
                                     <div>
-                                        <div className=''><strong> Name:</strong> <span className='text-lg text-gray-600'>{singleQuery?.name}</span></div>
-                                        <div className=''><strong> Create Date:</strong> <span className='text-lg font-sans text-gray-600'>{singleQuery?.createdDate}</span></div>
-                                        <p className=''><strong>Admin ID : </strong>{singleQuery?.adminId}</p>
+                                        <div className=''><strong> Name:</strong> <span className='text-lg text-gray-600'>{singleQuery?.result?.name}</span></div>
+                                        <div className=''><strong> Create Date:</strong> <span className='text-lg font-sans text-gray-600'>{singleQuery?.result?.createdDate}</span></div>
+                                        <p className=''><strong>Admin ID : </strong>{singleQuery?.result?.adminId}</p>
                                     </div>
                                     <div >
-                                        <div className=''><strong> Email: </strong><span className='text-lg text-gray-600'>{singleQuery?.email}</span></div>
+                                        <div className=''><strong> Email: </strong><span className='text-lg text-gray-600'>{singleQuery?.result?.email}</span></div>
 
-                                        <div className='mb-4'><strong> Modify Date:</strong> <span className='text-lg font-sans text-gray-600'>{singleQuery?.updatedDate}</span></div>
-                                        {/* <p className=''><strong>Admin Name : </strong>{singleQuery?.assigneeName}</p> */}
+                                        <div className='mb-4'><strong> Modify Date:</strong> <span className='text-lg font-sans text-gray-600'>{singleQuery?.result?.updatedDate}</span></div>
+                                        
                                     </div>
 
 
@@ -149,49 +148,46 @@ function ViewQuery() {
                                     <div className=' '>
                                         <h1 className='font-bold'>Message:</h1>
 
-                                        <textarea id="message" value={singleQuery?.msg} rows="2" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-100 rounded-lg" >
+                                        <textarea id="message" value={singleQuery?.result?.msg} 
+                                        rows="2" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-100 rounded-lg" >
 
                                         </textarea>
 
                                     </div>
 
-                                    {/* <div className=' my-5'>
+                                    <div className=' my-5'>
                                 <h1 className='font-bold'>Comment:</h1>
-                                <textarea id="message" rows="3" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:noe focus:none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value={singleQuery?.comment}  ></textarea>
-                            </div> */}
+                                <textarea id="message" rows="3" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:noe focus:none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value={singleQuery?.result?.comment}  ></textarea>
+                            </div>
                                 </div>
                             </div>
                             <div>
 
-                                <h1 className='font-bold text-xl   text-red-800'> {singleQuery?.status == 'RESOLVED' || singleQuery?.status == 'REJECTED' ? <>Result :</> : <>Action :</>} </h1>
+                                <h1 className='font-bold text-xl   text-red-800'> {singleQuery?.result?.status == 'RESOLVED' || singleQuery?.result?.status == 'REJECTED' ? <>Result :</> : <>Action :</>} </h1>
                                 <hr className='w-[6%] h-1  bg-red-800 ' />
                                 <div className='flex  px-20 m-5  '>
 
-                                    {singleQuery?.assigneeName ? <>
+                                    {singleQuery?.result?.assigneeName ? <>
 
-                                        {singleQuery.status == 'RESOLVED' || singleQuery.status == 'REJECTED' ? <>
+                                        {singleQuery?.result.status == 'RESOLVED' || singleQuery?.result.status == 'REJECTED' ? <>
 
                                             <div className=' w-full flex justify-between '>
                                                 <p className=''><strong>Status : </strong>
-                                                    <button className={`${singleQuery.status == 'RESOLVED' ? `bg-green-500` : `bg-red-500`} text-white py-1 rounded-lg px-2`}>{singleQuery?.status}</button>
+                                                    <button className={`${singleQuery?.result.status == 'RESOLVED' ? `bg-green-500` : `bg-red-500`} text-white py-1 rounded-lg px-2`}>{singleQuery?.result?.status}</button>
                                                 </p>
                                                <div className='  w-[60%]'>
                                              <div className='flex justify-center pt-1'>
                                              <p className='text-sm px-2 '><strong className='text-red-800'>Response: </strong></p>
-                                                <textarea id="message" value={singleQuery?.comment} rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-100 rounded-lg" />
+                                                <textarea id="message" value={singleQuery?.result?.comment} rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-100 rounded-lg" />
                                              </div>
                                                 <div className='flex justify-end items-center mt-2 gap-10'>
 
                                                     <p className='text-xs '><strong className='text-red-800'>Rssp by : </strong>
-                                                    {/* {singleQuery?.adminId} */}
-                                                    {singleQuery?.adminId}&nbsp;&nbsp;&nbsp;
-                                                        {singleQuery?.assigneeName}
+                                                  
+                                                    {singleQuery?.result?.adminId}&nbsp;&nbsp;&nbsp;
+                                                        {singleQuery?.result?.assigneeName}
                                                     </p>
-                                                    {/* <p className='text-xs'>
-
-                                                        <strong>Admin Name : </strong>
-                                                        {singleQuery?.adminId}&nbsp;&nbsp;&nbsp;
-                                                        {singleQuery?.assigneeName}</p> */}
+                                                   
                                                 </div>
                                                </div>
                                             </div>
@@ -210,7 +206,8 @@ function ViewQuery() {
                                             </button>
                                         </>}
 
-                                    </> : <>
+                                    </> 
+                                    : <>
                                         <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1  px-2 rounded"
                                             onClick={assignToMe}
                                         >
@@ -220,9 +217,7 @@ function ViewQuery() {
 
 
 
-                                    {/* <h1 className='font-bold'>Assignee Name:</h1>
-                        <p className='px-2 text-gray-600'>{singleQuery?.assigneeName}</p> */}
-
+                                
                                 </div>
                             </div>
 

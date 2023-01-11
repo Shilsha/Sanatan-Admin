@@ -7,11 +7,12 @@ import Modal from 'react-modal';
 import { AiOutlineClose } from 'react-icons/ai'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { addAdmin } from '../../Redux/Action/AdminAction'
+// import { addAdmin } from '../../Redux/Action/AdminAction'
 import { Navigate, NavLink, useNavigate } from 'react-router-dom'
 import { RiShieldUserLine } from 'react-icons/ri'
 import { HiClipboardDocumentList } from 'react-icons/hi2'
 import { BsFillQuestionSquareFill } from 'react-icons/bs'
+import {addAdmin} from '../../Redux/Fetures/Reducers/AdminListSlice'
 const customStyles = {
     content: {
         top: '50%',

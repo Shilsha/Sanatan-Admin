@@ -1,32 +1,27 @@
 import React, { useState } from 'react'
 import Navbar from '../Navbar/Navbar'
 import Sidebar from '../Sidebar/Sidebar'
-
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import { FaArrowUp, FaArrowDown } from 'react-icons/fa'
-import Progress from 'react-circle-progress-bar'
 import { HiClipboardDocumentList } from 'react-icons/hi2'
 import { GiArcheryTarget } from 'react-icons/gi'
 import { BsFillQuestionSquareFill, BsCaretDownFill } from 'react-icons/bs'
-import {AiOutlineClose} from 'react-icons/ai'
+import { AiOutlineClose } from 'react-icons/ai'
 import { RiShieldUserLine } from 'react-icons/ri'
-import Charts from '../Chart/Charts';
-import { Chart2 } from '../Chart/Chart2';
 import { useDispatch, useSelector } from 'react-redux';
 import moment from "moment";
 import { useEffect } from 'react';
-import { panchang } from '../../Redux/Action/PanchangAction';
 import { Link } from 'react-router-dom';
 import DigitalTime from '../Screen/DigitalTime';
-import { GetUser } from '../../Redux/Action/GetUserActions'
-import { GetArticles } from '../../Redux/Action/GetArticlesAction'
-import { getAllQueries } from '../../Redux/Action/QueriesAction'
-import { getThoughtOfDay ,updateThoughtOfDay} from '../../Redux/Action/ThoughtOfDayAction'
 import side1 from '../../Assets/images/sanatandark.png'
 import { FaEdit } from 'react-icons/fa'
 import Modal from 'react-modal';
 import Loader from '../Loader/Loader';
+import { getThoughtAction, updateThoughtAction } from '../../Redux/Fetures/Reducers/ThoughtOfdayPostSlice'
+import { panchangeAction } from '../../Redux/Fetures/Reducers/PanchangSlice'
+import { getUser } from '../../Redux/Fetures/Reducers/GetUserSlice';
+import {getAllArticleAction} from '../../Redux/Fetures/Reducers/ArticleSlice'
+import {getAllQueriesAction} from '../../Redux/Fetures/Reducers/QueriesSlice'
 const customStyles = {
     content: {
         top: '50%',
@@ -46,22 +41,15 @@ const customStyles = {
 };
 function Dashboard() {
     const [modalIsOpen, setIsOpen] = React.useState(false);
-    const [thoughtText,setThoughtText]=useState('')
+    const [thoughtText, setThoughtText] = useState('')
     const userId = 620015;
     const apiKey = 'd4e435906f8bdaf9aa6bcfe9f7f6474d';
     const dispatch = useDispatch();
-
-    // const userID = JSON.parse(sessionStorage.getItem('user'))
-    const data = useSelector((state) => state.PanchangReducer.result.result)
-    const userData = useSelector((state) => state.GetUserReducer.result.result)
-
-    const getArticle = useSelector((state) => state.GetArticlesReducer.result.data)
-    const queriesLength = useSelector((state) => state.getAllQueriesReducer.result.data)
-    // console.log(queriesLength,'lenght')
-    const thought = useSelector((state) => state.thoughtOfDayReducer.result)
-    console.log(thought,' thought')
-    const thought2 = useSelector((state) => state.thoughtOfDayReducer.result)
-    console.log(thought2, 'thought2')
+    const userData = useSelector((state) => state.user)
+    const articleLen = useSelector((state) => state.article)
+    const queryLen = useSelector((state) => state.query)
+    const { loading, result, error } = useSelector((state) => state.thoughtOfDay)
+    const panchangData = useSelector((state) => state.panchang)
     const [value, onChange] = useState(new Date());
     const requestOptions1 = {
         method: 'POST',
@@ -86,19 +74,14 @@ function Dashboard() {
             })
     };
 
-    // console.log(userData?.data,'get user')
-    useEffect(() => {
-        dispatch(panchang(requestOptions1))
-        dispatch(GetUser())
-        dispatch(GetArticles('OPEN'))
-        dispatch(getAllQueries("INPROGRESS"))
-        dispatch(getThoughtOfDay())
-        if(thought){
 
-        }
+    useEffect(() => {
+        dispatch(getThoughtAction())
+        dispatch(panchangeAction(requestOptions1))
+        dispatch(getUser(true))
+        dispatch(getAllArticleAction("OPEN"))
+        dispatch(getAllQueriesAction("NEW"))
     }, [])
-    // console.log(userData.data.length,'userdata')
-    // console.log(getArticle.length,'article open')
 
 
     function closeModal() {
@@ -111,19 +94,19 @@ function Dashboard() {
 
     // ========================thought handler=================
 
-    const thoughtSubmitHandler=(e)=>{
+    const thoughtSubmitHandler = (e) => {
         e.preventDefault()
 
-        const data={
-            thoughtId :2,
-            thoughtOfTheDay:thoughtText
-        
+        const data = {
+            thoughtId: 2,
+            thoughtOfTheDay: thoughtText
+
         }
-        console.log(data,'thought of day is ')
-        dispatch(updateThoughtOfDay(data))
+        console.log(data, 'thought of day is ')
+        // dispatch(updateThoughtOfDay(data))
+        dispatch(updateThoughtAction(data))
         setIsOpen(false);
-        window.location.reload(true)
-        // window.location.href(true)
+
 
     }
     return (
@@ -156,8 +139,13 @@ function Dashboard() {
                                     {/* <hr className='mx-auto w-[40%] text-transparent -mt-2  bg-gradient-to-br from-orange-400 to-red-600   h-1' /> */}
                                     <div className='p-5'>
                                         <p className="text-sm ">
-                                            {!thought?<Loader/>:thought?.data?.thoughtOfTheDay}
-                                             </p>
+                                            {loading ? <Loader /> : <>
+
+                                                {result.thoughtOfTheDay}
+
+
+                                            </>}
+                                        </p>
                                     </div>
                                 </div>
 
@@ -206,7 +194,11 @@ function Dashboard() {
                                                     font-bold underline underline-offset-8 '>Users</h1>
 
                                                 </Link>
-                                                <h1 className='text-5xl font-mono  font-bold text-red-800 text-center '>{userData?.data?.length}</h1>
+                                                {
+                                                   
+                                                       <h1 className='text-5xl font-mono  font-bold text-red-800 text-center '>{userData.result?.length}</h1> 
+                                                }
+                                              
                                             </div>
                                         </div>
 
@@ -222,7 +214,7 @@ function Dashboard() {
                                                     <h1 className='text-red-800 py-4 text-3xl text-center font-bold underline underline-offset-8 '>Articles</h1>
                                                 </Link>
 
-                                                <h1 className='text-5xl font-mono  font-bold text-red-800 text-center '>{getArticle?.length}</h1>
+                                                <h1 className='text-5xl font-mono  font-bold text-red-800 text-center '>{articleLen.result?.length}</h1>
                                             </div>
                                         </div>
 
@@ -233,8 +225,11 @@ function Dashboard() {
                                                 <GiArcheryTarget size={60} />
                                             </div>
                                             <div className='flex flex-col '>
-                                                <h1 className='text-red-800 py-4 text-3xl text-center font-bold underline underline-offset-8 '>Hits</h1>
-                                                <h1 className='text-5xl font-mono  font-bold text-red-800 text-center '>500</h1>
+                                                <Link to='/hits'>
+                                                    <h1 className='text-red-800 py-4 text-3xl text-center font-bold underline underline-offset-8 '>Hits
+                                                    </h1>
+                                                </Link>
+                                                <h1 className='text-5xl font-mono  font-bold text-red-800  text-center '>500</h1>
                                             </div>
                                         </div>
 
@@ -253,7 +248,7 @@ function Dashboard() {
                                                 <Link to='/queries'>
                                                     <h1 className='text-red-800 py-4 text-3xl text-center font-bold underline underline-offset-8 '>Queries</h1>
                                                 </Link>
-                                                <h1 className='text-5xl font-mono  font-bold text-red-800 text-center '>{queriesLength?.length}</h1>
+                                                <h1 className='text-5xl font-mono  font-bold text-red-800 text-center '>{queryLen.result.content?.length}</h1>
                                             </div>
                                         </div>
 
@@ -264,7 +259,12 @@ function Dashboard() {
                                                 <RiShieldUserLine size={60} />
                                             </div>
                                             <div className='flex flex-col '>
-                                                <h1 className='text-red-800 py-4 text-3xl text-center font-bold underline underline-offset-8 '>Logs</h1>
+
+                                                <Link to='/logs'>
+                                                    <h1 className='text-red-800 py-4 text-3xl text-center font-bold underline underline-offset-8 '>Logs</h1>
+
+                                                </Link>
+
                                                 <h1 className='text-5xl font-mono  font-bold text-red-800 text-center '>500</h1>
                                             </div>
                                         </div>
@@ -293,83 +293,89 @@ function Dashboard() {
 
                             </div>
 
-                            <div className=' col-span-3 bg-orange-400/20 rounded-lg p-1 shadow-xl '>
+                            <div className=' col-span-3 bg-orange-400/20 rounded-lg p-1 shadow-xl relative  '>
+                                <h1 className='text-center text-red-800  font-bold'>Panchang Period</h1>
 
 
-                                <div className=''>
+                                {
+                                    panchangData.loading ? <Loader /> : <>
+                                        <div className=' '>
 
-                                    <h1 className='text-center text-red-800  font-bold'>Panchang Period</h1>
 
+                                            <div className='flex justify-between items-center px-4 '>
+                                                <div className=' text-sm'>
+                                                    <h3>Sunrise</h3>
+                                                    <h3>Sunset</h3>
+                                                    <h3>Moonrise</h3>
+                                                    <h3>Moonset</h3>
+                                                    <h3>Sun sign</h3>
+                                                    <h3>Moon sign</h3>
+                                                    <h3>Vedic Ritu</h3>
+                                                    <h3>Ayana</h3>
+                                                    <h3>Tithi</h3>
+                                                    <h3>Yog</h3>
+                                                    <h3>Nakshatra</h3>
+                                                    <h3>Karan</h3>
+                                                    <h3>Abhijit Muhurta</h3>
+                                                    <h3>Adhik</h3>
 
-                                    <div className='flex justify-between items-center px-4 '>
-                                        <div className=' text-sm'>
-                                            <h3>Sunrise</h3>
-                                            <h3>Sunset</h3>
-                                            <h3>Moonrise</h3>
-                                            <h3>Moonset</h3>
-                                            <h3>Sun sign</h3>
-                                            <h3>Moon sign</h3>
-                                            <h3>Vedic Ritu</h3>
-                                            <h3>Ayana</h3>
-                                            <h3>Tithi</h3>
-                                            <h3>Yog</h3>
-                                            <h3>Nakshatra</h3>
-                                            <h3>Karan</h3>
-                                            <h3>Abhijit Muhurta</h3>
-                                            <h3>Adhik</h3>
+                                                </div>
+                                                <div className='text-[13px] font-sans text-end  text-gray-700/90'>
+                                                    <p>{panchangData?.result?.sunrise}</p>
+                                                    <p>{panchangData?.result?.sunset}</p>
+                                                    <p>{panchangData?.result?.moonrise}</p>
+                                                    <p>{panchangData?.result?.moonset}</p>
+                                                    <p>{panchangData?.result?.sun_sign}</p>
+                                                    <p>{panchangData?.result?.moon_sign}</p>
+                                                    <p>{panchangData?.result?.ritu}</p>
+                                                    <p>{panchangData?.result?.ayana}</p>
+                                                    <p>{panchangData?.result?.tithi?.details?.tithi_name} &nbsp;Till {panchangData?.result?.tithi?.end_time?.hour}:{panchangData?.result?.tithi?.end_time?.minute}</p>
+                                                    <p>{panchangData?.result?.yog?.details?.yog_name} &nbsp;Till {panchangData?.result?.yog?.end_time?.hour}:{panchangData?.result?.yog?.end_time?.minute}</p>
+                                                    <p>{panchangData?.result?.nakshatra?.details?.nak_name}&nbsp;Till {panchangData?.result?.nakshatra?.end_time?.hour}:{panchangData?.result?.nakshatra?.end_time?.minute}</p>
+
+                                                    <p>{panchangData?.result?.karan?.details?.nak_name}&nbsp;Till {panchangData?.result?.karan?.end_time?.hour}:{panchangData?.result?.karan?.end_time?.minute}</p>
+                                                    <p>{panchangData?.result?.abhijit_muhurta?.start}&nbsp; |&nbsp;{panchangData?.result?.abhijit_muhurta?.end}</p>
+                                                    <p>{true ? 'Yes' : 'No'}</p>
+
+                                                </div>
+                                            </div>
+
 
                                         </div>
-                                        <div className='text-[13px] font-sans text-end  text-gray-700/90'>
-                                            <p>{data?.sunrise}</p>
-                                            <p>{data?.sunset}</p>
-                                            <p>{data?.moonrise}</p>
-                                            <p>{data?.moonset}</p>
-                                            <p>{data?.sun_sign}</p>
-                                            <p>{data?.moon_sign}</p>
-                                            <p>{data?.ritu}</p>
-                                            <p>{data?.ayana}</p>
-                                            <p>{data?.tithi?.details?.tithi_name} &nbsp;Till {data?.tithi?.end_time?.hour}:{data?.tithi?.end_time?.minute}</p>
-                                            <p>{data?.yog?.details?.yog_name} &nbsp;Till {data?.yog?.end_time?.hour}:{data?.yog?.end_time?.minute}</p>
-                                            <p>{data?.nakshatra?.details?.nak_name}&nbsp;Till {data?.nakshatra?.end_time?.hour}:{data?.nakshatra?.end_time?.minute}</p>
+                                        <div className='w-[95%] mt-2 border-b-2 border-red-800 mx-auto'></div>
+                                        <div className=' '>
+                                            <h1 className='text-center text-red-800  font-bold'>Inausupicious Period</h1>
+                                            <div className='flex justify-between items-center px-3 '>
+                                                <div className=' text-sm'>
+                                                    <h3>Rahu kaal</h3>
+                                                    <h3>Yamghant kaal</h3>
+                                                    <h3>Gulikaal</h3>
+                                                </div>
+                                                <div className='text-[13px] font-sans  text-gray-700/90'>
+                                                    <p>{panchangData?.result?.rahukaal?.start} |{panchangData?.result?.rahukaal?.end}</p>
+                                                    <p>{panchangData?.result?.yamghant_kaal?.start} | {panchangData?.result?.yamghant_kaal?.end}</p>
+                                                    <p>{panchangData?.result?.guliKaal?.start}| {panchangData?.result?.guliKaal?.end}</p>
+                                                </div>
+                                            </div>
+                                            <div className='w-[95%] mt-2 border-b-2 border-red-800 mx-auto'></div>
+                                            <h1 className='text-center text-red-800  font-bold'>Lunar Month</h1>
+                                            <div className='flex justify-between items-center px-3  '>
+                                                <div className=' text-sm'>
+                                                    <h3>Amanta</h3>
+                                                    <h3>Purnimanta</h3>
+                                                    <h3>Paksha</h3>
+                                                </div>
+                                                <div className='text-[13px]  pr-3 text-gray-700/90 '>
+                                                    <p>{panchangData?.result?.hindu_maah?.amanta}</p>
+                                                    <p>{panchangData?.result?.hindu_maah?.purnimanta}</p>
+                                                    <p>{panchangData?.result?.paksha}</p>
+                                                </div>
+                                            </div>
 
-                                            <p>{data?.karan?.details?.nak_name}&nbsp;Till {data?.karan?.end_time?.hour}:{data?.karan?.end_time?.minute}</p>
-                                            <p>{data?.abhijit_muhurta?.start}&nbsp; |&nbsp;{data?.abhijit_muhurta?.end}</p>
-                                            <p>{true ? 'Yes' : 'No'}</p>
+                                        </div>
 
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className='w-[95%] mt-2 border-b-2 border-red-800 mx-auto'></div>
-                                <div className=' '>
-                                    <h1 className='text-center text-red-800  font-bold'>Inausupicious Period</h1>
-                                    <div className='flex justify-between items-center px-3 '>
-                                        <div className=' text-sm'>
-                                            <h3>Rahu kaal</h3>
-                                            <h3>Yamghant kaal</h3>
-                                            <h3>Gulikaal</h3>
-                                        </div>
-                                        <div className='text-[13px] font-sans  text-gray-700/90'>
-                                            <p>{data?.rahukaal?.start} |{data?.rahukaal?.end}</p>
-                                            <p>{data?.yamghant_kaal?.start} | {data?.yamghant_kaal?.end}</p>
-                                            <p>{data?.guliKaal?.start}| {data?.guliKaal?.end}</p>
-                                        </div>
-                                    </div>
-                                    <div className='w-[95%] mt-2 border-b-2 border-red-800 mx-auto'></div>
-                                    <h1 className='text-center text-red-800  font-bold'>Lunar Month</h1>
-                                    <div className='flex justify-between items-center px-3  '>
-                                        <div className=' text-sm'>
-                                            <h3>Amanta</h3>
-                                            <h3>Purnimanta</h3>
-                                            <h3>Paksha</h3>
-                                        </div>
-                                        <div className='text-[13px]  pr-3 text-gray-700/90 '>
-                                            <p>{data?.hindu_maah?.amanta}</p>
-                                            <p>{data?.hindu_maah?.purnimanta}</p>
-                                            <p>{data?.paksha}</p>
-                                        </div>
-                                    </div>
-
-                                </div>
+                                    </>
+                                }
 
 
 
@@ -404,16 +410,16 @@ function Dashboard() {
 
 
                 <form onSubmit={thoughtSubmitHandler} >
-        
+
 
                     <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your thought :</label>
                     <textarea id="message" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your thoughts here..."
-                    value={thoughtText} onChange={(e)=>setThoughtText(e.target.value)} required></textarea>
-                  <div className='text-center mt-4'>
-                  <button class="bg-red-800 hover:bg-red-700 text-white font-bold py-1 shadow-xl  px-5 rounded focus:outline-none focus:shadow-outline" type="submit">
-                                    Submit
-                                </button>
-                  </div>
+                        value={thoughtText} onChange={(e) => setThoughtText(e.target.value)} required></textarea>
+                    <div className='text-center mt-4'>
+                        <button class="bg-red-800 hover:bg-red-700 text-white font-bold py-1 shadow-xl  px-5 rounded focus:outline-none focus:shadow-outline" type="submit">
+                            Submit
+                        </button>
+                    </div>
 
                 </form>
             </Modal>

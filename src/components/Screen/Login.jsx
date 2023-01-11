@@ -1,15 +1,13 @@
  import React, { useState } from 'react';
 import './login.css'
-
 import logo from '../../Assets/images/sanatandark.png'
-
 import hindilogo from '../../Assets/images//Sanatanhindi.png'
 import DesignLogin from '../../Assets/images/DesignLogin.png'
 import Ellipse83 from '../../Assets/images/Ellipse83.png'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch, useSelector } from 'react-redux';
-import {AdminLogin} from '../../Redux/Action/LoginAction'
+import {getLogin} from '../../Redux/Fetures/Reducers/LoginSplice'
 function Login() {
 
     const [email, setEmail] = useState('')
@@ -22,7 +20,8 @@ function Login() {
             email, password
         }
         console.log(data)
-        dispatch(AdminLogin(data))
+        // dispatch(AdminLogin(data))
+        dispatch(getLogin(data))
     }
     function myFunction() {
         var x = document.getElementById("myInput");

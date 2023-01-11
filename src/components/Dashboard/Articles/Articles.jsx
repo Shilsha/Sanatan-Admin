@@ -3,7 +3,7 @@ import { useState } from 'react'
 import Navbar from '../../Navbar/Navbar'
 import Sidebar from '../../Sidebar/Sidebar'
 import { BsSearch, BsThreeDots } from 'react-icons/bs'
-import { BiFilter } from 'react-icons/bi'
+import { BiFilter ,BiSkipNext,BiSkipPrevious} from 'react-icons/bi'
 import { AiOutlinePlus, AiFillDelete, AiTwotoneEdit, AiOutlineClose } from 'react-icons/ai'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -16,6 +16,7 @@ import { toast, ToastContainer } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
 import { Link } from 'react-router-dom'
+import {getAllArticleAction} from '../../../Redux/Fetures/Reducers/ArticleSlice'
 const customStyles = {
     content: {
         top: '50%',
@@ -37,26 +38,35 @@ const customStyles = {
 function Articles() {
     const [FilterSearch, setFilterSearch] = useState('')
     const [ModelStatus, setModelStatus] = useState('')
+    const [page, setPage] = useState(0)
+    const [buttonPre, setButtonPre] = useState(false)
+    const [buttonNext, setButtonNext] = useState(false)
+    const [types,setTypes]=useState("OPEN")
     const dispatch = useDispatch()
     
    
 
-    const getArticle = useSelector((state) => state.GetArticlesReducer.result.data)
-    const getArticle2 = useSelector((state) => state.GetArticlesReducer.result2)
-    const UpdateArticleT = useSelector((state) => state)
-    // console.log(UpdateArticleT, 'type')
-    console.log(getArticle2, 'getArticle2')
+    const getArticle = useSelector((state) => state.article)
+    console.log(getArticle.result.length,'res')
+    useEffect(()=>{
 
-    useEffect(() => {
-        dispatch(GetArticles())
-
-    }, [getArticle2])
+        const data={
+            page:page,
+            type:types,
+        }
+        dispatch(getAllArticleAction(data))
+    },[])
 
 
     // ======================Publish and Open ==============================
 
     const selectArticleType = (Type) => {
-        dispatch(GetArticles(Type))
+        setTypes(Type)
+        const data={
+            page:page,
+            type:Type,
+        }
+        dispatch(getAllArticleAction(data))
         toast.success("Your article type has changed")
 
     }
@@ -95,9 +105,7 @@ function Articles() {
     const [modalIsOpen, setIsOpen] = React.useState(false);
     const [publishText, setPublishText] = useState('')
     const [publishArticleId, setPublishArticleId] = useState('')
-    // function afterOpenModal() {
-    //     subtitle.style.color = 'red';
-    // }
+ 
 
     function closeModal() {
         setIsOpen(false);
@@ -149,8 +157,54 @@ function Articles() {
         }
 
     }
+// ========================================previous and next======================================
+    const next = () => {
+        setPage(page + 1)
+
+    }
+
+    const prev = () => {
+        setPage(page - 1)
+
+    }
 
 
+
+    useEffect(() => {
+
+
+        const data={
+            page:page,
+            type:types,
+        }
+     
+      
+        console.log(page, 'length')
+        if (page > 0) {
+            console.log('bada hia')
+            setButtonPre(false)
+
+
+        } else {
+            console.log('chhoota hai')
+            setButtonPre(true)
+        }
+
+        dispatch(getAllArticleAction(data))
+
+    }, [page])
+
+    useEffect(() => {
+        if(getArticle.result.length<16){
+            // console.log('chhota')
+            setButtonNext(true)
+    
+        }else{
+            // console.log('bada')
+            setButtonNext(false)
+        }
+    
+    }, [getArticle.result])
 
     return (
         <>
@@ -218,13 +272,13 @@ function Articles() {
                                 </thead>
                                 <tbody style={{ background: '' }}>
                                     {
-                                        !getArticle ? <>
+                                        getArticle.loading ? <>
                                             <Loader />
                                         </> : <>
                                             {
-                                                (getArticle?.filter((user) => user.title?.toLowerCase().includes(FilterSearch)))?.map((data) => {
+                                                (getArticle?.result.filter((user) => user.title?.toLowerCase().includes(FilterSearch)))?.map((data) => {
 
-                                                    // getArticle?.map((data) => {
+                                                    // getArticle?.result.map((data) => {
                                                     return (
                                                         <>
 
@@ -247,19 +301,14 @@ function Articles() {
                                                                     {truncateString(data?.content, 50)}
 
                                                                 </td>
-                                                                {/* <td class="border text-center  text-[12px]">{data.userId}</td>
-                                                            <td class="border text-center text-[12px]">{data.likes}</td> */}
-
+                                                               
                                                                 <td class="border text-start  text-[13px] px-2">{data.author} </td>
 
                                                                 <td class="border text-[12px] px-2">
                                                                     {data.createdDate}
 
                                                                 </td>
-                                                                {/* <td class="border text-[13px] px-2"></td> */}
-
-
-
+                                                              
 
                                                                 <td class="border text-center pt-1  ">
 
@@ -333,40 +382,22 @@ function Articles() {
                         </div>
                         {/* -----------------------------------------------pagination--------------------------------------------------------- */}
 
-                        <nav aria-label="Page navigation example " className='text-center  -bottom-4 relative'>
-                            <ul class="inline-flex -space-x-px ">
+                        <nav aria-label="Page navigation example " className='text-center     '>
+                            <ul class="inline-flex justify-center items-center ">
                                 <li>
-                                    <button class={`px-3 cursor-pointer py-2 ml-0 leading-tight text-white font-bold bg-red-800 disabled:opacity-50  rounded-lg mx-4 hover:bg-red-700  dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white`}
-                                    // disabled={buttonPre}
-                                    //  onClick={prev}
-                                    >Prev</button>
+                                    <button class={`px-3 inline-flex justify-center  items-center cursor-pointer py-2 ml-0 leading-tight text-white font-bold bg-red-800 disabled:opacity-50  rounded-lg mx-4 hover:bg-red-700  dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white`} disabled={buttonPre} onClick={prev} >
+                                        <BiSkipPrevious className='pt-1' size={25} />  Prev</button>
 
                                 </li>
 
-                                {/* {
-                                    PageNumbers.map((number) => {
-                                        return (
-                                            <>
-                                                <li>
-                                                    <a href="#" class="px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white " onClick={() => setCurrentPage(number)}>{number}</a>
-                                                </li>
-
-                                            </>
-                                        )
-                                    })
-                                } */}
+                                <li className=' mr-4 font-bold'>  {page + 1}</li>
                                 <li>
-                                    <button type='button' class="px-3 py-2 leading-tight text-white font-bold bg-red-800 disabled:opacity-50 rounded-l-lg hover:bg-red-700 rounded-r-lg   dark:hover:text-white"
-                                    //  disabled={buttonNext}
-                                    //   onClick={next}
-                                    >Next</button>
+                                    <button type='button' class="px-3 py-2 inline-flex items-center justify-center  leading-tight text-white font-bold bg-red-800 disabled:opacity-50 rounded-l-lg hover:bg-red-700 rounded-r-lg   dark:hover:text-white" disabled={buttonNext} onClick={next}>Next <BiSkipNext className='pt-1' size={25} /></button>
 
-                                    {/* <button type="button" class="px-8 py-3 text-white bg-blue-600 rounded focus:outline-none "
-                                         onClick={next}>Next</button> */}
+
                                 </li>
                             </ul>
                         </nav>
-
 
                         {/* ================================Model================== */}
 
