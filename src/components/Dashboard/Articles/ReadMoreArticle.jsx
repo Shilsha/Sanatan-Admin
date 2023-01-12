@@ -2,7 +2,6 @@ import React from 'react'
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from "react-router-dom";
-import { GetSingleArticle } from '../../../Redux/Action/GetArticlesAction'
 import Loader from '../../Loader/Loader';
 import Navbar from '../../Navbar/Navbar';
 import Sidebar from '../../Sidebar/Sidebar';

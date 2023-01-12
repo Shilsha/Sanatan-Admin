@@ -6,10 +6,10 @@ import { BiFilter ,BiSkipNext,BiSkipPrevious} from 'react-icons/bi'
 import { AiOutlinePlus, AiFillDelete, AiTwotoneEdit, AiOutlineClose, AiOutlineWarning } from 'react-icons/ai'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
-import { getAllAdmin } from '../../../Redux/Action/AdminAction'
+
 import Loader from '../../Loader/Loader'
 
-import { deleteSingleAdmin } from '../../../Redux/Action/AdminAction'
+
 import { ToastContainer } from 'react-toastify'
 import Modal from 'react-modal';
 import { getAdminList } from '../../../Redux/Fetures/Reducers/AdminListSlice'

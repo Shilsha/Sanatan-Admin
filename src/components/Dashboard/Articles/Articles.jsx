@@ -7,8 +7,6 @@ import { BiFilter ,BiSkipNext,BiSkipPrevious} from 'react-icons/bi'
 import { AiOutlinePlus, AiFillDelete, AiTwotoneEdit, AiOutlineClose } from 'react-icons/ai'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { GetArticles } from '../../../Redux/Action/GetArticlesAction'
-import { UpdateArticleType, PublishArticleMessage, RejectArticleMessage } from '../../../Redux/Action/GetArticlesAction'
 import Loader from '../../Loader/Loader'
 import { AiFillCaretDown, AiFillEye } from 'react-icons/ai'
 import Modal from 'react-modal';

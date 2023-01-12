@@ -7,7 +7,6 @@ import Modal from 'react-modal';
 import { AiOutlineClose } from 'react-icons/ai'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-// import { addAdmin } from '../../Redux/Action/AdminAction'
 import { Navigate, NavLink, useNavigate } from 'react-router-dom'
 import { RiShieldUserLine } from 'react-icons/ri'
 import { HiClipboardDocumentList } from 'react-icons/hi2'

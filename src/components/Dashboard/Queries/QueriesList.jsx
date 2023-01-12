@@ -6,7 +6,6 @@ import { BsSearch, BsThreeDots } from 'react-icons/bs'
 import { BiFilter, BiSkipNext, BiSkipPrevious } from 'react-icons/bi'
 import { AiOutlinePlus, AiFillDelete, AiTwotoneEdit, AiOutlineClose, AiFillEye } from 'react-icons/ai'
 import { useDispatch, useSelector } from 'react-redux'
-import { getAllQueries, updateQueries, deleteSingleQuery } from '../../../Redux/Action/QueriesAction'
 import Loader from '../../Loader/Loader'
 import Modal from 'react-modal';
 import { toast, ToastContainer } from 'react-toastify'

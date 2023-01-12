@@ -6,7 +6,6 @@ import { useParams } from 'react-router-dom'
 import Loader from '../../Loader/Loader'
 import Modal from 'react-modal';
 import {AiOutlineClose} from 'react-icons/ai'
-import { updateQueries } from '../../../Redux/Action/QueriesAction'
 import {getSingleQuery} from '../../../Redux/Fetures/Reducers/GetSingleQuerySlice'
 import {updateQueriesAction} from '../../../Redux/Fetures/Reducers/GetSingleQuerySlice'
 

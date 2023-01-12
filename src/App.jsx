@@ -12,21 +12,25 @@ import QueriesList from './components/Dashboard/Queries/QueriesList';
 import ViewQuery from './components/Dashboard/Queries/ViewQuery';
 import Logs from './components/Dashboard/Logs/Logs';
 import Hits from './components/Dashboard/Hits/Hits';
+import PrivateRoutes from './components/Dashboard/PrivateRoutes/PrivateRoutes';
 function Routing() {
   return (
     <div> 
       <Router>
         <Routes>
           <Route exact path="/" element={<Login />} />
-          <Route exact path="/dashboard" element={<Dashboard />} />
-          <Route exact path="/user" element={<User />} />
-          <Route exact path="/articles" element={<Articles />} />
-          <Route exact path="/articles/:id" element={<ReadMoreArticle />} />
-          <Route exact path="/adminlists" element={<AdminUserList />} />
-          <Route exact path="/queries" element={<QueriesList />} />
-          <Route exact path="/queries/:id" element={<ViewQuery />} />
-          <Route exact path="/logs" element={<Logs />} />
-          <Route exact path="/hits" element={<Hits />} />
+
+          <Route exact path="/dashboard"  element={<PrivateRoutes Component={Dashboard}/>}> </Route>
+
+          {/* <Route exact path="/dashboard" element={<Dashboard />} /> */}
+          <Route exact path="/user" element={<PrivateRoutes Component={User}/>}> </Route>
+          <Route exact path="/articles"  element={<PrivateRoutes Component={Articles}/>}> </Route>
+          <Route exact path="/articles/:id"  element={<PrivateRoutes Component={ReadMoreArticle}/>}> </Route>
+          <Route exact path="/adminlists"  element={<PrivateRoutes Component={AdminUserList}/>}> </Route>
+          <Route exact path="/queries"  element={<PrivateRoutes Component={QueriesList}/>}> </Route>
+          <Route exact path="/queries/:id"  element={<PrivateRoutes Component={ViewQuery}/>}> </Route>
+          <Route exact path="/logs"  element={<PrivateRoutes Component={Logs}/>}> </Route>
+          <Route exact path="/hits"  element={<PrivateRoutes Component={Hits}/>}> </Route>
         </Routes>
       </Router>
 

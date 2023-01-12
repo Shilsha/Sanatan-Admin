@@ -7,13 +7,9 @@ import { AiOutlinePlus, AiFillDelete, AiTwotoneEdit, AiOutlineClose } from 'reac
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
-import { GetUser } from '../../../Redux/Action/GetUserActions'
 import moment from 'moment'
 
 import Modal from 'react-modal';
-import { MdHeight } from 'react-icons/md'
-
-import { updateSingleUser, deleteSingleUser } from '../../../Redux/Action/GetUserActions'
 import Loader from '../../Loader/Loader'
 import { toast, ToastContainer } from 'react-toastify'
 import { getUser, deleteUser } from '../../../Redux/Fetures/Reducers/GetUserSlice'

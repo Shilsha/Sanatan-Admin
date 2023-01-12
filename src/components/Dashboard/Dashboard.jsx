@@ -20,8 +20,8 @@ import Loader from '../Loader/Loader';
 import { getThoughtAction, updateThoughtAction } from '../../Redux/Fetures/Reducers/ThoughtOfdayPostSlice'
 import { panchangeAction } from '../../Redux/Fetures/Reducers/PanchangSlice'
 import { getUser } from '../../Redux/Fetures/Reducers/GetUserSlice';
-import {getAllArticleAction} from '../../Redux/Fetures/Reducers/ArticleSlice'
-import {getAllQueriesAction} from '../../Redux/Fetures/Reducers/QueriesSlice'
+import { getAllArticleAction } from '../../Redux/Fetures/Reducers/ArticleSlice'
+import { getAllQueriesAction } from '../../Redux/Fetures/Reducers/QueriesSlice'
 const customStyles = {
     content: {
         top: '50%',
@@ -74,13 +74,37 @@ function Dashboard() {
             })
     };
 
+    function getUserLength() {
+        const data = {
+            page: 0,
+            type: true
+        }
+        dispatch(getUser(data))
+
+    }
+    function getArticleLength() {
+        const data = {
+            page: 0,
+            type: 'OPEN'
+        }
+        dispatch(getAllArticleAction(data))
+
+    }
+    function getQueryLength() {
+        const data = {
+            page: 0,
+            type: 'NEW'
+        }
+        dispatch(getAllQueriesAction(data))
+
+    }
 
     useEffect(() => {
         dispatch(getThoughtAction())
         dispatch(panchangeAction(requestOptions1))
-        dispatch(getUser(true))
-        dispatch(getAllArticleAction("OPEN"))
-        dispatch(getAllQueriesAction("NEW"))
+        getUserLength()
+        getArticleLength()
+        getQueryLength()
     }, [])
 
 
@@ -195,10 +219,10 @@ function Dashboard() {
 
                                                 </Link>
                                                 {
-                                                   
-                                                       <h1 className='text-5xl font-mono  font-bold text-red-800 text-center '>{userData.result?.length}</h1> 
+
+                                                    <h1 className='text-5xl font-mono  font-bold text-red-800 text-center '>{userData.result?.length}</h1>
                                                 }
-                                              
+
                                             </div>
                                         </div>
 
