@@ -12,6 +12,7 @@ import { RiShieldUserLine } from 'react-icons/ri'
 import { HiClipboardDocumentList } from 'react-icons/hi2'
 import { BsFillQuestionSquareFill } from 'react-icons/bs'
 import {addAdmin} from '../../Redux/Fetures/Reducers/AdminListSlice'
+import { ToastContainer } from 'react-toastify'
 const customStyles = {
     content: {
         top: '50%',
@@ -76,7 +77,10 @@ function Sidebar() {
     }
 
     return (
-        <div className='  flex flex-col justify-between py-5 items-center shadow-xl    rounded-lg  px-2 '>
+
+        <>
+        <ToastContainer/>
+        <div className='  flex flex-col justify-between py-5 items-center shadow-xl    rounded-lg -ml-4 px-2 mr-2  '>
 
            <div className='-mt-4'>
            <NavLink to='/dashboard'>
@@ -212,6 +216,7 @@ function Sidebar() {
 
 
         </div>
+        </>
     )
 }
 

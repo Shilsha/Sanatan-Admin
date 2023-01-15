@@ -5,46 +5,105 @@ import { BsSearch, BsThreeDots } from 'react-icons/bs'
 import { BiFilter } from 'react-icons/bi'
 import { AiOutlinePlus, AiFillDelete, AiTwotoneEdit, AiOutlineClose } from 'react-icons/ai'
 import { useDispatch, useSelector } from 'react-redux'
-
 import Loader from '../../Loader/Loader'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import moment from 'moment/moment'
-import { getHits } from '../../../Redux/Fetures/Reducers/HitSplice'
+import moment from 'moment/moment';
+import {getHitsFestival} from '../../../Redux/Fetures/Reducers/HitsReducers/FestivalSlice'
+import {getHitsPanchang} from '../../../Redux/Fetures/Reducers/HitsReducers/PanchangSlice'
+import {getHitsArticle} from '../../../Redux/Fetures/Reducers/HitsReducers/ArticlessSlice'
+import {getHitsContact} from '../../../Redux/Fetures/Reducers/HitsReducers/HitsContact'
+import {getHitsHoroscope} from '../../../Redux/Fetures/Reducers/HitsReducers/Horoscope'
+import {getHitsMatchMaking} from '../../../Redux/Fetures/Reducers/HitsReducers/MatchMakingSplice'
+import {getHitsLogin} from '../../../Redux/Fetures/Reducers/HitsReducers/LoginSlice'
+import {getHitsKundali} from '../../../Redux/Fetures/Reducers/HitsReducers/KundliSplice'
+import LoaderN from '../../Loader/LoaderN'
 
 function Hits() {
     const [FilterSearch, setFilterSearch] = useState('')
     const [date, setDate] = useState(new Date());
+    const [dateFes, setDateFes] = useState(new Date());
+    const [dateKundli, setDateKundli] = useState(new Date());
+    const [dateCont, setDateCont] = useState(new Date());
+    const [dateHoro, setDateHoro] = useState(new Date());
+    const [dateMatch, setDateMatch] = useState(new Date());
+    const [dateArt, setDateArt] = useState(new Date());
+    const [dateLogin, setDateLogin] = useState(new Date());
     const dispatch = useDispatch()
 
-    const hit = useSelector((state) => state.hit)
-    console.log(hit, 'this is hits')
+    const hitPan = useSelector((state) => state.panchangHit)
+    const hitFes=useSelector((state)=>state.festivalsHit)
+    const hitCon=useSelector((state)=>state.contactHit)
+    const hitArt=useSelector((state)=>state.articleHit)
+    const hitHoro=useSelector((state)=>state.horoscopeHit)
+    const hitLogin=useSelector((state)=>state.loginHit)
+    const hitMatch=useSelector((state)=>state.matchMakingHit)
+    const hitKundli=useSelector((state)=>state.kundliHit)
+  
+
+    console.log(hitLogin, 'this horo is hits')
+    
 
     useEffect(() => {
-        dispatch(getHits())
+        dispatch(getHitsPanchang())
+        // dispatch(getHitsFestival())
+        dispatch(getHitsKundali())
+        dispatch(getHitsArticle())
+        dispatch(getHitsContact())
+        dispatch(getHitsHoroscope())
+        dispatch(getHitsMatchMaking())
+        dispatch(getHitsLogin())
+        dispatch(getHitsPanchang())
+        dispatch(getHitsFestival())
+
     }, [])
 
-    // filter method----------
+    //========================== filter method---=====================-------
 
-    const dateFilter = (date) => {
-        console.log(moment(date).format('YYYY-MM-DD'),'this is date')
+    useEffect(() => {
+        const data = moment(date).format('YYYY-MM-DD')
+        dispatch(getHitsPanchang(data))
+    }, [date])
 
-
-    }
-
-
+    useEffect(() => {
+        const data = moment(dateFes).format('YYYY-MM-DD')
+        dispatch(getHitsFestival(data))
+    }, [dateFes])
+    useEffect(() => {
+        const data = moment(dateKundli).format('YYYY-MM-DD')
+        dispatch(getHitsKundali(data))
+    }, [dateKundli])
+    useEffect(() => {
+        const data = moment(dateCont).format('YYYY-MM-DD')
+        dispatch(getHitsContact(data))
+    }, [dateCont])
+    useEffect(() => {
+        const data = moment(dateCont).format('YYYY-MM-DD')
+        dispatch(getHitsHoroscope(data))
+    }, [dateHoro])
+    useEffect(() => {
+        const data = moment(dateCont).format('YYYY-MM-DD')
+        dispatch(getHitsMatchMaking(data))
+    }, [dateMatch])
+    useEffect(() => {
+        const data = moment(dateCont).format('YYYY-MM-DD')
+        dispatch(getHitsArticle(data))
+    }, [dateArt])
+    useEffect(() => {
+        const data = moment(dateCont).format('YYYY-MM-DD')
+        dispatch(getHitsLogin(data))
+    }, [dateLogin])
+   
 
     return (
         <>
 
             <div className='container   w-[100%] h-[100vh] flex flex-col-2 gap-4  '>
                 <Sidebar />
-
                 <div className=' w-[91%]  '>
                     <Navbar />
                     <div className=' my-4 mx-auto '>
-
-                        <div className='flex justify-between items-center pb-4'>
+                        {/* <div className='flex justify-between items-center pb-4'>
                             <div className='flex justify-between w-[40%]'>
 
                                 <div class=" relative  w-[75%] text-gray-600 ">
@@ -74,145 +133,268 @@ function Hits() {
 
 
                             </div>
-                        </div>
-
-
-                        <div className="tableWrap ">
+                        </div> */}
+                        <div className="tableWrapsss ">
                             <h1 className='text-center font-bold text-xl text-red-800'> All Module Hits</h1>
+                            <div className='grid grid-cols-4  items-center'>
+                                <div class=" relative overflow-hidden sm:py-12">
+                                    <div class="max-w-[300px] ">
+                                        <div class="relative group">
+                                            <div class="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg blur opacity-25
+                                         group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
+                                            <div class="relative  bg-white ring-1 ring-gray-900/5 rounded-lg leading-none  space-x-6">
+                                                <div>
+                                                    <h1 className='text-center font-bold text-xl text-white py-1 bg-red-800 '>Panchang Hits </h1>
+                                                    {/* <hr className='w-[50%] mx-auto h-1 bg-red-800' /> */}
 
-                           <div className='flex  items-center'>
-                           <div class="min-h-screen   relative overflow-hidden sm:py-12 p-4">
-                                <div class="max-w-[300px] ">
-                                    <div class="relative group">
-                                        <div class="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
-                                        <div class="relative  bg-white ring-1 ring-gray-900/5 rounded-lg leading-none  space-x-6">
-                                            <div>
-                                                <h1 className='text-center font-bold text-xl text-red-800'>: festivals Hits : </h1>
-                                                <hr className='w-[50%] mx-auto h-1 bg-red-800' />
 
-                                                <div className='p-4'>
-                                                    <span className='text-sm'>Total hits: </span> <span>{hit.result}</span>
-                                                </div>
-                                                <div className='p-4'>
-                                                    <h1 className='text-center mb-4 bg-gray-100 py-2 font-bold'>Search Specific Date Hits</h1>
-                                                    <div class="mb-4">
-                                                        <label class="block text-gray-700 text-sm font-bold mb-1" for="username">
-                                                          Select Date
-                                                        </label>
-                                                        <DatePicker className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" selected={date} onChange={(date) => dateFilter(date)} />
+                                                    <div className='p-4'>
 
-                                                   
+                                                        <div class="mb-4">
+                                                            <label class="block text-gray-700 text-sm font-bold mb-1" for="username">
+                                                                Select Date
+                                                            </label>
+                                                            <DatePicker className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+                                                         focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" selected={date} onChange={(date) => setDate(date)} dateFormat="dd/MM/yyyy" />
+
+
+                                                        </div>
+                                                        <div className=''>
+                                                            <p className='font-bold text-red-800 text-xl'>Total hits: </p>
+                                                            {hitPan?.loading ? <LoaderN /> : <p className='font-extrabold text-2xl text-center' >{hitPan?.result}</p >}
+
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
 
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="min-h-screen   relative overflow-hidden sm:py-12 p-4">
-                                <div class="max-w-[300px] ">
-                                    <div class="relative group">
-                                        <div class="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
-                                        <div class="relative  bg-white ring-1 ring-gray-900/5 rounded-lg leading-none  space-x-6">
-                                            <div >
-                                                <h1 className='text-center font-bold text-xl text-red-800'>: festivals Hits : </h1>
-                                                <hr className='w-[50%] mx-auto h-1 bg-red-800' />
+                                <div class=" relative overflow-hidden sm:py-12">
+                                    <div class="max-w-[300px] ">
+                                        <div class="relative group">
+                                            <div class="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
+                                            <div class="relative  bg-white ring-1 ring-gray-900/5 rounded-lg leading-none  space-x-6">
+                                                <div>
+                                                    <h1 className='text-center font-bold text-xl text-white py-1 bg-red-800 '>Festival Hits </h1>
 
-                                                <div className='p-4'>
-                                                    <span className='text-sm'>Total hits: </span> <span>{hit.result}</span>
-                                                </div>
-                                                <div className='p-4'>
-                                                    <h1 className='text-center mb-4 bg-gray-100 py-2 font-bold'>Search Specific Date Hits</h1>
-                                                    <div class="mb-4">
-                                                        <label class="block text-gray-700 text-sm font-bold mb-1" for="username">
-                                                          Select Date
-                                                        </label>
-                                                        <DatePicker className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" selected={date} onChange={(date) => dateFilter(date)} />
 
-                                                   
+                                                    <div className='p-4'>
+
+                                                        <div class="mb-4">
+                                                            <label class="block text-gray-700 text-sm font-bold mb-1" for="username">
+                                                                Select Date
+                                                            </label>
+                                                            <DatePicker className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" selected={dateFes} onChange={(date) => setDateFes(date)} />
+
+
+                                                        </div>
+                                                        <div className=''>
+                                                            <p className='font-bold text-red-800 text-xl'>Total hits: </p>
+                                                            {hitFes.loading ? <LoaderN /> : <p className='font-extrabold text-2xl text-center' >{hitFes?.result}</p >}
+
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
 
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                                <div class=" relative overflow-hidden sm:py-12 ">
+                                    <div class="max-w-[300px] ">
+                                        <div class="relative group">
+                                            <div class="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
+                                            <div class="relative  bg-white ring-1 ring-gray-900/5 rounded-lg leading-none  space-x-6">
+                                                <div>
+                                                    <h1 className='text-center font-bold text-xl text-white py-1 bg-red-800 '>Kundali Hits </h1>
+                                                    {/* <hr className='w-[50%] mx-auto h-1 bg-red-800' /> */}
 
-                            <div class="min-h-screen   relative overflow-hidden sm:py-12 p-4">
-                                <div class="max-w-[300px] ">
-                                    <div class="relative group">
-                                        <div class="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
-                                        <div class="relative  bg-white ring-1 ring-gray-900/5 rounded-lg leading-none  space-x-6">
-                                            <div>
-                                                <h1 className='text-center font-bold text-xl text-red-800'>: festivals Hits : </h1>
-                                                <hr className='w-[50%] mx-auto h-1 bg-red-800' />
 
-                                                <div className='p-4'>
-                                                    <span className='text-sm'>Total hits: </span> <span>{hit.result}</span>
-                                                </div>
-                                                <div className='p-4'>
-                                                    <h1 className='text-center mb-4 bg-gray-100 py-2 font-bold'>Search Specific Date Hits</h1>
-                                                    <div class="mb-4">
-                                                        <label class="block text-gray-700 text-sm font-bold mb-1" for="username">
-                                                          Select Date
-                                                        </label>
-                                                        <DatePicker className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" selected={date} onChange={(date) => dateFilter(date)} />
+                                                    <div className='p-4'>
 
-                                                   
+                                                        <div class="mb-4">
+                                                            <label class="block text-gray-700 text-sm font-bold mb-1" for="username">
+                                                                Select Date
+                                                            </label>
+                                                            <DatePicker className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" selected={dateKundli} onChange={(date) => setDateKundli(date)} />
+
+
+                                                        </div>
+                                                        <div className=''>
+                                                            <p className='font-bold text-red-800 text-xl'>Total hits: </p>
+                                                            {hitKundli.loading?<LoaderN/>: <p className='font-extrabold text-2xl text-center' >{hitKundli?.result?.data}</p >}
+                                                           
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
 
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+                                <div class=" relative overflow-hidden sm:py-12 ">
+                                    <div class="max-w-[300px] ">
+                                        <div class="relative group">
+                                            <div class="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
+                                            <div class="relative  bg-white ring-1 ring-gray-900/5 rounded-lg leading-none  space-x-6">
+                                                <div>
+                                                    <h1 className='text-center font-bold text-xl text-white py-1 bg-red-800 '>Contact Hits </h1>
+                                                    {/* <hr className='w-[50%] mx-auto h-1 bg-red-800' /> */}
+
+
+                                                    <div className='p-4'>
+
+                                                        <div class="mb-4">
+                                                            <label class="block text-gray-700 text-sm font-bold mb-1" for="username">
+                                                                Select Date
+                                                            </label>
+                                                            <DatePicker className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" selected={dateCont} onChange={(date) => setDateCont(date)} />
+
+
+                                                        </div>
+                                                        <div className=''>
+                                                            <p className='font-bold text-red-800 text-xl'>Total hits: </p>
+                                                            {hitCon.loading?<LoaderN/>:<p className='font-extrabold text-2xl text-center' >{hitCon?.result}</p >}
+                                                      
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class=" relative overflow-hidden sm:py-12 ">
+                                    <div class="max-w-[300px] ">
+                                        <div class="relative group">
+                                            <div class="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
+                                            <div class="relative  bg-white ring-1 ring-gray-900/5 rounded-lg leading-none  space-x-6">
+                                                <div>
+                                                    <h1 className='text-center font-bold text-xl text-white py-1 bg-red-800 '>Horoscope Hits </h1>
+                                                    {/* <hr className='w-[50%] mx-auto h-1 bg-red-800' /> */}
+
+
+                                                    <div className='p-4'>
+
+                                                        <div class="mb-4">
+                                                            <label class="block text-gray-700 text-sm font-bold mb-1" for="username">
+                                                                Select Date
+                                                            </label>
+                                                            <DatePicker className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" selected={dateHoro} onChange={(date) => setDateHoro(date)} />
+
+
+                                                        </div>
+                                                        <div className=''>
+                                                            <p className='font-bold text-red-800 text-xl'>Total hits: </p>
+                                                            <p className='font-extrabold text-2xl text-center' >{hitHoro.loading?<LoaderN/>:hitHoro.result}</p >
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class=" relative overflow-hidden sm:py-12 ">
+                                    <div class="max-w-[300px] ">
+                                        <div class="relative group">
+                                            <div class="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
+                                            <div class="relative  bg-white ring-1 ring-gray-900/5 rounded-lg leading-none  space-x-6">
+                                                <div>
+                                                    <h1 className='text-center font-bold text-xl text-white py-1 bg-red-800 '>Match Making Hits </h1>
+                                                    {/* <hr className='w-[50%] mx-auto h-1 bg-red-800' /> */}
+
+
+                                                    <div className='p-4'>
+
+                                                        <div class="mb-4">
+                                                            <label class="block text-gray-700 text-sm font-bold mb-1" for="username">
+                                                                Select Date
+                                                            </label>
+                                                            <DatePicker className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" selected={dateMatch} onChange={(date) => setDateMatch(date)} />
+
+
+                                                        </div>
+                                                        <div className=''>
+                                                            <p className='font-bold text-red-800 text-xl'>Total hits: </p>
+                                                            <p className='font-extrabold text-2xl text-center' >{hitMatch.loading?<LoaderN/>:hitMatch.result}</p >
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class=" relative overflow-hidden sm:py-12 ">
+                                    <div class="max-w-[300px] ">
+                                        <div class="relative group">
+                                            <div class="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
+                                            <div class="relative  bg-white ring-1 ring-gray-900/5 rounded-lg leading-none  space-x-6">
+                                                <div>
+                                                    <h1 className='text-center font-bold text-xl text-white py-1 bg-red-800 '>Article Hits </h1>
+                                                    {/* <hr className='w-[50%] mx-auto h-1 bg-red-800' /> */}
+
+
+                                                    <div className='p-4'>
+
+                                                        <div class="mb-4">
+                                                            <label class="block text-gray-700 text-sm font-bold mb-1" for="username">
+                                                                Select Date
+                                                            </label>
+                                                            <DatePicker className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" selected={dateArt} onChange={(date) => setDateArt(date)} />
+
+
+                                                        </div>
+                                                        <div className=''>
+                                                            <p className='font-bold text-red-800 text-xl'>Total hits: </p>
+                                                            <p className='font-extrabold text-2xl text-center' >{hitArt?.loading?<LoaderN/>:hitArt?.result}</p >
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class=" relative overflow-hidden sm:py-12 ">
+                                    <div class="max-w-[300px] ">
+                                        <div class="relative group">
+                                            <div class="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
+                                            <div class="relative  bg-white ring-1 ring-gray-900/5 rounded-lg leading-none  space-x-6">
+                                                <div>
+                                                    <h1 className='text-center font-bold text-xl text-white py-1 bg-red-800 '>Login Hits </h1>
+                                                    {/* <hr className='w-[50%] mx-auto h-1 bg-red-800' /> */}
+
+
+                                                    <div className='p-4'>
+
+                                                        <div class="mb-4">
+                                                            <label class="block text-gray-700 text-sm font-bold mb-1" for="username">
+                                                                Select Date
+                                                            </label>
+                                                            <DatePicker className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" selected={dateLogin} onChange={(date) => setDateLogin(date)} />
+
+
+                                                        </div>
+                                                        <div className=''>
+                                                            <p className='font-bold text-red-800 text-xl'>Total hits: </p>
+                                                            <p className='font-extrabold text-2xl text-center' >{hitLogin?.loading?<LoaderN/>:hitLogin.result}</p >
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
                             </div>
-                           </div>
-                            {/* <table class="shadow-lg tables  w-full rounded-xl ">
-                                <thead className=''>
-                                    <tr className=' table_head  '>
-                                        <th class="bg-blue-100 border  text-center"> Id</th>
-                                        <th class="bg-blue-100  border text-center ">User Id</th>
-                                        <th class="bg-blue-100  border text-center ">Module</th>
-                                        <th class="bg-blue-100  border text-center ">Sub Module</th>
-                                        <th class="bg-blue-100  border text-center ">Status</th>
-                                        <th class="bg-blue-100  border text-center ">Method Operation</th>
-                                        <th class="bg-blue-100 border text-center "> Create Date</th>
 
-                                    </tr>
-
-                                  
-
-                                    {logs.loading ? <Loader /> : <>
-                                        {
-                                            logs.result.map((data) => {
-
-                                                return (<>
-                                                    <tr key={data.id} className="text-center ">
-                                                        <td class="border text-center">{data.id}</td>
-                                                        <td class="border text-center">{data.userId == null ? '---' : data.userId}</td>
-                                                        <td class="border text-start px-2 ">{data.module}</td>
-                                                        <td class="border text-start px-2 ">{data.subModule}</td>
-                                                        <td class="border text-start px-2 ">{JSON.stringify(data.status)}</td>
-                                                        <td class="border text-start px-2 ">{data.methodOperation}</td>
-                                                        <td class="border text-start px-2 ">{data.createdAt}</td>
-                                                    </tr>
-
-                                                </>)
-                                            })
-                                        }
-
-
-                                    </>}
-
-
-
-
-                                </thead>
-
-                            </table> */}
                         </div>
 
                     </div>

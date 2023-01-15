@@ -81,7 +81,8 @@ const adminLists = createSlice({
         },
         [addAdmin.rejected]: (state, action) => {
             state.loading = false,
-                state.error = action
+                state.error = action,
+                toast.warning("Please enter strong password like a test@123")
         },
 
         // =========================DELETE ADMIN ======================================

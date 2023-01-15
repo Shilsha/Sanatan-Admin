@@ -308,9 +308,17 @@ tr:hover{
 
 
 
-/* .active{
-  color: white;
-  border-radius: 5px;
-  background: #b87c14 !important;
-} */
+.tableWrapBroadcast {
+  max-height: 350px;
+  /* border: 2px solid black; */
+  overflow: auto;
+}
 
+.tableWrapBroadcast {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.tableWrapBroadcast::-webkit-scrollbar {
+  display: none;
+}

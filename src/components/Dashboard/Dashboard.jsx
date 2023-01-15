@@ -301,7 +301,9 @@ function Dashboard() {
                                                 <RiShieldUserLine size={60} />
                                             </div>
                                             <div className='flex flex-col '>
-                                                <h1 className='text-red-800 py-4 text-3xl text-center font-bold underline underline-offset-8 '>Broadcast</h1>
+                                                <Link to='/broadcast'>
+                                                    <h1 className='text-red-800 py-4 text-3xl text-center font-bold underline underline-offset-8 '>Broadcast</h1>
+                                                </Link>
                                                 <h1 className='text-5xl font-mono  font-bold text-red-800 text-center '>500</h1>
                                             </div>
                                         </div>

@@ -8,8 +8,21 @@ import singleArticle from './Reducers/GetSingleArticleSlice'
 import users from './Reducers/GetUserSlice'
 import  adminLists  from "./Reducers/AdminListSlice";
 import logs from './Reducers/LogsSlice'
-import getHits from './Reducers/HitSplice'
+// import getHits from './Reducers/HitSplice'
 import logins from './Reducers/LoginSplice'
+import articlesLikes from './Reducers/GetArticleLikeSlice'
+import articlesComments  from './Reducers/GetArticleCommentSlice'
+import getBroadCastOfDay from './Reducers/BroadcastSplice'
+
+import panchangHits from './Reducers/HitsReducers/PanchangSlice'
+import festivalsHits from './Reducers/HitsReducers/FestivalSlice'
+import articleHits from './Reducers/HitsReducers/ArticlessSlice'
+import contactHits from './Reducers/HitsReducers/HitsContact'
+import horoscopeHits from './Reducers/HitsReducers/Horoscope'
+import loginHits from './Reducers/HitsReducers/LoginSlice'
+import matchMakingHits from './Reducers/HitsReducers/MatchMakingSplice'
+import kundliHits from './Reducers/HitsReducers/KundliSplice'
+
 export default configureStore({
     reducer: {
         thoughtOfDay: getThoughtOfDay,
@@ -21,7 +34,23 @@ export default configureStore({
         user:users,
         adminList:adminLists,
         log:logs,
-        hit:getHits,
-        login:logins
+        // hit:getHits,
+        login:logins,
+        articlesLike:articlesLikes,
+        articlesComment:articlesComments,
+       broadcast:getBroadCastOfDay,
+
+
+       panchangHit:panchangHits,
+       festivalsHit:festivalsHits,
+       articleHit:articleHits,
+       contactHit:contactHits,
+       horoscopeHit:horoscopeHits,
+       loginHit:loginHits,
+       matchMakingHit:matchMakingHits,
+       kundliHit:kundliHits,
+    
+
+
     }
 })

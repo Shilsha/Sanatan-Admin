@@ -5,6 +5,7 @@ import Sidebar from '../../Sidebar/Sidebar'
 import { BsSearch, BsThreeDots } from 'react-icons/bs'
 import { BiFilter ,BiSkipNext,BiSkipPrevious} from 'react-icons/bi'
 import { AiOutlinePlus, AiFillDelete, AiTwotoneEdit, AiOutlineClose } from 'react-icons/ai'
+// import {PublishArticleMessage} from '../../../Redux/Action/GetArticlesAction'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../../Loader/Loader'
@@ -15,6 +16,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Link } from 'react-router-dom'
 import {getAllArticleAction} from '../../../Redux/Fetures/Reducers/ArticleSlice'
+import {PublishArticleMessage,RejectArticleMessage} from '../../../Redux/Fetures/Reducers/ArticleSlice'
 const customStyles = {
     content: {
         top: '50%',

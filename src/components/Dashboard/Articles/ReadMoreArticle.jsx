@@ -5,21 +5,21 @@ import { useParams } from "react-router-dom";
 import Loader from '../../Loader/Loader';
 import Navbar from '../../Navbar/Navbar';
 import Sidebar from '../../Sidebar/Sidebar';
-import { AiFillHeart, AiOutlineComment,AiFillCaretDown  } from 'react-icons/ai'
+
 import { getSingleArticle } from '../../../Redux/Fetures/Reducers/GetSingleArticleSlice'
+import GetArticelLike from './GetArticelLike';
 function ReadMoreArticle() {
 
     const { id } = useParams();
     const dispatch = useDispatch()
 
     const GetSingle = useSelector((state) => state.getArticle)
-    console.log(GetSingle, 'get single user article')
+    console.log(GetSingle, 'get single user parent article')
 
     useEffect(() => {
         dispatch(getSingleArticle(id))
 
     }, [])
-
 
     return (
         <>
@@ -58,35 +58,18 @@ function ReadMoreArticle() {
                             </div>
                             <hr className='h-1 bg-red-800' />
 
-                            <div className='flex'>
-
-
-                                <div className='flex  items-center py-2 px-4'>
-                                  
-                                    <button type="button" class="text-white bg-[#3b5998] hover:bg-[#3b5998]/90 focus:ring-4 focus:outline-none focus:ring-[#3b5998]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#3b5998]/55 mr-2 mb-2">
-                                       
-                                       Show All Like
-                                       <AiFillCaretDown size={25}/>
-                                    </button>
-                                    <span className='px-4'>{GetSingle?.result.likes}</span>
-                                </div>
-                                <div className='flex items-center mx-8' >
-                                <button type="button" class="text-white bg-[#3b5998] hover:bg-[#3b5998]/90 focus:ring-4 focus:outline-none focus:ring-[#3b5998]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#3b5998]/55 mr-2 mb-2">
-                                       
-                                       Show All Comment
-                                      <AiFillCaretDown size={25}/>
-                                    </button>
-                                    <span className='px-4'>{GetSingle?.result.commentCount}</span>
-                                </div>
-                            </div>
-
-                            <hr className='h-1 bg-red-800' />
+                           
 
 
                         </>}
 
+                               
                     </div>
 
+                    {GetSingle.loading?<Loader/>:<>
+                    
+                      <GetArticelLike id={id} likes={GetSingle?.result.likes} comments={GetSingle?.result.comments?.length} ParentFunc={()=>childFunc()} ParentFunc2={()=>childFunc2()}   />
+                    </>}
 
                 </div>
             </div>

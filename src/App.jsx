@@ -13,6 +13,7 @@ import ViewQuery from './components/Dashboard/Queries/ViewQuery';
 import Logs from './components/Dashboard/Logs/Logs';
 import Hits from './components/Dashboard/Hits/Hits';
 import PrivateRoutes from './components/Dashboard/PrivateRoutes/PrivateRoutes';
+import BroadCast from './components/Dashboard/BroadCast/BroadCast';
 function Routing() {
   return (
     <div> 
@@ -31,6 +32,7 @@ function Routing() {
           <Route exact path="/queries/:id"  element={<PrivateRoutes Component={ViewQuery}/>}> </Route>
           <Route exact path="/logs"  element={<PrivateRoutes Component={Logs}/>}> </Route>
           <Route exact path="/hits"  element={<PrivateRoutes Component={Hits}/>}> </Route>
+          <Route exact path="/broadcast"  element={<PrivateRoutes Component={BroadCast}/>}> </Route>
         </Routes>
       </Router>
 
