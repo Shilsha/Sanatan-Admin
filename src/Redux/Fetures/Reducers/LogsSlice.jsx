@@ -7,8 +7,9 @@ export const getLogs = createAsyncThunk('LOGS/GET_LOGS',
         console.log(data,'is this slice riht')
         let OPTIONS = {
             // url: `${baseUrl}/article/filter?category=All&keyword=&articleType=NEW&page=0&size=20`,
-            // url:`${baseUrl}/api/getlogs?createdAt=${date}&module=Panchang Module&page=0&size=50`,
-          url:  `${baseUrl}/api/getlogs?createdAt=${data.date}&module=${data.module}&page=${data.page}&size=19`,
+            url:`${baseUrl}/api/getlogs?module=${data.module}&createdAt=${data.date}&page=${data.page}&size=60`,
+        //   url:  `${baseUrl}/api/getlogs?createdAt=${data.date}&module=${data.module}&page=${data.page}&size=19`,
+                               
             method: "GET",
             headers: {
               'Accept': 'application/json'

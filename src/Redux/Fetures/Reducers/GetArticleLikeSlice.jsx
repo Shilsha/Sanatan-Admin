@@ -8,7 +8,7 @@ export const getArticleLike = createAsyncThunk('ARTICLE_LIKE/GET_ARTICLE_LIKE',
 
         let OPTIONS = {
             // url: `${baseUrl}/article/filter?category=All&keyword=&articleType=${data.type}&page=${data.page}&size=20`,
-            url: `https://94ca-2401-4900-1c60-ea7f-45a4-d808-f1ad-2a5f.in.ngrok.io/article/get_list_of_users?articleId=${id}`,
+            url: `${baseUrl}/article/get_list_of_users?articleId=${id}`,
             method: "GET",
             headers: {
               'Accept': 'application/json'

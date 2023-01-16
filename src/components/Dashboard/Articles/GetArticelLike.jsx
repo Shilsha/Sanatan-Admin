@@ -5,6 +5,7 @@ import { AiFillHeart, AiOutlineComment, AiFillCaretDown, AiFillCaretUp } from 'r
 import Loader from '../../Loader/Loader'
 import { getArticleComment } from '../../../Redux/Fetures/Reducers/GetArticleCommentSlice'
 import moment from 'moment';
+import LoaderN from '../../Loader/LoaderN'
 function GetArticelLike({ ParentFunc, id, ParentFunc2, likes ,comments}) {
     const dispatch = useDispatch()
     const [show, setShow] = useState(true)
@@ -85,7 +86,7 @@ function GetArticelLike({ ParentFunc, id, ParentFunc2, likes ,comments}) {
                     </thead>
 
                     {
-                        getAllLike.loading ? <Loader /> : <>
+                        getAllLike.loading ? <LoaderN /> : <>
 
 
                             {
@@ -131,7 +132,7 @@ function GetArticelLike({ ParentFunc, id, ParentFunc2, likes ,comments}) {
                     </thead>
 
                     {
-                        getAllComment.loading ? <Loader /> : <>
+                        getAllComment.loading ? <LoaderN /> : <>
 
 
                             {
