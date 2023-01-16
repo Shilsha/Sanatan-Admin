@@ -8,14 +8,14 @@ function Navbar() {
   return (
     <>
 
-      <div className='   rounded bg-orange-400/20 flex justify-between items-center shadow-lg border w-full  '>
+      <div className='   rounded navbar_bg flex justify-between items-center shadow-lg  w-full  '>
         <div className=' p-2'>
-          <h1 className='text-gray-800 '>Welcome,</h1>
-          <p className='font-bold text-red-800'>Aidan Martin</p>
+          <h1 className='text-gray-700 '>Welcome,</h1>
+          <p className='font-medium text-white'>Aidan Martin</p>
         </div>
 
         <div>
-          <div class="flex justify-center  pt-3">
+          <div class="flex justify-center  pt-3 ">
             <div class="mb-3 xl:w-96">
               <input
                 type="search"
@@ -24,6 +24,7 @@ function Navbar() {
                 form-control
                 block
                 w-full
+                shadow-lg
                 px-3
                 py-1.5
                 text-base
@@ -46,8 +47,8 @@ function Navbar() {
 
         <div className='flex justify-between items-center   w-[17%]  '>
           
-            <IoMdNotifications className='text-red-800 text-2xl'  />
-          <div className=' flex items-center px-2  bg-white rounded py-1 '>
+            <IoMdNotifications className='text-white text-2xl shadow-lg'  />
+          <div className=' flex items-center px-2  bg-white rounded py-1 shadow-lg mr-1'>
               <h2>{userID?.email}</h2>
               <BiChevronDown size={18} />
           </div>

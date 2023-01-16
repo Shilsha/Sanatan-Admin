@@ -98,9 +98,9 @@ function Hits() {
     return (
         <>
 
-            <div className='container   w-[100%] h-[100vh] flex flex-col-2 gap-4  '>
+            <div className='   w-[100%] h-[100vh] flex flex-col-2 gap-4  '>
                 <Sidebar />
-                <div className=' w-[91%]  '>
+                <div className=' w-[93%]  '>
                     <Navbar />
                     <div className=' my-4 mx-auto '>
                         {/* <div className='flex justify-between items-center pb-4'>
@@ -137,7 +137,7 @@ function Hits() {
                         <div className="tableWrapsss ">
                             <h1 className='text-center font-bold text-xl text-red-800'> All Module Hits</h1>
                             <div className='grid grid-cols-4  items-center'>
-                                <div class=" relative overflow-hidden sm:py-12">
+                                <div class=" relative sm:py-12">
                                     <div class="max-w-[300px] ">
                                         <div class="relative group">
                                             <div class="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg blur opacity-25
@@ -171,7 +171,7 @@ function Hits() {
                                         </div>
                                     </div>
                                 </div>
-                                <div class=" relative overflow-hidden sm:py-12">
+                                <div class=" relative  sm:py-12">
                                     <div class="max-w-[300px] ">
                                         <div class="relative group">
                                             <div class="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
@@ -202,7 +202,7 @@ function Hits() {
                                         </div>
                                     </div>
                                 </div>
-                                <div class=" relative overflow-hidden sm:py-12 ">
+                                <div class=" relative  sm:py-12 ">
                                     <div class="max-w-[300px] ">
                                         <div class="relative group">
                                             <div class="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
@@ -234,7 +234,7 @@ function Hits() {
                                         </div>
                                     </div>
                                 </div>
-                                <div class=" relative overflow-hidden sm:py-12 ">
+                                <div class=" relative  sm:py-12 ">
                                     <div class="max-w-[300px] ">
                                         <div class="relative group">
                                             <div class="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
@@ -267,7 +267,7 @@ function Hits() {
                                     </div>
                                 </div>
 
-                                <div class=" relative overflow-hidden sm:py-12 ">
+                                <div class=" relative  sm:py-12 ">
                                     <div class="max-w-[300px] ">
                                         <div class="relative group">
                                             <div class="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
@@ -298,7 +298,7 @@ function Hits() {
                                         </div>
                                     </div>
                                 </div>
-                                <div class=" relative overflow-hidden sm:py-12 ">
+                                <div class=" relative  sm:py-12 ">
                                     <div class="max-w-[300px] ">
                                         <div class="relative group">
                                             <div class="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
@@ -329,7 +329,7 @@ function Hits() {
                                         </div>
                                     </div>
                                 </div>
-                                <div class=" relative overflow-hidden sm:py-12 ">
+                                <div class=" relative  sm:py-12 ">
                                     <div class="max-w-[300px] ">
                                         <div class="relative group">
                                             <div class="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
@@ -360,7 +360,7 @@ function Hits() {
                                         </div>
                                     </div>
                                 </div>
-                                <div class=" relative overflow-hidden sm:py-12 ">
+                                <div class=" relative  sm:py-12 ">
                                     <div class="max-w-[300px] ">
                                         <div class="relative group">
                                             <div class="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>

@@ -211,10 +211,10 @@ function Articles() {
 
 
             <ToastContainer />
-            <div className='container   w-[100%] h-[100vh] flex flex-col-2 gap-4  '>
+            <div className='   w-[100%] h-[100vh] flex flex-col-2 gap-4  '>
                 <Sidebar />
 
-                <div className=' w-[91%]  '>
+                <div className=' w-[93%]  '>
                     <Navbar />
                     <div className=' my-4 mx-auto '>
 

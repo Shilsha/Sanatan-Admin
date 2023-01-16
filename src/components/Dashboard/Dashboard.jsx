@@ -135,34 +135,41 @@ function Dashboard() {
     }
     return (
         <>
-            <div className='container   w-[100%] h-[100vh] flex flex-col-12  '>
+            <div className='   w-[100%] h-[100vh] flex flex-col-2 gap-4 bg-gray-200/40  '>
                 <Sidebar />
-                <div className=' font-serif   w-[93%] mx-auto ' >
+                <div className='   w-[93%] mx-auto ' >
                     <Navbar />
                     {/* ---------------------------------------------------------------- 1 row---------------------------------------------------------------------------*/}
 
                     <div className=" ScrollStyle ">
                         <div className=' rounded-lg mt-4  grid grid-cols-12 gap-4  '>
 
-                            <div className=' text-[13px] col-span-3 rounded-lg bg-orange-400/20  p-2 flex justify-center shadow-xl '>
+                            <div className=' text-[13px] col-span-3 rounded-lg bg-white  p-2 flex justify-center shadow-md '>
 
 
                                 <Calendar onChange={onChange} value={value} />
 
                             </div>
-                            <div className='border-2 col-span-4  rounded-lg bg-orange-400/20 shadow-xl relative '>
+                            <div className=' col-span-4  rounded-lg shadow-md bg-white relative '>
 
                                 <div>
                                     <div className='flex justify-center items-center'>
 
-                                        <img src={side1} alt="logo" className='w-12' />
-                                        <h2 className=' text-lg font-extrabold underline underline-offset-8 text-center  
-                                 text-red-800 px-4 '>Thought Of The Day</h2>
-                                        <img src={side1} alt="logo" className='w-12' />
+                                        {/* <img src={side1} alt="logo" className='w-12' /> */}
+                                        {/* <h2 className=' text-lg font-extrabold underline underline-offset-8 text-center  
+                                  px-4 '>Thought Of The Day</h2> */}
+                                        <h1 class="text-lg font-bold px-2 pt-2 text-transparent bg-clip-text bg-gradient-to-br from-orange-400 to-red-600">
+                                            Thought Of The Day
+                                        </h1>
+                                        {/* <img src={side1} alt="logo" className='w-12' /> */}
                                     </div>
-                                    {/* <hr className='mx-auto w-[40%] text-transparent -mt-2  bg-gradient-to-br from-orange-400 to-red-600   h-1' /> */}
+                                    <hr className='mx-auto text-transparent
+                                            w-[40%]
+                                            bg-gradient-to-br from-orange-400 to-red-600 
+                                        text-gray-400
+                                          h-[2px]' />
                                     <div className='p-5'>
-                                        <p className="text-sm ">
+                                        <p className="text-sm text-gray-500 ">
                                             {loading ? <Loader /> : <>
 
                                                 {result.thoughtOfTheDay}
@@ -173,22 +180,22 @@ function Dashboard() {
                                     </div>
                                 </div>
 
-                                <FaEdit className='absolute bottom-2 right-2 text-red-800 cursor-pointer' onClick={openEdiotor} size={25} />
+                                <FaEdit className='absolute bottom-2 right-2  text-orange-500 cursor-pointer' onClick={openEdiotor} size={25} />
 
                             </div>
-                            <div className='border-2 col-span-5 p-5  rounded-lg bg-orange-400/20 shadow-xl '>
+                            <div className=' col-span-5 p-5  rounded-lg bg-white  shadow-md '>
 
                                 <div className='grid grid-cols-2 gap-4 h-full place-content-center '>
-                                    <div className='border border-red-800 bg-slate-300/20 rounded-xl flex justify-center items-center'>
-                                        <h1 className='text-4xl font-bold text-center text-red-800 font-mono '><DigitalTime /></h1>
+                                    <div className='border border-orange-500 bg-slate-300/20 rounded-xl flex justify-center items-center'>
+                                        <h1 className='text-4xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-br from-orange-400 to-red-600 '><DigitalTime /></h1>
                                     </div>
-                                    <div className='border border-red-800 text-center justify-center  bg-slate-300/20 rounded-xl '>
+                                    <div className='border border-orange-500 text-center justify-center  bg-slate-300/20 rounded-xl '>
 
                                         <div className='py-8'>
-                                            <h1 className='text-2xl font-bold  text-red-800 '> {moment(value).format('dddd')}</h1>
-                                            <h2 className='text-xl font-bold  my-2'>{moment(value).format('DD')}</h2>
-                                            <h1 className='text-2xl font-bold  text-red-800'>September</h1>
-                                            <h2 className='text-xl font-bold  my-2'>{moment(value).format('YYYY')}</h2>
+                                            <h1 className='text-2xl font-bold  text-transparent bg-clip-text bg-gradient-to-br from-orange-400 to-red-600 '> {moment(value).format('dddd')}</h1>
+                                            <h2 className='text-xl font-bold  text-gray-500 my-2'>{moment(value).format('DD')}</h2>
+                                            <h1 className='text-2xl font-bold  text-transparent bg-clip-text bg-gradient-to-br from-orange-400 to-red-600'>September</h1>
+                                            <h2 className='text-xl font-bold text-gray-500  my-2'>{moment(value).format('YYYY')}</h2>
                                         </div>
                                     </div>
                                 </div>
@@ -199,129 +206,19 @@ function Dashboard() {
                         </div>
 
                         {/* ---------------------------------------------------------------- second row---------------------------------------------------------------------------*/}
-                        <div className='rounded-lg mt-4 grid grid-cols-12 gap-4   ' >
-
-
-                            <div className=' col-span-9 rounded-lg   '>
-
-                                <div className="row grid grid-cols-3 gap-4 "  >
-
-                                    <div className='rounded-lg  bg-orange-400/20 shadow-xl  px-4 h-[160px] ' >
-                                        <div className='flex justify-between px-3 items-center my-3 '>
-                                            <div className='bg-pink-500/70 rounded-full p-2'>
-
-                                                <RiShieldUserLine size={60} />
-                                            </div>
-                                            <div className='flex flex-col '>
-                                                <Link to='/user'>
-                                                    <h1 className='text-red-800 cursor-pointer py-4 text-3xl text-center 
-                                                    font-bold underline underline-offset-8 '>Users</h1>
-
-                                                </Link>
-                                                {
-
-                                                    <h1 className='text-5xl font-mono  font-bold text-red-800 text-center '>{userData.result?.length}</h1>
-                                                }
-
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                    <div className='  rounded-lg  bg-orange-400/20 shadow-xl px-4 py-2 h-[160px]'>
-                                        <div className='flex justify-between px-3 items-center my-3 '>
-                                            <div className='bg-blue-500/70  rounded-full p-2'>
-                                                <HiClipboardDocumentList className='cursor-pointer' size={60} />
-                                            </div>
-                                            <div className='flex flex-col '>
-                                                <Link to='/articles'>
-                                                    <h1 className='text-red-800 py-4 text-3xl text-center font-bold underline underline-offset-8 '>Articles</h1>
-                                                </Link>
-
-                                                <h1 className='text-5xl font-mono  font-bold text-red-800 text-center '>{articleLen.result?.length}</h1>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <div className=' rounded-lg  bg-orange-400/20 shadow-xl px-4 py-2 h-[160px] '>
-                                        <div className='flex justify-between px-3 items-center my-3 '>
-                                            <div className='bg-green-500/70  rounded-full p-2'>
-                                                <GiArcheryTarget size={60} />
-                                            </div>
-                                            <div className='flex flex-col '>
-                                                <Link to='/hits'>
-                                                    <h1 className='text-red-800 py-4 text-3xl text-center font-bold underline underline-offset-8 '>Hits
-                                                    </h1>
-                                                </Link>
-                                                <h1 className='text-5xl font-mono  font-bold text-red-800  text-center '>500</h1>
-                                            </div>
-                                        </div>
-
-                                    </div>
+                        <div className='rounded-lg shadow-lg mt-4 
+                          grid grid-cols-4 gap-4  
+                         ' >
 
 
 
-
-
-                                    <div className=' rounded-lg  bg-orange-400/20 shadow-xl px-4 py-2 h-[160px]'>
-                                        <div className='flex justify-between px-3 items-center my-3 '>
-                                            <div className='bg-yellow-500/70 rounded-full p-2'>
-                                                <BsFillQuestionSquareFill size={60} />
-                                            </div>
-                                            <div className='flex flex-col '>
-                                                <Link to='/queries'>
-                                                    <h1 className='text-red-800 py-4 text-3xl text-center font-bold underline underline-offset-8 '>Queries</h1>
-                                                </Link>
-                                                <h1 className='text-5xl font-mono  font-bold text-red-800 text-center '>{queryLen.result.content?.length}</h1>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <div className='rounded-lg  bg-orange-400/20 shadow-xl px-4 py-2 h-[160px]'>
-                                        <div className='flex justify-between px-3 items-center my-3 '>
-                                            <div className='bg-purple-500/70  rounded-full p-2'>
-                                                <RiShieldUserLine size={60} />
-                                            </div>
-                                            <div className='flex flex-col '>
-
-                                                <Link to='/logs'>
-                                                    <h1 className='text-red-800 py-4 text-3xl text-center font-bold underline underline-offset-8 '>Logs</h1>
-
-                                                </Link>
-
-                                                <h1 className='text-5xl font-mono  font-bold text-red-800 text-center '>500</h1>
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                    <div className='rounded-lg bg-orange-400/20 shadow-xl px-4 py-2 h-[160px]'>
-                                        <div className='flex justify-between px-3 items-center my-3 '>
-                                            <div className='bg-purple-500/70  rounded-full p-2'>
-                                                <RiShieldUserLine size={60} />
-                                            </div>
-                                            <div className='flex flex-col '>
-                                                <Link to='/broadcast'>
-                                                    <h1 className='text-red-800 py-4 text-3xl text-center font-bold underline underline-offset-8 '>Broadcast</h1>
-                                                </Link>
-                                                <h1 className='text-5xl font-mono  font-bold text-red-800 text-center '>500</h1>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-
-
-
-                                </div>
-
-
-
-                            </div>
-
-                            <div className=' col-span-3 bg-orange-400/20 rounded-lg p-1 shadow-xl relative  '>
-                                <h1 className='text-center text-red-800  font-bold'>Panchang Period</h1>
-
+                            <div className=' col-span  rounded-lg p-1 bg-white  relative min-h-[300px] '>
+                                <h1 className='text-center text-lg   text-transparent bg-clip-text bg-gradient-to-br from-orange-400 to-red-600 font-bold'>Panchang Period</h1>
+                                <hr className='mx-auto text-transparent
+                                            w-[45%]
+                                            bg-gradient-to-br from-orange-400 to-red-600 
+                                        text-gray-400
+                                          h-[2px]' />
 
                                 {
                                     panchangData.loading ? <Loader /> : <>
@@ -329,7 +226,7 @@ function Dashboard() {
 
 
                                             <div className='flex justify-between items-center px-4 '>
-                                                <div className=' text-sm'>
+                                                <div className=' text-sm font-[500] leading-6'>
                                                     <h3>Sunrise</h3>
                                                     <h3>Sunset</h3>
                                                     <h3>Moonrise</h3>
@@ -346,7 +243,7 @@ function Dashboard() {
                                                     <h3>Adhik</h3>
 
                                                 </div>
-                                                <div className='text-[13px] font-sans text-end  text-gray-700/90'>
+                                                <div className='text-[13px]  text-end  text-gray-500 leading-6'>
                                                     <p>{panchangData?.result?.sunrise}</p>
                                                     <p>{panchangData?.result?.sunset}</p>
                                                     <p>{panchangData?.result?.moonrise}</p>
@@ -368,37 +265,8 @@ function Dashboard() {
 
 
                                         </div>
-                                        <div className='w-[95%] mt-2 border-b-2 border-red-800 mx-auto'></div>
-                                        <div className=' '>
-                                            <h1 className='text-center text-red-800  font-bold'>Inausupicious Period</h1>
-                                            <div className='flex justify-between items-center px-3 '>
-                                                <div className=' text-sm'>
-                                                    <h3>Rahu kaal</h3>
-                                                    <h3>Yamghant kaal</h3>
-                                                    <h3>Gulikaal</h3>
-                                                </div>
-                                                <div className='text-[13px] font-sans  text-gray-700/90'>
-                                                    <p>{panchangData?.result?.rahukaal?.start} |{panchangData?.result?.rahukaal?.end}</p>
-                                                    <p>{panchangData?.result?.yamghant_kaal?.start} | {panchangData?.result?.yamghant_kaal?.end}</p>
-                                                    <p>{panchangData?.result?.guliKaal?.start}| {panchangData?.result?.guliKaal?.end}</p>
-                                                </div>
-                                            </div>
-                                            <div className='w-[95%] mt-2 border-b-2 border-red-800 mx-auto'></div>
-                                            <h1 className='text-center text-red-800  font-bold'>Lunar Month</h1>
-                                            <div className='flex justify-between items-center px-3  '>
-                                                <div className=' text-sm'>
-                                                    <h3>Amanta</h3>
-                                                    <h3>Purnimanta</h3>
-                                                    <h3>Paksha</h3>
-                                                </div>
-                                                <div className='text-[13px]  pr-3 text-gray-700/90 '>
-                                                    <p>{panchangData?.result?.hindu_maah?.amanta}</p>
-                                                    <p>{panchangData?.result?.hindu_maah?.purnimanta}</p>
-                                                    <p>{panchangData?.result?.paksha}</p>
-                                                </div>
-                                            </div>
 
-                                        </div>
+
 
                                     </>
                                 }
@@ -407,6 +275,169 @@ function Dashboard() {
 
                             </div>
 
+
+                            <div className='bg-white col-span  '>
+                                {/* <h1 className='text-center text-red-800  font-bold'>Inausupicious Period</h1> */}
+                                <h1 className='text-center text-lg mt-2  text-transparent bg-clip-text bg-gradient-to-br from-orange-400
+                                 to-red-600 font-bold'>Inausupicious Period</h1>
+                                <hr className='mx-auto text-transparent
+                                            w-[55%]
+                                            bg-gradient-to-br from-orange-400 to-red-600 
+                                        text-gray-400
+                                          h-[2px]' />
+                                <div className='flex justify-between items-center px-3 pt-2 '>
+                                    <div className=' text-sm font-medium'>
+                                        <h3>Rahu kaal</h3>
+                                        <h3>Yamghant kaal</h3>
+                                        <h3>Gulikaal</h3>
+                                    </div>
+                                    <div className='text-[13px] font-sans  text-gray-500'>
+                                        <p>{panchangData?.result?.rahukaal?.start} |{panchangData?.result?.rahukaal?.end}</p>
+                                        <p>{panchangData?.result?.yamghant_kaal?.start} | {panchangData?.result?.yamghant_kaal?.end}</p>
+                                        <p>{panchangData?.result?.guliKaal?.start}| {panchangData?.result?.guliKaal?.end}</p>
+                                    </div>
+                                </div>
+                                {/* <div className='w-[95%] mt-20 border-b-2 border-red-800 mx-auto'></div> */}
+                                <h1 className='text-center text-lg mt-20  text-transparent bg-clip-text bg-gradient-to-br from-orange-400
+                                 to-red-600 font-bold'>Lunar Month</h1>
+                                <hr className='mx-auto text-transparent
+                                            w-[35%]
+                                            bg-gradient-to-br from-orange-400 to-red-600 
+                                        text-gray-400
+                                          h-[2px]' />
+                                <div className='flex justify-between items-center px-3 my-2  '>
+                                    <div className=' text-sm font-medium'>
+                                        <h3>Amanta</h3>
+                                        <h3>Purnimanta</h3>
+                                        <h3>Paksha</h3>
+                                    </div>
+                                    <div className='text-[13px]  pr-3 text-gray-500 '>
+                                        <p>{panchangData?.result?.hindu_maah?.amanta}</p>
+                                        <p>{panchangData?.result?.hindu_maah?.purnimanta}</p>
+                                        <p>{panchangData?.result?.paksha}</p>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                               
+                             <div className=' col-span-2 rounded-lg  bg-white  '>
+
+                                <div className="row grid grid-cols-3 gap-4 "  >
+
+                                    <div className='rounded-lg   shadow-xl  px-4 h-[160px]  ' >
+                                        <div className='flex justify-between px-3 items-center my-3 '>
+                                            <div className=' rounded-full p-2'>
+
+                                                <RiShieldUserLine className='text-orange-500 '  size={60} />
+                                            </div>
+                                            <div className='flex flex-col '>
+                                                <Link to='/user'>
+                                                    <h1 className=' cursor-pointer py-4 text-3xl text-center 
+                                                    font-medium underline underline-offset-8 '>Users</h1>
+
+                                                </Link>
+                                                {
+
+                                                    <h1 className='text-5xl font-mono    text-center '>{userData.result?.length}</h1>
+                                                }
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div className='  rounded-lg   shadow-xl px-4 py-2 h-[160px]'>
+                                        <div className='flex justify-between px-3 items-center my-3 '>
+                                            <div className='  rounded-full p-2'>
+                                                <HiClipboardDocumentList className='cursor-pointer' size={60} />
+                                            </div>
+                                            <div className='flex flex-col '>
+                                                <Link to='/articles'>
+                                                    <h1 className=' py-4 text-3xl text-center font-medium underline underline-offset-8 '>Articles</h1>
+                                                </Link>
+
+                                                <h1 className='text-5xl   font-medium  text-center '>{articleLen.result?.length}</h1>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div className=' rounded-lg   shadow-xl px-4 py-2 h-[160px] '>
+                                        <div className='flex justify-between px-3 items-center my-3 '>
+                                            <div className='  rounded-full p-2'>
+                                                <GiArcheryTarget size={60} />
+                                            </div>
+                                            <div className='flex flex-col '>
+                                                <Link to='/hits'>
+                                                    <h1 className=' py-4 text-3xl text-center font-medium underline underline-offset-8 '>Hits
+                                                    </h1>
+                                                </Link>
+                                                <h1 className='text-5xl font-mono  font-medium  text-center '>500</h1>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+
+
+
+                                    <div className=' rounded-lg   shadow-xl px-4 py-2 h-[160px]'>
+                                        <div className='flex justify-between px-3 items-center my-3 '>
+                                            <div className=' rounded-full p-2'>
+                                                <BsFillQuestionSquareFill size={60} />
+                                            </div>
+                                            <div className='flex flex-col '>
+                                                <Link to='/queries'>
+                                                    <h1 className=' py-4 text-3xl text-center font-bold underline underline-offset-8 '>Queries</h1>
+                                                </Link>
+                                                <h1 className='text-5xl   font-medium  text-center '>{queryLen.result.content?.length}</h1>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div className='rounded-lg   shadow-xl px-4 py-2 h-[160px]'>
+                                        <div className='flex justify-between px-3 items-center my-3 '>
+                                            <div className='  rounded-full p-2'>
+                                                <RiShieldUserLine size={60} />
+                                            </div>
+                                            <div className='flex flex-col '>
+
+                                                <Link to='/logs'>
+                                                    <h1 className=' py-4 text-3xl text-center font-bold underline underline-offset-8 '>Logs</h1>
+
+                                                </Link>
+
+                                                <h1 className='text-5xl     text-center '>500</h1>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div className='rounded-lg  shadow-xl px-4 py-2 h-[160px]'>
+                                        <div className='flex justify-between px-3 items-center my-3 '>
+                                            <div className=' rounded-full p-2'>
+                                                <RiShieldUserLine size={60} />
+                                            </div>
+                                            <div className='flex flex-col '>
+                                                <Link to='/broadcast'>
+                                                    <h1 className=' py-4 text-3xl text-center  underline underline-offset-8 '>Broadcast</h1>
+                                                </Link>
+                                                <h1 className='text-5xl font-mono    text-center '>500</h1>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+
+
+                                </div>
+
+
+
+                            </div> 
 
 
 
