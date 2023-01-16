@@ -29,7 +29,7 @@
     font-size: 17px;
 }
 .react-calendar__tile--active {
-    background: #f89f1d !important;
+    background: orange !important;
     color: white;
     border-radius: 10px !important;
 }
@@ -79,7 +79,9 @@
 
 
  .tables th{
-    background-color: #991b1b;
+    /* background-color: orange;
+     */
+     background: linear-gradient(109.6deg, rgb(255, 194, 48) 11.2%, rgb(255, 124, 0) 100.2%);
     color: white;
   }
 
@@ -327,4 +329,14 @@ tr:hover{
 .navbar_bg{
   background: radial-gradient(circle at 10% 20%, rgb(255, 197, 61) 0%, rgb(255, 94, 7) 90%);
   
+}
+
+.react-calendar__navigation button {
+  min-width: 44px;
+  background: none !important;
+  color: none !important;
+  border-radius: none;
+  font-size: 17px;
+  font-weight: 700;
+  color: gray;
 }

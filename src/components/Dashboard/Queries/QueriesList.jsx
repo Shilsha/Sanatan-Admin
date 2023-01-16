@@ -181,7 +181,7 @@ function QueriesList() {
                     <div className='mt-6 '>
 
 
-                        <div className='flex justify-between items-center pb-4 '>
+                        <div className='flex justify-between items-center pb-4 pr-4 '>
                             <div className='flex justify-between w-[40%]'>
                                 <div class=" relative  w-[75%] text-gray-600 ">
                                     <input class="border-2  w-full border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
@@ -191,12 +191,7 @@ function QueriesList() {
                                     </button>
                                 </div>
 
-                                <button class="inline-flex items-center px-4 py-1 bg-red-800 hover:bg-red-700 text-white text-sm font-medium rounded-md">
-
-                                    Filter
-                                    <BiFilter className='mx-1' size={30} />
-
-                                </button>
+                                <button type="button" class= "inline-flex items-center text-white bg-gradient-to-r from-orange-500  to-yellow-400 hover:bg-gradient-to-bl font-medium rounded-lg text-sm px-3 py-1 text-center mr-2 mb-2"> Filter   <BiFilter className='mx-1' size={30} /></button>
                             </div>
                             <div>
                                 {/* <button class="inline-flex items-center px-4 py-[10px] bg-red-800 hover:bg-red-700 text-white text-sm font-medium rounded-md">
@@ -219,23 +214,19 @@ function QueriesList() {
                                 </select>
                             </div>
                         </div>
-                        <div className='tableWrap'>
+                        <div className='tableWrap pr-4'>
                             <table class="shadow-lg tables  w-full rounded-xl  ">
                                 <thead className=''>
                                     <tr className=' table_head  '>
-                                        <th class="bg-blue-100 border  px-2 text-center">ID</th>
-                                        {/* <th class="bg-blue-100 border  px-2 text-center">Admin</th> */}
-                                        <th class="bg-blue-100 border text-center py-2">Name</th>
-                                        <th class="bg-blue-100 border text-center py-2">Email</th>
-                                        <th class="bg-blue-100 border text-center py-2">Message</th>
-
-                                        <th class="bg-blue-100 border text-center py-2">Comment</th>
-                                        <th class="bg-blue-100 border text-center py-2">Phone No</th>
-                                        <th class="bg-blue-100 border text-center py-2"> Create Date</th>
-                                        {/* <th class="bg-blue-100 border text-center py-2">Token</th> */}
-
-                                        <th class="bg-blue-100 border text-center py-2">Status</th>
-                                        <th class="bg-blue-100 border text-center py-2">View</th>
+                                        <td class="bg-blue-100   px-2 text-start">ID</td>
+                                        <td class="bg-blue-100 px-2 text-start py-3">Name</td>
+                                        <td class="bg-blue-100 px-2 text-start py-3">Email</td>
+                                        <td class="bg-blue-100 px-2 text-start py-2">Message</td>
+                                        <td class="bg-blue-100 px-2 text-start py-2">Comment</td>
+                                        <td class="bg-blue-100 px-2 text-start py-2">Phone No</td>
+                                        <td class="bg-blue-100 px-2 text-start py-2"> Create Date</td>
+                                        <td class="bg-blue-100 px-2 text-start py-2">Status</td>
+                                        <td class="bg-blue-100 px-2 text-start py-2">View</td>
                                     </tr>
                                 </thead>
 
@@ -254,16 +245,16 @@ function QueriesList() {
                                                             <>
 
                                                                 <tr key={data.id} className="text-center ">
-                                                                    <td class="border text-center">{data.contactId}</td>
-                                                                    <td class="border text-start px-2 ">{data.name}</td>
-                                                                    <td class="border text-start px-2 ">{data.email}</td>
-                                                                    <td class="border text-start px-2 ">{data.msg}</td>
-                                                                    <td class="border text-start px-2 ">{data.comment}</td>
-                                                                    <td class="border text-start px-2 ">{data.phoneNo}</td>
-                                                                    <td class="border text-start px-2 ">{data.createdDate}</td>
-                                                                    <td class="border text-start px-2 ">{data.status}</td>
+                                                                    <td class="  text-center">{data.contactId}</td>
+                                                                    <td class="  text-start px-2 py-3 ">{data.name}</td>
+                                                                    <td class="  text-start px-2 py-3 ">{data.email}</td>
+                                                                    <td class="  text-start px-2 py-3 ">{data.msg}</td>
+                                                                    <td class="  text-start px-2 py-3 ">{data.comment}</td>
+                                                                    <td class="  text-start px-2 py-3 ">{data.phoneNo}</td>
+                                                                    <td class="  text-start px-2 py-3 ">{data.createdDate}</td>
+                                                                    <td class="  text-start px-2 py-3 ">{data.status}</td>
 
-                                                                    <td class=" px-4 flex  justify-evenly items-center pt-1" >
+                                                                    <td class=" px-4 flex  justify-evenly items-center pt-2" >
 
                                                                         <Link to={`${data.contactId}`}>
                                                                             <AiFillEye size={25} className='text-blue-200 hover:text-blue-600' />

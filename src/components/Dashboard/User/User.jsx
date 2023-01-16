@@ -213,7 +213,7 @@ function User() {
                     <Navbar />
                     <div className=' my-6 mx-auto '>
 
-                        <div className='flex justify-between items-center pb-4 '>
+                        <div className='flex justify-between items-center pb-4 pr-4'>
                             <div className='flex justify-between w-[40%]'>
                                 <div class=" relative  w-[75%] text-gray-600 ">
                                     <input class="border-2  w-full border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
@@ -223,12 +223,7 @@ function User() {
                                     </button>
                                 </div>
 
-                                <button class="inline-flex items-center px-4 py-1 bg-red-800 hover:bg-red-700 text-white text-sm font-medium rounded-md">
-
-                                    Filter
-                                    <BiFilter className='mx-1' size={30} />
-
-                                </button>
+                                <button type="button" class= "inline-flex items-center text-white bg-gradient-to-r from-orange-500  to-yellow-400 hover:bg-gradient-to-bl font-medium rounded-lg text-sm px-3 py-1 text-center mr-2 mb-2"> Filter   <BiFilter className='mx-1' size={30} /></button>
                             </div>
                             <div>
                                 <select id="countries" className="bg-gray-50 border border-gray-400 text-gray-900 
@@ -243,25 +238,18 @@ function User() {
 
                             </div>
                         </div>
-                        <div className="tableWrap">
+                        <div className="tableWrap pr-4">
                             <table class="shadow-lg tables  w-full rounded-xl ">
                                 <thead className=''>
-                                    <tr className=' table_head  '>
-                                        <th class="bg-blue-100 border  px-2 text-center">ID</th>
-                                        {/* <th class="bg-blue-100 border  px-2 text-center">Admin</th> */}
-                                        <th class="bg-blue-100 border text-center py-2">Name</th>
-                                        <th class="bg-blue-100 border text-center py-2">Email</th>
-                                        <th class="bg-blue-100 border text-center py-2">Mobile Number</th>
-                                        {/* <th class="bg-blue-100 border text-center py-2">Customer</th> */}
-                                        {/* <th class="bg-blue-100 border text-center py-2">User Type</th> */}
-                                        {/* <th class="bg-blue-100 border text-center py-2">User Code</th> */}
-                                        <th class="bg-blue-100 border text-center py-2">Create</th>
-                                        <th class="bg-blue-100 border text-center py-2">Modify</th>
-                                        {/* <th class="bg-blue-100 border text-center py-2"> Password</th> */}
-                                        {/* <th class="bg-blue-100 border text-center py-2">Token</th> */}
-
-                                        <th class="bg-blue-100 border text-center py-2">Status</th>
-                                        <th class="bg-blue-100 border text-center py-2">Action</th>
+                                    <tr className='   '>
+                                        <td class="bg-blue-100   px-2 text-center">ID</td>
+                                        <td class="bg-blue-100  text-start px-2  py-3">Name</td>
+                                        <td class="bg-blue-100  text-start px-2 py-2">Email</td>
+                                        <td class="bg-blue-100  text-center py-2">Mobile Number</td>
+                                        <td class="bg-blue-100  text-center py-2">Create</td>
+                                        <td class="bg-blue-100  text-center py-2">Modify</td>
+                                        <td class="bg-blue-100  text-center py-2">Status</td>
+                                        <td class="bg-blue-100  text-center py-2">Action</td>
                                     </tr>
                                 </thead>
 
@@ -283,25 +271,26 @@ function User() {
                                                         return (
                                                             <>
                                                                 <tr key={data.id} className="text-center ">
-                                                                    <td class="border text-center">{data.userId}</td>
-                                                                    <td class="border text-start px-2 ">{data.fullName}
+                                                                    <td class="py-3 text-center">{data.userId}</td>
+                                                                    <td class="py-2 text-start px-2 ">{data.fullName}
                                                                     </td>
-                                                                    <td class="border text-start  text-[13px] px-2">{data.email} </td>
-                                                                    <td class="border text-[13px] px-2">{data.mobileNo == null ? '---' : data.mobileNo} </td>
-                                                                    <td class="border text-[13px] px-2">
+                                                                    <td class="py-2 text-start  text-[13px] px-2">{data.email} </td>
+                                                                    <td class="py-2 text-[13px] px-2">{data.mobileNo == null ? '---' : data.mobileNo} </td>
+                                                                    <td class="py-2 text-[13px] px-2">
                                                                         {moment(data.createdDate).format("MM/DD/YYYY")}
                                                                     </td>
-                                                                    <td class="border text-[13px] px-2">
+                                                                    <td class="py-2 text-[13px] px-2">
                                                                         {moment(data.modifiedDate).format("MM/DD/YYYY")}
                                                                     </td>
-                                                                    <td class="border text-center pt-1  ">
+                                                                    <td class="py-2 text-center pt-1  ">
                                                                         {JSON.stringify(data?.enabled)}
 
 
 
                                                                     </td>
-                                                                    <td class=" px-4 flex justify-evenly items-center pt-1" >
-                                                                        <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 text-xs px-2 border  rounded" onClick={() => handleDeleteSingleUser(data.userId)}>
+                                                                    <td class=" px-4 flex justify-evenly items-center pt-2" >
+                                                                        <button class="bg-red-500 hover:bg-red-700
+                                                                        py-1  text-white font-bold  text-xs px-3   rounded-full" onClick={() => handleDeleteSingleUser(data.userId)}>
                                                                             Delete
                                                                         </button>
                                                                     </td>

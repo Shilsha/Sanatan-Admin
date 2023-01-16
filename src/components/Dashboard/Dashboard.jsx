@@ -22,6 +22,8 @@ import { panchangeAction } from '../../Redux/Fetures/Reducers/PanchangSlice'
 import { getUser } from '../../Redux/Fetures/Reducers/GetUserSlice';
 import { getAllArticleAction } from '../../Redux/Fetures/Reducers/ArticleSlice'
 import { getAllQueriesAction } from '../../Redux/Fetures/Reducers/QueriesSlice'
+import DesignLogin from '../../Assets/images/DesignLogin.png'
+import Button from '../Screen/Button/Button';
 const customStyles = {
     content: {
         top: '50%',
@@ -35,7 +37,8 @@ const customStyles = {
         height: 'auto',
         background: "white",
         position: 'relative',
-        border: 'none'
+        border: 'none',
+       
 
     },
 };
@@ -135,22 +138,22 @@ function Dashboard() {
     }
     return (
         <>
-            <div className='   w-[100%] h-[100vh] flex flex-col-2 gap-4 bg-gray-200/40  '>
+            <div className='   w-[100%] h-[100vh] flex flex-col-2 gap-4   '>
                 <Sidebar />
                 <div className='   w-[93%] mx-auto ' >
                     <Navbar />
                     {/* ---------------------------------------------------------------- 1 row---------------------------------------------------------------------------*/}
 
-                    <div className=" ScrollStyle ">
+                    <div className=" ScrollStyle  pr-4 ">
                         <div className=' rounded-lg mt-4  grid grid-cols-12 gap-4  '>
 
-                            <div className=' text-[13px] col-span-3 rounded-lg bg-white  p-2 flex justify-center shadow-md '>
+                            <div className=' text-[13px] col-span-3 rounded-lg bg-slate-300/20   p-2 flex justify-center shadow '>
 
 
                                 <Calendar onChange={onChange} value={value} />
 
                             </div>
-                            <div className=' col-span-4  rounded-lg shadow-md bg-white relative '>
+                            <div className=' col-span-4 bg-slate-300/20   rounded-lg shadow  relative '>
 
                                 <div>
                                     <div className='flex justify-center items-center'>
@@ -158,16 +161,16 @@ function Dashboard() {
                                         {/* <img src={side1} alt="logo" className='w-12' /> */}
                                         {/* <h2 className=' text-lg font-extrabold underline underline-offset-8 text-center  
                                   px-4 '>Thought Of The Day</h2> */}
-                                        <h1 class="text-lg font-bold px-2 pt-2 text-transparent bg-clip-text bg-gradient-to-br from-orange-400 to-red-600">
+                                        <h1 class="text-xl font-medium px-2 pt-2 text-gray-500    underline underline-offset-8 ">
                                             Thought Of The Day
                                         </h1>
                                         {/* <img src={side1} alt="logo" className='w-12' /> */}
                                     </div>
-                                    <hr className='mx-auto text-transparent
+                                    {/* <hr className='mx-auto text-transparent
                                             w-[40%]
-                                            bg-gradient-to-br from-orange-400 to-red-600 
+                                            
                                         text-gray-400
-                                          h-[2px]' />
+                                          h-[2px]' /> */}
                                     <div className='p-5'>
                                         <p className="text-sm text-gray-500 ">
                                             {loading ? <Loader /> : <>
@@ -179,17 +182,19 @@ function Dashboard() {
                                         </p>
                                     </div>
                                 </div>
+                                <button class="bg-orange-500 rounded font-medium absolute bottom-2 right-2 py-1 hover:bg-orange-600 px-3 text-white " onClick={openEdiotor}>Edit</button>
 
-                                <FaEdit className='absolute bottom-2 right-2  text-orange-500 cursor-pointer' onClick={openEdiotor} size={25} />
+                                {/* <FaEdit className='absolute bottom-2 right-2  text-orange-500 cursor-pointer' onClick={openEdiotor} size={25} /> */}
 
                             </div>
-                            <div className=' col-span-5 p-5  rounded-lg bg-white  shadow-md '>
+                            <div className=' col-span-5   rounded-lg    '>
 
-                                <div className='grid grid-cols-2 gap-4 h-full place-content-center '>
-                                    <div className='border border-orange-500 bg-slate-300/20 rounded-xl flex justify-center items-center'>
-                                        <h1 className='text-4xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-br from-orange-400 to-red-600 '><DigitalTime /></h1>
+                                <div className='grid grid-cols-2 gap-4 h-full '>
+                                    <div className='shadow bg-slate-300/20 rounded-xl flex justify-center items-center'>
+                                        <h1 className='text-4xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-br
+                                         from-orange-400 to-red-600 '><DigitalTime /></h1>
                                     </div>
-                                    <div className='border border-orange-500 text-center justify-center  bg-slate-300/20 rounded-xl '>
+                                    <div className='shadow text-center justify-center  bg-slate-300/20 rounded-xl '>
 
                                         <div className='py-8'>
                                             <h1 className='text-2xl font-bold  text-transparent bg-clip-text bg-gradient-to-br from-orange-400 to-red-600 '> {moment(value).format('dddd')}</h1>
@@ -206,19 +211,19 @@ function Dashboard() {
                         </div>
 
                         {/* ---------------------------------------------------------------- second row---------------------------------------------------------------------------*/}
-                        <div className='rounded-lg shadow-lg mt-4 
+                        <div className='rounded-lg    shadow mt-4 
                           grid grid-cols-4 gap-4  
                          ' >
 
 
 
-                            <div className=' col-span  rounded-lg p-1 bg-white  relative min-h-[300px] '>
-                                <h1 className='text-center text-lg   text-transparent bg-clip-text bg-gradient-to-br from-orange-400 to-red-600 font-bold'>Panchang Period</h1>
-                                <hr className='mx-auto text-transparent
+                            <div className=' col-span  rounded-lg p-1 bg-slate-300/20  shadow  min-h-[300px] '>
+                                <h1 className='text-center text-lg  text-gray-500 font-medium  underline underline-offset-8'>Panchang Period</h1>
+                                {/* <hr className='mx-auto text-transparent
                                             w-[45%]
-                                            bg-gradient-to-br from-orange-400 to-red-600 
+                                          
                                         text-gray-400
-                                          h-[2px]' />
+                                          h-[2px]' /> */}
 
                                 {
                                     panchangData.loading ? <Loader /> : <>
@@ -276,15 +281,14 @@ function Dashboard() {
                             </div>
 
 
-                            <div className='bg-white col-span  '>
+                            <div className='shadow col-span bg-slate-300/20  rounded-lg '>
                                 {/* <h1 className='text-center text-red-800  font-bold'>Inausupicious Period</h1> */}
-                                <h1 className='text-center text-lg mt-2  text-transparent bg-clip-text bg-gradient-to-br from-orange-400
-                                 to-red-600 font-bold'>Inausupicious Period</h1>
-                                <hr className='mx-auto text-transparent
+                                <h1 className='text-center text-lg mt-2  text-gray-500 font-medium  underline underline-offset-8'>Inausupicious Period</h1>
+                                {/* <hr className='mx-auto text-transparent
                                             w-[55%]
-                                            bg-gradient-to-br from-orange-400 to-red-600 
+                                          
                                         text-gray-400
-                                          h-[2px]' />
+                                          h-[2px]' /> */}
                                 <div className='flex justify-between items-center px-3 pt-2 '>
                                     <div className=' text-sm font-medium'>
                                         <h3>Rahu kaal</h3>
@@ -298,13 +302,12 @@ function Dashboard() {
                                     </div>
                                 </div>
                                 {/* <div className='w-[95%] mt-20 border-b-2 border-red-800 mx-auto'></div> */}
-                                <h1 className='text-center text-lg mt-20  text-transparent bg-clip-text bg-gradient-to-br from-orange-400
-                                 to-red-600 font-bold'>Lunar Month</h1>
-                                <hr className='mx-auto text-transparent
+                                <h1 className='text-center text-lg mt-20 text-gray-500 font-medium  underline underline-offset-8'>Lunar Month</h1>
+                                {/* <hr className='mx-auto text-transparent
                                             w-[35%]
-                                            bg-gradient-to-br from-orange-400 to-red-600 
+                                          
                                         text-gray-400
-                                          h-[2px]' />
+                                          h-[2px]' /> */}
                                 <div className='flex justify-between items-center px-3 my-2  '>
                                     <div className=' text-sm font-medium'>
                                         <h3>Amanta</h3>
@@ -321,26 +324,26 @@ function Dashboard() {
                             </div>
 
 
-                               
-                             <div className=' col-span-2 rounded-lg  bg-white  '>
+
+                            <div className=' col-span-2 rounded-lg   '>
 
                                 <div className="row grid grid-cols-3 gap-4 "  >
 
-                                    <div className='rounded-lg   shadow-xl  px-4 h-[160px]  ' >
+                                    <div className='rounded-lg bg-slate-300/20   shadow  px-2 h-[160px]  ' >
                                         <div className='flex justify-between px-3 items-center my-3 '>
                                             <div className=' rounded-full p-2'>
 
-                                                <RiShieldUserLine className='text-orange-500 '  size={60} />
+                                                <RiShieldUserLine className='text-orange-500 ' size={50} />
                                             </div>
                                             <div className='flex flex-col '>
                                                 <Link to='/user'>
-                                                    <h1 className=' cursor-pointer py-4 text-3xl text-center 
-                                                    font-medium underline underline-offset-8 '>Users</h1>
+                                                    <h1 className=' cursor-pointer py-4 text-2xl text-center 
+                                                    font-medium underline underline-offset-8 text-gray-500 '>Users</h1>
 
                                                 </Link>
                                                 {
 
-                                                    <h1 className='text-5xl font-mono    text-center '>{userData.result?.length}</h1>
+                                                    <h1 className='text-5xl font-medium text-gray-500    text-center '>{userData.result?.length}</h1>
                                                 }
 
                                             </div>
@@ -348,32 +351,32 @@ function Dashboard() {
 
                                     </div>
 
-                                    <div className='  rounded-lg   shadow-xl px-4 py-2 h-[160px]'>
-                                        <div className='flex justify-between px-3 items-center my-3 '>
+                                    <div className='  rounded-lg bg-slate-300/20   shadow  py-2 h-[160px]'>
+                                        <div className='flex justify-between px-2 items-center my-3 '>
                                             <div className='  rounded-full p-2'>
-                                                <HiClipboardDocumentList className='cursor-pointer' size={60} />
+                                                <HiClipboardDocumentList className='cursor-pointer text-orange-500 ' size={50} />
                                             </div>
                                             <div className='flex flex-col '>
                                                 <Link to='/articles'>
-                                                    <h1 className=' py-4 text-3xl text-center font-medium underline underline-offset-8 '>Articles</h1>
+                                                    <h1 className=' py-4 text-2xl text-center font-medium underline underline-offset-8 text-gray-500 '>Articles</h1>
                                                 </Link>
 
-                                                <h1 className='text-5xl   font-medium  text-center '>{articleLen.result?.length}</h1>
+                                                <h1 className='text-5xl   font-medium  text-center text-gray-500 '>{articleLen.result?.length}</h1>
                                             </div>
                                         </div>
 
                                     </div>
-                                    <div className=' rounded-lg   shadow-xl px-4 py-2 h-[160px] '>
-                                        <div className='flex justify-between px-3 items-center my-3 '>
+                                    <div className=' rounded-lg bg-slate-300/20   shadow  py-2 h-[160px] '>
+                                        <div className='flex justify-between px-2 items-center my-3 '>
                                             <div className='  rounded-full p-2'>
-                                                <GiArcheryTarget size={60} />
+                                                <GiArcheryTarget className='text-orange-500 ' size={50} />
                                             </div>
                                             <div className='flex flex-col '>
                                                 <Link to='/hits'>
-                                                    <h1 className=' py-4 text-3xl text-center font-medium underline underline-offset-8 '>Hits
+                                                    <h1 className=' py-4 text-2xl text-center font-medium underline underline-offset-8 text-gray-500 '>Hits
                                                     </h1>
                                                 </Link>
-                                                <h1 className='text-5xl font-mono  font-medium  text-center '>500</h1>
+                                                <h1 className='text-5xl text-gray-500  font-medium  text-center '>500</h1>
                                             </div>
                                         </div>
 
@@ -383,48 +386,49 @@ function Dashboard() {
 
 
 
-                                    <div className=' rounded-lg   shadow-xl px-4 py-2 h-[160px]'>
-                                        <div className='flex justify-between px-3 items-center my-3 '>
+                                    <div className=' rounded-lg bg-slate-300/20   shadow  py-2 h-[160px]'>
+                                        <div className='flex justify-between px-2 items-center my-3 '>
                                             <div className=' rounded-full p-2'>
-                                                <BsFillQuestionSquareFill size={60} />
+                                                <BsFillQuestionSquareFill className='text-orange-500 '
+                                                    size={40} />
                                             </div>
                                             <div className='flex flex-col '>
                                                 <Link to='/queries'>
-                                                    <h1 className=' py-4 text-3xl text-center font-bold underline underline-offset-8 '>Queries</h1>
+                                                    <h1 className=' py-4 text-2xl text-center text-gray-500 font-medium underline underline-offset-8 '>Queries</h1>
                                                 </Link>
-                                                <h1 className='text-5xl   font-medium  text-center '>{queryLen.result.content?.length}</h1>
+                                                <h1 className='text-5xl   font-medium text-gray-500  text-center '>{queryLen.result.content?.length}</h1>
                                             </div>
                                         </div>
 
                                     </div>
-                                    <div className='rounded-lg   shadow-xl px-4 py-2 h-[160px]'>
-                                        <div className='flex justify-between px-3 items-center my-3 '>
+                                    <div className='rounded-lg bg-slate-300/20   shadow  py-2 h-[160px]'>
+                                        <div className='flex justify-between px-2 items-center my-3 '>
                                             <div className='  rounded-full p-2'>
-                                                <RiShieldUserLine size={60} />
+                                                <RiShieldUserLine className='text-orange-500 ' size={50} />
                                             </div>
                                             <div className='flex flex-col '>
 
                                                 <Link to='/logs'>
-                                                    <h1 className=' py-4 text-3xl text-center font-bold underline underline-offset-8 '>Logs</h1>
+                                                    <h1 className=' py-4 text-2xl text-center font-medium text-gray-500 underline underline-offset-8 '>Logs</h1>
 
                                                 </Link>
 
-                                                <h1 className='text-5xl     text-center '>500</h1>
+                                                <h1 className='text-5xl   text-gray-500 font-medium  text-center '>500</h1>
                                             </div>
                                         </div>
 
                                     </div>
 
-                                    <div className='rounded-lg  shadow-xl px-4 py-2 h-[160px]'>
-                                        <div className='flex justify-between px-3 items-center my-3 '>
+                                    <div className='rounded-lg bg-slate-300/20  shadow py-2 h-[160px]'>
+                                        <div className='flex justify-between px-1 items-center my-3 '>
                                             <div className=' rounded-full p-2'>
-                                                <RiShieldUserLine size={60} />
+                                                <RiShieldUserLine className='text-orange-500 ' size={50} />
                                             </div>
                                             <div className='flex flex-col '>
                                                 <Link to='/broadcast'>
-                                                    <h1 className=' py-4 text-3xl text-center  underline underline-offset-8 '>Broadcast</h1>
+                                                    <h1 className=' py-4 text-2xl text-center font-medium  text-gray-500 underline underline-offset-8 '>Broadcast</h1>
                                                 </Link>
-                                                <h1 className='text-5xl font-mono    text-center '>500</h1>
+                                                <h1 className='text-5xl text-gray-500 font-medium    text-center '>500</h1>
                                             </div>
                                         </div>
                                     </div>
@@ -437,19 +441,23 @@ function Dashboard() {
 
 
 
-                            </div> 
+                            </div>
 
 
 
 
 
                         </div>
+                        {/* <div className='absolute bottom-0      '>
+                    <img src={DesignLogin} alt='empty' className='w-[50%]'></img>
+                </div> */}
                     </div>
 
                 </div>
-
+              
 
             </div>
+
 
             {/* ============================model=========================== */}
 
@@ -459,11 +467,11 @@ function Dashboard() {
                 onRequestClose={closeModal}
                 style={customStyles}
                 contentLabel="Example Modal"
-                className=""
-            >          <AiOutlineClose onClick={closeModal} className="relative top-0 left-[96%] hover:text-red-900 shadow-lg -mt-2 cursor-pointer" size={25} />
+                className="shadow py-4 px-4"
+            >          <AiOutlineClose onClick={closeModal} className="relative top-0 left-[96%] hover:text-red-900 shadow -mt-2 cursor-pointer" size={25} />
 
-                <h2 className=' text-lg font-bold underline underline-offset-8 text-center  
-                                 text-red-800 px-4 '>Thought Of The Day</h2>
+                <h2 className=' text-lg font-medium underline underline-offset-8 text-center  
+                                 text-gray-500 px-4 '>Thought Of The Day</h2>
 
 
                 <form onSubmit={thoughtSubmitHandler} >
@@ -473,7 +481,7 @@ function Dashboard() {
                     <textarea id="message" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your thoughts here..."
                         value={thoughtText} onChange={(e) => setThoughtText(e.target.value)} required></textarea>
                     <div className='text-center mt-4'>
-                        <button class="bg-red-800 hover:bg-red-700 text-white font-bold py-1 shadow-xl  px-5 rounded focus:outline-none focus:shadow-outline" type="submit">
+                        <button class="bg-orange-600 hover:bg-orange-700 text-white font-bold py-1 shadow-xl  px-5 rounded focus:outline-none focus:shadow-outline" type="submit">
                             Submit
                         </button>
                     </div>

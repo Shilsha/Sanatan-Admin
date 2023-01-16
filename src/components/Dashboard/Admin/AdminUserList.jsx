@@ -139,7 +139,7 @@ function AdminUserList() {
 
         <>
             <ToastContainer />
-            <div className='   w-[100%] h-[100vh] flex flex-col-12 gap-4 '>
+            <div className='   w-[100%] h-[100vh] flex flex-col-12 gap-4 bg-white'>
 
                 <Sidebar />
                 <div className='   w-[93%]  ' >
@@ -155,36 +155,36 @@ function AdminUserList() {
                                     <button type="submit" class="absolute right-0 top-2 mr-5">
                                         <BsSearch className='p-1 ' size={25} />
                                     </button>
-                                </div>
-
+                                 </div>
+{/* 
                                 <button class="inline-flex items-center px-4 py-1 bg-red-800 hover:bg-red-700 text-white text-sm font-medium rounded-md">
 
                                     Filter
                                     <BiFilter className='mx-1' size={30} />
 
-                                </button>
+                                </button> */}
+
+                                  <button type="button" class= "inline-flex items-center text-white bg-gradient-to-r from-orange-500  to-yellow-400 hover:bg-gradient-to-bl font-medium rounded-lg text-sm px-3 py-1 text-center mr-2 mb-2"> Filter   <BiFilter className='mx-1' size={30} /></button>
+
                             </div>
                             <div>
-                                <button class="inline-flex items-center px-4 py-[10px] bg-red-800 hover:bg-red-700 text-white text-sm font-medium rounded-md">
-                                    Admin-Users
-
-                                </button>
+                            <button type="button" class= "inline-flex items-center text-white bg-gradient-to-r from-orange-500  to-yellow-400 hover:bg-gradient-to-bl font-medium rounded-lg  px-3 py-2 text-center mr-2 "> Admin Users</button>
+                            
                             </div>
                         </div>
-                        <div className="tableWrap">
+                        <div className="tableWrap pr-4">
                             <table class="shadow-lg tables  w-full rounded-xl ">
                                 <thead className=''>
-                                    <tr className=' table_head  '>
-                                        <th class="bg-blue-100 border  px-2 text-center">ID</th>
-                                        <th class="bg-blue-100 border  px-2 text-center">Admin Name</th>
-
-                                        <th class="bg-blue-100 border text-center py-2">Email</th>
-                                        <th class="bg-blue-100 border text-center py-2">Role</th>
-                                        <th class="bg-blue-100 border text-center py-2">Password</th>
-                                        <th class="bg-blue-100 border text-center py-2">IsSuperAdmin</th>
-                                        <th class="bg-blue-100 border text-center py-2">Create</th>
-                                        <th class="bg-blue-100 border text-center py-2">Admin Status</th>
-                                        <th class="bg-blue-100 border text-center py-2">Action</th>
+                                    <tr className='   '>
+                                        <td class="bg-blue-100   px-2 text-center">ID</td>
+                                        <td class="bg-blue-100   px-2 text-center">Admin Name</td>
+                                        <td class="bg-blue-100  text-center py-3">Email</td>
+                                        <td class="bg-blue-100  text-center py-3">Role</td>
+                                        <td class="bg-blue-100  text-center py-3">Password</td>
+                                        <td class="bg-blue-100  text-center py-3">IsSuperAdmin</td>
+                                        <td class="bg-blue-100  text-center py-3">Create</td>
+                                        <td class="bg-blue-100  text-center py-3">Admin Status</td>
+                                        <td class="bg-blue-100  text-center py-3">Action</td>
                                     </tr>
                                 </thead>
 
@@ -200,19 +200,19 @@ function AdminUserList() {
                                                     return (
                                                         <>
                                                             <tr key={data.id} className="text-center ">
-                                                                <td class="border text-center">{data.adminId}</td>
-                                                                <td class="border text-center">{data.adminName}</td>
-                                                                <td class="border text-center">{data.email}</td>
-                                                                <td class="border text-center">{data.role}</td>
-                                                                <td class="border text-center">{data.password}</td>
-                                                                <td class="border text-center">{JSON.stringify(data.isSuperAdmin)}</td>
-                                                                <td class="border text-center">{data.createdDate}</td>
-                                                                <td class="border text-center">{JSON.stringify(data.adminStatus)}</td>
-                                                                <td class="border text-center">
+                                                                <td class=" py-2 text-center">{data.adminId}</td>
+                                                                <td class=" py-2 text-center">{data.adminName}</td>
+                                                                <td class=" py-2 text-center">{data.email}</td>
+                                                                <td class=" py-2 text-center">{data.role}</td>
+                                                                <td class=" py-2 text-center">{data.password}</td>
+                                                                <td class=" py-2 text-center">{JSON.stringify(data.isSuperAdmin)}</td>
+                                                                <td class=" py-2 text-center">{data.createdDate}</td>
+                                                                <td class=" py-2 text-center">{JSON.stringify(data.adminStatus)}</td>
+                                                                <td class=" py-2 text-center">
                                                                   
                                                                     &nbsp;
                                                                     <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 text-xs px-2 border
-                                                                      rounded"
+                                                                      rounded-full"
                                                                         onClick={() => openModel(data.adminId)}>
                                                                         Delete
                                                                     </button>

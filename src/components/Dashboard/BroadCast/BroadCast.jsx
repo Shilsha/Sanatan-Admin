@@ -136,7 +136,9 @@ dispatch(deleteBroadcastAction(id ))
                                     <form onSubmit={handleSubmit}>
                                         
                                         <div class="w-[70%] shadow-xl mx-auto  border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
-                                        <h1 class="text-2xl font-bold text-red-800 drop-shadow-lg shadow-red-800 shadow text-center py-2">Broadcast</h1>
+                                        {/* <h1 class="text-2xl font-bold  drop-shadow-lg text-gray-500 shadow text-center py-2">Broadcast</h1> */}
+                                        <h1 className='text-center text-2xl py-2  text-gray-500 font-medium  underline underline-offset-8'>Broadcast</h1>
+
                                             <div class="px-4 py-2 bg-white rounded-t-lg dark:bg-gray-800">
 
                                                 <textarea id="comment" rows="8" class="w-full px-2 text-sm text-gray-900 bg-white  dark:bg-gray-800 
@@ -147,17 +149,17 @@ dispatch(deleteBroadcastAction(id ))
                                             <div class="flex items-center justify-center px-3 py-3 border-t dark:border-gray-600">
                                                 {id ? <>
 
-                                                    <button type="submit" class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center bg-red-800 hover:bg-red-700 text-white shadow-lg rounded-lg " >
-                                                        Update Message
+                                                    <button type="submit" class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center bg-orange-600 hover:bg-orange-700 text-white shadow-lg rounded-lg " >
+                                                        Update Broadcast
                                                     </button>
                                                 </> : <>
-                                                    <button type="submit" class="inline-flex shadow-lg  items-center py-2.5 px-4 text-xs font-medium text-center bg-red-800 hover:bg-red-700 text-white rounded-lg ">
-                                                        Save Message
+                                                    <button type="submit" class="inline-flex shadow-lg  items-center py-2.5 px-4 text-xs font-medium text-center bg-orange-600 hover:bg-orange-700 text-white rounded-lg ">
+                                                    Broadcast Message
                                                     </button>
                                                 </>}
 
-                                                <button type="" class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-black hover:bg-red-700 border mx-2 shadow-lg rounded-lg hover:text-white " onClick={handleClear} >
-                                                    Clear Message
+                                                <button type="" class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-black hover:bg-orange-700 border mx-2 shadow-lg rounded-lg hover:text-white " onClick={handleClear} >
+                                                    Clear Broadcast
                                                 </button>
 
 
@@ -175,15 +177,15 @@ dispatch(deleteBroadcastAction(id ))
                         </div>
 
                         {/* ================================================table============================================ */}
-                        <div className='w-full tableWrapBroadcast mt-8 shadow-xl'>
+                        <div className='w-full tableWrapBroadcast mt-8 shadow-xl pr-4'>
                             <table class="shadow-xl tables  w-full rounded-xl ">
                                 <thead className=''>
                                     <tr className=' table_head  '>
-                                        <th class="bg-blue-100 border  px-2 text-center">ID</th>
-                                        <th class="bg-blue-100 border text-center py-2"> Date</th>
-                                        <th class="bg-blue-100 border text-center py-2">Status</th>
-                                        <th class="bg-blue-100 border text-center py-2">Message</th>
-                                        <th class="bg-blue-100 border text-center py-2">Action</th>
+                                        <td class="bg-blue-100 py-3  px-2 text-start">ID</td>
+                                        <td class="bg-blue-100 py-3 text-start "> Date</td>
+                                        <td class="bg-blue-100 py-3 text-start ">Status</td>
+                                        <td class="bg-blue-100 py-3 text-start ">Message</td>
+                                        <td class="bg-blue-100 py-3 text-center ">Action</td>
 
 
                                     </tr>
@@ -194,15 +196,15 @@ dispatch(deleteBroadcastAction(id ))
                                                 return (
                                                     <>
                                                         <tr key={data.id}>
-                                                            <td class="border text-start px-2 ">{data.announcementId}</td>
-                                                            <td class="border text-start px-2 ">{data.announcementDate}</td>
-                                                            <td class="border text-start px-2 ">{JSON.stringify(data.announcementStatus)}</td>
-                                                            <td class="border text-start px-2 ">{truncateString(data.announcementOfTheDay, 90)}</td>
-                                                            <td class="border text-center px-2 ">
+                                                            <td class="py-3 text-start px-2 ">{data.announcementId}</td>
+                                                            <td class="py-3 text-start px-2 ">{data.announcementDate}</td>
+                                                            <td class="py-3 text-start px-2 ">{JSON.stringify(data.announcementStatus)}</td>
+                                                            <td class="py-3 text-start px-2 ">{truncateString(data.announcementOfTheDay, 90)}</td>
+                                                            <td class="py-3 text-center px-2 ">
 
 
                                                                 <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold 
-                                                                    py-1 text-xs px-2 rounded"
+                                                                    py-1 text-xs px-3 rounded-full"
                                                                     onClick={() => editHandle({data:{
                                                                         Id:data.announcementId,
                                                                        Date: data.announcementDate,
@@ -213,11 +215,11 @@ dispatch(deleteBroadcastAction(id ))
                                                                 &nbsp;
                                                                 
                                                                 {data.announcementStatus?<> <button class="bg-red-500 hover:bg-red-700 text-white font-bold
-                                                                     py-1 text-xs px-2 border  rounded" onClick={()=>deleteBroadcast(data.announcementId)} >
+                                                                     py-1 text-xs px-2 border  rounded-full" onClick={()=>deleteBroadcast(data.announcementId)} >
                                                                     Deactivate
                                                                 </button></>:<>
                                                                 <button class="bg-orange-500 hover:bg-orange-700 text-white font-bold
-                                                                     py-1 text-xs px-5 border  rounded" onClick={()=>deleteBroadcast(data.announcementId)} >
+                                                                     py-1 text-xs px-5 border  rounded-full" onClick={()=>deleteBroadcast(data.announcementId)} >
                                                                     Delete
                                                                 </button>
                                                                 </>}

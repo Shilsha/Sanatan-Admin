@@ -218,7 +218,7 @@ function Articles() {
                     <Navbar />
                     <div className=' my-4 mx-auto '>
 
-                        <div className='flex justify-between items-center pb-4'>
+                        <div className='flex justify-between items-center pb-4 pr-4'>
                             <div className='flex justify-between w-[40%]'>
                                 <div class=" relative  w-[75%] text-gray-600 ">
                                     <input class="border-2  w-full border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
@@ -245,29 +245,20 @@ function Articles() {
 
                             </div>
                         </div>
-                        <div className="tableWrap">
+                        <div className="tableWrap pr-4">
                             <table class="shadow-lg tables  w-full rounded-xl ">
                                 <thead className=''>
                                     <tr className=' table_head  '>
-                                        <th class="bg-blue-100 border  text-center">Article Id</th>
-
-                                        {/* <th class="bg-blue-100 border  px-2 text-center">Admin</th> */}
-                                        <th class="bg-blue-100  border text-center ">Title</th>
-                                        <th class="bg-blue-100  border text-center ">Category</th>
-                                        <th class="bg-blue-100  border text-center ">Subject</th>
-                                        <th class="bg-blue-100  border text-center ">Content</th>
-                                        {/* <th class="bg-blue-100  border  text-center">User Id</th>
-                                        <th class="bg-blue-100  border  text-center">Likes</th> */}
-                                        <th class="bg-blue-100  border text-center">Author</th>
-                                        {/* <th class="bg-blue-100 border text-center py-2">User Code</th> */}
-                                        <th class="bg-blue-100 border text-center "> Create Date</th>
-                                        {/* <th class="bg-blue-100 border text-center py-2">Modify</th> */}
-                                        {/* <th class="bg-blue-100 border text-center py-2"> Password</th> */}
-                                        {/* <th class="bg-blue-100 border text-center py-2">Token</th> */}
-
-                                        <th class="bg-blue-100 border text-center ">Open/Publish</th>
-                                        <th class="bg-blue-100 border text-center">Action</th>
-                                        <th class="bg-blue-100 border text-center">View</th>
+                                        <td class="bg-blue-100 py-3  text-start px-2">Article Id</td>
+                                        <td class="bg-blue-100   text-start px-3 ">Title</td>
+                                        <td class="bg-blue-100   text-start px-2 ">Category</td>
+                                        <td class="bg-blue-100   text-start px-2 ">Subject</td>
+                                        <td class="bg-blue-100   text-start px-2 ">Content</td>
+                                        <td class="bg-blue-100   text-start px-2">Author</td>
+                                        <td class="bg-blue-100  text-start px-2 "> Create Date</td>
+                                        <td class="bg-blue-100  text-start px-2 ">Open/Publish</td>
+                                        <td class="bg-blue-100  text-start px-2">Action</td>
+                                        <td class="bg-blue-100  text-start px-2">View</td>
                                     </tr>
                                 </thead>
                                 <tbody style={{ background: '' }}>
@@ -283,34 +274,34 @@ function Articles() {
                                                         <>
 
                                                             <tr key={data.id} className="text-center ">
-                                                                <td class="border text-center text-[12px]">{data.articleId}</td>
+                                                                <td class=" text-center  py-3 text-[12px]">{data.articleId}</td>
 
-                                                                <td class="border text-start  text-[13px]  px-2 ">
+                                                                <td class=" text-start py-2  text-[13px]  px-2 ">
 
                                                                     {truncateTitle(data.title, 20)}
                                                                 </td>
-                                                                <td class="border text-start  text-[13px] px-2">{data.category} </td>
-                                                                <td class="border text-start  text-[12px] px-2">
+                                                                <td class=" text-start  text-[13px] px-2">{data.category} </td>
+                                                                <td class=" text-start  text-[12px] px-2">
 
                                                                     {truncateSubject(data.subject, 20)}
 
                                                                 </td>
-                                                                <td class="border text-start  text-[12px] px-2">
+                                                                <td class=" text-start  text-[12px] px-2">
 
 
                                                                     {truncateString(data?.content, 50)}
 
                                                                 </td>
                                                                
-                                                                <td class="border text-start  text-[13px] px-2">{data.author} </td>
+                                                                <td class=" text-start  text-[13px] px-2">{data.author} </td>
 
-                                                                <td class="border text-[12px] px-2">
+                                                                <td class=" text-[12px] px-2">
                                                                     {data.createdDate}
 
                                                                 </td>
                                                               
 
-                                                                <td class="border text-center pt-1  ">
+                                                                <td class=" text-center pt-1  ">
 
                                                                     <span className='text-[10px]'>{data.articleType}</span>
 
@@ -318,12 +309,12 @@ function Articles() {
 
 
                                                                 </td>
-                                                                <td class=" px-2 border flex justify-between items-center pt-1" >
+                                                                <td class=" px-2  flex justify-between items-center pt-1" >
 
 
                                                                     {data.articleType == 'PUBLISH' ? <>
 
-                                                                        <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 text-xs px-2 border  rounded" onClick={() => HanldeReject(data.articleId, 'Reject')}>
+                                                                        <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 text-xs px-3 mt-2   rounded-full" onClick={() => HanldeReject(data.articleId, 'Reject')}>
                                                                             Reject
                                                                         </button>
 
@@ -333,12 +324,12 @@ function Articles() {
 
 
                                                                             <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold 
-                                                                            py-1 text-xs px-2 rounded" onClick={() => HandlePublish(data.articleId, 'Publish')}>
+                                                                            py-1 text-xs px-3 mt-2 rounded-full" onClick={() => HandlePublish(data.articleId, 'Publish')}>
                                                                                 Pubish
                                                                             </button>
                                                                             &nbsp;
                                                                             <button class="bg-red-500 hover:bg-red-700 text-white font-bold
-                                                                             py-1 text-xs px-2 border  rounded" onClick={() => HanldeReject(data.articleId, 'Reject')}>
+                                                                             py-1 text-xs px-3 mt-2   rounded-full" onClick={() => HanldeReject(data.articleId, 'Reject')}>
                                                                                 Reject
                                                                             </button>
 
@@ -349,7 +340,7 @@ function Articles() {
                                                                     }
                                                                 </td>
 
-                                                                <td className='border px-3'>
+                                                                <td className=' px-3'>
                                                                     <Link to={`/articles/${data.articleId}`}>
                                                                         <AiFillEye size={22} className='mx-2 text-blue-300 hover:text-blue-800' />
                                                                     </Link>

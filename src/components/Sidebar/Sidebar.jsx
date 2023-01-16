@@ -80,11 +80,11 @@ function Sidebar() {
 
         <>
         <ToastContainer/>
-        <div className='  flex flex-col justify-between py-5 items-center shadow-xl navbar_bg    rounded-r-lg -ml-4 px-2 mr-2  '>
+        <div className='  flex flex-col justify-between py-5 items-center shadow-xl navbar_bg    rounded-lg -ml-4 px-2 mr-2  '>
 
            <div className='-mt-4'>
            <NavLink to='/dashboard'>
-                <img src={side1} alt="logo" className='w-20 shadow-lg' />
+                <img src={side1} alt="logo" className='w-20' />
             </NavLink>
            </div>
 
@@ -92,47 +92,47 @@ function Sidebar() {
                 {/* <div className='  rounded cursor-pointer hover:bg-red-800 text-black hover:text-white p-1'> */}
 
                     <NavLink to='/dashboard'  >
-                        <CgMenuGridR className='text-white  p-1 rounded cursor-pointer shadow-lg'  size={35} />
+                        <CgMenuGridR className='text-white  p-1 rounded cursor-pointer'  size={35} />
                     </NavLink>
 
 
                 {/* </div> */}
-                <p className='text-center text-[10px] -mt-6 shadow-lg text-white'>Dashboard</p>
+                <p className='text-center text-[16px] -mt-6 font-medium text-white'>Dashboard</p>
 
                 <div class="dropdown inline-block ">
 
-                    <MdOutlineGroupAdd className=' cursor-pointer  text-white hover:text-white shadow-lg  p-1 rounded' size={35} />
+                    <MdOutlineGroupAdd className=' cursor-pointer mx-2  text-white hover:text-white  p-1 rounded' size={35} />
                     
-                    <p className='text-center  text-[10px]   text-white shadow-lg'>Staff List </p>
+                    <p className='text-center  text-[16px]    text-white'>Staff List </p>
                     <ul class="dropdown-menu absolute hidden  rounded-lg  text-black bg-white shadow-xl ml-8">
                         <li class=""><a class="  hover:text-white hover:rounded-lg  hover:bg-red-800 py-2 
-                        px-4 block whitespace-no-wrap cursor-pointer shadow-lg " onClick={addStaff} >Add Staff</a></li>
+                        px-4 block whitespace-no-wrap cursor-pointer " onClick={addStaff} >Add Staff</a></li>
                         <NavLink to='/adminlists'>
                             <li class=""><a class="  hover:text-white hover:rounded-lg hover:bg-red-800 py-2 px-4 block
-                             whitespace-no-wrap cursor-pointer shadow-lg" >Staff List</a></li>
+                             whitespace-no-wrap cursor-pointer" >Staff List</a></li>
                         </NavLink>
 
                     </ul>
                 </div>
                 {/* <div className='  rounded cursor-pointer hover:bg-red-800 text-black hover:text-white p-1  '> */}
                     <NavLink to='/user'>
-                        <RiShieldUserLine className='text-white shadow-lg ' size={35} />
+                        <RiShieldUserLine className='text-white  ' size={35} />
                     </NavLink>
                 {/* </div> */}
-                <p className='text-center -mt-6 text-[10px] shadow-lg   text-white'>Users</p>
+                <p className='text-center -mt-6 text-[16px]    text-white'>Users</p>
                 {/* <div className='  rounded cursor-pointer hover:bg-red-800 text-black  hover:text-white p-1  '> */}
                     <NavLink to='/articles'>
-                        <HiClipboardDocumentList className=' text-white shadow-lg'  size={35} />
+                        <HiClipboardDocumentList className=' text-white'  size={35} />
                     </NavLink>
                 {/* </div> */}
-                <p className='text-center -mt-6 text-[10px] shadow-lg  text-white'>Articles</p>
+                <p className='text-center -mt-6 text-[16px]    text-white'>Articles</p>
                 {/* <div className='  rounded cursor-pointer hover:bg-red-800 text-black  hover:text-white p-1  '> */}
                     <NavLink to='/queries'>
-                        <BsFillQuestionSquareFill className='text-white  shadow-lg' size={30} />
+                        <BsFillQuestionSquareFill className='text-white ' size={30} />
                     </NavLink>
                     
                 {/* </div> */}
-                <p className='text-center -mt-6 text-[10px] shadow-lg   text-white'>Queries</p>
+                <p className='text-center -mt-6 text-[16px]    text-white'>Queries</p>
 
 
 
@@ -141,9 +141,9 @@ function Sidebar() {
             
 
             <div className=' justify-center  rounded-full'>
-                <TbLogout className='text-white shadow-lg  p-1 hover:bg-red-800 rounded-lg hover:text-white  cursor-pointer'
+                <TbLogout className='text-white  p-1 hover:bg-red-800 rounded-lg hover:text-white  cursor-pointer'
                 onClick={logout} size={35} />
-                <p className='text-center text-[10px] shadow-lg  text-white' >Logout</p>
+                <p className='text-center text-[16px]    text-white' >Logout</p>
 
            
             </div>
