@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
 import { toast } from 'react-toastify';
 const baseUrl = 'http://sanatanjyoti-env.eba-ab3znppq.ap-south-1.elasticbeanstalk.com'
+// const baseUrl = 'https://6899-2405-201-4041-c01c-8130-8e08-5ead-88a1.in.ngrok.io'
 
 export const getUser = createAsyncThunk('USER/GET_ALL_USER',
     async (data) => {
@@ -59,7 +60,7 @@ export const getUser = createAsyncThunk('USER/GET_ALL_USER',
         },
         [deleteUser.fulfilled]: (state, action) => {
             // console.log(action.payload.data.data.userId,'action')
-            toast.success('User deleted successfully')
+            // toast.success('User deleted successfully')
             state.loading = false,
                 state.result =state.result.filter((data)=>data.userId!==action.payload.data.data.userId)
         },

@@ -145,7 +145,7 @@ function Logs() {
                                 </button> */}
 
                             </div>
-                            <button class="inline-flex items-center px-4 py-2 bg-red-800 hover:bg-red-700 text-white text-sm font-medium rounded-md" onClick={ClearAllFilter}>
+                            <button class="inline-flex items-center px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white text-sm font-medium rounded-md" onClick={ClearAllFilter}>
 
                                 Clear All
                                 <AiOutlineClear className='mx-1  ' size={25} />
@@ -181,14 +181,14 @@ function Logs() {
                         <div className="tableWrap">
                             <table class="shadow-lg tables  w-full rounded-xl ">
                                 <thead className=''>
-                                    <tr className=' table_head  '>
-                                        <td class="bg-blue-100 py-3  text-start"> Id</td>
-                                        <td class="bg-blue-100 py-3   text-start ">User Id</td>
-                                        <td class="bg-blue-100   text-start ">Module</td>
-                                        <td class="bg-blue-100   text-start ">Sub Module</td>
-                                        <td class="bg-blue-100   text-start ">Status</td>
-                                        <td class="bg-blue-100   text-start ">Method Operation</td>
-                                        <td class="bg-blue-100  text-start "> Create Date</td>
+                                    <tr className='  bg-blue-100 text-center  '>
+                                        <td class=" py-3  "> ID</td>
+                                        <td class=" py-3   ">User Id</td>
+                                        <td class="   ">Module</td>
+                                        <td class="   ">Sub Module</td>
+                                        <td class="   ">Status</td>
+                                        <td class="   ">Method Operation</td>
+                                        <td class="  "> Create Date</td>
 
                                     </tr>
 
@@ -203,14 +203,14 @@ function Logs() {
 
 
                                                 return (<>
-                                                    <tr key={data.id} className="text-center ">
-                                                        <td class=" py-3 text-start">{data.id}</td>
-                                                        <td class=" py-3 text-start">{data.userId == null ? '---' : data.userId}</td>
-                                                        <td class=" py-3 text-start px-2 ">{data.module}</td>
-                                                        <td class=" py-3 text-start px-2 ">{data.subModule}</td>
-                                                        <td class=" py-3 text-start px-2 ">{JSON.stringify(data.status)}</td>
-                                                        <td class=" py-3 text-start px-2 ">{data.methodOperation}</td>
-                                                        <td class=" py-3 text-start px-2 ">{data.createdAt}</td>
+                                                    <tr key={data.id} className="text-center text-gray-500 border-b-[3px]">
+                                                        <td class=" py-3">{data.id}</td>
+                                                        <td class=" py-3">{data.userId == null ? '---' : data.userId}</td>
+                                                        <td class=" py-3 px-2 ">{data.module}</td>
+                                                        <td class=" py-3 px-2 ">{data.subModule}</td>
+                                                        <td class=" py-3 px-2 ">{JSON.stringify(data.status)}</td>
+                                                        <td class=" py-3 px-2 ">{data.methodOperation}</td>
+                                                        <td class=" py-3 px-2 ">{data.createdAt}</td>
                                                     </tr>
 
                                                 </>)

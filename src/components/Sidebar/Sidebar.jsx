@@ -80,7 +80,7 @@ function Sidebar() {
 
         <>
         <ToastContainer/>
-        <div className='  flex flex-col justify-between py-5 items-center shadow-xl navbar_bg    rounded-lg -ml-4 px-2 mr-2  '>
+        <div className='  flex flex-col justify-between py-5 items-center shadow-xl navbar_bg    -ml-4 px-2 mr-2  '>
 
            <div className='-mt-4'>
            <NavLink to='/dashboard'>
@@ -105,10 +105,10 @@ function Sidebar() {
                     
                     <p className='text-center  text-[16px]    text-white'>Staff List </p>
                     <ul class="dropdown-menu absolute hidden  rounded-lg  text-black bg-white shadow-xl ml-8">
-                        <li class=""><a class="  hover:text-white hover:rounded-lg  hover:bg-red-800 py-2 
+                        <li class=""><a class="  hover:text-white hover:rounded-lg  hover:bg-orange-600 py-2 
                         px-4 block whitespace-no-wrap cursor-pointer " onClick={addStaff} >Add Staff</a></li>
                         <NavLink to='/adminlists'>
-                            <li class=""><a class="  hover:text-white hover:rounded-lg hover:bg-red-800 py-2 px-4 block
+                            <li class=""><a class="  hover:text-white hover:rounded-lg hover:bg-orange-600 py-2 px-4 block
                              whitespace-no-wrap cursor-pointer" >Staff List</a></li>
                         </NavLink>
 
@@ -158,9 +158,9 @@ function Sidebar() {
 
             >
 
-                <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 " onSubmit={HandleOnSubmit}>
+                <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 relative z-50" onSubmit={HandleOnSubmit}>
                     <AiOutlineClose onClick={closeModal} className="relative top-0 left-[100%] cursor-pointer" size={25} />
-                    <h1 className='text-center font-sans  mb-4 text-4xl font-bold text-red-800'>Add Staff </h1>
+                    <h1 className='text-center font-sans  mb-4 text-4xl font-bold text-orange-500'>Add Staff </h1>
 
 
                     <div class="mb-4">
@@ -204,8 +204,12 @@ function Sidebar() {
                     </div> */}
 
                     <div class="flex items-center justify-center">
-                        <button class="bg-red-800 hover:bg-red-700 text-white font-bold  px-5 py-2 rounded focus:outline-none focus:shadow-outline" type="submit">
+                        {/* <button class="bg-red-800 hover:bg-red-700 text-white font-bold  px-5 py-2 rounded focus:outline-none focus:shadow-outline" type="submit">
                             Submit
+                        </button> */}
+
+                        <button class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-1 shadow-xl  px-5 rounded focus:outline-none focus:shadow-outline" type="submit">
+                        Submit
                         </button>
 
                     </div>

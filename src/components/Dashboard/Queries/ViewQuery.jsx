@@ -9,6 +9,10 @@ import {AiOutlineClose} from 'react-icons/ai'
 import {getSingleQuery} from '../../../Redux/Fetures/Reducers/GetSingleQuerySlice'
 import {updateQueriesAction} from '../../../Redux/Fetures/Reducers/GetSingleQuerySlice'
 
+
+
+import DesignLogin from '../../../Assets/images/DesignLogin.png'
+
 const customStyles = {
     content: {
         top: '50%',
@@ -92,20 +96,23 @@ function ViewQuery() {
 
     return <>
 
-        <div className='container   w-[100%] h-[100vh] flex flex-col-12 gap-4 bg-orange-50 '>
+        <div className='   w-[100%] h-[100vh] flex flex-col-12 gap-4  '>
             <Sidebar />
             <div className=' font-serif w-full ' >
                 <Navbar />
-                <h1 className='text-center font-bold mt-4 text-2xl text-red-800 '  >: Query {id}:</h1>
-                <hr className='w-[8%] mx-auto h-1 text-center  bg-red-800 ' />
-
+                {/* <h1 className='text-center font-bold mt-4 text-2xl text-red-800 '  >: Query {id}:</h1>
+                <hr className='w-[8%] mx-auto h-1 text-center  bg-red-800 ' /> */}
+                          <h1 className='text-center text-2xl mt-2  text-gray-500 font-medium  underline underline-offset-8'> Query {id}</h1>
+                    
                 {singleQuery?.loading ? <><Loader /></> : <>
 
-                    <div className='flex items-center  px-10  my-4'>
-                        <div className='border border-red-800 w-[90%] shadow-xl rounded-xl px-4 mx-auto   bg-white/70'>
+                    <div className='flex items-center  px-4  my-4 '>
+                        <div className='  w-full shadow-xl rounded-xl px-4 mx-auto   bg-slate-300/20'>
                             <div className='my-5'>
-                                <h1 className='font-bold text-xl   text-red-800'>Query Details :</h1>
-                                <hr className='w-[12%] h-1  bg-red-800 ' />
+                                {/* <h1 className='font-bold text-xl   text-red-800'>Query Details :</h1> */}
+                                {/* <hr className='w-[12%] h-1  bg-red-800 ' /> */}
+                                <h1 className=' text-xl   text-gray-500 font-medium  underline underline-offset-8'> Query :</h1>
+                    
 
                                 <div className='flex  justify-around items-center my-4  px-10'>
 
@@ -139,8 +146,9 @@ function ViewQuery() {
 
 
                                 <div className='mt-4'>
-                                    <h1 className='font-bold text-xl   text-red-800'>Content :</h1>
-                                    <hr className='w-[7%] h-1  bg-red-800 ' />
+                                    {/* <h1 className='font-bold text-xl   text-red-800'>Content :</h1>
+                                    <hr className='w-[7%] h-1  bg-red-800 ' /> */}
+                                    <h1 className=' text-xl   text-gray-500 font-medium  underline underline-offset-8'> Content :</h1>
                                 </div>
 
                                 <div className='m-5 px-20'>
@@ -162,8 +170,10 @@ function ViewQuery() {
                             </div>
                             <div>
 
-                                <h1 className='font-bold text-xl   text-red-800'> {singleQuery?.result?.status == 'RESOLVED' || singleQuery?.result?.status == 'REJECTED' ? <>Result :</> : <>Action :</>} </h1>
-                                <hr className='w-[6%] h-1  bg-red-800 ' />
+                                <h1 className='font-bold text-xl  underline underline-offset-8 text-gray-500'> {singleQuery?.result?.status == 'RESOLVED' || singleQuery?.result?.status == 'REJECTED' ? <>Result :</> : <>Action :</>} </h1>
+                          
+
+                                
                                 <div className='flex  px-20 m-5  '>
 
                                     {singleQuery?.result?.assigneeName ? <>
@@ -172,7 +182,7 @@ function ViewQuery() {
 
                                             <div className=' w-full flex justify-between '>
                                                 <p className=''><strong>Status : </strong>
-                                                    <button className={`${singleQuery?.result.status == 'RESOLVED' ? `bg-green-500` : `bg-red-500`} text-white py-1 rounded-lg px-2`}>{singleQuery?.result?.status}</button>
+                                                    <button className={`${singleQuery?.result.status == 'RESOLVED' ? `bg-green-500` : `bg-red-500`} text-white py-1 shadow rounded-lg px-2`}>{singleQuery?.result?.status}</button>
                                                 </p>
                                                <div className='  w-[60%]'>
                                              <div className='flex justify-center pt-1'>
@@ -193,12 +203,12 @@ function ViewQuery() {
 
                                         </> : <>
 
-                                            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1  px-2 rounded"
+                                            <button class="bg-orange-500 shadow hover:bg-orange-600 text-white font-bold py-1  px-2 rounded"
                                                 onClick={() => openModel('RESOLVED')}
                                             >
                                                 Resolve
                                             </button>
-                                            <button class="bg-red-500 hover:bg-red-700 mx-4 text-white font-bold py-1  px-2 rounded"
+                                            <button class="border-2  hover:bg-red-600 mx-4 hover:text-white text-gray-500 shadow font-bold py-1  px-2 rounded"
                                                 onClick={() => openModel('REJECTED')}
                                             >
                                                 Reject
@@ -207,7 +217,7 @@ function ViewQuery() {
 
                                     </> 
                                     : <>
-                                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1  px-2 rounded"
+                                        <button class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-1  px-2 rounded"
                                             onClick={assignToMe}
                                         >
                                             Assignee To Me
@@ -224,6 +234,11 @@ function ViewQuery() {
 
                     </div>
                 </>}
+
+
+                {/* <div className='absolute bottom-0      '>
+                    <img src={DesignLogin} alt='empty' className='w-[95%]'></img>
+                </div> */}
 
 
             </div>

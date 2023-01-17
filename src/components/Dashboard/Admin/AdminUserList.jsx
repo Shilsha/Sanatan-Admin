@@ -14,6 +14,7 @@ import { ToastContainer } from 'react-toastify'
 import Modal from 'react-modal';
 import { getAdminList } from '../../../Redux/Fetures/Reducers/AdminListSlice'
 import {delelteAdmin} from '../../../Redux/Fetures/Reducers/AdminListSlice'
+import DesignLogin from '../../../Assets/images/DesignLogin.png'
 const customStyles = {
     content: {
         top: '50%',
@@ -139,7 +140,7 @@ function AdminUserList() {
 
         <>
             <ToastContainer />
-            <div className='   w-[100%] h-[100vh] flex flex-col-12 gap-4 bg-white'>
+            <div className='  w-[100%] h-[100vh] flex flex-col-12 gap-4 bg-white'>
 
                 <Sidebar />
                 <div className='   w-[93%]  ' >
@@ -199,7 +200,7 @@ function AdminUserList() {
                                                     (allAdminList?.result.filter((user) => user.email?.toLowerCase().includes(FilterSearch)))?.map((data)=>{
                                                     return (
                                                         <>
-                                                            <tr key={data.id} className="text-center ">
+                                                            <tr key={data.id} className="text-center text-gray-500  ">
                                                                 <td class=" py-2 text-center">{data.adminId}</td>
                                                                 <td class=" py-2 text-center">{data.adminName}</td>
                                                                 <td class=" py-2 text-center">{data.email}</td>
@@ -211,7 +212,7 @@ function AdminUserList() {
                                                                 <td class=" py-2 text-center">
                                                                   
                                                                     &nbsp;
-                                                                    <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 text-xs px-2 border
+                                                                    <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-1.5 text-xs px-2 border
                                                                       rounded-full"
                                                                         onClick={() => openModel(data.adminId)}>
                                                                         Delete
@@ -233,7 +234,7 @@ function AdminUserList() {
                             </table>
 
                         </div>
-                        <nav aria-label="Page navigation example " className='text-center     '>
+                        <nav aria-label="Page navigation example " className='text-center relative z-10  '>
                         <ul class="inline-flex justify-center items-center ">
                             <li>
                                 <button class={`px-3 inline-flex justify-center  items-center cursor-pointer py-2 ml-0 leading-tight text-white font-bold bg-red-800 disabled:opacity-50  rounded-lg mx-4 hover:bg-red-700  dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white`} disabled={buttonPre} onClick={prev} >
@@ -251,8 +252,13 @@ function AdminUserList() {
                     </nav>
 
                     </div>
+                    
+                </div>
+                <div className='absolute bottom-0     '>
+                    <img src={DesignLogin} alt='empty' className='w-full'></img>
                 </div>
             </div>
+          
 
             {/* ===============model==================== */}
             <Modal
@@ -274,7 +280,7 @@ function AdminUserList() {
                         </div>
                         <div class="mt-4 md:mt-0 md:ml-6 text-center md:text-left">
                             <p class="font-bold text-red-800">Delete admin account</p>
-                            <p class="text-sm text-gray-700 mt-1">You will lose all of your data by deleting your account. This action cannot be undone.
+                            <p class="text-sm text-gray-700 mt-1">Are you sure to delete Admin account. This action cannot be undone.
                             </p>
                         </div>
                     </div>

@@ -19,20 +19,13 @@ function GetArticelLike({ ParentFunc, id, ParentFunc2, likes ,comments}) {
         dispatch(getArticleLike(id))
         setBox1(!box1)
         setShow(!show)
-
-       
-     
-
-
     }
 
     ParentFunc2 = () => {
         console.log('commets')
         dispatch(getArticleComment(id))
         setBox2(!box2)
-        setShow1(!show1)
-      
-     
+        setShow1(!show1)  
     }
     const getAllLike = useSelector((state) => state.articlesLike)
     const getAllComment = useSelector((state) => state.articlesComment)
@@ -47,7 +40,7 @@ function GetArticelLike({ ParentFunc, id, ParentFunc2, likes ,comments}) {
 
                 <div className='flex  items-center py-2 px-4'>
 
-                    <button type="button" class="text-white bg-red-800 hover:bg-red-700  font-medium rounded-lg text-sm px-3 py-2 text-center inline-flex items-center  mr-2 "
+                    <button type="button" class="text-white bg-orange-500 hover:bg-orange-600  font-medium rounded-lg text-sm px-3 py-2 text-center inline-flex items-center  mr-2 "
                         onClick={ParentFunc}>
 
                         Show Likes <span className='px-2 font-extrabold'>{likes}</span>
@@ -58,7 +51,7 @@ function GetArticelLike({ ParentFunc, id, ParentFunc2, likes ,comments}) {
 
                 </div>
                 <div className='flex items-center mx-8' >
-                    <button type="button" class="text-white  bg-red-800 hover:bg-red-700 font-medium rounded-lg text-sm px-2 py-2 text-center inline-flex items-center mr-2 "
+                    <button type="button" class="  border text-black hover:bg-orange-600 hover:text-white font-medium rounded-lg text-sm px-2 py-2 text-center inline-flex items-center mr-2 "
                         onClick={ParentFunc2}>
 
                         Show Comments
@@ -69,18 +62,18 @@ function GetArticelLike({ ParentFunc, id, ParentFunc2, likes ,comments}) {
                 </div>
             </div>
             {/* =====================================this is like ================================= */}
-            <div className='container  mt-4 mx-auto ' style={show?{display:'none'}:{display:'block'}} >
+            <div className='  mt-4 mx-auto mr-4 shadow ' style={show?{display:'none'}:{display:'block'}} >
 
-                <table class="shadow-lg tables  w-full rounded-xl  ">
-                    <thead className=''>
-                        <tr className=' table_head  '>
-                            <th class="bg-blue-100 border  px-2 text-center text-xs">ID</th>
-                            <th class="bg-blue-100 border text-center  text-xs">Name</th>
-                            <th class="bg-blue-100 border text-center  text-xs">Email</th>
-                            <th class="bg-blue-100 border text-center  text-xs">Create Date</th>
-                            <th class="bg-blue-100 border text-center  text-xs">Modify Date</th>
-                            <th class="bg-blue-100 border text-center  text-xs">Status</th>
-                            <th class="bg-blue-100 border text-center  text-xs"> Mobile No</th>
+                <table class=" tables  w-full rounded-xl  ">
+                    <thead className=' '>
+                        <tr className=' table_head text-center shadow-lg bg-blue-100  '>
+                            <td class=" py-3  px-2 ">ID</td>
+                            <td class="   ">Name</td>
+                            <td class="   ">Email</td>
+                            <td class="   ">Create Date</td>
+                            <td class="   ">Modify Date</td>
+                            <td class="   ">Status</td>
+                            <td class="   "> Mobile No</td>
 
                         </tr>
                     </thead>
@@ -92,14 +85,14 @@ function GetArticelLike({ ParentFunc, id, ParentFunc2, likes ,comments}) {
                             {
                                 getAllLike.result?.map((data) => {
                                     return <>
-                                        <tr>
-                                            <td class="border text-start  text-[13px]  px-2 ">{data.userId}</td>
-                                            <td class="border text-start  text-[13px]  px-2 ">{data.fullName}</td>
-                                            <td class="border text-start  text-[13px]  px-2 ">{data.email}</td>
-                                            <td class="border text-start  text-[13px]  px-2 ">{data.createdDate}</td>
-                                            <td class="border text-start  text-[13px]  px-2 ">{data.modifiedDate}</td>
-                                            <td class="border text-start  text-[13px]  px-2 ">{JSON.stringify(data.enabled)}</td>
-                                            <td class="border text-start  text-[13px]  px-2 ">{data.mobileNo}</td>
+                                        <tr className='text-center text-gray-500 border-b-[3px]'>
+                                            <td class=" py-3 px-2 ">{data.userId}</td>
+                                            <td class="  px-2 ">{data.fullName}</td>
+                                            <td class="  px-2 ">{data.email}</td>
+                                            <td class="  px-2 ">{data.createdDate}</td>
+                                            <td class="  px-2 ">{data.modifiedDate}</td>
+                                            <td class="  px-2 ">{JSON.stringify(data.enabled)}</td>
+                                            <td class="  px-2 ">{data.mobileNo}</td>
 
                                         </tr>
 
@@ -115,18 +108,18 @@ function GetArticelLike({ ParentFunc, id, ParentFunc2, likes ,comments}) {
 
             {/* ======================================this is comment==================================== */}
 
-            <div className='container  mt-4 mx-auto '  style={show1?{display:'none'}:{display:'block'}} >
+            <div className='  mt-4 mx-auto mr-4  '  style={show1?{display:'none'}:{display:'block'}} >
 
                 <table class="shadow-lg tables  w-full rounded-xl  ">
                     <thead className=''>
-                        <tr className=' table_head  '>
-                            <th class="bg-blue-100 border  px-2 text-center text-xs">ID</th>
-                            <th class="bg-blue-100 border text-center  text-xs">Name</th>
-                            <th class="bg-blue-100 border text-center  text-xs">Email</th>
-                            <th class="bg-blue-100 border text-center  text-xs">Create Date</th>
-                            <th class="bg-blue-100 border text-center  text-xs">Modify Date</th>
-                            <th class="bg-blue-100 border text-center  text-xs">Status</th>
-                            <th class="bg-blue-100 border text-center  text-xs"> Mobile No</th>
+                        <tr className=' table_head text-center bg-blue-100'>
+                            <td class="  px-2 py-3 ">ID</td>
+                            <td class="   ">Name</td>
+                            <td class="   ">Email</td>
+                            <td class="   ">Create Date</td>
+                            <td class="   ">Modify Date</td>
+                            <td class="   ">Status</td>
+                            <td class="   "> Mobile No</td>
 
                         </tr>
                     </thead>
@@ -138,14 +131,14 @@ function GetArticelLike({ ParentFunc, id, ParentFunc2, likes ,comments}) {
                             {
                                 getAllComment.result?.map((data) => {
                                     return <>
-                                        <tr>
-                                            <td class="border text-start  text-[13px]  px-2 ">{data.userId}</td>
-                                            <td class="border text-start  text-[13px]  px-2 ">{data.fullName}</td>
-                                            <td class="border text-start  text-[13px]  px-2 ">{data.email}</td>
-                                            <td class="border text-start  text-[13px]  px-2 ">{(data.createdDate)}</td>
-                                            <td class="border text-start  text-[13px]  px-2 ">{data.modifiedDate}</td>
-                                            <td class="border text-start  text-[13px]  px-2 ">{JSON.stringify(data.enabled)}</td>
-                                            <td class="border text-start  text-[13px]  px-2 ">{data.mobileNo}</td>
+                                        <tr className='text-center text-gray-500 border-b-[3px]'>
+                                            <td class=" py-3  px-2 ">{data.userId}</td>
+                                            <td class=" py-3  px-2 ">{data.fullName}</td>
+                                            <td class=" py-3  px-2 ">{data.email}</td>
+                                            <td class=" py-3  px-2 ">{(data.createdDate)}</td>
+                                            <td class=" py-3  px-2 ">{data.modifiedDate}</td>
+                                            <td class=" py-3  px-2 ">{JSON.stringify(data.enabled)}</td>
+                                            <td class=" py-3  px-2 ">{data.mobileNo}</td>
 
                                         </tr>
 
