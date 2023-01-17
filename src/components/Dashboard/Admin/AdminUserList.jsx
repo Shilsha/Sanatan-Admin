@@ -280,7 +280,7 @@ function AdminUserList() {
                         </div>
                         <div class="mt-4 md:mt-0 md:ml-6 text-center md:text-left">
                             <p class="font-bold text-red-800">Delete admin account</p>
-                            <p class="text-sm text-gray-700 mt-1">You will lose all of your data by deleting your account. This action cannot be undone.
+                            <p class="text-sm text-gray-700 mt-1">Are you sure to delete Admin account. This action cannot be undone.
                             </p>
                         </div>
                     </div>

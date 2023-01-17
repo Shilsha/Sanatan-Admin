@@ -55,6 +55,9 @@ function Dashboard() {
     const { loading, result, error } = useSelector((state) => state.thoughtOfDay)
     const panchangData = useSelector((state) => state.panchang)
     const [value, onChange] = useState(new Date());
+
+    const role=JSON.parse(sessionStorage.getItem('user'))
+    console.log(role.isSuperAdmin,'this is role')
     const requestOptions1 = {
         method: 'POST',
         headers: {
@@ -183,7 +186,12 @@ function Dashboard() {
                                         </p>
                                     </div>
                                 </div>
-                                <button class="bg-orange-500 rounded font-medium absolute bottom-2 right-2 py-1 hover:bg-orange-600 px-3 text-white " onClick={openEdiotor}>Edit</button>
+
+                                {role.isSuperAdmin?<>
+                                <button class="bg-orange-500 rounded font-medium absolute bottom-2 right-2 py-1
+                                 hover:bg-orange-600 px-3 text-white " onClick={openEdiotor}>Edit</button>
+                                </>:<></>}
+                                
 
                                 {/* <FaEdit className='absolute bottom-2 right-2  text-orange-500 cursor-pointer' onClick={openEdiotor} size={25} /> */}
 
@@ -212,13 +220,13 @@ function Dashboard() {
                         </div>
 
                         {/* ---------------------------------------------------------------- second row---------------------------------------------------------------------------*/}
-                        <div className='rounded-lg    shadow mt-4 relative z-10
+                        <div className='rounded-lg     mt-4
                           grid grid-cols-4 gap-4  
                          ' >
 
 
 
-                            <div className=' col-span  rounded-lg p-1 bg-gray-50  shadow  min-h-[300px] '>
+                            <div className=' col-span  rounded-lg p-1 bg-gray-50/20 blurr shadow  min-h-[300px] '>
                                 <h1 className='text-center text-lg  text-gray-500 font-medium  underline underline-offset-8'>Panchang Period</h1>
                                 {/* <hr className='mx-auto text-transparent
                                             w-[45%]
@@ -289,7 +297,7 @@ function Dashboard() {
                             </div>
 
 
-                            <div className='shadow col-span bg-gray-50  rounded-lg '>
+                            <div className='shadow col-span bg-gray-50/20 blurr rounded-lg '>
                                 {/* <h1 className='text-center text-red-800  font-bold'>Inausupicious Period</h1> */}
                                 <h1 className='text-center text-lg mt-2  text-gray-500 font-medium  underline underline-offset-8'>Inausupicious Period</h1>
                                {  panchangData.loading ?<>
@@ -335,9 +343,9 @@ function Dashboard() {
 
                             <div className=' col-span-2 rounded-lg   '>
 
-                                <div className="row grid grid-cols-3 gap-5 "  >
+                                <div className="row grid grid-cols-3 gap-5  "  >
 
-                                    <div className='rounded-lg bg-gray-50/20   shadow  px-2 h-[175px]  ' >
+                                    <div className='rounded-lg bg-gray-50/20 blurr  shadow  px-2 h-[175px]  ' >
                                         <div className='flex justify-between px-3 items-center my-3 '>
                                             <div className=' rounded-full p-2'>
 
@@ -359,7 +367,7 @@ function Dashboard() {
 
                                     </div>
 
-                                    <div className='  rounded-lg bg-gray-50/20   shadow  py-2 h-[175px] '>
+                                    <div className='  rounded-lg bg-gray-50/20 blurr   shadow  py-2 h-[175px] '>
                                         <div className='flex justify-between px-2 items-center my-3 '>
                                             <div className='  rounded-full p-2'>
                                                 <HiClipboardDocumentList className='cursor-pointer text-orange-500 ' size={50} />
@@ -374,7 +382,7 @@ function Dashboard() {
                                         </div>
 
                                     </div>
-                                    <div className=' rounded-lg bg-gray-50   shadow  py-2 h-[175px] '>
+                                    <div className=' rounded-lg bg-gray-50/20  blurr  shadow  py-2 h-[175px] '>
                                         <div className='flex justify-between px-2 items-center my-3 '>
                                             <div className='  rounded-full p-2'>
                                                 <GiArcheryTarget className='text-orange-500 ' size={50} />
@@ -394,7 +402,7 @@ function Dashboard() {
 
 
 
-                                    <div className=' rounded-lg bg-gray-50    shadow  py-2 h-[175px]'>
+                                    <div className=' rounded-lg bg-gray-50/20 blurr  shadow  py-2 h-[175px]'>
                                         <div className='flex justify-between px-2 items-center my-3 '>
                                             <div className=' rounded-full p-2'>
                                                 <BsFillQuestionSquareFill className='text-orange-500 '
@@ -409,7 +417,7 @@ function Dashboard() {
                                         </div>
 
                                     </div>
-                                    <div className='rounded-lg bg-gray-50    shadow  py-2 h-[175px]'>
+                                    <div className='rounded-lg bg-gray-50/20 blurr   shadow  py-2 h-[175px]'>
                                         <div className='flex justify-between px-2 items-center my-3 '>
                                             <div className='  rounded-full p-2'>
                                                 <RiShieldUserLine className='text-orange-500 ' size={50} />
@@ -427,7 +435,7 @@ function Dashboard() {
 
                                     </div>
 
-                                    <div className='rounded-lg bg-gray-50    shadow py-2 h-[175px]'>
+                                    <div className='rounded-lg bg-gray-50/20 blurr   shadow py-2 h-[175px]'>
                                         <div className='flex justify-between px-1 items-center my-3 '>
                                             <div className=' rounded-full p-2'>
                                                 <RiShieldUserLine className='text-orange-500 ' size={50} />
@@ -456,8 +464,8 @@ function Dashboard() {
 
 
                         </div>
-                        <div className='absolute bottom-0      '>
-                    <img src={DesignLogin} alt='empty' className='w-full'></img>
+                        <div className='absolute bottom-0  -z-10 right-0   '>
+                    <img src={DesignLogin} alt='empty' className='w-full '></img>
                 </div>
                     </div>
 

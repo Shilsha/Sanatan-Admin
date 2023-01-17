@@ -14,7 +14,7 @@ import Loader from '../../Loader/Loader'
 import { toast, ToastContainer } from 'react-toastify'
 import { getUser, deleteUser } from '../../../Redux/Fetures/Reducers/GetUserSlice'
 
-
+import DesignLogin from '../../../Assets/images/DesignLogin.png'
 
 const customStyles = {
     content: {
@@ -105,10 +105,10 @@ function User() {
     // ===================change user type====================
     const setUserType = (type) => {
         setTypes(type)
-        console.log(types,'22')
-        const data={
-            page:page,
-            type:type
+        console.log(types, '22')
+        const data = {
+            page: page,
+            type: type
         }
         dispatch(getUser(data))
         toast.success("User Type has changed")
@@ -158,14 +158,24 @@ function User() {
 
 
     // ---------------------------deleteSingleUser-----------------------
-    const handleDeleteSingleUser = (id) => {
+    const handleDeactivatedSingleUser = (id) => {
 
         dispatch(deleteUser((id)))
+        toast.success('User deactivated successfully ! ')
+
+
+    }
+    const handleActivatedSingleUser = (id) => {
+
+        dispatch(deleteUser((id)))
+        toast.success('User activated successfully !')
 
 
     }
 
-    console.log(types,'types')
+    
+
+    console.log(types, 'types')
 
     // --------------------next and prev button ---------------------------
     const next = () => {
@@ -187,7 +197,7 @@ function User() {
             page: page,
             type: types
         }
-      
+
         console.log(page, 'length')
         if (page > 0) {
             console.log('bada hia')
@@ -209,9 +219,9 @@ function User() {
             <div className='  w-[100%] h-[100vh] flex flex-col-2 gap-4  '>
                 <Sidebar />
 
-                <div className=' w-[93%]'>
+                <div className=' w-[93%] '>
                     <Navbar />
-                    <div className=' my-6 mx-auto '>
+                    <div className=' my-6 mx-auto  '>
 
                         <div className='flex justify-between items-center pb-4 pr-4'>
                             <div className='flex justify-between w-[40%]'>
@@ -223,7 +233,7 @@ function User() {
                                     </button>
                                 </div>
 
-                                <button type="button" class= "inline-flex items-center text-white bg-gradient-to-r from-orange-500  to-yellow-400 hover:bg-gradient-to-bl font-medium rounded-lg text-sm px-3 py-1 text-center mr-2 mb-2"> Filter   <BiFilter className='mx-1' size={30} /></button>
+                                <button type="button" class="inline-flex items-center text-white bg-gradient-to-r from-orange-500  to-yellow-400 hover:bg-gradient-to-bl font-medium rounded-lg text-sm px-3 py-1 text-center mr-2 mb-2"> Filter   <BiFilter className='mx-1' size={30} /></button>
                             </div>
                             <div>
                                 <select id="countries" className="bg-gray-50 border border-gray-400 text-gray-900 
@@ -239,6 +249,7 @@ function User() {
                             </div>
                         </div>
                         <div className="tableWrap pr-4">
+
                             <table class="shadow-lg tables  w-full rounded-xl ">
                                 <thead className=''>
                                     <tr className='  text-center '>
@@ -289,10 +300,19 @@ function User() {
 
                                                                     </td>
                                                                     <td class=" px-4 flex justify-evenly items-center pt-3" >
-                                                                        <button class="bg-red-500 hover:bg-red-700
-                                                                        py-1.5  text-white font-bold  text-xs px-3   rounded-full" onClick={() => handleDeleteSingleUser(data.userId)}>
-                                                                            Delete
+
+                                                                        {data?.enabled?<>
+                                                                            <button class="bg-red-500 hover:bg-red-700
+                                                                        py-1.5  text-white font-bold  text-xs px-3   rounded-full" onClick={() => handleDeactivatedSingleUser(data.userId)}>
+                                                                            Deactivate
                                                                         </button>
+                                                                        </>:<>
+                                                                        <button class="bg-red-500 hover:bg-red-700
+                                                                        py-1.5  text-white font-bold  text-xs px-3   rounded-full" onClick={() => handleActivatedSingleUser(data.userId)}>
+                                                                            Activate
+                                                                        </button>
+                                                                        </>}
+                                                                      
                                                                     </td>
 
 
@@ -313,81 +333,13 @@ function User() {
                             </table>
 
 
-                            <Modal
-                                isOpen={modalIsOpen}
-                                onAfterOpen={afterOpenModal}
-                                onRequestClose={closeModal}
-                                style={customStyles}
-                                contentLabel="Example Modal"
-                                className=""
-
-                            >
-
-                                <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 " onSubmit={UpdateHandelSubmit} >
-                                    <AiOutlineClose onClick={closeModal} className="relative top-0 left-[100%] cursor-pointer" size={25} />
-                                    <h1 className='text-center font-sans  mb-4 text-4xl font-bold text-red-800'>Update Data </h1>
-
-                                    <div class="mb-4">
-                                        <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
-                                            Name
-                                        </label>
-                                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Name" required value={updateForm.name} name='name' onChange={handleOnChange} />
-                                    </div>
-
-                                    <div class="mb-4">
-                                        <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
-                                            Email
-                                        </label>
-                                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Email" required value={updateForm.email} name='email' onChange={handleOnChange} />
-                                    </div>
-
-                                    <div class="mb-4">
-                                        <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
-                                            Mobile Number
-                                        </label>
-                                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="number" placeholder="Mobile No" required value={updateForm.mobileNo} name='mobileNo' onChange={handleOnChange} />
-                                    </div>
-
-                                    {/* <div className='flex justify-between items-center'>
-                                        <div class="mb-4">
-                                            <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
-                                                Create Date
-                                            </label>
-                                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Modify Date" />
-                                        </div>
-                                        <div class="mb-4">
-                                            <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
-                                                Modify Date
-                                            </label>
-                                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Modify Date" />
-                                        </div>
-
-                                    </div> */}
-
-                                    {/* <div class="mb-4">
-                                        <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
-                                            Status
-                                        </label>
-                                        <div class="flex items-center">
-                                            <input checked id="checked-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-
-                                        </div>
-                                    </div> */}
-                                    <div class="flex items-center justify-center">
-                                        <button class="bg-red-800 hover:bg-red-700 text-white font-bold  px-5 py-2 rounded focus:outline-none focus:shadow-outline" type="submit">
-                                            Save
-                                        </button>
-
-                                    </div>
-                                </form>
 
 
-                            </Modal>
-
+                          
                         </div>
                         {/* -----------------------------------------------pagination--------------------------------------------------------- */}
 
-                        <nav aria-label="Page navigation example " className='text-center     '>
+                        <nav aria-label="Page navigation example  " className='text-center relative z-10    '>
                             <ul class="inline-flex justify-center items-center ">
                                 <li>
                                     <button class={`px-3 inline-flex justify-center  items-center cursor-pointer py-2 ml-0 leading-tight text-white font-bold bg-red-800 disabled:opacity-50  rounded-lg mx-4 hover:bg-red-700  dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white`} disabled={buttonPre} onClick={prev} >
@@ -404,12 +356,86 @@ function User() {
                             </ul>
                         </nav>
 
-
+                        {/* <div className='absolute bottom-0      '>
+                                <img src={DesignLogin} alt='empty' className='w-full'></img>
+                            </div> */}
 
                     </div>
                 </div>
 
             </div>
+
+
+            <Modal
+                isOpen={modalIsOpen}
+                onAfterOpen={afterOpenModal}
+                onRequestClose={closeModal}
+                style={customStyles}
+                contentLabel="Example Modal"
+                className=""
+
+            >
+
+                <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 " onSubmit={UpdateHandelSubmit} >
+                    <AiOutlineClose onClick={closeModal} className="relative top-0 left-[100%] cursor-pointer" size={25} />
+                    <h1 className='text-center font-sans  mb-4 text-4xl font-bold text-red-800'>Update Data </h1>
+
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+                            Name
+                        </label>
+                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Name" required value={updateForm.name} name='name' onChange={handleOnChange} />
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+                            Email
+                        </label>
+                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Email" required value={updateForm.email} name='email' onChange={handleOnChange} />
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+                            Mobile Number
+                        </label>
+                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="number" placeholder="Mobile No" required value={updateForm.mobileNo} name='mobileNo' onChange={handleOnChange} />
+                    </div>
+
+                    {/* <div className='flex justify-between items-center'>
+                                        <div class="mb-4">
+                                            <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+                                                Create Date
+                                            </label>
+                                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Modify Date" />
+                                        </div>
+                                        <div class="mb-4">
+                                            <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+                                                Modify Date
+                                            </label>
+                                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Modify Date" />
+                                        </div>
+
+                                    </div> */}
+
+                    {/* <div class="mb-4">
+                                        <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+                                            Status
+                                        </label>
+                                        <div class="flex items-center">
+                                            <input checked id="checked-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+
+                                        </div>
+                                    </div> */}
+                    <div class="flex items-center justify-center">
+                        <button class="bg-red-800 hover:bg-red-700 text-white font-bold  px-5 py-2 rounded focus:outline-none focus:shadow-outline" type="submit">
+                            Save
+                        </button>
+
+                    </div>
+                </form>
+
+
+            </Modal>
 
 
         </>

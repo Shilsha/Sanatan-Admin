@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
 
 const baseUrl = `http://sanatanjyoti-env.eba-ab3znppq.ap-south-1.elasticbeanstalk.com`
+// const baseUrl = 'https://6899-2405-201-4041-c01c-8130-8e08-5ead-88a1.in.ngrok.io'
 
 export const getAllArticleAction = createAsyncThunk('ARTICELS/GET_ALL_ARTICLES',
     async (data) => {

@@ -19,20 +19,13 @@ function GetArticelLike({ ParentFunc, id, ParentFunc2, likes ,comments}) {
         dispatch(getArticleLike(id))
         setBox1(!box1)
         setShow(!show)
-
-       
-     
-
-
     }
 
     ParentFunc2 = () => {
         console.log('commets')
         dispatch(getArticleComment(id))
         setBox2(!box2)
-        setShow1(!show1)
-      
-     
+        setShow1(!show1)  
     }
     const getAllLike = useSelector((state) => state.articlesLike)
     const getAllComment = useSelector((state) => state.articlesComment)
@@ -58,7 +51,7 @@ function GetArticelLike({ ParentFunc, id, ParentFunc2, likes ,comments}) {
 
                 </div>
                 <div className='flex items-center mx-8' >
-                    <button type="button" class="  border text-black hover:bg-orange-600 font-medium rounded-lg text-sm px-2 py-2 text-center inline-flex items-center mr-2 "
+                    <button type="button" class="  border text-black hover:bg-orange-600 hover:text-white font-medium rounded-lg text-sm px-2 py-2 text-center inline-flex items-center mr-2 "
                         onClick={ParentFunc2}>
 
                         Show Comments
@@ -69,7 +62,7 @@ function GetArticelLike({ ParentFunc, id, ParentFunc2, likes ,comments}) {
                 </div>
             </div>
             {/* =====================================this is like ================================= */}
-            <div className='  mt-4 mx-auto ' style={show?{display:'none'}:{display:'block'}} >
+            <div className='  mt-4 mx-auto mr-4 shadow ' style={show?{display:'none'}:{display:'block'}} >
 
                 <table class=" tables  w-full rounded-xl  ">
                     <thead className=' '>
@@ -115,7 +108,7 @@ function GetArticelLike({ ParentFunc, id, ParentFunc2, likes ,comments}) {
 
             {/* ======================================this is comment==================================== */}
 
-            <div className='  mt-4 mx-auto '  style={show1?{display:'none'}:{display:'block'}} >
+            <div className='  mt-4 mx-auto mr-4  '  style={show1?{display:'none'}:{display:'block'}} >
 
                 <table class="shadow-lg tables  w-full rounded-xl  ">
                     <thead className=''>

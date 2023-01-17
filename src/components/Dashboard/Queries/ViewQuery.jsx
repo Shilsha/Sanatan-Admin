@@ -9,6 +9,10 @@ import {AiOutlineClose} from 'react-icons/ai'
 import {getSingleQuery} from '../../../Redux/Fetures/Reducers/GetSingleQuerySlice'
 import {updateQueriesAction} from '../../../Redux/Fetures/Reducers/GetSingleQuerySlice'
 
+
+
+import DesignLogin from '../../../Assets/images/DesignLogin.png'
+
 const customStyles = {
     content: {
         top: '50%',
@@ -92,7 +96,7 @@ function ViewQuery() {
 
     return <>
 
-        <div className='container   w-[100%] h-[100vh] flex flex-col-12 gap-4  '>
+        <div className='   w-[100%] h-[100vh] flex flex-col-12 gap-4  '>
             <Sidebar />
             <div className=' font-serif w-full ' >
                 <Navbar />
@@ -102,7 +106,7 @@ function ViewQuery() {
                     
                 {singleQuery?.loading ? <><Loader /></> : <>
 
-                    <div className='flex items-center  px-4  my-4'>
+                    <div className='flex items-center  px-4  my-4 '>
                         <div className='  w-full shadow-xl rounded-xl px-4 mx-auto   bg-slate-300/20'>
                             <div className='my-5'>
                                 {/* <h1 className='font-bold text-xl   text-red-800'>Query Details :</h1> */}
@@ -230,6 +234,11 @@ function ViewQuery() {
 
                     </div>
                 </>}
+
+
+                {/* <div className='absolute bottom-0      '>
+                    <img src={DesignLogin} alt='empty' className='w-[95%]'></img>
+                </div> */}
 
 
             </div>

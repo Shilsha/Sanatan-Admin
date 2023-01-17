@@ -46,16 +46,17 @@ function Hits() {
     
 
     useEffect(() => {
-        dispatch(getHitsPanchang())
+        const data = moment(date).format('YYYY-MM-DD')
+        dispatch(getHitsPanchang(data))
         // dispatch(getHitsFestival())
-        dispatch(getHitsKundali())
-        dispatch(getHitsArticle())
-        dispatch(getHitsContact())
-        dispatch(getHitsHoroscope())
-        dispatch(getHitsMatchMaking())
-        dispatch(getHitsLogin())
-        dispatch(getHitsPanchang())
-        dispatch(getHitsFestival())
+        dispatch(getHitsKundali(data))
+        dispatch(getHitsArticle(data))
+        dispatch(getHitsContact(data))
+        dispatch(getHitsHoroscope(data))
+        dispatch(getHitsMatchMaking(data))
+        dispatch(getHitsLogin(data))
+        dispatch(getHitsPanchang(data))
+        dispatch(getHitsFestival(data))
 
     }, [])
 
@@ -79,19 +80,19 @@ function Hits() {
         dispatch(getHitsContact(data))
     }, [dateCont])
     useEffect(() => {
-        const data = moment(dateCont).format('YYYY-MM-DD')
+        const data = moment(dateHoro).format('YYYY-MM-DD')
         dispatch(getHitsHoroscope(data))
     }, [dateHoro])
     useEffect(() => {
-        const data = moment(dateCont).format('YYYY-MM-DD')
+        const data = moment(dateMatch).format('YYYY-MM-DD')
         dispatch(getHitsMatchMaking(data))
     }, [dateMatch])
     useEffect(() => {
-        const data = moment(dateCont).format('YYYY-MM-DD')
+        const data = moment(dateArt).format('YYYY-MM-DD')
         dispatch(getHitsArticle(data))
     }, [dateArt])
     useEffect(() => {
-        const data = moment(dateCont).format('YYYY-MM-DD')
+        const data = moment(dateLogin).format('YYYY-MM-DD')
         dispatch(getHitsLogin(data))
     }, [dateLogin])
    
@@ -162,7 +163,7 @@ function Hits() {
                                                         </div>
                                                         <div className=''>
                                                             <p className='font-bold underline text-gray-500 underline-offset-8 py-1 text-xl'>Total hits: </p>
-                                                            {hitPan?.loading ? <LoaderN /> : <p className='font-extrabold text-white text-2xl tootlabg rounded-full mt-2 text-center' >{hitPan?.result}</p >}
+                                                            {hitPan?.loading ? <LoaderN /> : <p className='font-extrabold  text-2xl  rounded-full mt-2 text-center' >{hitPan?.result}</p >}
 
                                                         </div>
                                                     </div>
@@ -187,13 +188,13 @@ function Hits() {
                                                             <label class="block text-gray-700 text-sm font-bold mb-1" for="username">
                                                                 Select Date
                                                             </label>
-                                                            <DatePicker className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" selected={dateFes} onChange={(date) => setDateFes(date)} />
+                                                            <DatePicker className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" selected={dateFes} dateFormat="dd/MM/yyyy" onChange={(date) => setDateFes(date)} />
 
 
                                                         </div>
                                                         <div className=''>
                                                             <p className='font-bold underline text-gray-500 underline-offset-8 py-1 text-xl'>Total hits: </p>
-                                                            {hitFes.loading ? <LoaderN /> : <p className='font-extrabold text-2xl text-center tootlabg rounded-full mt-2 text-white' >{hitFes?.result}</p >}
+                                                            {hitFes.loading ? <LoaderN /> : <p className='font-extrabold text-2xl text-center  rounded-full mt-2 ' >{hitFes?.result}</p >}
 
                                                         </div>
                                                     </div>
@@ -219,13 +220,13 @@ function Hits() {
                                                             <label class="block text-gray-700 text-sm font-bold mb-1" for="username">
                                                                 Select Date
                                                             </label>
-                                                            <DatePicker className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" selected={dateKundli} onChange={(date) => setDateKundli(date)} />
+                                                            <DatePicker className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" selected={dateKundli} dateFormat="dd/MM/yyyy" onChange={(date) => setDateKundli(date)} />
 
 
                                                         </div>
                                                         <div className=''>
                                                             <p className='font-bold underline text-gray-500 underline-offset-8 py-1 text-xl'>Total hits: </p>
-                                                            {hitKundli.loading?<LoaderN/>: <p className='font-extrabold text-2xl text-center tootlabg rounded-full mt-2 text-white' >{hitKundli?.result?.data}</p >}
+                                                            {hitKundli.loading?<LoaderN/>: <p className='font-extrabold text-2xl text-center  rounded-full mt-2 ' >{hitKundli?.result?.data}</p >}
                                                            
                                                         </div>
                                                     </div>
@@ -251,13 +252,13 @@ function Hits() {
                                                             <label class="block text-gray-700 text-sm font-bold mb-1" for="username">
                                                                 Select Date
                                                             </label>
-                                                            <DatePicker className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" selected={dateCont} onChange={(date) => setDateCont(date)} />
+                                                            <DatePicker className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" selected={dateCont} dateFormat="dd/MM/yyyy" onChange={(date) => setDateCont(date)} />
 
 
                                                         </div>
                                                         <div className=''>
                                                             <p className='font-bold underline text-gray-500 underline-offset-8 py-1 text-xl'>Total hits: </p>
-                                                            {hitCon.loading?<LoaderN/>:<p className='font-extrabold text-2xl text-center tootlabg rounded-full mt-2 text-white' >{hitCon?.result}</p >}
+                                                            {hitCon.loading?<LoaderN/>:<p className='font-extrabold text-2xl text-center  rounded-full mt-2 ' >{hitCon?.result}</p >}
                                                       
                                                         </div>
                                                     </div>
@@ -284,13 +285,13 @@ function Hits() {
                                                             <label class="block text-gray-700 text-sm font-bold mb-1" for="username">
                                                                 Select Date
                                                             </label>
-                                                            <DatePicker className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" selected={dateHoro} onChange={(date) => setDateHoro(date)} />
+                                                            <DatePicker className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" selected={dateHoro} dateFormat="dd/MM/yyyy" onChange={(date) => setDateHoro(date)} />
 
 
                                                         </div>
                                                         <div className=''>
                                                             <p className='font-bold underline text-gray-500 underline-offset-8 py-1 text-xl'>Total hits: </p>
-                                                            <p className='font-extrabold text-2xl text-center tootlabg rounded-full mt-2 text-white' >{hitHoro.loading?<LoaderN/>:hitHoro.result}</p >
+                                                            <p className='font-extrabold text-2xl text-center  rounded-full mt-2 ' >{hitHoro.loading?<LoaderN/>:hitHoro.result}</p >
                                                         </div>
                                                     </div>
                                                 </div>
@@ -315,13 +316,13 @@ function Hits() {
                                                             <label class="block text-gray-700 text-sm font-bold mb-1" for="username">
                                                                 Select Date
                                                             </label>
-                                                            <DatePicker className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" selected={dateMatch} onChange={(date) => setDateMatch(date)} />
+                                                            <DatePicker className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" selected={dateMatch} dateFormat="dd/MM/yyyy" onChange={(date) => setDateMatch(date)} />
 
 
                                                         </div>
                                                         <div className=''>
                                                             <p className='font-bold underline text-gray-500 underline-offset-8 py-1 text-xl'>Total hits: </p>
-                                                            <p className='font-extrabold text-2xl text-center tootlabg rounded-full mt-2 text-white' >{hitMatch.loading?<LoaderN/>:hitMatch.result}</p >
+                                                            <p className='font-extrabold text-2xl text-center  rounded-full mt-2' >{hitMatch.loading?<LoaderN/>:hitMatch.result}</p >
                                                         </div>
                                                     </div>
                                                 </div>
@@ -346,13 +347,13 @@ function Hits() {
                                                             <label class="block text-gray-700 text-sm font-bold mb-1" for="username">
                                                                 Select Date
                                                             </label>
-                                                            <DatePicker className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" selected={dateArt} onChange={(date) => setDateArt(date)} />
+                                                            <DatePicker className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" selected={dateArt} dateFormat="dd/MM/yyyy" onChange={(date) => setDateArt(date)} />
 
 
                                                         </div>
                                                         <div className=''>
                                                             <p className='font-bold underline text-gray-500 underline-offset-8 py-1 text-xl'>Total hits: </p>
-                                                            <p className='font-extrabold text-2xl text-center tootlabg rounded-full mt-2 text-white' >{hitArt?.loading?<LoaderN/>:hitArt?.result}</p >
+                                                            <p className='font-extrabold text-2xl text-center  rounded-full mt-2 ' >{hitArt?.loading?<LoaderN/>:hitArt?.result}</p >
                                                         </div>
                                                     </div>
                                                 </div>
@@ -377,13 +378,13 @@ function Hits() {
                                                             <label class="block text-gray-700 text-sm font-bold mb-1" for="username">
                                                                 Select Date
                                                             </label>
-                                                            <DatePicker className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" selected={dateLogin} onChange={(date) => setDateLogin(date)} />
+                                                            <DatePicker className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" selected={dateLogin} dateFormat="dd/MM/yyyy" onChange={(date) => setDateLogin(date)} />
 
 
                                                         </div>
                                                         <div className=''>
                                                             <p className='font-bold underline text-gray-500 underline-offset-8 py-1 text-xl'>Total hits: </p>
-                                                            <p className='font-extrabold text-2xl text-center tootlabg rounded-full mt-2 text-white' >{hitLogin?.loading?<LoaderN/>:hitLogin.result}</p >
+                                                            <p className='font-extrabold text-2xl text-center  rounded-full mt-2 ' >{hitLogin?.loading?<LoaderN/>:hitLogin.result}</p >
                                                         </div>
                                                     </div>
                                                 </div>
@@ -398,8 +399,8 @@ function Hits() {
 
                         </div>
 
-                          <div className='absolute bottom-0      '>
-                    <img src={DesignLogin} alt='empty' className='w-[95%]'></img>
+                          <div className='absolute bottom-0   right-0   '>
+                    <img src={DesignLogin} alt='empty' className='w-full'></img>
                 </div>
 
                     </div>

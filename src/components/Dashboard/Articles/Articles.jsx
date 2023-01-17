@@ -105,8 +105,9 @@ function Articles() {
     const [modalIsOpen, setIsOpen] = React.useState(false);
     const [publishText, setPublishText] = useState('')
     const [publishArticleId, setPublishArticleId] = useState('')
-
-
+    const [userId, setUserId] = useState('')
+    
+    
     function closeModal() {
         setIsOpen(false);
     }
@@ -119,8 +120,10 @@ function Articles() {
 
     }
 
-    const HanldeReject = (id, modelName) => {
+    const HanldeReject = (id,userId, modelName) => {
+        console.log(id,userId,modelName,'hmmm')
         setPublishArticleId(id)
+        setUserId(userId)
         setModelStatus(modelName)
         setIsOpen(true);
     }
@@ -148,8 +151,10 @@ function Articles() {
             const data = {
                 articleId: publishArticleId,
                 reason: publishText,
-                "page": 0,
-                "size": 10
+                userId:userId,
+                articleType: "REJECTED",
+                page: 0,
+                size: 10,
             }
             dispatch(RejectArticleMessage(data))
             setIsOpen(false);
@@ -172,12 +177,10 @@ function Articles() {
 
     useEffect(() => {
 
-
         const data = {
             page: page,
             type: types,
         }
-
 
         console.log(page, 'length')
         if (page > 0) {
@@ -310,7 +313,7 @@ function Articles() {
 
                                                                     {data.articleType == 'PUBLISH' ? <>
 
-                                                                        <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 text-xs px-3 mt-2   rounded-full" onClick={() => HanldeReject(data.articleId, 'Reject')}>
+                                                                        <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 text-xs px-3 mt-2   rounded-full" onClick={() => HanldeReject(data.articleId,data.userId, 'Reject')}>
                                                                             Reject
                                                                         </button>
 
@@ -321,12 +324,12 @@ function Articles() {
 
                                                                           <div className='mx-auto flex gap-2'>
                                                                           <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold 
-                                                                            py-1.5 text-xs px-3 mt-2 rounded-full" onClick={() => HandlePublish(data.articleId, 'Publish')}>
+                                                                            py-1.5 text-xs px-3 mt-1 rounded-full" onClick={() => HandlePublish(data.articleId, 'Publish')}>
                                                                                 Pubish
                                                                             </button>
                                                                           
                                                                             <button class="bg-red-500 hover:bg-red-700 text-white font-bold
-                                                                             py-1.5 text-xs px-3 mt-2   rounded-full" onClick={() => HanldeReject(data.articleId, 'Reject')}>
+                                                                             py-1.5 text-xs px-3 mt-1   rounded-full" onClick={() => HanldeReject(data.articleId, 'Reject')}>
                                                                                 Reject
                                                                             </button>
                                                                           </div>
