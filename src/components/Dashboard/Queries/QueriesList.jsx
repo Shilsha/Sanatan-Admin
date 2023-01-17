@@ -217,16 +217,16 @@ function QueriesList() {
                         <div className='tableWrap pr-4'>
                             <table class="shadow-lg tables  w-full rounded-xl  ">
                                 <thead className=''>
-                                    <tr className=' table_head  '>
-                                        <td class="bg-blue-100   px-2 text-start">ID</td>
-                                        <td class="bg-blue-100 px-2 text-start py-3">Name</td>
-                                        <td class="bg-blue-100 px-2 text-start py-3">Email</td>
-                                        <td class="bg-blue-100 px-2 text-start py-2">Message</td>
-                                        <td class="bg-blue-100 px-2 text-start py-2">Comment</td>
-                                        <td class="bg-blue-100 px-2 text-start py-2">Phone No</td>
-                                        <td class="bg-blue-100 px-2 text-start py-2"> Create Date</td>
-                                        <td class="bg-blue-100 px-2 text-start py-2">Status</td>
-                                        <td class="bg-blue-100 px-2 text-start py-2">View</td>
+                                    <tr className=' table_head bg-blue-100  text-center '>
+                                        <td class="   px-2  ">ID</td>
+                                        <td class=" px-2 py-3">Name</td>
+                                        <td class=" px-2 py-3">Email</td>
+                                        <td class=" px-2 py-2">Message</td>
+                                        <td class=" px-2 py-2">Comment</td>
+                                        <td class=" px-2 py-2">Phone No</td>
+                                        <td class=" px-2 py-2"> Create Date</td>
+                                        <td class=" px-2 py-2">Status</td>
+                                        <td class=" px-2 py-2">View</td>
                                     </tr>
                                 </thead>
 
@@ -244,20 +244,20 @@ function QueriesList() {
                                                         return (
                                                             <>
 
-                                                                <tr key={data.id} className="text-center ">
+                                                                <tr key={data.id} className="text-center text-gray-500 border-b-[3px]  ">
                                                                     <td class="  text-center">{data.contactId}</td>
-                                                                    <td class="  text-start px-2 py-3 ">{data.name}</td>
-                                                                    <td class="  text-start px-2 py-3 ">{data.email}</td>
-                                                                    <td class="  text-start px-2 py-3 ">{data.msg}</td>
-                                                                    <td class="  text-start px-2 py-3 ">{data.comment}</td>
-                                                                    <td class="  text-start px-2 py-3 ">{data.phoneNo}</td>
-                                                                    <td class="  text-start px-2 py-3 ">{data.createdDate}</td>
-                                                                    <td class="  text-start px-2 py-3 ">{data.status}</td>
+                                                                    <td class="   px-2 py-3 ">{data.name}</td>
+                                                                    <td class="   px-2 py-3 ">{data.email}</td>
+                                                                    <td class="   px-2 py-3 ">{data.msg}</td>
+                                                                    <td class="   px-2 py-3 ">{data.comment}</td>
+                                                                    <td class="   px-2 py-3 ">{data.phoneNo}</td>
+                                                                    <td class="   px-2 py-3 ">{data.createdDate}</td>
+                                                                    <td class="   px-2 py-3 ">{data.status}</td>
 
                                                                     <td class=" px-4 flex  justify-evenly items-center pt-2" >
 
                                                                         <Link to={`${data.contactId}`}>
-                                                                            <AiFillEye size={25} className='text-blue-200 hover:text-blue-600' />
+                                                                            <AiFillEye size={25} className='text-orange-200 hover:text-orange-600' />
                                                                         </Link>
 
 

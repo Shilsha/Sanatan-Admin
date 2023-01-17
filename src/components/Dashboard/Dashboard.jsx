@@ -24,6 +24,7 @@ import { getAllArticleAction } from '../../Redux/Fetures/Reducers/ArticleSlice'
 import { getAllQueriesAction } from '../../Redux/Fetures/Reducers/QueriesSlice'
 import DesignLogin from '../../Assets/images/DesignLogin.png'
 import Button from '../Screen/Button/Button';
+import LoaderN from '../Loader/LoaderN';
 const customStyles = {
     content: {
         top: '50%',
@@ -147,13 +148,13 @@ function Dashboard() {
                     <div className=" ScrollStyle  pr-4 ">
                         <div className=' rounded-lg mt-4  grid grid-cols-12 gap-4  '>
 
-                            <div className=' text-[13px] col-span-3 rounded-lg bg-slate-300/20   p-2 flex justify-center shadow '>
+                            <div className=' text-[13px] col-span-3 rounded-lg bg-gray-50/20   p-2 flex justify-center shadow '>
 
 
                                 <Calendar onChange={onChange} value={value} />
 
                             </div>
-                            <div className=' col-span-4 bg-slate-300/20   rounded-lg shadow  relative '>
+                            <div className=' col-span-4 bg-gray-50/20   rounded-lg shadow  relative '>
 
                                 <div>
                                     <div className='flex justify-center items-center'>
@@ -190,13 +191,13 @@ function Dashboard() {
                             <div className=' col-span-5   rounded-lg    '>
 
                                 <div className='grid grid-cols-2 gap-4 h-full '>
-                                    <div className='shadow bg-slate-300/20 rounded-xl flex justify-center items-center'>
+                                    <div className='shadow bg-gray-50/20 rounded-xl flex justify-center items-center'>
                                         <h1 className='text-4xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-br
                                          from-orange-400 to-red-600 '><DigitalTime /></h1>
                                     </div>
-                                    <div className='shadow text-center justify-center  bg-slate-300/20 rounded-xl '>
+                                    <div className='shadow grid place-content-center text-center  bg-gray-50/20 rounded-xl '>
 
-                                        <div className='py-8'>
+                                        <div className=''>
                                             <h1 className='text-2xl font-bold  text-transparent bg-clip-text bg-gradient-to-br from-orange-400 to-red-600 '> {moment(value).format('dddd')}</h1>
                                             <h2 className='text-xl font-bold  text-gray-500 my-2'>{moment(value).format('DD')}</h2>
                                             <h1 className='text-2xl font-bold  text-transparent bg-clip-text bg-gradient-to-br from-orange-400 to-red-600'>September</h1>
@@ -211,13 +212,13 @@ function Dashboard() {
                         </div>
 
                         {/* ---------------------------------------------------------------- second row---------------------------------------------------------------------------*/}
-                        <div className='rounded-lg    shadow mt-4 
+                        <div className='rounded-lg    shadow mt-4 relative z-10
                           grid grid-cols-4 gap-4  
                          ' >
 
 
 
-                            <div className=' col-span  rounded-lg p-1 bg-slate-300/20  shadow  min-h-[300px] '>
+                            <div className=' col-span  rounded-lg p-1 bg-gray-50  shadow  min-h-[300px] '>
                                 <h1 className='text-center text-lg  text-gray-500 font-medium  underline underline-offset-8'>Panchang Period</h1>
                                 {/* <hr className='mx-auto text-transparent
                                             w-[45%]
@@ -226,7 +227,14 @@ function Dashboard() {
                                           h-[2px]' /> */}
 
                                 {
-                                    panchangData.loading ? <Loader /> : <>
+                                    panchangData.loading ? <>
+                                    <div className='grid justify-center h-full place-content-center '>
+                                    <LoaderN />
+                                    </div>
+                                    </>
+                                    
+                                    
+                                    : <>
                                         <div className=' '>
 
 
@@ -281,14 +289,15 @@ function Dashboard() {
                             </div>
 
 
-                            <div className='shadow col-span bg-slate-300/20  rounded-lg '>
+                            <div className='shadow col-span bg-gray-50  rounded-lg '>
                                 {/* <h1 className='text-center text-red-800  font-bold'>Inausupicious Period</h1> */}
                                 <h1 className='text-center text-lg mt-2  text-gray-500 font-medium  underline underline-offset-8'>Inausupicious Period</h1>
-                                {/* <hr className='mx-auto text-transparent
-                                            w-[55%]
-                                          
-                                        text-gray-400
-                                          h-[2px]' /> */}
+                               {  panchangData.loading ?<>
+                               
+                                <div className='grid justify-center h-full place-content-center '>
+                                    <LoaderN />
+                                    </div>
+                               </>:<>
                                 <div className='flex justify-between items-center px-3 pt-2 '>
                                     <div className=' text-sm font-medium'>
                                         <h3>Rahu kaal</h3>
@@ -301,13 +310,12 @@ function Dashboard() {
                                         <p>{panchangData?.result?.guliKaal?.start}| {panchangData?.result?.guliKaal?.end}</p>
                                     </div>
                                 </div>
-                                {/* <div className='w-[95%] mt-20 border-b-2 border-red-800 mx-auto'></div> */}
+                               
+                               </>}
+
+                               
                                 <h1 className='text-center text-lg mt-20 text-gray-500 font-medium  underline underline-offset-8'>Lunar Month</h1>
-                                {/* <hr className='mx-auto text-transparent
-                                            w-[35%]
-                                          
-                                        text-gray-400
-                                          h-[2px]' /> */}
+                              
                                 <div className='flex justify-between items-center px-3 my-2  '>
                                     <div className=' text-sm font-medium'>
                                         <h3>Amanta</h3>
@@ -327,9 +335,9 @@ function Dashboard() {
 
                             <div className=' col-span-2 rounded-lg   '>
 
-                                <div className="row grid grid-cols-3 gap-4 "  >
+                                <div className="row grid grid-cols-3 gap-5 "  >
 
-                                    <div className='rounded-lg bg-slate-300/20   shadow  px-2 h-[160px]  ' >
+                                    <div className='rounded-lg bg-gray-50/20   shadow  px-2 h-[175px]  ' >
                                         <div className='flex justify-between px-3 items-center my-3 '>
                                             <div className=' rounded-full p-2'>
 
@@ -351,7 +359,7 @@ function Dashboard() {
 
                                     </div>
 
-                                    <div className='  rounded-lg bg-slate-300/20   shadow  py-2 h-[160px]'>
+                                    <div className='  rounded-lg bg-gray-50/20   shadow  py-2 h-[175px] '>
                                         <div className='flex justify-between px-2 items-center my-3 '>
                                             <div className='  rounded-full p-2'>
                                                 <HiClipboardDocumentList className='cursor-pointer text-orange-500 ' size={50} />
@@ -366,7 +374,7 @@ function Dashboard() {
                                         </div>
 
                                     </div>
-                                    <div className=' rounded-lg bg-slate-300/20   shadow  py-2 h-[160px] '>
+                                    <div className=' rounded-lg bg-gray-50   shadow  py-2 h-[175px] '>
                                         <div className='flex justify-between px-2 items-center my-3 '>
                                             <div className='  rounded-full p-2'>
                                                 <GiArcheryTarget className='text-orange-500 ' size={50} />
@@ -386,7 +394,7 @@ function Dashboard() {
 
 
 
-                                    <div className=' rounded-lg bg-slate-300/20   shadow  py-2 h-[160px]'>
+                                    <div className=' rounded-lg bg-gray-50    shadow  py-2 h-[175px]'>
                                         <div className='flex justify-between px-2 items-center my-3 '>
                                             <div className=' rounded-full p-2'>
                                                 <BsFillQuestionSquareFill className='text-orange-500 '
@@ -401,7 +409,7 @@ function Dashboard() {
                                         </div>
 
                                     </div>
-                                    <div className='rounded-lg bg-slate-300/20   shadow  py-2 h-[160px]'>
+                                    <div className='rounded-lg bg-gray-50    shadow  py-2 h-[175px]'>
                                         <div className='flex justify-between px-2 items-center my-3 '>
                                             <div className='  rounded-full p-2'>
                                                 <RiShieldUserLine className='text-orange-500 ' size={50} />
@@ -419,7 +427,7 @@ function Dashboard() {
 
                                     </div>
 
-                                    <div className='rounded-lg bg-slate-300/20  shadow py-2 h-[160px]'>
+                                    <div className='rounded-lg bg-gray-50    shadow py-2 h-[175px]'>
                                         <div className='flex justify-between px-1 items-center my-3 '>
                                             <div className=' rounded-full p-2'>
                                                 <RiShieldUserLine className='text-orange-500 ' size={50} />
@@ -448,9 +456,9 @@ function Dashboard() {
 
 
                         </div>
-                        {/* <div className='absolute bottom-0      '>
-                    <img src={DesignLogin} alt='empty' className='w-[50%]'></img>
-                </div> */}
+                        <div className='absolute bottom-0      '>
+                    <img src={DesignLogin} alt='empty' className='w-full'></img>
+                </div>
                     </div>
 
                 </div>

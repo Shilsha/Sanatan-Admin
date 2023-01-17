@@ -3,7 +3,7 @@ import { useState } from 'react'
 import Navbar from '../../Navbar/Navbar'
 import Sidebar from '../../Sidebar/Sidebar'
 import { BsSearch, BsThreeDots } from 'react-icons/bs'
-import { BiFilter ,BiSkipNext,BiSkipPrevious} from 'react-icons/bi'
+import { BiFilter, BiSkipNext, BiSkipPrevious } from 'react-icons/bi'
 import { AiOutlinePlus, AiFillDelete, AiTwotoneEdit, AiOutlineClose } from 'react-icons/ai'
 // import {PublishArticleMessage} from '../../../Redux/Action/GetArticlesAction'
 import { useEffect } from 'react'
@@ -15,8 +15,8 @@ import { toast, ToastContainer } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
 import { Link } from 'react-router-dom'
-import {getAllArticleAction} from '../../../Redux/Fetures/Reducers/ArticleSlice'
-import {PublishArticleMessage,RejectArticleMessage} from '../../../Redux/Fetures/Reducers/ArticleSlice'
+import { getAllArticleAction } from '../../../Redux/Fetures/Reducers/ArticleSlice'
+import { PublishArticleMessage, RejectArticleMessage } from '../../../Redux/Fetures/Reducers/ArticleSlice'
 const customStyles = {
     content: {
         top: '50%',
@@ -41,30 +41,30 @@ function Articles() {
     const [page, setPage] = useState(0)
     const [buttonPre, setButtonPre] = useState(false)
     const [buttonNext, setButtonNext] = useState(false)
-    const [types,setTypes]=useState("OPEN")
+    const [types, setTypes] = useState("OPEN")
     const dispatch = useDispatch()
-    
-   
+
+
 
     const getArticle = useSelector((state) => state.article)
-    console.log(getArticle.result.length,'res')
-    useEffect(()=>{
+    console.log(getArticle.result.length, 'res')
+    useEffect(() => {
 
-        const data={
-            page:page,
-            type:types,
+        const data = {
+            page: page,
+            type: types,
         }
         dispatch(getAllArticleAction(data))
-    },[])
+    }, [])
 
 
     // ======================Publish and Open ==============================
 
     const selectArticleType = (Type) => {
         setTypes(Type)
-        const data={
-            page:page,
-            type:Type,
+        const data = {
+            page: page,
+            type: Type,
         }
         dispatch(getAllArticleAction(data))
         toast.success("Your article type has changed")
@@ -105,7 +105,7 @@ function Articles() {
     const [modalIsOpen, setIsOpen] = React.useState(false);
     const [publishText, setPublishText] = useState('')
     const [publishArticleId, setPublishArticleId] = useState('')
- 
+
 
     function closeModal() {
         setIsOpen(false);
@@ -157,7 +157,7 @@ function Articles() {
         }
 
     }
-// ========================================previous and next======================================
+    // ========================================previous and next======================================
     const next = () => {
         setPage(page + 1)
 
@@ -173,12 +173,12 @@ function Articles() {
     useEffect(() => {
 
 
-        const data={
-            page:page,
-            type:types,
+        const data = {
+            page: page,
+            type: types,
         }
-     
-      
+
+
         console.log(page, 'length')
         if (page > 0) {
             console.log('bada hia')
@@ -195,15 +195,15 @@ function Articles() {
     }, [page])
 
     useEffect(() => {
-        if(getArticle.result.length<16){
+        if (getArticle.result.length < 16) {
             // console.log('chhota')
             setButtonNext(true)
-    
-        }else{
+
+        } else {
             // console.log('bada')
             setButtonNext(false)
         }
-    
+
     }, [getArticle.result])
 
     return (
@@ -228,18 +228,14 @@ function Articles() {
                                     </button>
                                 </div>
 
-                                <button class="inline-flex items-center px-4 py-1 bg-red-800 hover:bg-red-700 text-white text-sm font-medium rounded-md">
-
-                                    Filter
-                                    <BiFilter className='mx-1' size={30} />
-
-                                </button>
+                                <button type="button" class= "inline-flex items-center text-white bg-gradient-to-r from-orange-500  to-yellow-400 hover:bg-gradient-to-bl font-medium rounded-lg text-sm px-3 py-1 text-center mr-2 mb-2"> Filter   <BiFilter className='mx-1' size={30} /></button>
                             </div>
                             <div>
 
                                 <select id="countries" class="bg-gray-50 border border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" onChange={(e) => selectArticleType(e.target.value)}>
                                     <option disabled selected>Select Article Type</option>
                                     <option value="PUBLISH">Publish</option>
+                                    <option value="REJECTED">Reject</option>
                                     <option value="OPEN">Open</option>
                                 </select>
 
@@ -248,17 +244,17 @@ function Articles() {
                         <div className="tableWrap pr-4">
                             <table class="shadow-lg tables  w-full rounded-xl ">
                                 <thead className=''>
-                                    <tr className=' table_head  '>
-                                        <td class="bg-blue-100 py-3  text-start px-2">Article Id</td>
-                                        <td class="bg-blue-100   text-start px-3 ">Title</td>
-                                        <td class="bg-blue-100   text-start px-2 ">Category</td>
-                                        <td class="bg-blue-100   text-start px-2 ">Subject</td>
-                                        <td class="bg-blue-100   text-start px-2 ">Content</td>
-                                        <td class="bg-blue-100   text-start px-2">Author</td>
-                                        <td class="bg-blue-100  text-start px-2 "> Create Date</td>
-                                        <td class="bg-blue-100  text-start px-2 ">Open/Publish</td>
-                                        <td class="bg-blue-100  text-start px-2">Action</td>
-                                        <td class="bg-blue-100  text-start px-2">View</td>
+                                    <tr className=' table_head text-center   bg-blue-100 '>
+                                        <td class="  py-3 "> ID</td>
+                                        <td class="   px-2 ">Title</td>
+                                        <td class="   px-2 ">Category</td>
+                                        <td class="   px-2 ">Subject</td>
+                                        <td class="   px-2 ">Content</td>
+                                        <td class="   px-2">Author</td>
+                                        <td class="  px-2 "> Create Date</td>
+                                        <td class="  px-2 ">Open/Publish</td>
+                                        <td class="  px-2">Action</td>
+                                        <td class="  px-2">View</td>
                                     </tr>
                                 </thead>
                                 <tbody style={{ background: '' }}>
@@ -273,37 +269,37 @@ function Articles() {
                                                     return (
                                                         <>
 
-                                                            <tr key={data.id} className="text-center ">
-                                                                <td class=" text-center  py-3 text-[12px]">{data.articleId}</td>
+                                                            <tr key={data.id} className="text-gray-500 text-center text-sm border-b-[3px] ">
+                                                                <td class="   py-3  ">{data.articleId}</td>
 
-                                                                <td class=" text-start py-2  text-[13px]  px-2 ">
+                                                                <td class="  py-2    px-2 ">
 
                                                                     {truncateTitle(data.title, 20)}
                                                                 </td>
-                                                                <td class=" text-start  text-[13px] px-2">{data.category} </td>
-                                                                <td class=" text-start  text-[12px] px-2">
+                                                                <td class="    px-2">{data.category} </td>
+                                                                <td class="    px-2">
 
                                                                     {truncateSubject(data.subject, 20)}
 
                                                                 </td>
-                                                                <td class=" text-start  text-[12px] px-2">
+                                                                <td class="    px-2">
 
 
                                                                     {truncateString(data?.content, 50)}
 
                                                                 </td>
-                                                               
-                                                                <td class=" text-start  text-[13px] px-2">{data.author} </td>
 
-                                                                <td class=" text-[12px] px-2">
+                                                                <td class="    px-2">{data.author} </td>
+
+                                                                <td class="  px-2">
                                                                     {data.createdDate}
 
                                                                 </td>
-                                                              
 
-                                                                <td class=" text-center pt-1  ">
 
-                                                                    <span className='text-[10px]'>{data.articleType}</span>
+                                                                <td class="  pt-1  ">
+
+                                                                  {data.articleType}
 
 
 
@@ -323,15 +319,17 @@ function Articles() {
                                                                         <>
 
 
-                                                                            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold 
-                                                                            py-1 text-xs px-3 mt-2 rounded-full" onClick={() => HandlePublish(data.articleId, 'Publish')}>
+                                                                          <div className='mx-auto flex gap-2'>
+                                                                          <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold 
+                                                                            py-1.5 text-xs px-3 mt-2 rounded-full" onClick={() => HandlePublish(data.articleId, 'Publish')}>
                                                                                 Pubish
                                                                             </button>
-                                                                            &nbsp;
+                                                                          
                                                                             <button class="bg-red-500 hover:bg-red-700 text-white font-bold
-                                                                             py-1 text-xs px-3 mt-2   rounded-full" onClick={() => HanldeReject(data.articleId, 'Reject')}>
+                                                                             py-1.5 text-xs px-3 mt-2   rounded-full" onClick={() => HanldeReject(data.articleId, 'Reject')}>
                                                                                 Reject
                                                                             </button>
+                                                                          </div>
 
 
 
@@ -342,7 +340,7 @@ function Articles() {
 
                                                                 <td className=' px-3'>
                                                                     <Link to={`/articles/${data.articleId}`}>
-                                                                        <AiFillEye size={22} className='mx-2 text-blue-300 hover:text-blue-800' />
+                                                                        <AiFillEye size={22} className='mx-2 text-orange-300 hover:text-orange-500' />
                                                                     </Link>
 
                                                                 </td>
@@ -401,12 +399,13 @@ function Articles() {
                             className=""
 
                         >
-                            
 
-                            <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 " onSubmit={handlePublishSubmit}>
-                                <AiOutlineClose onClick={closeModal} className="relative top-0 left-[100%] cursor-pointer" size={25} />
-                                <h1 className='text-center font-sans  mb-4 text-4xl font-bold text-red-800'>{ModelStatus} Article </h1>
 
+                            <form class="bg-slate-300/20 shadow-md rounded px-8 pt-6 pb-8 " onSubmit={handlePublishSubmit}>
+                                <AiOutlineClose onClick={closeModal} className="relative top-0 shadow left-[100%] cursor-pointer" size={25} />
+                                {/* <h1 className='text-center font-sans  mb-4 text-4xl font-bold text-red-800'>{ModelStatus} Article </h1> */}
+                                <h1 className='text-center text-3xl mt-2  text-gray-500 font-medium  underline underline-offset-8'>{ModelStatus} Article </h1>
+                    
                                 <div class="mb-4">
 
                                     <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your message :</label>
@@ -421,7 +420,7 @@ function Articles() {
 
 
                                 <div class="flex items-center justify-center">
-                                    <button class="bg-red-800 hover:bg-red-700 text-white font-bold  px-5 py-2 rounded focus:outline-none focus:shadow-outline" type="submit">
+                                    <button class="bg-orange-500 hover:bg-orange-600 text-white font-bold  px-5 py-2 rounded focus:outline-none focus:shadow-outline" type="submit">
                                         Save
                                     </button>
 

@@ -80,7 +80,7 @@ function Sidebar() {
 
         <>
         <ToastContainer/>
-        <div className='  flex flex-col justify-between py-5 items-center shadow-xl navbar_bg    rounded-lg -ml-4 px-2 mr-2  '>
+        <div className='  flex flex-col justify-between py-5 items-center shadow-xl navbar_bg    -ml-4 px-2 mr-2  '>
 
            <div className='-mt-4'>
            <NavLink to='/dashboard'>
@@ -160,7 +160,7 @@ function Sidebar() {
 
                 <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 " onSubmit={HandleOnSubmit}>
                     <AiOutlineClose onClick={closeModal} className="relative top-0 left-[100%] cursor-pointer" size={25} />
-                    <h1 className='text-center font-sans  mb-4 text-4xl font-bold text-red-800'>Add Staff </h1>
+                    <h1 className='text-center font-sans  mb-4 text-4xl font-bold text-orange-500'>Add Staff </h1>
 
 
                     <div class="mb-4">
@@ -204,8 +204,12 @@ function Sidebar() {
                     </div> */}
 
                     <div class="flex items-center justify-center">
-                        <button class="bg-red-800 hover:bg-red-700 text-white font-bold  px-5 py-2 rounded focus:outline-none focus:shadow-outline" type="submit">
+                        {/* <button class="bg-red-800 hover:bg-red-700 text-white font-bold  px-5 py-2 rounded focus:outline-none focus:shadow-outline" type="submit">
                             Submit
+                        </button> */}
+
+                        <button class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-1 shadow-xl  px-5 rounded focus:outline-none focus:shadow-outline" type="submit">
+                        Submit
                         </button>
 
                     </div>

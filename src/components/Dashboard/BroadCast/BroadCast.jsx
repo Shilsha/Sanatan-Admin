@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getBroadCastAction } from '../../../Redux/Fetures/Reducers/BroadcastSplice'
 import Loader from '../../Loader/Loader'
 import { MdSystemSecurityUpdateGood } from 'react-icons/md'
-import { addBroadcastAction, updateBroadcastAction,deleteBroadcastAction } from '../../../Redux/Fetures/Reducers/BroadcastSplice'
+import { addBroadcastAction, updateBroadcastAction, deleteBroadcastAction } from '../../../Redux/Fetures/Reducers/BroadcastSplice'
 import { ToastContainer } from 'react-toastify'
 
 function BroadCast() {
@@ -60,7 +60,7 @@ function BroadCast() {
                 announcementId: id,
                 announcementOfTheDay: msg,
                 date: date,
-                announcementStatus:true
+                announcementStatus: true
             }
             console.log(data, 'update data')
             console.log('update')
@@ -82,7 +82,7 @@ function BroadCast() {
     // ==================handle clear=====================
     const handleClear = (e) => {
         e.preventDefault()
-       
+
         setId('')
         setDate('')
         setMsg('')
@@ -92,22 +92,22 @@ function BroadCast() {
     // =======================handle update msg==================
 
     const handleChange = (e) => {
-        setMsg(e.target.value )
+        setMsg(e.target.value)
     }
 
     const editHandle = (data) => {
-        console.log(data.data.Msg,'form')
+        console.log(data.data.Msg, 'form')
         setMsg(data.data.Msg)
         setId(data.data.Id)
         setDate(data.data.Date)
     }
 
     // ========================delete broadcast msg=================
-    const deleteBroadcast =(id)=>{
-console.log(id,'del')
-dispatch(deleteBroadcastAction(id ))
+    const deleteBroadcast = (id) => {
+        console.log(id, 'del')
+        dispatch(deleteBroadcastAction(id))
     }
-   
+
     return (
         <>
             <ToastContainer />
@@ -127,19 +127,19 @@ dispatch(deleteBroadcastAction(id ))
                                     {/* <img src={side1} alt="logo" className='w-16' /> */}
                                     {/* <h2 className=' text-xl font-extrabold underline underline-offset-8 text-center  
                                    text-red-800 px-4 '>Broadcast</h2> */}
-                                 
+
                                     {/* <img src={side1} alt="logo" className='w-16' /> */}
                                 </div>
 
                                 <div className='  '>
-                                    
-                                    <form onSubmit={handleSubmit}>
-                                        
-                                        <div class="w-[70%] shadow-xl mx-auto  border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
-                                        {/* <h1 class="text-2xl font-bold  drop-shadow-lg text-gray-500 shadow text-center py-2">Broadcast</h1> */}
-                                        <h1 className='text-center text-2xl py-2  text-gray-500 font-medium  underline underline-offset-8'>Broadcast</h1>
 
-                                            <div class="px-4 py-2 bg-white rounded-t-lg dark:bg-gray-800">
+                                    <form onSubmit={handleSubmit}>
+
+                                        <div class="w-[70%] shadow-xl mx-auto  border border-gray-200 rounded-lg bg-slate-300/20 dark:bg-gray-700 dark:border-gray-600">
+                                            {/* <h1 class="text-2xl font-bold  drop-shadow-lg text-gray-500 shadow text-center py-2">Broadcast</h1> */}
+                                            <h1 className='text-center text-2xl py-2  text-gray-500 font-medium  underline underline-offset-8'>Broadcast</h1>
+
+                                            <div class="px-4 py-2 rounded-t-lg dark:bg-gray-800">
 
                                                 <textarea id="comment" rows="8" class="w-full px-2 text-sm text-gray-900 bg-white  dark:bg-gray-800 
                                                 focus:none dark:text-white dark:placeholder-gray-400 focus:none" placeholder="Write a Message..." value={msg}
@@ -154,7 +154,7 @@ dispatch(deleteBroadcastAction(id ))
                                                     </button>
                                                 </> : <>
                                                     <button type="submit" class="inline-flex shadow-lg  items-center py-2.5 px-4 text-xs font-medium text-center bg-orange-600 hover:bg-orange-700 text-white rounded-lg ">
-                                                    Broadcast Message
+                                                        Broadcast Message
                                                     </button>
                                                 </>}
 
@@ -178,64 +178,66 @@ dispatch(deleteBroadcastAction(id ))
 
                         {/* ================================================table============================================ */}
                         <div className='w-full tableWrapBroadcast mt-8 shadow-xl pr-4'>
-                            <table class="shadow-xl tables  w-full rounded-xl ">
+                            <table class="shadow-xl tables    w-full rounded-xl ">
+                               
                                 <thead className=''>
-                                    <tr className=' table_head  '>
-                                        <td class="bg-blue-100 py-3  px-2 text-start">ID</td>
-                                        <td class="bg-blue-100 py-3 text-start "> Date</td>
-                                        <td class="bg-blue-100 py-3 text-start ">Status</td>
-                                        <td class="bg-blue-100 py-3 text-start ">Message</td>
-                                        <td class="bg-blue-100 py-3 text-center ">Action</td>
-
-
+                                <tr className='  bg-blue-100  text-center '>
+                                        <td class=" py-3  px-2">ID</td>
+                                        <td class=" py-3 "> Date</td>
+                                        <td class=" py-3 ">Status</td>
+                                        <td class=" py-3 ">Message</td>
+                                        <td class=" py-3  ">Action</td>
                                     </tr>
-                                    {
-                                        broadCast.loading ? <Loader /> : <>
+                                </thead>
+                                {
+                                    broadCast.loading ? <Loader /> : <>
 
-                                            {broadCast.result.map((data) => {
-                                                return (
-                                                    <>
-                                                        <tr key={data.id}>
-                                                            <td class="py-3 text-start px-2 ">{data.announcementId}</td>
-                                                            <td class="py-3 text-start px-2 ">{data.announcementDate}</td>
-                                                            <td class="py-3 text-start px-2 ">{JSON.stringify(data.announcementStatus)}</td>
-                                                            <td class="py-3 text-start px-2 ">{truncateString(data.announcementOfTheDay, 90)}</td>
-                                                            <td class="py-3 text-center px-2 ">
+                                        {broadCast.result.map((data) => {
+                                            return (
+                                                <>
+                                                    <tr key={data.id} className='text-center border-b-[3px] text-gray-500'>
+                                                        <td class="py-2 px-2 ">{data.announcementId}</td>
+                                                        <td class="py-2  px-2 ">{data.announcementDate}</td>
+                                                        <td class="py-2  px-2 ">{JSON.stringify(data.announcementStatus)}</td>
+                                                        <td class="py-2  px-2 ">{truncateString(data.announcementOfTheDay, 90)}</td>
+                                                        <td class="py-2  px-2 ">
 
 
-                                                                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold 
-                                                                    py-1 text-xs px-3 rounded-full"
-                                                                    onClick={() => editHandle({data:{
-                                                                        Id:data.announcementId,
-                                                                       Date: data.announcementDate,
+                                                            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold 
+                                                                    py-1 text-xs px-5 rounded-full"
+                                                                onClick={() => editHandle({
+                                                                    data: {
+                                                                        Id: data.announcementId,
+                                                                        Date: data.announcementDate,
                                                                         Msg: data.announcementOfTheDay
-                                                                    }})}>
-                                                                    Edit
-                                                                </button>
-                                                                &nbsp;
-                                                                
-                                                                {data.announcementStatus?<> <button class="bg-red-500 hover:bg-red-700 text-white font-bold
-                                                                     py-1 text-xs px-2 border  rounded-full" onClick={()=>deleteBroadcast(data.announcementId)} >
-                                                                    Deactivate
-                                                                </button></>:<>
+                                                                    }
+                                                                })}>
+                                                                Edit
+                                                            </button>
+                                                            &nbsp;
+
+                                                            {data.announcementStatus ? <> <button class="bg-red-500 hover:bg-red-700 text-white font-bold
+                                                                     py-1.5 text-xs px-2 border  rounded-full" onClick={() => deleteBroadcast(data.announcementId)} >
+                                                                Deactivate
+                                                            </button></> : <>
                                                                 <button class="bg-orange-500 hover:bg-orange-700 text-white font-bold
-                                                                     py-1 text-xs px-5 border  rounded-full" onClick={()=>deleteBroadcast(data.announcementId)} >
+                                                                     py-1.5 text-xs px-5 border  rounded-full" onClick={() => deleteBroadcast(data.announcementId)} >
                                                                     Delete
                                                                 </button>
-                                                                </>}
-                                                               
-                                                            </td>
+                                                            </>}
 
-                                                        </tr>
-                                                    </>
-                                                )
-                                            })}
-                                        </>
-                                    }
+                                                        </td>
+
+                                                    </tr>
+                                                </>
+                                            )
+                                        })}
+                                    </>
+                                }
 
 
 
-                                </thead>
+
 
                             </table>
                         </div>

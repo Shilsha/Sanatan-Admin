@@ -8,7 +8,7 @@ function Navbar() {
   return (
     <>
 
-      <div className='   rounded navbar_bg flex justify-between items-center shadow-lg  w-full  '>
+      <div className='   rounded-b navbar_bg flex justify-between items-center shadow-lg  w-full  '>
         <div className=' p-2'>
           <h1 className='text-gray-700 '>Welcome,</h1>
           <p className='font-medium text-white px-2'>{userID?.adminName}</p>

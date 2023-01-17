@@ -18,6 +18,7 @@ import {getHitsMatchMaking} from '../../../Redux/Fetures/Reducers/HitsReducers/M
 import {getHitsLogin} from '../../../Redux/Fetures/Reducers/HitsReducers/LoginSlice'
 import {getHitsKundali} from '../../../Redux/Fetures/Reducers/HitsReducers/KundliSplice'
 import LoaderN from '../../Loader/LoaderN'
+import DesignLogin from '../../../Assets/images/DesignLogin.png'
 
 function Hits() {
     const [FilterSearch, setFilterSearch] = useState('')
@@ -98,11 +99,11 @@ function Hits() {
     return (
         <>
 
-            <div className='   w-[100%] h-[100vh] flex flex-col-2 gap-4  '>
+            <div className='   w-[100%] h-[100vh] flex flex-col-2 gap-4 bgGradient bg-[#fefefe] '>
                 <Sidebar />
                 <div className=' w-[93%]  '>
                     <Navbar />
-                    <div className=' my-4 mx-auto '>
+                    <div className=' my-4 mx-auto  '>
                         {/* <div className='flex justify-between items-center pb-4'>
                             <div className='flex justify-between w-[40%]'>
 
@@ -134,17 +135,17 @@ function Hits() {
 
                             </div>
                         </div> */}
-                        <div className="tableWrapsss ">
-                            <h1 className='text-center font-bold text-xl text-red-800'> All Module Hits</h1>
+                        <div className="tableWrapsss ml-8 relative z-10 ">
+                            {/* <h1 className='text-center font-bold text-xl text-red-800'> All Module Hits</h1> */}
+                            <h1 className='text-center text-xl  mt-2  text-gray-500 font-bold  underline underline-offset-8'>All Module Hits</h1>
                             <div className='grid grid-cols-4  items-center'>
-                                <div class=" relative sm:py-12">
+                                <div class=" relative sm:py-12 ">
                                     <div class="max-w-[300px] ">
                                         <div class="relative group">
-                                            <div class="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg blur opacity-25
-                                         group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
+                                         
                                             <div class="relative  bg-white ring-1 ring-gray-900/5 rounded-lg leading-none  space-x-6">
                                                 <div>
-                                                    <h1 className='text-center font-bold text-xl text-white py-1 bg-red-800 '>Panchang Hits </h1>
+                                                    <h1 className='text-center font-bold text-xl text-gray-500   underline underline-offset-8 py-1  '>Panchang Hits </h1>
                                                     {/* <hr className='w-[50%] mx-auto h-1 bg-red-800' /> */}
 
 
@@ -160,8 +161,8 @@ function Hits() {
 
                                                         </div>
                                                         <div className=''>
-                                                            <p className='font-bold text-red-800 text-xl'>Total hits: </p>
-                                                            {hitPan?.loading ? <LoaderN /> : <p className='font-extrabold text-2xl text-center' >{hitPan?.result}</p >}
+                                                            <p className='font-bold underline text-gray-500 underline-offset-8 py-1 text-xl'>Total hits: </p>
+                                                            {hitPan?.loading ? <LoaderN /> : <p className='font-extrabold text-white text-2xl tootlabg rounded-full mt-2 text-center' >{hitPan?.result}</p >}
 
                                                         </div>
                                                     </div>
@@ -174,10 +175,10 @@ function Hits() {
                                 <div class=" relative  sm:py-12">
                                     <div class="max-w-[300px] ">
                                         <div class="relative group">
-                                            <div class="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
-                                            <div class="relative  bg-white ring-1 ring-gray-900/5 rounded-lg leading-none  space-x-6">
+                                       
+                                            <div class="relative bg-white ring-1 ring-gray-900/5 rounded-lg leading-none  space-x-6">
                                                 <div>
-                                                    <h1 className='text-center font-bold text-xl text-white py-1 bg-red-800 '>Festival Hits </h1>
+                                                    <h1 className='text-center font-bold text-xl text-gray-500   underline underline-offset-8 py-1 '>Festival Hits </h1>
 
 
                                                     <div className='p-4'>
@@ -191,8 +192,8 @@ function Hits() {
 
                                                         </div>
                                                         <div className=''>
-                                                            <p className='font-bold text-red-800 text-xl'>Total hits: </p>
-                                                            {hitFes.loading ? <LoaderN /> : <p className='font-extrabold text-2xl text-center' >{hitFes?.result}</p >}
+                                                            <p className='font-bold underline text-gray-500 underline-offset-8 py-1 text-xl'>Total hits: </p>
+                                                            {hitFes.loading ? <LoaderN /> : <p className='font-extrabold text-2xl text-center tootlabg rounded-full mt-2 text-white' >{hitFes?.result}</p >}
 
                                                         </div>
                                                     </div>
@@ -205,10 +206,10 @@ function Hits() {
                                 <div class=" relative  sm:py-12 ">
                                     <div class="max-w-[300px] ">
                                         <div class="relative group">
-                                            <div class="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
+                                  
                                             <div class="relative  bg-white ring-1 ring-gray-900/5 rounded-lg leading-none  space-x-6">
                                                 <div>
-                                                    <h1 className='text-center font-bold text-xl text-white py-1 bg-red-800 '>Kundali Hits </h1>
+                                                    <h1 className='text-center font-bold text-xl text-gray-500   underline underline-offset-8 py-1'>Kundali Hits </h1>
                                                     {/* <hr className='w-[50%] mx-auto h-1 bg-red-800' /> */}
 
 
@@ -223,8 +224,8 @@ function Hits() {
 
                                                         </div>
                                                         <div className=''>
-                                                            <p className='font-bold text-red-800 text-xl'>Total hits: </p>
-                                                            {hitKundli.loading?<LoaderN/>: <p className='font-extrabold text-2xl text-center' >{hitKundli?.result?.data}</p >}
+                                                            <p className='font-bold underline text-gray-500 underline-offset-8 py-1 text-xl'>Total hits: </p>
+                                                            {hitKundli.loading?<LoaderN/>: <p className='font-extrabold text-2xl text-center tootlabg rounded-full mt-2 text-white' >{hitKundli?.result?.data}</p >}
                                                            
                                                         </div>
                                                     </div>
@@ -237,10 +238,10 @@ function Hits() {
                                 <div class=" relative  sm:py-12 ">
                                     <div class="max-w-[300px] ">
                                         <div class="relative group">
-                                            <div class="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
+                                     
                                             <div class="relative  bg-white ring-1 ring-gray-900/5 rounded-lg leading-none  space-x-6">
                                                 <div>
-                                                    <h1 className='text-center font-bold text-xl text-white py-1 bg-red-800 '>Contact Hits </h1>
+                                                    <h1 className='text-center font-bold text-xl text-gray-500   underline underline-offset-8 py-1 '>Contact Hits </h1>
                                                     {/* <hr className='w-[50%] mx-auto h-1 bg-red-800' /> */}
 
 
@@ -255,8 +256,8 @@ function Hits() {
 
                                                         </div>
                                                         <div className=''>
-                                                            <p className='font-bold text-red-800 text-xl'>Total hits: </p>
-                                                            {hitCon.loading?<LoaderN/>:<p className='font-extrabold text-2xl text-center' >{hitCon?.result}</p >}
+                                                            <p className='font-bold underline text-gray-500 underline-offset-8 py-1 text-xl'>Total hits: </p>
+                                                            {hitCon.loading?<LoaderN/>:<p className='font-extrabold text-2xl text-center tootlabg rounded-full mt-2 text-white' >{hitCon?.result}</p >}
                                                       
                                                         </div>
                                                     </div>
@@ -270,10 +271,10 @@ function Hits() {
                                 <div class=" relative  sm:py-12 ">
                                     <div class="max-w-[300px] ">
                                         <div class="relative group">
-                                            <div class="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
+                       
                                             <div class="relative  bg-white ring-1 ring-gray-900/5 rounded-lg leading-none  space-x-6">
                                                 <div>
-                                                    <h1 className='text-center font-bold text-xl text-white py-1 bg-red-800 '>Horoscope Hits </h1>
+                                                    <h1 className='text-center font-bold text-xl text-gray-500   underline underline-offset-8 py-1 '>Horoscope Hits </h1>
                                                     {/* <hr className='w-[50%] mx-auto h-1 bg-red-800' /> */}
 
 
@@ -288,8 +289,8 @@ function Hits() {
 
                                                         </div>
                                                         <div className=''>
-                                                            <p className='font-bold text-red-800 text-xl'>Total hits: </p>
-                                                            <p className='font-extrabold text-2xl text-center' >{hitHoro.loading?<LoaderN/>:hitHoro.result}</p >
+                                                            <p className='font-bold underline text-gray-500 underline-offset-8 py-1 text-xl'>Total hits: </p>
+                                                            <p className='font-extrabold text-2xl text-center tootlabg rounded-full mt-2 text-white' >{hitHoro.loading?<LoaderN/>:hitHoro.result}</p >
                                                         </div>
                                                     </div>
                                                 </div>
@@ -301,10 +302,10 @@ function Hits() {
                                 <div class=" relative  sm:py-12 ">
                                     <div class="max-w-[300px] ">
                                         <div class="relative group">
-                                            <div class="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
+             
                                             <div class="relative  bg-white ring-1 ring-gray-900/5 rounded-lg leading-none  space-x-6">
                                                 <div>
-                                                    <h1 className='text-center font-bold text-xl text-white py-1 bg-red-800 '>Match Making Hits </h1>
+                                                    <h1 className='text-center font-bold text-xl text-gray-500   underline underline-offset-8 py-1 '>Match Making Hits </h1>
                                                     {/* <hr className='w-[50%] mx-auto h-1 bg-red-800' /> */}
 
 
@@ -319,8 +320,8 @@ function Hits() {
 
                                                         </div>
                                                         <div className=''>
-                                                            <p className='font-bold text-red-800 text-xl'>Total hits: </p>
-                                                            <p className='font-extrabold text-2xl text-center' >{hitMatch.loading?<LoaderN/>:hitMatch.result}</p >
+                                                            <p className='font-bold underline text-gray-500 underline-offset-8 py-1 text-xl'>Total hits: </p>
+                                                            <p className='font-extrabold text-2xl text-center tootlabg rounded-full mt-2 text-white' >{hitMatch.loading?<LoaderN/>:hitMatch.result}</p >
                                                         </div>
                                                     </div>
                                                 </div>
@@ -332,10 +333,10 @@ function Hits() {
                                 <div class=" relative  sm:py-12 ">
                                     <div class="max-w-[300px] ">
                                         <div class="relative group">
-                                            <div class="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
+                                      
                                             <div class="relative  bg-white ring-1 ring-gray-900/5 rounded-lg leading-none  space-x-6">
                                                 <div>
-                                                    <h1 className='text-center font-bold text-xl text-white py-1 bg-red-800 '>Article Hits </h1>
+                                                    <h1 className='text-center font-bold text-xl text-gray-500   underline underline-offset-8 py-1 '>Article Hits </h1>
                                                     {/* <hr className='w-[50%] mx-auto h-1 bg-red-800' /> */}
 
 
@@ -350,8 +351,8 @@ function Hits() {
 
                                                         </div>
                                                         <div className=''>
-                                                            <p className='font-bold text-red-800 text-xl'>Total hits: </p>
-                                                            <p className='font-extrabold text-2xl text-center' >{hitArt?.loading?<LoaderN/>:hitArt?.result}</p >
+                                                            <p className='font-bold underline text-gray-500 underline-offset-8 py-1 text-xl'>Total hits: </p>
+                                                            <p className='font-extrabold text-2xl text-center tootlabg rounded-full mt-2 text-white' >{hitArt?.loading?<LoaderN/>:hitArt?.result}</p >
                                                         </div>
                                                     </div>
                                                 </div>
@@ -363,10 +364,10 @@ function Hits() {
                                 <div class=" relative  sm:py-12 ">
                                     <div class="max-w-[300px] ">
                                         <div class="relative group">
-                                            <div class="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
+                                       
                                             <div class="relative  bg-white ring-1 ring-gray-900/5 rounded-lg leading-none  space-x-6">
                                                 <div>
-                                                    <h1 className='text-center font-bold text-xl text-white py-1 bg-red-800 '>Login Hits </h1>
+                                                    <h1 className='text-center font-bold text-xl text-gray-500   underline underline-offset-8 py-1 '>Login Hits </h1>
                                                     {/* <hr className='w-[50%] mx-auto h-1 bg-red-800' /> */}
 
 
@@ -381,8 +382,8 @@ function Hits() {
 
                                                         </div>
                                                         <div className=''>
-                                                            <p className='font-bold text-red-800 text-xl'>Total hits: </p>
-                                                            <p className='font-extrabold text-2xl text-center' >{hitLogin?.loading?<LoaderN/>:hitLogin.result}</p >
+                                                            <p className='font-bold underline text-gray-500 underline-offset-8 py-1 text-xl'>Total hits: </p>
+                                                            <p className='font-extrabold text-2xl text-center tootlabg rounded-full mt-2 text-white' >{hitLogin?.loading?<LoaderN/>:hitLogin.result}</p >
                                                         </div>
                                                     </div>
                                                 </div>
@@ -396,6 +397,10 @@ function Hits() {
                             </div>
 
                         </div>
+
+                          <div className='absolute bottom-0      '>
+                    <img src={DesignLogin} alt='empty' className='w-[95%]'></img>
+                </div>
 
                     </div>
                 </div>

@@ -241,15 +241,15 @@ function User() {
                         <div className="tableWrap pr-4">
                             <table class="shadow-lg tables  w-full rounded-xl ">
                                 <thead className=''>
-                                    <tr className='   '>
+                                    <tr className='  text-center '>
                                         <td class="bg-blue-100   px-2 text-center">ID</td>
-                                        <td class="bg-blue-100  text-start px-2  py-3">Name</td>
-                                        <td class="bg-blue-100  text-start px-2 py-2">Email</td>
-                                        <td class="bg-blue-100  text-center py-2">Mobile Number</td>
-                                        <td class="bg-blue-100  text-center py-2">Create</td>
-                                        <td class="bg-blue-100  text-center py-2">Modify</td>
-                                        <td class="bg-blue-100  text-center py-2">Status</td>
-                                        <td class="bg-blue-100  text-center py-2">Action</td>
+                                        <td class="bg-blue-100   px-2  py-3">Name</td>
+                                        <td class="bg-blue-100   px-2 py-2">Email</td>
+                                        <td class="bg-blue-100   py-2">Mobile Number</td>
+                                        <td class="bg-blue-100   py-2">Create</td>
+                                        <td class="bg-blue-100   py-2">Modify</td>
+                                        <td class="bg-blue-100   py-2">Status</td>
+                                        <td class="bg-blue-100   py-2">Action</td>
                                     </tr>
                                 </thead>
 
@@ -270,16 +270,16 @@ function User() {
                                                         // userData?.result.map((data) => {
                                                         return (
                                                             <>
-                                                                <tr key={data.id} className="text-center ">
+                                                                <tr key={data.id} className="text-center  text-gray-500 border-b-[3px]">
                                                                     <td class="py-3 text-center">{data.userId}</td>
-                                                                    <td class="py-2 text-start px-2 ">{data.fullName}
+                                                                    <td class="py-2  px-2 ">{data.fullName}
                                                                     </td>
-                                                                    <td class="py-2 text-start  text-[13px] px-2">{data.email} </td>
-                                                                    <td class="py-2 text-[13px] px-2">{data.mobileNo == null ? '---' : data.mobileNo} </td>
-                                                                    <td class="py-2 text-[13px] px-2">
+                                                                    <td class="py-2    px-2">{data.email} </td>
+                                                                    <td class="py-3  px-2">{data.mobileNo == null ? '---' : data.mobileNo} </td>
+                                                                    <td class="py-3  px-2">
                                                                         {moment(data.createdDate).format("MM/DD/YYYY")}
                                                                     </td>
-                                                                    <td class="py-2 text-[13px] px-2">
+                                                                    <td class="py-3  px-2">
                                                                         {moment(data.modifiedDate).format("MM/DD/YYYY")}
                                                                     </td>
                                                                     <td class="py-2 text-center pt-1  ">
@@ -288,9 +288,9 @@ function User() {
 
 
                                                                     </td>
-                                                                    <td class=" px-4 flex justify-evenly items-center pt-2" >
+                                                                    <td class=" px-4 flex justify-evenly items-center pt-3" >
                                                                         <button class="bg-red-500 hover:bg-red-700
-                                                                        py-1  text-white font-bold  text-xs px-3   rounded-full" onClick={() => handleDeleteSingleUser(data.userId)}>
+                                                                        py-1.5  text-white font-bold  text-xs px-3   rounded-full" onClick={() => handleDeleteSingleUser(data.userId)}>
                                                                             Delete
                                                                         </button>
                                                                     </td>
