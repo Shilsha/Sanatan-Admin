@@ -176,7 +176,7 @@ function Dashboard() {
                                         text-gray-400
                                           h-[2px]' /> */}
                                     <div className='p-5'>
-                                        <p className="text-sm text-gray-500 ">
+                                        <p className="text-sm text-gray-500 leading-7 tracking-widest ">
                                             {loading ? <Loader /> : <>
 
                                                 {result.thoughtOfTheDay}
