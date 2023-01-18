@@ -100,11 +100,11 @@ function Hits() {
     return (
         <>
 
-            <div className='   w-[100%] h-[100vh] flex flex-col-2 gap-4 bgGradient bg-[#fefefe] '>
+            <div className='   w-[100%] h-[100vh] flex flex-col-2 gap-4 bgGradient '>
                 <Sidebar />
-                <div className=' w-[93%]  '>
+                <div className=' w-full '>
                     <Navbar />
-                    <div className=' my-4 mx-auto  '>
+                    <div className=' my-4   '>
                         {/* <div className='flex justify-between items-center pb-4'>
                             <div className='flex justify-between w-[40%]'>
 
@@ -136,7 +136,7 @@ function Hits() {
 
                             </div>
                         </div> */}
-                        <div className="tableWrapsss ml-8 relative z-10 ">
+                        <div className="tableWrapsss  relative z-10 ">
                             {/* <h1 className='text-center font-bold text-xl text-red-800'> All Module Hits</h1> */}
                             <h1 className='text-center text-xl  mt-2  text-gray-500 font-bold  underline underline-offset-8'>All Module Hits</h1>
                             <div className='grid grid-cols-4  items-center'>
@@ -146,7 +146,7 @@ function Hits() {
                                          
                                             <div class="relative  bg-white ring-1 ring-gray-900/5 rounded-lg leading-none  space-x-6">
                                                 <div>
-                                                    <h1 className='text-center font-bold text-xl text-gray-500   underline underline-offset-8 py-1  '>Panchang Hits </h1>
+                                                    <h1 className='text-center font-bold text-xl text-gray-500   underline underline-offset-8 py-4  '>Panchang Hits </h1>
                                                     {/* <hr className='w-[50%] mx-auto h-1 bg-red-800' /> */}
 
 
@@ -163,7 +163,7 @@ function Hits() {
                                                         </div>
                                                         <div className=''>
                                                             <p className='font-bold underline text-gray-500 underline-offset-8 py-1 text-xl'>Total hits: </p>
-                                                            {hitPan?.loading ? <LoaderN /> : <p className='font-extrabold  text-2xl  rounded-full mt-2 text-center' >{hitPan?.result}</p >}
+                                                            {hitPan?.loading ? <LoaderN /> : <p className='font-extrabold  text-2xl text-orange-500  rounded-full mt-2 text-center' >{hitPan?.result}</p >}
 
                                                         </div>
                                                     </div>
@@ -179,7 +179,7 @@ function Hits() {
                                        
                                             <div class="relative bg-white ring-1 ring-gray-900/5 rounded-lg leading-none  space-x-6">
                                                 <div>
-                                                    <h1 className='text-center font-bold text-xl text-gray-500   underline underline-offset-8 py-1 '>Festival Hits </h1>
+                                                    <h1 className='text-center font-bold text-xl text-gray-500   underline underline-offset-8 py-4 '>Festival Hits </h1>
 
 
                                                     <div className='p-4'>
@@ -194,7 +194,7 @@ function Hits() {
                                                         </div>
                                                         <div className=''>
                                                             <p className='font-bold underline text-gray-500 underline-offset-8 py-1 text-xl'>Total hits: </p>
-                                                            {hitFes.loading ? <LoaderN /> : <p className='font-extrabold text-2xl text-center  rounded-full mt-2 ' >{hitFes?.result}</p >}
+                                                            {hitFes.loading ? <LoaderN /> : <p className='font-extrabold text-orange-500  text-2xl text-center  rounded-full mt-2 ' >{hitFes?.result}</p >}
 
                                                         </div>
                                                     </div>
@@ -210,7 +210,7 @@ function Hits() {
                                   
                                             <div class="relative  bg-white ring-1 ring-gray-900/5 rounded-lg leading-none  space-x-6">
                                                 <div>
-                                                    <h1 className='text-center font-bold text-xl text-gray-500   underline underline-offset-8 py-1'>Kundali Hits </h1>
+                                                    <h1 className='text-center font-bold text-xl text-gray-500   underline underline-offset-8 py-4'>Kundali Hits </h1>
                                                     {/* <hr className='w-[50%] mx-auto h-1 bg-red-800' /> */}
 
 
@@ -226,7 +226,7 @@ function Hits() {
                                                         </div>
                                                         <div className=''>
                                                             <p className='font-bold underline text-gray-500 underline-offset-8 py-1 text-xl'>Total hits: </p>
-                                                            {hitKundli.loading?<LoaderN/>: <p className='font-extrabold text-2xl text-center  rounded-full mt-2 ' >{hitKundli?.result?.data}</p >}
+                                                            {hitKundli.loading?<LoaderN/>: <p className='font-extrabold text-orange-500  text-2xl text-center  rounded-full mt-2 ' >{hitKundli?.result?.data}</p >}
                                                            
                                                         </div>
                                                     </div>
@@ -242,7 +242,7 @@ function Hits() {
                                      
                                             <div class="relative  bg-white ring-1 ring-gray-900/5 rounded-lg leading-none  space-x-6">
                                                 <div>
-                                                    <h1 className='text-center font-bold text-xl text-gray-500   underline underline-offset-8 py-1 '>Contact Hits </h1>
+                                                    <h1 className='text-center font-bold text-xl text-gray-500   underline underline-offset-8 py-4 '>Contact Hits </h1>
                                                     {/* <hr className='w-[50%] mx-auto h-1 bg-red-800' /> */}
 
 
@@ -258,7 +258,7 @@ function Hits() {
                                                         </div>
                                                         <div className=''>
                                                             <p className='font-bold underline text-gray-500 underline-offset-8 py-1 text-xl'>Total hits: </p>
-                                                            {hitCon.loading?<LoaderN/>:<p className='font-extrabold text-2xl text-center  rounded-full mt-2 ' >{hitCon?.result}</p >}
+                                                            {hitCon.loading?<LoaderN/>:<p className='font-extrabold text-orange-500  text-2xl text-center  rounded-full mt-2 ' >{hitCon?.result}</p >}
                                                       
                                                         </div>
                                                     </div>
@@ -275,7 +275,7 @@ function Hits() {
                        
                                             <div class="relative  bg-white ring-1 ring-gray-900/5 rounded-lg leading-none  space-x-6">
                                                 <div>
-                                                    <h1 className='text-center font-bold text-xl text-gray-500   underline underline-offset-8 py-1 '>Horoscope Hits </h1>
+                                                    <h1 className='text-center font-bold text-xl text-gray-500   underline underline-offset-8 py-4 '>Horoscope Hits </h1>
                                                     {/* <hr className='w-[50%] mx-auto h-1 bg-red-800' /> */}
 
 
@@ -291,7 +291,7 @@ function Hits() {
                                                         </div>
                                                         <div className=''>
                                                             <p className='font-bold underline text-gray-500 underline-offset-8 py-1 text-xl'>Total hits: </p>
-                                                            <p className='font-extrabold text-2xl text-center  rounded-full mt-2 ' >{hitHoro.loading?<LoaderN/>:hitHoro.result}</p >
+                                                            <p className='font-extrabold text-2xl text-center  text-orange-500  rounded-full mt-2 ' >{hitHoro.loading?<LoaderN/>:hitHoro.result}</p >
                                                         </div>
                                                     </div>
                                                 </div>
@@ -306,7 +306,7 @@ function Hits() {
              
                                             <div class="relative  bg-white ring-1 ring-gray-900/5 rounded-lg leading-none  space-x-6">
                                                 <div>
-                                                    <h1 className='text-center font-bold text-xl text-gray-500   underline underline-offset-8 py-1 '>Match Making Hits </h1>
+                                                    <h1 className='text-center font-bold text-xl text-gray-500   underline underline-offset-8 py-4 '>Match Making Hits </h1>
                                                     {/* <hr className='w-[50%] mx-auto h-1 bg-red-800' /> */}
 
 
@@ -322,7 +322,7 @@ function Hits() {
                                                         </div>
                                                         <div className=''>
                                                             <p className='font-bold underline text-gray-500 underline-offset-8 py-1 text-xl'>Total hits: </p>
-                                                            <p className='font-extrabold text-2xl text-center  rounded-full mt-2' >{hitMatch.loading?<LoaderN/>:hitMatch.result}</p >
+                                                            <p className='font-extrabold text-2xl text-center text-orange-500   rounded-full mt-2' >{hitMatch.loading?<LoaderN/>:hitMatch.result}</p >
                                                         </div>
                                                     </div>
                                                 </div>
@@ -337,7 +337,7 @@ function Hits() {
                                       
                                             <div class="relative  bg-white ring-1 ring-gray-900/5 rounded-lg leading-none  space-x-6">
                                                 <div>
-                                                    <h1 className='text-center font-bold text-xl text-gray-500   underline underline-offset-8 py-1 '>Article Hits </h1>
+                                                    <h1 className='text-center font-bold text-xl text-gray-500   underline underline-offset-8 py-4 '>Article Hits </h1>
                                                     {/* <hr className='w-[50%] mx-auto h-1 bg-red-800' /> */}
 
 
@@ -353,7 +353,7 @@ function Hits() {
                                                         </div>
                                                         <div className=''>
                                                             <p className='font-bold underline text-gray-500 underline-offset-8 py-1 text-xl'>Total hits: </p>
-                                                            <p className='font-extrabold text-2xl text-center  rounded-full mt-2 ' >{hitArt?.loading?<LoaderN/>:hitArt?.result}</p >
+                                                            <p className='font-extrabold text-2xl text-center text-orange-500  rounded-full mt-2 ' >{hitArt?.loading?<LoaderN/>:hitArt?.result}</p >
                                                         </div>
                                                     </div>
                                                 </div>
@@ -368,7 +368,7 @@ function Hits() {
                                        
                                             <div class="relative  bg-white ring-1 ring-gray-900/5 rounded-lg leading-none  space-x-6">
                                                 <div>
-                                                    <h1 className='text-center font-bold text-xl text-gray-500   underline underline-offset-8 py-1 '>Login Hits </h1>
+                                                    <h1 className='text-center font-bold text-xl text-gray-500   underline underline-offset-8 py-4 '>Login Hits </h1>
                                                     {/* <hr className='w-[50%] mx-auto h-1 bg-red-800' /> */}
 
 
@@ -384,7 +384,7 @@ function Hits() {
                                                         </div>
                                                         <div className=''>
                                                             <p className='font-bold underline text-gray-500 underline-offset-8 py-1 text-xl'>Total hits: </p>
-                                                            <p className='font-extrabold text-2xl text-center  rounded-full mt-2 ' >{hitLogin?.loading?<LoaderN/>:hitLogin.result}</p >
+                                                            <p className='font-extrabold text-2xl text-center text-orange-500   rounded-full mt-2 ' >{hitLogin?.loading?<LoaderN/>:hitLogin.result}</p >
                                                         </div>
                                                     </div>
                                                 </div>

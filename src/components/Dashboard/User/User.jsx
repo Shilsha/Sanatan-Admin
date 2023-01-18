@@ -3,7 +3,7 @@ import Navbar from '../../Navbar/Navbar'
 import Sidebar from '../../Sidebar/Sidebar'
 import { BsSearch, BsThreeDots } from 'react-icons/bs'
 import { BiFilter, BiSkipNext, BiSkipPrevious } from 'react-icons/bi'
-import { AiOutlinePlus, AiFillDelete, AiTwotoneEdit, AiOutlineClose } from 'react-icons/ai'
+import { AiOutlinePlus, AiFillDelete, AiTwotoneEdit, AiOutlineClose, AiOutlineWarning } from 'react-icons/ai'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
@@ -123,6 +123,9 @@ function User() {
     // -----------------------------onclick model----------------------------------------
     let subtitle;
     const [modalIsOpen, setIsOpen] = React.useState(false);
+    const [userId, setUserid] = useState('')
+    const [Status, setStatus] = useState('')
+
 
     function UpdateUser(id, name, email, no) {
         console.log(id, name, email, 'dta')
@@ -158,24 +161,38 @@ function User() {
 
 
     // ---------------------------deleteSingleUser-----------------------
-    const handleDeactivatedSingleUser = (id) => {
+    const handleDeactivatedSingleUser = () => {
 
-        dispatch(deleteUser((id)))
-        toast.success('User deactivated successfully ! ')
+        dispatch(deleteUser(userId))
+
+        setIsOpen(false)
+
+    }
+    const handleActivatedSingleUser = () => {
+
+        dispatch(deleteUser(userId))
+        setIsOpen(false)
 
 
     }
-    const handleActivatedSingleUser = (id) => {
-
-        dispatch(deleteUser((id)))
-        toast.success('User activated successfully !')
-
-
-    }
-
-    
 
     console.log(types, 'types')
+
+
+    // ===================================model Open and Close==========================
+
+    function closeModal() {
+        setIsOpen(false);
+    }
+    const openModel = (id, status) => {
+
+        setIsOpen(true)
+        setUserid(id)
+        setStatus(status)
+    }
+
+
+
 
     // --------------------next and prev button ---------------------------
     const next = () => {
@@ -301,18 +318,24 @@ function User() {
                                                                     </td>
                                                                     <td class=" px-4 flex justify-evenly items-center pt-3" >
 
-                                                                        {data?.enabled?<>
+                                                                        {data?.enabled ? <>
                                                                             <button class="bg-red-500 hover:bg-red-700
-                                                                        py-1.5  text-white font-bold  text-xs px-3   rounded-full" onClick={() => handleDeactivatedSingleUser(data.userId)}>
-                                                                            Deactivate
-                                                                        </button>
-                                                                        </>:<>
-                                                                        <button class="bg-red-500 hover:bg-red-700
-                                                                        py-1.5  text-white font-bold  text-xs px-3   rounded-full" onClick={() => handleActivatedSingleUser(data.userId)}>
-                                                                            Activate
-                                                                        </button>
+                                                                        py-1.5  text-white font-bold  text-xs px-3   rounded-full"
+                                                                                onClick={() => openModel(data.userId, 'Deactivate')}
+                                                                            // onClick={() => handleDeactivatedSingleUser(data.userId)}
+                                                                            >
+                                                                                Deactivate
+                                                                            </button>
+                                                                        </> : <>
+                                                                            <button class="bg-blue-500 hover:bg-blue-700
+                                                                        py-1.5  text-white font-bold  text-xs px-3   rounded-full"
+                                                                                // onClick={() => handleActivatedSingleUser(data.userId)}
+                                                                                onClick={() => openModel(data.userId, 'Activate')}
+                                                                            >
+                                                                                Activate
+                                                                            </button>
                                                                         </>}
-                                                                      
+
                                                                     </td>
 
 
@@ -335,7 +358,7 @@ function User() {
 
 
 
-                          
+
                         </div>
                         {/* -----------------------------------------------pagination--------------------------------------------------------- */}
 
@@ -366,7 +389,7 @@ function User() {
             </div>
 
 
-            <Modal
+            {/* <Modal
                 isOpen={modalIsOpen}
                 onAfterOpen={afterOpenModal}
                 onRequestClose={closeModal}
@@ -401,31 +424,7 @@ function User() {
                         <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="number" placeholder="Mobile No" required value={updateForm.mobileNo} name='mobileNo' onChange={handleOnChange} />
                     </div>
 
-                    {/* <div className='flex justify-between items-center'>
-                                        <div class="mb-4">
-                                            <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
-                                                Create Date
-                                            </label>
-                                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Modify Date" />
-                                        </div>
-                                        <div class="mb-4">
-                                            <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
-                                                Modify Date
-                                            </label>
-                                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Modify Date" />
-                                        </div>
-
-                                    </div> */}
-
-                    {/* <div class="mb-4">
-                                        <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
-                                            Status
-                                        </label>
-                                        <div class="flex items-center">
-                                            <input checked id="checked-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-
-                                        </div>
-                                    </div> */}
+                   
                     <div class="flex items-center justify-center">
                         <button class="bg-red-800 hover:bg-red-700 text-white font-bold  px-5 py-2 rounded focus:outline-none focus:shadow-outline" type="submit">
                             Save
@@ -435,8 +434,78 @@ function User() {
                 </form>
 
 
-            </Modal>
+            </Modal> */}
 
+            <Modal
+                isOpen={modalIsOpen}
+                // onAfterOpen={afterOpenModal}
+                onRequestClose={closeModal}
+                style={customStyles}
+                contentLabel="Example Modal"
+                className=" "
+
+            >
+
+
+
+                <div class="shadow-xl   bg-[rgb(254 214 172)] rounded-lg md:max-w-md md:mx-auto p-4 fixed inset-x-0 bottom-0 z-50 mb-4 mx-4 md:relative">
+
+                    {Status == "Deactivate" ? <>
+                    <div class="md:flex items-center">
+                        <div class="rounded-full border border-red-900 flex items-center justify-center w-16 h-16 flex-shrink-0 mx-auto">
+                            <AiOutlineWarning size={40} onClick={closeModal} fill='#8E2E0F' />
+                        </div>
+                        <div class="mt-4 md:mt-0 md:ml-6 text-center md:text-left">
+                            <p class="font-bold text-red-800">Deactivate user account</p>
+                            <p class="text-sm text-gray-700 mt-1">Are you sure to Deactivate User account.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="text-center md:text-right mt-4 md:flex md:justify-end">
+
+                        <button class="block w-full md:inline-block md:w-auto px-4 py-3 md:py-2
+                                 bg-red-500 text-white rounded-lg font-semibold text-sm md:ml-2 md:order-2
+                                  hover:bg-red-700 hover:text-white"
+                            onClick={handleDeactivatedSingleUser}
+                        >Deactivate
+                            Account</button>
+                        <button class="block w-full md:inline-block md:w-auto px-4 py-3 md:py-2
+                                 bg-gray-200 rounded-lg font-semibold text-sm mt-4
+                       md:mt-0 md:order-1 hover:bg-slate-500 hover:text-white"
+                            onClick={closeModal}
+                        >Cancel</button>
+                    </div>
+
+                    </> : <>
+                    
+                    <div class="md:flex items-center">
+                        <div class="rounded-full border border-red-900 flex items-center justify-center w-16 h-16 flex-shrink-0 mx-auto">
+                            <AiOutlineWarning size={40} onClick={closeModal} fill='#8E2E0F' />
+                        </div>
+                        <div class="mt-4 md:mt-0 md:ml-6 text-center md:text-left">
+                            <p class="font-bold text-red-800">Activate user account</p>
+                            <p class="text-sm text-gray-700 mt-1">Are you sure to Activate User account.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="text-center md:text-right mt-4 md:flex md:justify-end">
+                        <button class="block w-full md:inline-block md:w-auto px-4 py-3 md:py-2
+                                 bg-blue-500 text-white rounded-lg font-semibold text-sm md:ml-2 md:order-2
+                                  hover:bg-blue-700 hover:text-white"
+                           onClick={handleActivatedSingleUser}
+                          >Activate Account</button>
+                        <button class="block w-full md:inline-block md:w-auto px-4 py-3 md:py-2
+                                 bg-gray-200 rounded-lg font-semibold text-sm mt-4
+                       md:mt-0 md:order-1 hover:bg-slate-500 hover:text-white"
+                            onClick={closeModal}
+                        >Cancel</button>
+                    </div>
+                    </>}
+                    
+                </div>
+
+
+            </Modal>
 
         </>
     )

@@ -28,7 +28,8 @@ const customStyles = {
         height: 'auto',
         background: "white",
         position: 'relative',
-        border: 'none'
+        border: 'none',
+        
 
     },
 };
@@ -140,13 +141,13 @@ function AdminUserList() {
 
         <>
             <ToastContainer />
-            <div className='  w-[100%] h-[100vh] flex flex-col-12 gap-4 bg-white'>
+            <div className='  w-[100%] h-[100vh] flex flex-col-12 gap-4 bgGradient '>
 
                 <Sidebar />
-                <div className='   w-[93%]  ' >
+                <div className='   w-full  ' >
                     <Navbar />
 
-                    <div className=' my-4 mx-auto '>
+                    <div className=' my-4  pr-4    '>
 
                         <div className='flex justify-between items-center pb-4'>
                             <div className='flex justify-between w-[40%]'>
@@ -173,7 +174,7 @@ function AdminUserList() {
                             
                             </div>
                         </div>
-                        <div className="tableWrap pr-4">
+                        <div className="tableWrap mb-2   blurrTable ">
                             <table class="shadow-lg tables  w-full rounded-xl ">
                                 <thead className=''>
                                     <tr className='   '>
@@ -212,7 +213,7 @@ function AdminUserList() {
                                                                 <td class=" py-2 text-center">
                                                                   
                                                                     &nbsp;
-                                                                    <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-1.5 text-xs px-2 border
+                                                                    <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-1.5 text-xs px-3 border
                                                                       rounded-full"
                                                                         onClick={() => openModel(data.adminId)}>
                                                                         Delete
@@ -234,7 +235,7 @@ function AdminUserList() {
                             </table>
 
                         </div>
-                        <nav aria-label="Page navigation example " className='text-center relative z-10  '>
+                        <nav aria-label="Page navigation example  " className='text-center relative z-10  '>
                         <ul class="inline-flex justify-center items-center ">
                             <li>
                                 <button class={`px-3 inline-flex justify-center  items-center cursor-pointer py-2 ml-0 leading-tight text-white font-bold bg-red-800 disabled:opacity-50  rounded-lg mx-4 hover:bg-red-700  dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white`} disabled={buttonPre} onClick={prev} >
@@ -254,9 +255,9 @@ function AdminUserList() {
                     </div>
                     
                 </div>
-                <div className='absolute bottom-0     '>
+                {/* <div className='absolute bottom-0 right-0 -z-10    '>
                     <img src={DesignLogin} alt='empty' className='w-full'></img>
-                </div>
+                </div> */}
             </div>
           
 
@@ -267,13 +268,13 @@ function AdminUserList() {
                 onRequestClose={closeModal}
                 style={customStyles}
                 contentLabel="Example Modal"
-                className=""
+                className=" "
 
             >
 
 
 
-                <div class="shadow-xl bg-[rgb(254 214 172)] rounded-lg md:max-w-md md:mx-auto p-4 fixed inset-x-0 bottom-0 z-50 mb-4 mx-4 md:relative">
+                <div class="shadow-xl   bg-[rgb(254 214 172)] rounded-lg md:max-w-md md:mx-auto p-4 fixed inset-x-0 bottom-0 z-50 mb-4 mx-4 md:relative">
                     <div class="md:flex items-center">
                         <div class="rounded-full border border-red-900 flex items-center justify-center w-16 h-16 flex-shrink-0 mx-auto">
                             <AiOutlineWarning size={40} fill='#8E2E0F' />

@@ -2,7 +2,8 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
 import { toast } from 'react-toastify';
 
-const baseUrl = `http://sanatanjyoti-env.eba-ab3znppq.ap-south-1.elasticbeanstalk.com`
+// const baseUrl = `http://sanatanjyoti-env.eba-ab3znppq.ap-south-1.elasticbeanstalk.com`
+const baseUrl = `https://0bbe-2405-201-4041-c01c-9dd3-a1e5-c247-8e87.in.ngrok.io`
 
 export const getAdminList = createAsyncThunk('ADMIN_LIST/GET_ALL_ADMIN_LIST',
     async (data) => {
@@ -75,9 +76,11 @@ const adminLists = createSlice({
             // console.log(state,'this is state')
             // console.log(action.payload.data.data,'this is action ')
             // console.log( [state.result.push(action.payload.data.data)],'what is this')
-            toast.success('Admin added successfully')
+            // toast.success('Admin added successfully')
             state.loading = false,
                 [state.result.push(action.payload.data.data)]
+                console.log(action.payload.data.status.message,'err')
+                toast.success(action.payload.data.status.message)
         },
         [addAdmin.rejected]: (state, action) => {
             state.loading = false,

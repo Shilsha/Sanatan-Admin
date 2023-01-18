@@ -6,7 +6,7 @@ import { TbLogout } from 'react-icons/tb'
 import Modal from 'react-modal';
 import { AiOutlineClose } from 'react-icons/ai'
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Navigate, NavLink, useNavigate } from 'react-router-dom'
 import { RiShieldUserLine } from 'react-icons/ri'
 import { HiClipboardDocumentList } from 'react-icons/hi2'
@@ -42,6 +42,9 @@ function Sidebar() {
     })
     const dispatch = useDispatch()
     const navigate    =useNavigate()
+
+    const adminMsg=useSelector((state)=>state.adminList)
+    console.log(adminMsg,'adminMsg')
     // =======================================add staff model===========================
 
     function closeModal() {
@@ -88,7 +91,7 @@ function Sidebar() {
             </NavLink>
            </div>
 
-            <div className='flex flex-col justify-between items-center -mt-52 gap-6  '>
+            <div className='flex flex-col justify-between items-center -mt-16 gap-6  '>
                 {/* <div className='  rounded cursor-pointer hover:bg-red-800 text-black hover:text-white p-1'> */}
 
                     <NavLink to='/dashboard'  >

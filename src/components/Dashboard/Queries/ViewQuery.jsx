@@ -182,7 +182,7 @@ function ViewQuery() {
 
                                             <div className=' w-full flex justify-between '>
                                                 <p className=''><strong>Status : </strong>
-                                                    <button className={`${singleQuery?.result.status == 'RESOLVED' ? `bg-green-500` : `bg-red-500`} text-white py-1 shadow rounded-lg px-2`}>{singleQuery?.result?.status}</button>
+                                                    <button className={`${singleQuery?.result.status == 'RESOLVED' ? `bg-green-500` : `bg-red-500`} text-white py-1 shadow rounded-full px-3`}>{singleQuery?.result?.status}</button>
                                                 </p>
                                                <div className='  w-[60%]'>
                                              <div className='flex justify-center pt-1'>
@@ -203,12 +203,12 @@ function ViewQuery() {
 
                                         </> : <>
 
-                                            <button class="bg-orange-500 shadow hover:bg-orange-600 text-white font-bold py-1  px-2 rounded"
+                                            <button class="bg-orange-500 shadow hover:bg-orange-600 text-white font-bold py-1  px-3 rounded-full"
                                                 onClick={() => openModel('RESOLVED')}
                                             >
                                                 Resolve
                                             </button>
-                                            <button class="border-2  hover:bg-red-600 mx-4 hover:text-white text-gray-500 shadow font-bold py-1  px-2 rounded"
+                                            <button class="border-2 border-orange-500  hover:bg-red-600 mx-4 hover:text-white text-orange-500 shadow font-bold py-1  px-4 rounded-full"
                                                 onClick={() => openModel('REJECTED')}
                                             >
                                                 Reject

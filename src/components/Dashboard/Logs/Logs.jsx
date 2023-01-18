@@ -119,12 +119,12 @@ function Logs() {
     return (
         <>
 
-            <div className='container   w-[100%] h-[100vh] flex flex-col-2 gap-4  '>
+            <div className='   w-[100%] h-[100vh] flex flex-col-2 gap-4  '>
                 <Sidebar />
 
-                <div className=' w-[91%]  '>
+                <div className=' w-full  '>
                     <Navbar />
-                    <div className=' my-2 mx-auto '>
+                    <div className=' my-2 pr-4 '>
 
                         < div className='flex justify-between items-center pb-4 '>
                             <div className='flex justify-between w-[40%]'>

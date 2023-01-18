@@ -5,7 +5,7 @@ import { FaEdit } from 'react-icons/fa'
 import side1 from '../../../Assets/images/sanatandark.png'
 import { useDispatch, useSelector } from 'react-redux'
 import { getBroadCastAction } from '../../../Redux/Fetures/Reducers/BroadcastSplice'
-import Loader from '../../Loader/Loader'
+import LoaderN from '../../Loader/Loader'
 import { MdSystemSecurityUpdateGood } from 'react-icons/md'
 import { addBroadcastAction, updateBroadcastAction, deleteBroadcastAction } from '../../../Redux/Fetures/Reducers/BroadcastSplice'
 import { ToastContainer } from 'react-toastify'
@@ -114,9 +114,9 @@ function BroadCast() {
             <div className='   w-[100%] h-[100vh] flex flex-col-2 gap-4  '>
                 <Sidebar />
 
-                <div className=' w-[93%]  '>
+                <div className=' w-full '>
                     <Navbar />
-                    <div className=' my-4  '>
+                    <div className=' my-4 pr-4  '>
 
 
                         <div className=' col-span-4  rounded-lg  relative '>
@@ -149,16 +149,16 @@ function BroadCast() {
                                             <div class="flex items-center justify-center px-3 py-3 border-t dark:border-gray-600">
                                                 {id ? <>
 
-                                                    <button type="submit" class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center bg-orange-600 hover:bg-orange-700 text-white shadow-lg rounded-lg " >
+                                                    <button type="submit" class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center bg-orange-600 hover:bg-orange-700 text-white shadow-lg rounded-full " >
                                                         Update Broadcast
                                                     </button>
                                                 </> : <>
-                                                    <button type="submit" class="inline-flex shadow-lg  items-center py-2.5 px-4 text-xs font-medium text-center bg-orange-600 hover:bg-orange-700 text-white rounded-lg ">
+                                                    <button type="submit" class="inline-flex shadow-lg  items-center py-2.5 px-4 text-xs font-medium text-center bg-orange-600 hover:bg-orange-700 text-white rounded-full ">
                                                         Broadcast Message
                                                     </button>
                                                 </>}
 
-                                                <button type="" class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-black hover:bg-orange-700 border mx-2 shadow-lg rounded-lg hover:text-white " onClick={handleClear} >
+                                                <button type="" class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-orange-500 hover:bg-orange-700 border-2 border-orange-500 mx-2 shadow-lg rounded-full hover:text-white " onClick={handleClear} >
                                                     Clear Broadcast
                                                 </button>
 
@@ -190,7 +190,7 @@ function BroadCast() {
                                     </tr>
                                 </thead>
                                 {
-                                    broadCast.loading ? <Loader /> : <>
+                                    broadCast.loading ? <LoaderN /> : <>
 
                                         {broadCast.result.map((data) => {
                                             return (
@@ -201,10 +201,10 @@ function BroadCast() {
                                                         <td class="py-2  px-2 ">{JSON.stringify(data.announcementStatus)}</td>
                                                         <td class="py-2  px-2 ">{truncateString(data.announcementOfTheDay, 90)}</td>
                                                         <td class="py-2  px-2 ">
-
+{/* 
 
                                                             <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold 
-                                                                    py-1 text-xs px-5 rounded-full"
+                                                                    py-1.5 text-xs px-5 rounded-full"
                                                                 onClick={() => editHandle({
                                                                     data: {
                                                                         Id: data.announcementId,
@@ -212,17 +212,25 @@ function BroadCast() {
                                                                         Msg: data.announcementOfTheDay
                                                                     }
                                                                 })}>
-                                                                Edit
+                                                                Update
                                                             </button>
-                                                            &nbsp;
+                                                            &nbsp; */}
 
-                                                            {data.announcementStatus ? <> <button class="bg-red-500 hover:bg-red-700 text-white font-bold
-                                                                     py-1.5 text-xs px-2 border  rounded-full" onClick={() => deleteBroadcast(data.announcementId)} >
+                                                            {data.announcementStatus ? <> <button class="border-2 border-orange-500  bg-red-700 text-white font-bold
+                                                                     py-1.5 text-xs px-5   rounded-full" onClick={() => deleteBroadcast(data.announcementId)} >
                                                                 Deactivate
                                                             </button></> : <>
-                                                                <button class="bg-orange-500 hover:bg-orange-700 text-white font-bold
-                                                                     py-1.5 text-xs px-5 border  rounded-full" onClick={() => deleteBroadcast(data.announcementId)} >
-                                                                    Delete
+                                                                <button  class=" text-orange-500 border-2 border-red-500 hover:bg-orange-500 hover:text-white font-bold
+                                                                     py-1.5 text-xs px-5   rounded-full" 
+                                                                     onClick={() => editHandle({
+                                                                        data: {
+                                                                            Id: data.announcementId,
+                                                                            Date: data.announcementDate,
+                                                                            Msg: data.announcementOfTheDay
+                                                                        }
+                                                                    })}
+                                                                      >
+                                                                    Reactivate
                                                                 </button>
                                                             </>}
 

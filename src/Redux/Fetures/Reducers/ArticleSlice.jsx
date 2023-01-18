@@ -1,8 +1,8 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
 
-const baseUrl = `http://sanatanjyoti-env.eba-ab3znppq.ap-south-1.elasticbeanstalk.com`
-// const baseUrl = 'https://6899-2405-201-4041-c01c-8130-8e08-5ead-88a1.in.ngrok.io'
+// const baseUrl = `http://sanatanjyoti-env.eba-ab3znppq.ap-south-1.elasticbeanstalk.com`
+const baseUrl = 'https://0bbe-2405-201-4041-c01c-9dd3-a1e5-c247-8e87.in.ngrok.io'
 
 export const getAllArticleAction = createAsyncThunk('ARTICELS/GET_ALL_ARTICLES',
     async (data) => {
@@ -33,6 +33,21 @@ export const PublishArticleMessage = createAsyncThunk('ARTICELS_PUBLISH/PUBLISH_
     })
 
 // =======================================reject article===================================
+export const getAllRejectedArticleAction = createAsyncThunk('GET_REJECTED_ARTICELS/GET_ALL_REJECTED_ARTICLES',
+    async (page) => {
+
+        let OPTIONS = {
+            // url: `${baseUrl}/article/filter?category=All&keyword=&articleType=${data.type}&page=${data.page}&size=20`,
+            url: `${baseUrl}/api/getRejectedArticlesList?articleType=REJECTED&page=${page}&size=10`,
+            method: "GET",
+            headers: {
+              'Accept': 'application/json'
+            },
+          };
+        return axios(OPTIONS)
+            .then(res => res)
+    })
+
 export const RejectArticleMessage = createAsyncThunk('ARTICELS_REJECT/ARTICLES_REJECT',
     async (data) => {
         let OPTIONS = {
@@ -98,6 +113,20 @@ const articles = createSlice({
             state.loading = false,
                 state.error = action
         },
+        [getAllRejectedArticleAction.pending]: (state, action) => {
+            state.loading = true;
+        },
+        [getAllRejectedArticleAction.fulfilled]: (state, action) => {
+            state.loading = false,
+                state.result = action.payload.data.data
+
+        },
+        [getAllRejectedArticleAction.rejected]: (state, action) => {
+            state.loading = false,
+                state.error = action
+        },
+
+
     }
 
 })
