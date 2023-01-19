@@ -2,14 +2,12 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
 import { toast } from 'react-toastify';
 
-const baseUrl = `http://sanatanjyoti-env.eba-ab3znppq.ap-south-1.elasticbeanstalk.com`
-// const baseUrl = `https://0bbe-2405-201-4041-c01c-9dd3-a1e5-c247-8e87.in.ngrok.io`
 
 export const getAdminList = createAsyncThunk('ADMIN_LIST/GET_ALL_ADMIN_LIST',
     async (data) => {
 
         let OPTIONS = {
-            url: `${baseUrl}/api/getAdminList?adminStatus=true&page=${data.page}&size=20`,
+            url: `${import.meta.env.VITE_BASE_URL}/api/getAdminList?adminStatus=${data.type}&page=${data.page}&size=20`,
             method: "GET",
             headers: {
                 'Accept': 'application/json'
@@ -22,7 +20,7 @@ export const getAdminList = createAsyncThunk('ADMIN_LIST/GET_ALL_ADMIN_LIST',
 export const addAdmin = createAsyncThunk('ADD_ADMIN/ADD_ADMIN',
     async (data) => {
         let OPTIONS = {
-            url: `${baseUrl}/api/addAdmin`,
+            url: `${import.meta.env.VITE_BASE_URL}/api/addAdmin`,
             data: data,
             method: "POST",
             headers: {
@@ -36,7 +34,7 @@ export const addAdmin = createAsyncThunk('ADD_ADMIN/ADD_ADMIN',
 export const delelteAdmin = createAsyncThunk('DELETE_ADMIN/DELETE_ADMIN',
     async (id) => {
         let OPTIONS = {
-            url: `${baseUrl}/api/deleteAdmin?adminId=${id}`,
+            url: `${import.meta.env.VITE_BASE_URL}/api/deleteAdmin?adminId=${id}`,
             method: "DELETE",
             headers: {
                 'Accept': 'application/json'
@@ -62,6 +60,7 @@ const adminLists = createSlice({
         [getAdminList.fulfilled]: (state, action) => {
             state.loading = false,
                 state.result = action.payload.data.data
+             
         },
         [getAdminList.rejected]: (state, action) => {
             state.loading = false,

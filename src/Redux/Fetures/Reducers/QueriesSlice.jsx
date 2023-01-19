@@ -1,12 +1,12 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
-const baseUrl = 'http://sanatanjyoti-env.eba-ab3znppq.ap-south-1.elasticbeanstalk.com'
+
 
 export const getAllQueriesAction = createAsyncThunk('QUERIES/GET_ALL_QUERIES',
     async (data) => {
        
         let OPTIONS = {
-            url: `${baseUrl}/api/get_Contacts_on_Filter?status=${data.type}&createdDate&keyword=${data.FilterSearch}&page=${data.page}&size=16`,
+            url: `${import.meta.env.VITE_BASE_URL}/api/get_Contacts_on_Filter?status=${data.type}&createdDate&keyword=${data.FilterSearch}&page=${data.page}&size=16`,
             method: "GET",
             headers: {
               'Accept': 'application/json'

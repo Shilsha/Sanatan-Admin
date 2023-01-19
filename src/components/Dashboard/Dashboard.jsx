@@ -25,6 +25,7 @@ import { getAllQueriesAction } from '../../Redux/Fetures/Reducers/QueriesSlice'
 import DesignLogin from '../../Assets/images/DesignLogin.png'
 import Button from '../Screen/Button/Button';
 import LoaderN from '../Loader/LoaderN';
+
 const customStyles = {
     content: {
         top: '50%',
@@ -137,15 +138,20 @@ function Dashboard() {
         // dispatch(updateThoughtOfDay(data))
         dispatch(updateThoughtAction(data))
         setIsOpen(false);
-
-
     }
+
+    // console.log(process,'process')
+    // console.log(process.env.REACT_APP_BASE_URL,'env file ')
+    console.log(import.meta.env.VITE_BASE_URL,'kkkk')
+
+
     return (
         <>
             <div className='   w-[100%] h-[100vh] flex flex-col-2 gap-4   '>
                 <Sidebar />
                 <div className='   w-full ' >
                     <Navbar />
+                    
                     {/* ---------------------------------------------------------------- 1 row---------------------------------------------------------------------------*/}
 
                     <div className=" ScrollStyle  pr-4 ">

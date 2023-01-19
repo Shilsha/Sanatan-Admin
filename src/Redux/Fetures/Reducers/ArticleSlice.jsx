@@ -1,14 +1,12 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
 
-const baseUrl = `http://sanatanjyoti-env.eba-ab3znppq.ap-south-1.elasticbeanstalk.com`
-// const baseUrl = 'https://0bbe-2405-201-4041-c01c-9dd3-a1e5-c247-8e87.in.ngrok.io'
 
 export const getAllArticleAction = createAsyncThunk('ARTICELS/GET_ALL_ARTICLES',
     async (data) => {
 
         let OPTIONS = {
-            url: `${baseUrl}/article/filter?category=All&keyword=&articleType=${data.type}&page=${data.page}&size=20`,
+            url: `${import.meta.env.VITE_BASE_URL}/article/filter?category=All&keyword=&articleType=${data.type}&page=${data.page}&size=20`,
             method: "GET",
             headers: {
               'Accept': 'application/json'
@@ -20,7 +18,7 @@ export const getAllArticleAction = createAsyncThunk('ARTICELS/GET_ALL_ARTICLES',
 export const PublishArticleMessage = createAsyncThunk('ARTICELS_PUBLISH/PUBLISH_ARTICLES',
     async (data) => {
         let OPTIONS = {
-            url: `${baseUrl}/api/approveArticle`,
+            url: `${import.meta.env.VITE_BASE_URL}/api/approveArticle`,
             data: data,
             method: "PUT",
             headers: {
@@ -37,8 +35,8 @@ export const getAllRejectedArticleAction = createAsyncThunk('GET_REJECTED_ARTICE
     async (page) => {
 
         let OPTIONS = {
-            // url: `${baseUrl}/article/filter?category=All&keyword=&articleType=${data.type}&page=${data.page}&size=20`,
-            url: `${baseUrl}/api/getRejectedArticlesList?articleType=REJECTED&page=${page}&size=10`,
+            // url: `${import.meta.env.VITE_BASE_URL}/article/filter?category=All&keyword=&articleType=${data.type}&page=${data.page}&size=20`,
+            url: `${import.meta.env.VITE_BASE_URL}/api/getRejectedArticlesList?articleType=REJECTED&page=${page}&size=10`,
             method: "GET",
             headers: {
               'Accept': 'application/json'
@@ -51,7 +49,7 @@ export const getAllRejectedArticleAction = createAsyncThunk('GET_REJECTED_ARTICE
 export const RejectArticleMessage = createAsyncThunk('ARTICELS_REJECT/ARTICLES_REJECT',
     async (data) => {
         let OPTIONS = {
-            url: `${baseUrl}/api/delete_Article`,
+            url: `${import.meta.env.VITE_BASE_URL}/api/delete_Article`,
             data: data,
             method: "DELETE",
             headers: {

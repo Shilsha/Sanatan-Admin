@@ -42,6 +42,7 @@ function AdminUserList() {
     const [buttonPre, setButtonPre] = useState(false)
     const [buttonNext, setButtonNext] = useState(false)
     const[deleteId,setDeleteId]=useState('')
+    const [types, setTypes] = useState(true)
     const dispatch = useDispatch()
 
     const allAdminList = useSelector((state) => state.adminList)
@@ -51,7 +52,8 @@ function AdminUserList() {
 
     useEffect(() => {
         const data={
-            page:page
+            page:page,
+            type:types
         }
         dispatch(getAdminList(data))
     }, [])
@@ -137,6 +139,21 @@ function AdminUserList() {
     }, [allAdminList.result])
 
 
+    // ==========================admin type==========================
+    const setAdminType = (type) => {
+        setTypes(type)
+        console.log(type, '22')
+        const data = {
+            page: page,
+            type: type
+        }
+        // dispatch(getUser(data))
+        // toast.success("User Type has changed")
+        dispatch(getAdminList(data))
+     
+
+    }
+
     return (
 
         <>
@@ -170,7 +187,17 @@ function AdminUserList() {
 
                             </div>
                             <div>
-                            <button type="button" class= "inline-flex items-center text-white bg-gradient-to-r from-orange-500  to-yellow-400 hover:bg-gradient-to-bl font-medium rounded-lg  px-3 py-2 text-center mr-2 "> Admin Users</button>
+                            <select id="countries" className="bg-gray-50 border border-gray-400 text-gray-900 
+                                text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700
+                                 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    onChange={(e) => setAdminType(e.target.value)}   
+                                      >
+                                    <option disabled={true} 
+                                    selected={true}
+                                    >Select Admin Type</option>
+                                    <option value="true">Active</option>
+                                    <option value="false">Deactive</option>
+                                </select>
                             
                             </div>
                         </div>
@@ -213,10 +240,16 @@ function AdminUserList() {
                                                                 <td class=" py-2 text-center">
                                                                   
                                                                     &nbsp;
-                                                                    <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-1.5 text-xs px-3 border
+                                                                    {/* <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-1.5 text-xs px-3 border
                                                                       rounded-full"
                                                                         onClick={() => openModel(data.adminId)}>
                                                                         Delete
+                                                                    </button> */}
+                                                                     <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-1.5 text-xs px-3 border
+                                                                      rounded-full"
+                                                                        // onClick={() => openModel(data.adminId)}
+                                                                        >
+                                                                        Deactivate
                                                                     </button>
                                                                 </td>
                                                             </tr>

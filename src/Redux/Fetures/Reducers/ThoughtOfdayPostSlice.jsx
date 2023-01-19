@@ -1,11 +1,11 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
-const baseUrl = 'http://sanatanjyoti-env.eba-ab3znppq.ap-south-1.elasticbeanstalk.com'
+
 // =======================GET============================
 export const getThoughtAction = createAsyncThunk('THOUGHT_OF_DAY/GET_THOUGHT_OF_DAY',
     async () => {
         let OPTIONS = {
-            url: `${baseUrl}/api/get_thought?thoughtId=2&todayDate=`,
+            url: `${import.meta.env.VITE_BASE_URL}/api/get_thought?thoughtId=2&todayDate=`,
             method: "GET",
             headers: {
                 'Accept': 'application/json'
@@ -18,7 +18,7 @@ export const getThoughtAction = createAsyncThunk('THOUGHT_OF_DAY/GET_THOUGHT_OF_
 export const updateThoughtAction = createAsyncThunk('THOUGHT_OF_DAY/UPDATE_THOUGHT_OF_DAY',
     async (data) => {
         let OPTIONS = {
-            url: `${baseUrl}/api/update_thought`,
+            url: `${import.meta.env.VITE_BASE_URL}/api/update_thought`,
             method: "PUT",
 
             data:data,

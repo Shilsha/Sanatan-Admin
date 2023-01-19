@@ -1,12 +1,11 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
-const baseUrl = 'http://sanatanjyoti-env.eba-ab3znppq.ap-south-1.elasticbeanstalk.com'
 
 export const getSingleQuery = createAsyncThunk('QUERIES/GET_SINGLE_QUERY',
     async (id) => {
        
         let OPTIONS = {
-            url: `${baseUrl}/api/get_Contact_By_Id?contactId=${id}`,
+            url: `${import.meta.env.VITE_BASE_URL}/api/get_Contact_By_Id?contactId=${id}`,
             method: "GET",
             headers: {
               'Accept': 'application/json'
@@ -19,7 +18,7 @@ export const getSingleQuery = createAsyncThunk('QUERIES/GET_SINGLE_QUERY',
     export const updateQueriesAction = createAsyncThunk('QUERIES_UPDATE/UPADTE_QUERIES',
     async (data) => {
         let OPTIONS = {
-            url: `${baseUrl}/api/update_Contact`,
+            url: `${import.meta.env.VITE_BASE_URL}/api/update_Contact`,
             method: "PUT",
             headers: {
                 'Accept': 'application/json'

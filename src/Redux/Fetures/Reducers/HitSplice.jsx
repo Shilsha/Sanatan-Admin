@@ -1,12 +1,12 @@
 // import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 // import axios from 'axios'
-// const baseUrl = 'http://sanatanjyoti-env.eba-ab3znppq.ap-south-1.elasticbeanstalk.com'
+// const import.meta.env.VITE_BASE_URL = 'http://sanatanjyoti-env.eba-ab3znppq.ap-south-1.elasticbeanstalk.com'
 
 // export const getHitsPanchang = createAsyncThunk('HITS_PANCHANG/GET_HITS_PANCHANG',
 //     async (data) => {     
 //         console.log(data,'this is action date') 
 //         let OPTIONS = {
-//             // url: `${baseUrl}/api/getHits?module=festivalModule&createdAt&page=0&size=20`,
+//             // url: `${import.meta.env.VITE_BASE_URL}/api/getHits?module=festivalModule&createdAt&page=0&size=20`,
 //             url: `https://62be-2405-201-4041-c01c-20fb-c0da-32bc-a7e6.in.ngrok.io/api/getHits?module=PanchangModule&createdAt=${data}`,
         
 
@@ -22,7 +22,7 @@
 //     export const getHitsFestival = createAsyncThunk('HITS_FESTIVAL/GET_HITS_FESTIVAL',
 //     async (data) => {      
 //         let OPTIONS = {
-//             // url: `${baseUrl}/api/getHits?module=festivalModule&createdAt&page=0&size=20`,
+//             // url: `${import.meta.env.VITE_BASE_URL}/api/getHits?module=festivalModule&createdAt&page=0&size=20`,
 //             url: `https://62be-2405-201-4041-c01c-20fb-c0da-32bc-a7e6.in.ngrok.io/api/getHits?module=festivalModule&createdAt=${data}`,
         
 
@@ -37,7 +37,7 @@
 //     export const getHitsKundali = createAsyncThunk('HITS_KUNDLI/GET_HITS_KUNDLI',
 //     async (data) => {      
 //         let OPTIONS = {
-//             // url: `${baseUrl}/api/getHits?module=festivalModule&createdAt&page=0&size=20`,
+//             // url: `${import.meta.env.VITE_BASE_URL}/api/getHits?module=festivalModule&createdAt&page=0&size=20`,
 //             url: `https://62be-2405-201-4041-c01c-20fb-c0da-32bc-a7e6.in.ngrok.io/api/getHits?module=KundaliModule&createdAt=${data}`,
         
 
@@ -53,7 +53,7 @@
 //     export const getHitsContact  = createAsyncThunk('HITS_CONTACT/GET_HITS_CONTACT',
 //     async (data) => {      
 //         let OPTIONS = {
-//             // url: `${baseUrl}/api/getHits?module=festivalModule&createdAt&page=0&size=20`,
+//             // url: `${import.meta.env.VITE_BASE_URL}/api/getHits?module=festivalModule&createdAt&page=0&size=20`,
 //             url: `https://62be-2405-201-4041-c01c-20fb-c0da-32bc-a7e6.in.ngrok.io/api/getHits?module=ContactModule&createdAt=${data}`,
         
 
@@ -68,7 +68,7 @@
 //     export const getHitsHoroscope  = createAsyncThunk('HITS_HOROSCOPE/GET_HITS_HOROSCOPE',
 //     async () => {      
 //         let OPTIONS = {
-//             // url: `${baseUrl}/api/getHits?module=festivalModule&createdAt&page=0&size=20`,
+//             // url: `${import.meta.env.VITE_BASE_URL}/api/getHits?module=festivalModule&createdAt&page=0&size=20`,
 //             url: `https://62be-2405-201-4041-c01c-20fb-c0da-32bc-a7e6.in.ngrok.io/api/getHits?module=HoroscopeModule&createdAt=2023-01-11`,
         
 
@@ -83,7 +83,7 @@
 //     export const getHitsArticle = createAsyncThunk('HITS_ARTICLE/GET_HITS_ARTICLE',
 //     async () => {      
 //         let OPTIONS = {
-//             // url: `${baseUrl}/api/getHits?module=festivalModule&createdAt&page=0&size=20`,
+//             // url: `${import.meta.env.VITE_BASE_URL}/api/getHits?module=festivalModule&createdAt&page=0&size=20`,
 //             url: `https://62be-2405-201-4041-c01c-20fb-c0da-32bc-a7e6.in.ngrok.io/api/getHits?module=ArticleModule&createdAt=2023-01-11`,
         
 
@@ -98,7 +98,7 @@
 //     export const getHitsMatchMaking = createAsyncThunk('HITS_MATCH_MAKING/GET_HITS_MATCH_MAKING',
 //     async () => {      
 //         let OPTIONS = {
-//             // url: `${baseUrl}/api/getHits?module=festivalModule&createdAt&page=0&size=20`,
+//             // url: `${import.meta.env.VITE_BASE_URL}/api/getHits?module=festivalModule&createdAt&page=0&size=20`,
 //             url: `https://62be-2405-201-4041-c01c-20fb-c0da-32bc-a7e6.in.ngrok.io/api/getHits?module=MatchMakingModule&createdAt=2023-01-11`,
         
 
@@ -113,7 +113,7 @@
 //     export const getHitsLogin = createAsyncThunk('HITS_LOGIN/GET_HITS_LOGIN',
 //     async () => {      
 //         let OPTIONS = {
-//             // url: `${baseUrl}/api/getHits?module=festivalModule&createdAt&page=0&size=20`,
+//             // url: `${import.meta.env.VITE_BASE_URL}/api/getHits?module=festivalModule&createdAt&page=0&size=20`,
 //             url: `https://62be-2405-201-4041-c01c-20fb-c0da-32bc-a7e6.in.ngrok.io/api/getHits?module=LoginModule&createdAt=2023-01-11`,
         
 

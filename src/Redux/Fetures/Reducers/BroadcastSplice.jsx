@@ -1,13 +1,12 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
 import { toast } from 'react-toastify';
-const baseUrl = 'http://sanatanjyoti-env.eba-ab3znppq.ap-south-1.elasticbeanstalk.com'
-// const baseUrl = 'https://62be-2405-201-4041-c01c-20fb-c0da-32bc-a7e6.in.ngrok.io'
+
 // =======================GET============================
 export const getBroadCastAction = createAsyncThunk('BROADCAST_OF_DAY/GET_BROADCAST',
     async () => {
         let OPTIONS = {
-            url: `${baseUrl}/api/get_all_announcement`,
+            url: `${import.meta.env.VITE_BASE_URL}/api/get_all_announcement`,
             method: "GET",
             headers: {
                 'Accept': 'application/json'
@@ -21,7 +20,7 @@ export const getBroadCastAction = createAsyncThunk('BROADCAST_OF_DAY/GET_BROADCA
 export const addBroadcastAction = createAsyncThunk('BROADCAST_OF_DAY/ADD_BROADCAST',
     async (data) => {
         let OPTIONS = {
-            url: `${baseUrl}/api/add_announcement`,
+            url: `${import.meta.env.VITE_BASE_URL}/api/add_announcement`,
             method: "POST",
             headers: {
                 'Accept': 'application/json'
@@ -37,7 +36,7 @@ export const addBroadcastAction = createAsyncThunk('BROADCAST_OF_DAY/ADD_BROADCA
 export const updateBroadcastAction = createAsyncThunk('UPDATE_BROADCAST_OF_DAY/UPDATE_BROADCAST_OF_DAY',
     async (data) => {
         let OPTIONS = {
-            url: `${baseUrl}/api/update_announcement`,
+            url: `${import.meta.env.VITE_BASE_URL}/api/update_announcement`,
             method: "PUT",
 
             data: data,
@@ -55,7 +54,7 @@ export const updateBroadcastAction = createAsyncThunk('UPDATE_BROADCAST_OF_DAY/U
 export const deleteBroadcastAction = createAsyncThunk('DELETE_BROADCAST_OF_DAY/DELETE_BROADCAST_OF_DAY',
     async (ID) => {
         let OPTIONS = {
-            url: `${baseUrl}/api/delete_announcement?announcementId=${ID}`,
+            url: `${import.meta.env.VITE_BASE_URL}/api/delete_announcement?announcementId=${ID}`,
             method: "DELETE",
             headers: {
                 'Accept': 'application/json'

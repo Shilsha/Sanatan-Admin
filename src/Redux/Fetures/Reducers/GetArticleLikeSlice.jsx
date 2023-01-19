@@ -1,14 +1,12 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
 
-const baseUrl = `http://sanatanjyoti-env.eba-ab3znppq.ap-south-1.elasticbeanstalk.com`
-
 export const getArticleLike = createAsyncThunk('ARTICLE_LIKE/GET_ARTICLE_LIKE',
     async (id) => {
 
         let OPTIONS = {
-            // url: `${baseUrl}/article/filter?category=All&keyword=&articleType=${data.type}&page=${data.page}&size=20`,
-            url: `${baseUrl}/article/get_list_of_users?articleId=${id}`,
+            // url: `${import.meta.env.VITE_BASE_URL}/article/filter?category=All&keyword=&articleType=${data.type}&page=${data.page}&size=20`,
+            url: `${import.meta.env.VITE_BASE_URL}/article/get_list_of_users?articleId=${id}`,
             method: "GET",
             headers: {
               'Accept': 'application/json'

@@ -1,14 +1,13 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
-const baseUrl = 'http://sanatanjyoti-env.eba-ab3znppq.ap-south-1.elasticbeanstalk.com'
 
 export const getLogs = createAsyncThunk('LOGS/GET_LOGS',
     async (data) => {
         console.log(data,'is this slice riht')
         let OPTIONS = {
-            // url: `${baseUrl}/article/filter?category=All&keyword=&articleType=NEW&page=0&size=20`,
-            url:`${baseUrl}/api/getlogs?module=${data.module}&createdAt=${data.date}&page=${data.page}&size=60`,
-        //   url:  `${baseUrl}/api/getlogs?createdAt=${data.date}&module=${data.module}&page=${data.page}&size=19`,
+            // url: `${import.meta.env.VITE_BASE_URL}/article/filter?category=All&keyword=&articleType=NEW&page=0&size=20`,
+            url:`${import.meta.env.VITE_BASE_URL}/api/getlogs?module=${data.module}&createdAt=${data.date}&page=${data.page}&size=60`,
+        //   url:  `${import.meta.env.VITE_BASE_URL}/api/getlogs?createdAt=${data.date}&module=${data.module}&page=${data.page}&size=19`,
                                
             method: "GET",
             headers: {
