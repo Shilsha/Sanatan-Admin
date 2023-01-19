@@ -62,11 +62,11 @@ function GetArticelLike({ ParentFunc, id, ParentFunc2, likes ,comments}) {
                 </div>
             </div>
             {/* =====================================this is like ================================= */}
-            <div className='  mt-4 mx-auto mr-4 shadow ' style={show?{display:'none'}:{display:'block'}} >
+            <div className='  mt-4 mx-auto mr-4 shadow tableWrapComment' style={show?{display:'none'}:{display:'block'}} >
 
                 <table class=" tables  w-full rounded-xl  ">
                     <thead className=' '>
-                        <tr className=' table_head text-center shadow-lg bg-blue-100  '>
+                        <tr className=' table_head text-center bg-blue-100  '>
                             <td class=" py-3  px-2 ">ID</td>
                             <td class="   ">Name</td>
                             <td class="   ">Email</td>
@@ -110,16 +110,16 @@ function GetArticelLike({ ParentFunc, id, ParentFunc2, likes ,comments}) {
 
             <div className='  mt-4 mx-auto mr-4  '  style={show1?{display:'none'}:{display:'block'}} >
 
-                <table class="shadow-lg tables  w-full rounded-xl  ">
+                <table class="shadow-lg tables tableWrapComment  w-full rounded-xl  ">
                     <thead className=''>
                         <tr className=' table_head text-center bg-blue-100'>
-                            <td class="  px-2 py-3 ">ID</td>
+                            <td class="   py-3 ">User Id</td>
                             <td class="   ">Name</td>
-                            <td class="   ">Email</td>
+                            <td class="   ">Content</td>
                             <td class="   ">Create Date</td>
-                            <td class="   ">Modify Date</td>
+                            {/* <td class="   ">Modify Date</td> */}
                             <td class="   ">Status</td>
-                            <td class="   "> Mobile No</td>
+                            {/* <td class="   "> Mobile No</td> */}
 
                         </tr>
                     </thead>
@@ -133,12 +133,12 @@ function GetArticelLike({ ParentFunc, id, ParentFunc2, likes ,comments}) {
                                     return <>
                                         <tr className='text-center text-gray-500 border-b-[3px]'>
                                             <td class=" py-3  px-2 ">{data.userId}</td>
-                                            <td class=" py-3  px-2 ">{data.fullName}</td>
-                                            <td class=" py-3  px-2 ">{data.email}</td>
-                                            <td class=" py-3  px-2 ">{(data.createdDate)}</td>
-                                            <td class=" py-3  px-2 ">{data.modifiedDate}</td>
-                                            <td class=" py-3  px-2 ">{JSON.stringify(data.enabled)}</td>
-                                            <td class=" py-3  px-2 ">{data.mobileNo}</td>
+                                            <td class=" py-3  px-2 ">{data.userName}</td>
+                                            <td class=" py-3  px-2 ">{data.content}</td>
+                                            <td class=" py-3  px-2 ">{(data.createdAt)}</td>
+                                            {/* <td class=" py-3  px-2 ">{data.modifiedDate}</td> */}
+                                            <td class=" py-3  px-2 ">{JSON.stringify(data.status)}</td>
+                                            {/* <td class=" py-3  px-2 ">{data.mobileNo}</td> */}
 
                                         </tr>
 

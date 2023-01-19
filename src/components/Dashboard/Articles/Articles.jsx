@@ -321,26 +321,39 @@ function Articles() {
 
                                                                     {data.articleType == 'PUBLISH' ? <>
 
-                                                                        <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 text-xs px-3 mt-2   rounded-full" onClick={() => HanldeReject(data.articleId, data.userId, 'Reject')}>
+                                                                        <button class="bg-red-500 hover:bg-red-700 text-white  py-1 text-sm px-3 mt-2   rounded-full" onClick={() => HanldeReject(data.articleId, data.userId, 'Reject')}>
                                                                             Reject
                                                                         </button>
 
 
                                                                     </> :
+
                                                                         <>
-
-
-                                                                            <div className='mx-auto flex gap-2'>
+                                                                            {data.articleType == 'REJECTED' ? <>
                                                                                 <button class="bg-blue-500 hover:bg-blue-700 text-white  
-                                                                         text-sm px-3 mt-1 rounded-full" onClick={() => HandlePublish(data.articleId, 'Publish')}>
+                                                                         text-sm px-3 mt-1 py-1 rounded-full" onClick={() => HandlePublish(data.articleId, 'Publish')}>
                                                                                     Pubish
-                                                                                </button>
+                                                                                </button></> : <>
 
-                                                                                <button class=" border-2 border-orange-500 text-orange-500 hover:bg-red-500 hover:text-white  
-                                                                             text-sm px-3 mt-1   rounded-full" onClick={() => HanldeReject(data.articleId, data.userId, 'Reject')}>
-                                                                                    Reject
-                                                                                </button>
-                                                                            </div>
+                                                                                <div className='mx-auto flex gap-2'>
+                                                                                    <button class="bg-blue-500 hover:bg-blue-700 text-white  
+                                                                         text-sm py-1 px-3  rounded-full" onClick={() => HandlePublish(data.articleId, 'Publish')}>
+                                                                                        Pubish
+                                                                                    </button>
+
+                                                                                    <button class=" border-2 border-orange-500 text-orange-500 hover:bg-red-500 hover:text-white  
+                                                                             text-sm px-3  py-1   rounded-full" onClick={() => HanldeReject(data.articleId, data.userId, 'Reject')}>
+                                                                                        Reject
+                                                                                    </button>
+                                                                                </div>
+
+
+
+
+
+                                                                            </>}
+
+
 
 
 
@@ -431,7 +444,7 @@ function Articles() {
 
                                 <div class="flex items-center justify-center">
                                     <button class="bg-orange-500 hover:bg-orange-600 text-white font-bold  px-5 py-2 rounded focus:outline-none focus:shadow-outline" type="submit">
-                                        Confirm 
+                                        Confirm
                                     </button>
 
                                 </div>

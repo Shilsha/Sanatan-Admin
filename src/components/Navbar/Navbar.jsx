@@ -45,9 +45,9 @@ function Navbar() {
           </div>
         </div>
 
-        <div className='flex justify-between items-center   w-[17%]  '>
+        <div className='flex justify-between items-center   '>
           
-            <IoMdNotifications className='text-white text-2xl shadow-lg'  />
+            <IoMdNotifications className='text-white text-2xl shadow-lg mx-3'   />
           <div className=' flex items-center px-2  bg-white rounded py-1 shadow-lg mr-1'>
               <h2>{userID?.email}</h2>
               <BiChevronDown size={18} />

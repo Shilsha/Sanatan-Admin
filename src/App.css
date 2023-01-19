@@ -326,6 +326,43 @@ tr:hover{
   display: none;
 }
 
+.tableWrapComment {
+  max-height: 400px;
+  /* border: 2px solid black; */
+  overflow: auto;
+}
+
+.tableWrapComment {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.tableWrapComment::-webkit-scrollbar {
+  display: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .navbar_bg{
   background: radial-gradient(circle at 10% 20%, rgb(255, 197, 61) 0%, rgb(255, 94, 7) 90%);
   

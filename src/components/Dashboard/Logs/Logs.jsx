@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Navbar from '../../Navbar/Navbar'
 import Sidebar from '../../Sidebar/Sidebar'
 import { BsSearch, BsThreeDots } from 'react-icons/bs'
-import { BiFilter ,BiSkipNext,BiSkipPrevious} from 'react-icons/bi'
+import { BiFilter, BiSkipNext, BiSkipPrevious } from 'react-icons/bi'
 import { AiOutlinePlus, AiFillDelete, AiTwotoneEdit, AiOutlineClose, AiOutlineClear } from 'react-icons/ai'
 import { useDispatch, useSelector } from 'react-redux'
 import { getLogs } from '../../../Redux/Fetures/Reducers/LogsSlice'
@@ -59,7 +59,7 @@ function Logs() {
         setPage(0)
         const data = {
             date: moment(new Date()).format('YYYY-MM-DD'),
-            module: null,
+            module: '',
             page: page,
         }
         dispatch(getLogs(data))
@@ -104,15 +104,15 @@ function Logs() {
 
 
     useEffect(() => {
-        if(logs.result.length<19){
+        if (logs.result.length < 19) {
             // console.log('chhota')
             setButtonNext(true)
-    
-        }else{
+
+        } else {
             // console.log('bada')
             setButtonNext(false)
         }
-    
+
     }, [logs.result])
 
 
@@ -126,7 +126,7 @@ function Logs() {
                     <Navbar />
                     <div className=' my-2 pr-4 '>
 
-                        < div className='flex justify-between items-center pb-4 '>
+                        < div className='flex justify-between items-center py-4 '>
                             <div className='flex justify-between w-[40%]'>
 
                                 <div class=" relative  w-[75%] text-gray-600 ">
@@ -145,16 +145,16 @@ function Logs() {
                                 </button> */}
 
                             </div>
-                            <button class="inline-flex items-center px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white text-sm font-medium rounded-md" onClick={ClearAllFilter}>
 
-                                Clear All
-                                <AiOutlineClear className='mx-1  ' size={25} />
-
-                            </button>
 
                             <div className='flex justify-between items-center'>
 
+                                <button class="inline-flex items-center px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white text-sm font-medium rounded-md" onClick={ClearAllFilter}>
 
+
+                                    <AiOutlineClear className='mx-1  ' size={25} />
+
+                                </button>
                                 <div className="mx-4 flex justify-between items-center w-[80%]">
 
                                     <DatePicker className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" selected={date} onChange={(date) => dateFilter(date)} />
@@ -233,13 +233,13 @@ function Logs() {
                         <ul class="inline-flex justify-center items-center ">
                             <li>
                                 <button class={`px-3 inline-flex justify-center  items-center cursor-pointer py-2 ml-0 leading-tight text-white font-bold bg-red-800 disabled:opacity-50  rounded-lg mx-4 hover:bg-red-700  dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white`} disabled={buttonPre} onClick={prev} >
-                                     <BiSkipPrevious className='pt-1' size={25}/>  Prev</button>
+                                    <BiSkipPrevious className='pt-1' size={25} />  Prev</button>
 
                             </li>
 
                             <li className=' mr-4 font-bold'>  {page + 1}</li>
                             <li>
-                                <button type='button' class="px-3 py-2 inline-flex items-center justify-center  leading-tight text-white font-bold bg-red-800 disabled:opacity-50 rounded-l-lg hover:bg-red-700 rounded-r-lg   dark:hover:text-white" disabled={buttonNext} onClick={next}>Next <BiSkipNext className='pt-1' size={25}/></button>
+                                <button type='button' class="px-3 py-2 inline-flex items-center justify-center  leading-tight text-white font-bold bg-red-800 disabled:opacity-50 rounded-l-lg hover:bg-red-700 rounded-r-lg   dark:hover:text-white" disabled={buttonNext} onClick={next}>Next <BiSkipNext className='pt-1' size={25} /></button>
 
 
                             </li>
