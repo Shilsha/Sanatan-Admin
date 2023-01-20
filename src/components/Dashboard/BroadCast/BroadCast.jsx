@@ -216,7 +216,7 @@ function BroadCast() {
                                                             </button>
                                                             &nbsp; */}
 
-                                                            {data.announcementStatus ? <> <button class="border-2 border-orange-500  bg-red-700 text-white font-bold
+                                                            {data.announcementStatus ? <> <button class="border-2 border-green-400 bg-green-600 hover:bg-green-700 text-white font-bold
                                                                      py-1.5 text-xs px-5   rounded-full" onClick={() => deleteBroadcast(data.announcementId)} >
                                                                 Deactivate
                                                             </button></> : <>
