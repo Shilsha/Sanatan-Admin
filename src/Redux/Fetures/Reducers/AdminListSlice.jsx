@@ -44,6 +44,21 @@ export const delelteAdmin = createAsyncThunk('DELETE_ADMIN/DELETE_ADMIN',
         return axios(OPTIONS)
             .then((res) => res)
     })
+    // =============================update admin ===================================
+    export const updateAdmin = createAsyncThunk('UPDATE_ADMIN/UPDATE_ADMIN',
+    async (data) => {
+        let OPTIONS = {
+            url: `${import.meta.env.VITE_BASE_URL}/api/update_Admin`,
+            data: data,
+            method: "PUT",
+            headers: {
+                'Accept': 'application/json'
+            },
+        };
+
+        return axios(OPTIONS)
+            .then((res) => res)
+    })
 
 const adminLists = createSlice({
     name: 'DELETE ADMIN',
@@ -97,6 +112,21 @@ const adminLists = createSlice({
             state.result =state.result.filter((data)=>data.adminId!==action.payload.data.data.adminId)
         },
         [delelteAdmin.rejected]: (state, action) => {
+            state.loading = false,
+                state.error = action
+        },
+
+        // =====================================update admin ======================================
+        [updateAdmin.pending]: (state, action) => {
+            state.loading = true;
+        },
+        [updateAdmin.fulfilled]: (state, action) => {
+           
+            state.loading = false,
+            state.result =state.result.filter((data)=>data.adminId!==action.payload.data.data.adminId)
+            toast.success('Admin has update successfully')
+        },
+        [updateAdmin.rejected]: (state, action) => {
             state.loading = false,
                 state.error = action
         },

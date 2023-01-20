@@ -17,7 +17,7 @@ function BroadCast() {
     const [msg, setMsg] = useState('')
     const broadCast = useSelector((state) => state.broadcast)
 
-    // console.log(broadCast, 'broadcast')
+    console.log(broadCast, 'broadcast')
 
     useEffect(() => {
         dispatch(getBroadCastAction())
@@ -116,7 +116,7 @@ function BroadCast() {
 
                 <div className=' w-full '>
                     <Navbar />
-                    <div className=' my-4 pr-4  '>
+                    <div className=' my-4 pr-4   '>
 
 
                         <div className=' col-span-4  rounded-lg  relative '>
@@ -177,7 +177,7 @@ function BroadCast() {
                         </div>
 
                         {/* ================================================table============================================ */}
-                        <div className='w-full tableWrapBroadcast mt-8 shadow-xl pr-4'>
+                        <div className='w- mx-auto tableWrapBroadcast  mt-8  pr-4'>
                             <table class="shadow-xl tables    w-full rounded-xl ">
                                
                                 <thead className=''>

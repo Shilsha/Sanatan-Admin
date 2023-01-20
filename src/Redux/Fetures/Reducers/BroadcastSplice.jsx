@@ -20,7 +20,8 @@ export const getBroadCastAction = createAsyncThunk('BROADCAST_OF_DAY/GET_BROADCA
 export const addBroadcastAction = createAsyncThunk('BROADCAST_OF_DAY/ADD_BROADCAST',
     async (data) => {
         let OPTIONS = {
-            url: `${import.meta.env.VITE_BASE_URL}/api/add_announcement`,
+            // url: `${import.meta.env.VITE_BASE_URL}/api/add_announcement`,
+            url: `https://2772-49-36-177-157.in.ngrok.io/api/add_announcement`,
             method: "POST",
             headers: {
                 'Accept': 'application/json'
@@ -109,7 +110,9 @@ const getBroadCastOfDay = createSlice({
             state.loading = true;
         },
         [addBroadcastAction.fulfilled]: (state, action) => {
-            toast.success('Added successfully')
+            // toast.success('Added successfully')
+            console.log( action.payload.data.status,'action add')
+            toast.success( action.payload.data.status.message)
             state.loading = false
             [state.result.push(action.payload.data.data)]
         },
@@ -123,13 +126,16 @@ const getBroadCastOfDay = createSlice({
             state.loading = true;
         },
         [deleteBroadcastAction.fulfilled]: (state, action) => {
-            toast.success('Deleted successfully')
+            toast.success('Broadcast has deactivated successfully')
+        
             state.loading = false
             state.result = [...state.result.filter(d => d.announcementId !== action.payload.data.data.announcementId), action.payload.data.data,];
 
+       
             // state.result=state.result.filter((data)=>data.announcementId==action.payload.data.data.announcementId)
         },
         [deleteBroadcastAction.rejected]: (state, action) => {
+           
             state.loading = false,
                 state.error = action
         },

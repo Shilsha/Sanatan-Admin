@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Navbar from '../../Navbar/Navbar'
 import Sidebar from '../../Sidebar/Sidebar'
 import { BsSearch, BsThreeDots } from 'react-icons/bs'
-import { BiFilter ,BiSkipNext,BiSkipPrevious} from 'react-icons/bi'
+import { BiFilter, BiSkipNext, BiSkipPrevious } from 'react-icons/bi'
 import { AiOutlinePlus, AiFillDelete, AiTwotoneEdit, AiOutlineClose, AiOutlineWarning } from 'react-icons/ai'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
@@ -12,8 +12,7 @@ import Loader from '../../Loader/Loader'
 
 import { ToastContainer } from 'react-toastify'
 import Modal from 'react-modal';
-import { getAdminList } from '../../../Redux/Fetures/Reducers/AdminListSlice'
-import {delelteAdmin} from '../../../Redux/Fetures/Reducers/AdminListSlice'
+import {getAdminList, delelteAdmin,updateAdmin } from '../../../Redux/Fetures/Reducers/AdminListSlice'
 import DesignLogin from '../../../Assets/images/DesignLogin.png'
 const customStyles = {
     content: {
@@ -29,7 +28,7 @@ const customStyles = {
         background: "white",
         position: 'relative',
         border: 'none',
-        
+
 
     },
 };
@@ -37,11 +36,16 @@ const customStyles = {
 function AdminUserList() {
     const [FilterSearch, setFilterSearch] = useState('')
     const [modalIsOpen, setIsOpen] = React.useState(false);
-    const [modalIsOpenUpdate, setModalIsOpenUpdate] = React.useState(false);
     const [page, setPage] = useState(0)
     const [buttonPre, setButtonPre] = useState(false)
     const [buttonNext, setButtonNext] = useState(false)
-    const[deleteId,setDeleteId]=useState('')
+    const [deleteId, setDeleteId] = useState('')
+    const [adminId, setAdminId] = useState('')
+    const [adminRole, setAdminRole] = useState('')
+    // const [adminStatus, setAdminStatus] = useState(false)
+    const [adminName, setAdminName] = useState('')
+    const [action, setAction] = useState('')
+    
     const [types, setTypes] = useState(true)
     const dispatch = useDispatch()
 
@@ -51,35 +55,50 @@ function AdminUserList() {
 
 
     useEffect(() => {
-        const data={
-            page:page,
-            type:types
+        const data = {
+            page: page,
+            type: types
         }
         dispatch(getAdminList(data))
     }, [])
-
-
-
-
-
 
     // ==================model open and close ========================
     function closeModal() {
         setIsOpen(false);
     }
-    const openModel = (id) => {
-        setIsOpen(true)
-        setDeleteId(id)
+    const openModel = (data) => {
+        console.log(data)
+        if(data.action=='Delete'){
+            setIsOpen(true)
+            setAction(data.action)
+            setAdminId(data.Id)
+           
+        }else{
+            setIsOpen(true)
+            setAdminId(data.Id)         
+            setAction(data.action)
+            setAdminName(data.name)
+           
+        }
+
+      
     }
-
-    // const =()=>{
-
-    // }
+    console.log(action,'this is action')
 
     // ==========================================update admin =====================
-    const updateAdmin=(key,id,name,role)=>{
-        setIsOpen(true)
-        console.log(key,id,name,role)
+    const handleUpdateAdmin = () => {
+        if(action=='Deactivate'){
+
+            const data={adminId,adminName,adminStatus:false}
+            dispatch(updateAdmin(data))
+         
+        }else{
+            const data={adminId,adminName,adminStatus:true}
+            dispatch(updateAdmin(data))
+           
+
+        }
+        setIsOpen(false);
 
     }
 
@@ -87,12 +106,12 @@ function AdminUserList() {
 
 
     const deleteAdmin = () => {
-        dispatch(delelteAdmin(deleteId))
+        dispatch(delelteAdmin(adminId))
         setIsOpen(false)
     }
 
-     // =====================prev and next=======================
-     const next = () => {
+    // =====================prev and next=======================
+    const next = () => {
         setPage(page + 1)
 
     }
@@ -104,14 +123,14 @@ function AdminUserList() {
 
 
     useEffect(() => {
-       
-       
-        const data={
-            page:page
+
+
+        const data = {
+            page: page
         }
-     
+
         console.log(page, 'length')
-        if (page > 0 ) {
+        if (page > 0) {
             console.log('bada hia')
             setButtonPre(false)
 
@@ -127,15 +146,15 @@ function AdminUserList() {
 
 
     useEffect(() => {
-        if(allAdminList.result.length<16){
+        if (allAdminList.result.length < 16) {
             // console.log('chhota')
             setButtonNext(true)
-    
-        }else{
+
+        } else {
             // console.log('bada')
             setButtonNext(false)
         }
-    
+
     }, [allAdminList.result])
 
 
@@ -150,7 +169,7 @@ function AdminUserList() {
         // dispatch(getUser(data))
         // toast.success("User Type has changed")
         dispatch(getAdminList(data))
-     
+
 
     }
 
@@ -174,8 +193,8 @@ function AdminUserList() {
                                     <button type="submit" class="absolute right-0 top-2 mr-5">
                                         <BsSearch className='p-1 ' size={25} />
                                     </button>
-                                 </div>
-{/* 
+                                </div>
+                                {/* 
                                 <button class="inline-flex items-center px-4 py-1 bg-red-800 hover:bg-red-700 text-white text-sm font-medium rounded-md">
 
                                     Filter
@@ -183,22 +202,22 @@ function AdminUserList() {
 
                                 </button> */}
 
-                                  <button type="button" class= "inline-flex items-center text-white bg-gradient-to-r from-orange-500  to-yellow-400 hover:bg-gradient-to-bl font-medium rounded-lg text-sm px-3 py-1 text-center mr-2 mb-2"> Filter   <BiFilter className='mx-1' size={30} /></button>
+                                <button type="button" class="inline-flex items-center text-white bg-gradient-to-r from-orange-500  to-yellow-400 hover:bg-gradient-to-bl font-medium rounded-lg text-sm px-3 py-1 text-center mr-2 mb-2"> Filter   <BiFilter className='mx-1' size={30} /></button>
 
                             </div>
                             <div>
-                            <select id="countries" className="bg-gray-50 border border-gray-400 text-gray-900 
+                                <select id="countries" className="bg-gray-50 border border-gray-400 text-gray-900 
                                 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700
                                  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    onChange={(e) => setAdminType(e.target.value)}   
-                                      >
-                                    <option disabled={true} 
-                                    selected={true}
+                                    onChange={(e) => setAdminType(e.target.value)}
+                                >
+                                    <option disabled={true}
+                                        selected={true}
                                     >Select Admin Type</option>
                                     <option value="true">Active</option>
                                     <option value="false">Deactive</option>
                                 </select>
-                            
+
                             </div>
                         </div>
                         <div className="tableWrap mb-2   blurrTable ">
@@ -225,7 +244,7 @@ function AdminUserList() {
                                         </> : <>
                                             {
                                                 // allAdminList?.result.map((data) => {
-                                                    (allAdminList?.result.filter((user) => user.email?.toLowerCase().includes(FilterSearch)))?.map((data)=>{
+                                                (allAdminList?.result.filter((user) => user.email?.toLowerCase().includes(FilterSearch)))?.map((data) => {
                                                     return (
                                                         <>
                                                             <tr key={data.id} className="text-center text-gray-500  ">
@@ -238,19 +257,33 @@ function AdminUserList() {
                                                                 <td class=" py-2 text-center">{data.createdDate}</td>
                                                                 <td class=" py-2 text-center">{JSON.stringify(data.adminStatus)}</td>
                                                                 <td class=" py-2 text-center">
-                                                                  
+
                                                                     &nbsp;
-                                                                    {/* <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-1.5 text-xs px-3 border
+                                                                    {data.adminStatus ? <>
+                                                                        <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-1.5 text-xs px-3 border
                                                                       rounded-full"
-                                                                        onClick={() => openModel(data.adminId)}>
-                                                                        Delete
-                                                                    </button> */}
-                                                                     <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-1.5 text-xs px-3 border
-                                                                      rounded-full"
-                                                                        // onClick={() => openModel(data.adminId)}
+                                                                            onClick={() => openModel({Id:data.adminId,name:data.adminName,action:'Deactivate'})}
                                                                         >
-                                                                        Deactivate
-                                                                    </button>
+                                                                            Deactivate
+                                                                        </button>
+
+                                                                    </> : <>
+                                                                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1.5 text-xs px-3 border
+                                                                      rounded-full"
+                                                                            onClick={() => openModel({Id:data.adminId,name:data.adminName,action:'Activate'})}
+                                                                        >
+                                                                            Activate
+                                                                        </button>
+
+
+                                                                        <button class="border-red-500 text-red-500 ml-2 hover:text-white hover:bg-red-600  font-bold py-1.5 text-xs px-3 border
+                                                                      rounded-full"
+                                                                            onClick={() => openModel({Id:data.adminId,action:'Delete'})}
+                                                                        >
+                                                                            Delete
+                                                                        </button>
+                                                                    </>}
+
                                                                 </td>
                                                             </tr>
                                                         </>
@@ -269,30 +302,30 @@ function AdminUserList() {
 
                         </div>
                         <nav aria-label="Page navigation example  " className='text-center relative z-10  '>
-                        <ul class="inline-flex justify-center items-center ">
-                            <li>
-                                <button class={`px-3 inline-flex justify-center  items-center cursor-pointer py-2 ml-0 leading-tight text-white font-bold bg-red-800 disabled:opacity-50  rounded-lg mx-4 hover:bg-red-700  dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white`} disabled={buttonPre} onClick={prev} >
-                                     <BiSkipPrevious className='pt-1' size={25}/>  Prev</button>
+                            <ul class="inline-flex justify-center items-center ">
+                                <li>
+                                    <button class={`px-3 inline-flex justify-center  items-center cursor-pointer py-2 ml-0 leading-tight text-white font-bold bg-red-800 disabled:opacity-50  rounded-lg mx-4 hover:bg-red-700  dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white`} disabled={buttonPre} onClick={prev} >
+                                        <BiSkipPrevious className='pt-1' size={25} />  Prev</button>
 
-                            </li>
+                                </li>
 
-                            <li className=' mr-4 font-bold'>  {page + 1}</li>
-                            <li>
-                                <button type='button' class="px-3 py-2 inline-flex items-center justify-center  leading-tight text-white font-bold bg-red-800 disabled:opacity-50 rounded-l-lg hover:bg-red-700 rounded-r-lg   dark:hover:text-white" disabled={buttonNext} onClick={next}>Next <BiSkipNext className='pt-1' size={25}/></button>
+                                <li className=' mr-4 font-bold'>  {page + 1}</li>
+                                <li>
+                                    <button type='button' class="px-3 py-2 inline-flex items-center justify-center  leading-tight text-white font-bold bg-red-800 disabled:opacity-50 rounded-l-lg hover:bg-red-700 rounded-r-lg   dark:hover:text-white" disabled={buttonNext} onClick={next}>Next <BiSkipNext className='pt-1' size={25} /></button>
 
 
-                            </li>
-                        </ul>
-                    </nav>
+                                </li>
+                            </ul>
+                        </nav>
 
                     </div>
-                    
+
                 </div>
                 {/* <div className='absolute bottom-0 right-0 -z-10    '>
                     <img src={DesignLogin} alt='empty' className='w-full'></img>
                 </div> */}
             </div>
-          
+
 
             {/* ===============model==================== */}
             <Modal
@@ -304,10 +337,8 @@ function AdminUserList() {
                 className=" "
 
             >
-
-
-
-                <div class="shadow-xl   bg-[rgb(254 214 172)] rounded-lg md:max-w-md md:mx-auto p-4 fixed inset-x-0 bottom-0 z-50 mb-4 mx-4 md:relative">
+                {action=='Delete'?<>
+                  <div class="shadow-xl   bg-[rgb(254 214 172)] rounded-lg md:max-w-md md:mx-auto p-4 fixed inset-x-0 bottom-0 z-50 mb-4 mx-4 md:relative">
                     <div class="md:flex items-center">
                         <div class="rounded-full border border-red-900 flex items-center justify-center w-16 h-16 flex-shrink-0 mx-auto">
                             <AiOutlineWarning size={40} fill='#8E2E0F' />
@@ -325,14 +356,42 @@ function AdminUserList() {
                             Account</button>
                         <button class="block w-full md:inline-block md:w-auto px-4 py-3 md:py-2
                                  bg-gray-200 rounded-lg font-semibold text-sm mt-4
-          md:mt-0 md:order-1 hover:bg-slate-500 hover:text-white" onClick={closeModal}>Cancel</button>
+                                  md:mt-0 md:order-1 hover:bg-slate-500 hover:text-white" onClick={closeModal}>Cancel</button>
+                    </div>
+                </div>
+                </>:<>
+                <div class="shadow-xl   bg-[rgb(254 214 172)] rounded-lg md:max-w-md md:mx-auto p-4 fixed inset-x-0 bottom-0 z-50 mb-4 mx-4 md:relative">
+                    <div class="md:flex items-center">
+                        <div class="rounded-full border border-red-900 flex items-center justify-center w-16 h-16 flex-shrink-0 mx-auto">
+                            <AiOutlineWarning size={40} fill='#8E2E0F' />
+                        </div>
+                        <div class="mt-4 md:mt-0 md:ml-6 text-center md:text-left">
+                            <p class="font-bold text-red-800">Update admin account</p>
+                            <p class="text-sm text-gray-700 mt-1">Are you sure to Update Admin account.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="text-center md:text-right mt-4 md:flex md:justify-end">
+                        <button class="block w-full md:inline-block md:w-auto px-5 py-3 md:py-2
+                                 bg-red-200 text-red-700 rounded-lg font-semibold text-sm md:ml-2 md:order-2
+                                  hover:bg-red-400 hover:text-white" onClick={handleUpdateAdmin}>Yes</button>
+                        <button class="block w-full md:inline-block md:w-auto px-5 py-3 md:py-2
+                                 bg-gray-200 rounded-lg font-semibold text-sm mt-4
+                                  md:mt-0 md:order-1 hover:bg-slate-500 hover:text-white" onClick={closeModal}>No</button>
                     </div>
                 </div>
 
 
-            </Modal>
+          
+                
+                </>}
+                
 
-            <Modal 
+
+                </Modal>
+              
+
+            {/* <Modal 
              isOpen={modalIsOpenUpdate}
              // onAfterOpen={afterOpenModal}
             //  onRequestClose={closeModalUpdate}
@@ -343,7 +402,7 @@ function AdminUserList() {
 
 
 
-            </Modal>
+            </Modal> */}
         </>
     )
 }
