@@ -189,6 +189,7 @@ function Logs() {
                                         <td class="   ">Status</td>
                                         <td class="   ">Method Operation</td>
                                         <td class="  "> Create Date</td>
+                                        <td class="  "> Time</td>
 
                                     </tr>
 
@@ -211,6 +212,7 @@ function Logs() {
                                                         <td class=" py-3 px-2 ">{JSON.stringify(data.status)}</td>
                                                         <td class=" py-3 px-2 ">{data.methodOperation}</td>
                                                         <td class=" py-3 px-2 ">{data.createdAt}</td>
+                                                        <td class=" py-3 px-2 ">{data.createdTime}</td>
                                                     </tr>
 
                                                 </>)

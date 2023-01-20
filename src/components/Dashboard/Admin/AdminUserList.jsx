@@ -12,7 +12,7 @@ import Loader from '../../Loader/Loader'
 
 import { ToastContainer } from 'react-toastify'
 import Modal from 'react-modal';
-import {getAdminList, delelteAdmin,updateAdmin } from '../../../Redux/Fetures/Reducers/AdminListSlice'
+import { getAdminList, delelteAdmin, updateAdmin } from '../../../Redux/Fetures/Reducers/AdminListSlice'
 import DesignLogin from '../../../Assets/images/DesignLogin.png'
 const customStyles = {
     content: {
@@ -45,7 +45,7 @@ function AdminUserList() {
     // const [adminStatus, setAdminStatus] = useState(false)
     const [adminName, setAdminName] = useState('')
     const [action, setAction] = useState('')
-    
+
     const [types, setTypes] = useState(true)
     const dispatch = useDispatch()
 
@@ -68,34 +68,34 @@ function AdminUserList() {
     }
     const openModel = (data) => {
         console.log(data)
-        if(data.action=='Delete'){
+        if (data.action == 'Delete') {
             setIsOpen(true)
             setAction(data.action)
             setAdminId(data.Id)
-           
-        }else{
+
+        } else {
             setIsOpen(true)
-            setAdminId(data.Id)         
+            setAdminId(data.Id)
             setAction(data.action)
             setAdminName(data.name)
-           
+
         }
 
-      
+
     }
-    console.log(action,'this is action')
+    console.log(action, 'this is action')
 
     // ==========================================update admin =====================
     const handleUpdateAdmin = () => {
-        if(action=='Deactivate'){
+        if (action == 'Deactivate') {
 
-            const data={adminId,adminName,adminStatus:false}
+            const data = { adminId, adminName, adminStatus: false }
             dispatch(updateAdmin(data))
-         
-        }else{
-            const data={adminId,adminName,adminStatus:true}
+
+        } else {
+            const data = { adminId, adminName, adminStatus: true }
             dispatch(updateAdmin(data))
-           
+
 
         }
         setIsOpen(false);
@@ -262,7 +262,7 @@ function AdminUserList() {
                                                                     {data.adminStatus ? <>
                                                                         <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-1.5 text-xs px-3 border
                                                                       rounded-full"
-                                                                            onClick={() => openModel({Id:data.adminId,name:data.adminName,action:'Deactivate'})}
+                                                                            onClick={() => openModel({ Id: data.adminId, name: data.adminName, action: 'Deactivate' })}
                                                                         >
                                                                             Deactivate
                                                                         </button>
@@ -270,7 +270,7 @@ function AdminUserList() {
                                                                     </> : <>
                                                                         <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1.5 text-xs px-3 border
                                                                       rounded-full"
-                                                                            onClick={() => openModel({Id:data.adminId,name:data.adminName,action:'Activate'})}
+                                                                            onClick={() => openModel({ Id: data.adminId, name: data.adminName, action: 'Activate' })}
                                                                         >
                                                                             Activate
                                                                         </button>
@@ -278,7 +278,7 @@ function AdminUserList() {
 
                                                                         <button class="border-red-500 text-red-500 ml-2 hover:text-white hover:bg-red-600  font-bold py-1.5 text-xs px-3 border
                                                                       rounded-full"
-                                                                            onClick={() => openModel({Id:data.adminId,action:'Delete'})}
+                                                                            onClick={() => openModel({ Id: data.adminId, action: 'Delete' })}
                                                                         >
                                                                             Delete
                                                                         </button>
@@ -337,7 +337,7 @@ function AdminUserList() {
                 className=" "
 
             >
-                {action=='Delete'?<>
+                {/* {action=='Delete'?<>
                   <div class="shadow-xl   bg-[rgb(254 214 172)] rounded-lg md:max-w-md md:mx-auto p-4 fixed inset-x-0 bottom-0 z-50 mb-4 mx-4 md:relative">
                     <div class="md:flex items-center">
                         <div class="rounded-full border border-red-900 flex items-center justify-center w-16 h-16 flex-shrink-0 mx-auto">
@@ -381,15 +381,35 @@ function AdminUserList() {
                     </div>
                 </div>
 
+                </>} */}
 
-          
-                
-                </>}
-                
+                <div class="shadow-xl   bg-[rgb(254 214 172)] rounded-lg md:max-w-md md:mx-auto p-4 fixed inset-x-0 bottom-0 z-50 mb-4 mx-4 md:relative">
+                    <div class="md:flex items-center">
+                        <div class="rounded-full border border-red-900 flex items-center justify-center w-16 h-16 flex-shrink-0 mx-auto">
+                            <AiOutlineWarning size={40} fill='#8E2E0F' />
+                        </div>
+                        <div class="mt-4 md:mt-0 md:ml-6 text-center md:text-left">
+                            <p class="font-bold text-red-800">Update admin account</p>
+                            <p class="text-sm text-gray-700 mt-1">Are you sure to Update Admin account.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="text-center md:text-right mt-4 md:flex md:justify-end">
+                        <button class="block w-full md:inline-block md:w-auto px-5 py-3 md:py-2
+                                 bg-red-200 text-red-700 rounded-lg font-semibold text-sm md:ml-2 md:order-2
+                                  hover:bg-red-400 hover:text-white" onClick={handleUpdateAdmin}>Yes</button>
+                        <button class="block w-full md:inline-block md:w-auto px-5 py-3 md:py-2
+                                 bg-gray-200 rounded-lg font-semibold text-sm mt-4
+                                  md:mt-0 md:order-1 hover:bg-slate-500 hover:text-white" onClick={closeModal}>No</button>
+                    </div>
+                </div>
 
 
-                </Modal>
-              
+
+
+
+            </Modal>
+
 
             {/* <Modal 
              isOpen={modalIsOpenUpdate}

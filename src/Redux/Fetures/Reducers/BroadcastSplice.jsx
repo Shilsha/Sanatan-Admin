@@ -20,8 +20,8 @@ export const getBroadCastAction = createAsyncThunk('BROADCAST_OF_DAY/GET_BROADCA
 export const addBroadcastAction = createAsyncThunk('BROADCAST_OF_DAY/ADD_BROADCAST',
     async (data) => {
         let OPTIONS = {
-            // url: `${import.meta.env.VITE_BASE_URL}/api/add_announcement`,
-            url: `https://2772-49-36-177-157.in.ngrok.io/api/add_announcement`,
+            url: `${import.meta.env.VITE_BASE_URL}/api/add_announcement`,
+            // url: `https://2772-49-36-177-157.in.ngrok.io/api/add_announcement`,
             method: "POST",
             headers: {
                 'Accept': 'application/json'
