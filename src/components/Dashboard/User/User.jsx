@@ -319,16 +319,16 @@ function User() {
                                                                     <td class=" px-4 flex justify-evenly items-center pt-3" >
 
                                                                         {data?.enabled ? <>
-                                                                            <button class="bg-red-500 hover:bg-red-700
-                                                                        py-1.5  text-white font-bold  text-xs px-3   rounded-full"
+                                                                            <button class="border-2 border-red-500 text-red-500 hover:bg-red-700
+                                                                        py-1.5  hover:text-white font-bold  text-xs px-3   rounded-full"
                                                                                 onClick={() => openModel(data.userId, 'Deactivate')}
                                                                             // onClick={() => handleDeactivatedSingleUser(data.userId)}
                                                                             >
                                                                                 Deactivate
                                                                             </button>
                                                                         </> : <>
-                                                                            <button class="bg-blue-500 hover:bg-blue-700
-                                                                        py-1.5  text-white font-bold  text-xs px-3   rounded-full"
+                                                                            <button class="border-2 border-green-500 text-green-500 hover:bg-green-700
+                                                                        py-1.5  hover:text-white font-bold  text-xs px-3   rounded-full"
                                                                                 // onClick={() => handleActivatedSingleUser(data.userId)}
                                                                                 onClick={() => openModel(data.userId, 'Activate')}
                                                                             >

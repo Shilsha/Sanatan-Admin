@@ -22,6 +22,7 @@ import { panchangeAction } from '../../Redux/Fetures/Reducers/PanchangSlice'
 import { getUser } from '../../Redux/Fetures/Reducers/GetUserSlice';
 import { getAllArticleAction } from '../../Redux/Fetures/Reducers/ArticleSlice'
 import { getAllQueriesAction } from '../../Redux/Fetures/Reducers/QueriesSlice'
+import {getBroadCastAction} from '../../Redux/Fetures/Reducers/BroadcastSplice'
 import DesignLogin from '../../Assets/images/DesignLogin.png'
 import Button from '../Screen/Button/Button';
 import LoaderN from '../Loader/LoaderN';
@@ -47,18 +48,25 @@ const customStyles = {
 function Dashboard() {
     const [modalIsOpen, setIsOpen] = React.useState(false);
     const [thoughtText, setThoughtText] = useState('')
+    const [value, onChange] = useState(new Date());
     const userId = 620015;
     const apiKey = 'd4e435906f8bdaf9aa6bcfe9f7f6474d';
     const dispatch = useDispatch();
+
+
     const userData = useSelector((state) => state.user)
     const articleLen = useSelector((state) => state.article)
     const queryLen = useSelector((state) => state.query)
     const { loading, result, error } = useSelector((state) => state.thoughtOfDay)
     const panchangData = useSelector((state) => state.panchang)
-    const [value, onChange] = useState(new Date());
+    const broadcastStatus=useSelector((state)=>state.broadcast)
+    console.log(broadcastStatus,'this is broadcast ')
+    const broadCast=broadcastStatus.result.filter(data=>data.announcementStatus==true)
+    console.log(broadCast.length   ,'this is braod case repeted')
 
     const role=JSON.parse(sessionStorage.getItem('user'))
-    console.log(role.isSuperAdmin,'this is role')
+
+    // console.log(role.isSuperAdmin,'this is role')
     const requestOptions1 = {
         method: 'POST',
         headers: {
@@ -110,6 +118,7 @@ function Dashboard() {
     useEffect(() => {
         dispatch(getThoughtAction())
         dispatch(panchangeAction(requestOptions1))
+        dispatch(getBroadCastAction())
         getUserLength()
         getArticleLength()
         getQueryLength()
@@ -142,7 +151,7 @@ function Dashboard() {
 
     // console.log(process,'process')
     // console.log(process.env.REACT_APP_BASE_URL,'env file ')
-    console.log(import.meta.env.VITE_BASE_URL,'kkkk')
+   
 
 
     return (
@@ -450,7 +459,7 @@ function Dashboard() {
                                                 <Link to='/broadcast'>
                                                     <h1 className=' py-4 text-2xl text-center font-medium  text-gray-500 underline underline-offset-8 '>Broadcast</h1>
                                                 </Link>
-                                                <h1 className='text-5xl text-gray-500 font-medium    text-center '>500</h1>
+                                                <h1 className='text-5xl text-gray-500 font-medium    text-center '>{broadCast.length?<>{broadCast.length}</>:<>0</>}</h1>
                                             </div>
                                         </div>
                                     </div>

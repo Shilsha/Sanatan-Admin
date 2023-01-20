@@ -260,7 +260,7 @@ function AdminUserList() {
 
                                                                     &nbsp;
                                                                     {data.adminStatus ? <>
-                                                                        <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-1.5 text-xs px-3 border
+                                                                        <button class="border-2 border-red-500 text-red-500 hover:bg-red-700 hover:text-white font-bold py-1.5 text-xs px-3 
                                                                       rounded-full"
                                                                             onClick={() => openModel({ Id: data.adminId, name: data.adminName, action: 'Deactivate' })}
                                                                         >
@@ -268,7 +268,7 @@ function AdminUserList() {
                                                                         </button>
 
                                                                     </> : <>
-                                                                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1.5 text-xs px-3 border
+                                                                        <button class="border-2 border-green-500 hover:text-white  hover:bg-green-700 text-green-500 font-bold py-1.5 text-xs px-3 
                                                                       rounded-full"
                                                                             onClick={() => openModel({ Id: data.adminId, name: data.adminName, action: 'Activate' })}
                                                                         >
@@ -276,12 +276,12 @@ function AdminUserList() {
                                                                         </button>
 
 
-                                                                        <button class="border-red-500 text-red-500 ml-2 hover:text-white hover:bg-red-600  font-bold py-1.5 text-xs px-3 border
+                                                                        {/* <button class="border-red-500 text-red-500 ml-2 hover:text-white hover:bg-red-600  font-bold py-1.5 text-xs px-3 border
                                                                       rounded-full"
                                                                             onClick={() => openModel({ Id: data.adminId, action: 'Delete' })}
                                                                         >
                                                                             Delete
-                                                                        </button>
+                                                                        </button> */}
                                                                     </>}
 
                                                                 </td>

@@ -38,7 +38,7 @@ export default configureStore({
         login:logins,
         articlesLike:articlesLikes,
         articlesComment:articlesComments,
-       broadcast:getBroadCastOfDay,
+        broadcast:getBroadCastOfDay,
 
 
        panchangHit:panchangHits,

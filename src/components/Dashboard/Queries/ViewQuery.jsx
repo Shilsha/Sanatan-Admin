@@ -41,6 +41,7 @@ function ViewQuery() {
     console.log(singleQuery.loading,'res')
 
     const AdminId = JSON.parse(sessionStorage.getItem('user'))   
+    console.log(AdminId.adminId,'login user')
     const dispatch = useDispatch()
   
     useEffect(() => {
@@ -203,7 +204,9 @@ function ViewQuery() {
 
                                         </> : <>
 
-                                            <button class="bg-orange-500 shadow hover:bg-orange-600 text-white font-bold py-1  px-3 rounded-full"
+
+                                            {singleQuery?.result?.adminId===AdminId.adminId?<>    
+                                             <button class="bg-orange-500 shadow hover:bg-orange-600 text-white font-bold py-1  px-3 rounded-full"
                                                 onClick={() => openModel('RESOLVED')}
                                             >
                                                 Resolve
@@ -213,6 +216,23 @@ function ViewQuery() {
                                             >
                                                 Reject
                                             </button>
+                                            </>:<>
+                                            
+                                            <button class="bg-orange-500 shadow hover:bg-orange-600 text-white font-bold py-1  px-3 rounded-full disabled:opacity-25"
+                                                onClick={() => openModel('RESOLVED')} disabled={true}
+                                            > 
+                                                Resolve
+                                            </button>
+                                            <button class="border-2 border-orange-500  hover:bg-red-600 mx-4 hover:text-white text-orange-500 shadow font-bold py-1  px-4 rounded-full disabled:opacity-25"
+                                                onClick={() => openModel('REJECTED')} disabled={true}
+                                            >
+                                                Reject
+                                            </button>
+                                            
+                                            
+                                            </>}
+
+                                           
                                         </>}
 
                                     </> 
