@@ -10,6 +10,8 @@ import Loader from '../../Loader/Loader'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import moment from 'moment/moment'
+import DesignLogin from '../../../Assets/images/DesignLogin.png'
+
 
 function Logs() {
     const [FilterSearch, setFilterSearch] = useState('')
@@ -119,7 +121,7 @@ function Logs() {
     return (
         <>
 
-            <div className='   w-[100%] h-[100vh] flex flex-col-2 gap-4  '>
+            <div className='   w-[100%] h-[100vh] flex flex-col-2 gap-4 bgGradient '>
                 <Sidebar />
 
                 <div className=' w-full  '>
@@ -127,9 +129,9 @@ function Logs() {
                     <div className=' my-2 pr-4 '>
 
                         < div className='flex justify-between items-center py-4 '>
-                            <div className='flex justify-between w-[40%]'>
+                            <div className='w-[400px]'>
 
-                                <div class=" relative  w-[75%] text-gray-600 ">
+                                <div class=" relative  w-full text-gray-600 ">
                                     <input class="border-2  w-full border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
                                         type="search" name="search" placeholder="Search..." value={FilterSearch} onChange={(e) => setFilterSearch(e.target.value)} />
                                     <button type="submit" class="absolute right-0 top-2 mr-5">
@@ -137,14 +139,13 @@ function Logs() {
                                     </button>
                                 </div>
 
-                                {/* <button class="inline-flex items-center px-4 py-1 bg-red-800 hover:bg-red-700 text-white text-sm font-medium rounded-md">
 
-                                    Filter
-                                    <BiFilter className='mx-1' size={30} />
-
-                                </button> */}
 
                             </div>
+                            <button type="button" class= "inline-flex items-center text-white bg-gradient-to-r from-orange-500  to-yellow-400 hover:bg-gradient-to-bl font-medium rounded-lg text-lg px-3 py-1 text-center mr-40 mb-2"> Logs List
+                            
+                            </button>
+                     
 
 
                             <div className='flex justify-between items-center'>
@@ -179,7 +180,7 @@ function Logs() {
                             </div>
                         </div>
                         <div className="tableWrap">
-                            <table class="shadow-lg tables  w-full rounded-xl ">
+                            <table class="shadow-lg tables  w-full rounded-xl blurrTable">
                                 <thead className=''>
                                     <tr className='  bg-blue-100 text-center  '>
                                         <td class=" py-3  "> ID</td>
@@ -247,6 +248,9 @@ function Logs() {
                             </li>
                         </ul>
                     </nav>
+                    <div className='absolute bottom-0   right-0  -z-10  '>
+                                <img src={DesignLogin} alt='empty' className='w-full'></img>
+                            </div>
                 </div>
 
 

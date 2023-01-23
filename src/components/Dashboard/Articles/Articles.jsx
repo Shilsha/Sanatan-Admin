@@ -17,6 +17,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Link } from 'react-router-dom'
 import { getAllArticleAction } from '../../../Redux/Fetures/Reducers/ArticleSlice'
 import { PublishArticleMessage, RejectArticleMessage, getAllRejectedArticleAction } from '../../../Redux/Fetures/Reducers/ArticleSlice'
+
+import DesignLogin from '../../../Assets/images/DesignLogin.png'
 const customStyles = {
     content: {
         top: '50%',
@@ -222,7 +224,7 @@ function Articles() {
 
 
             <ToastContainer />
-            <div className='   w-[100%] h-[100vh] flex flex-col-2 gap-4  '>
+            <div className='   w-[100%] h-[100vh] flex flex-col-2 gap-4 bgGradient  '>
                 <Sidebar />
 
                 <div className=' w-[93%]  '>
@@ -230,8 +232,8 @@ function Articles() {
                     <div className=' my-4 mx-auto '>
 
                         <div className='flex justify-between items-center pb-4 pr-4'>
-                            <div className='flex justify-between w-[40%]'>
-                                <div class=" relative  w-[75%] text-gray-600 ">
+                            <div className=' w-[400px]'>
+                                <div class=" relative  w-full text-gray-600 ">
                                     <input class="border-2  w-full border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
                                         type="search" name="search" placeholder="Search..." value={FilterSearch} onChange={(e) => setFilterSearch(e.target.value)} />
                                     <button type="submit" class="absolute right-0 top-2 mr-5">
@@ -239,7 +241,13 @@ function Articles() {
                                     </button>
                                 </div>
 
-                                <button type="button" class="inline-flex items-center text-white bg-gradient-to-r from-orange-500  to-yellow-400 hover:bg-gradient-to-bl font-medium rounded-lg text-sm px-3 py-1 text-center mr-2 mb-2"> Filter   <BiFilter className='mx-1' size={30} /></button>
+                            </div>
+                            <div>
+                            <button type="button" class="inline-flex items-center text-white bg-gradient-to-r 
+                            from-orange-500  to-yellow-400 hover:bg-gradient-to-bl font-medium rounded-lg text-lg px-3 py-1 text-center mr-40 mb-2">
+                          Articles List
+                                 </button>
+                      
                             </div>
                             <div>
 
@@ -252,8 +260,8 @@ function Articles() {
 
                             </div>
                         </div>
-                        <div className="tableWrap pr-4">
-                            <table class="shadow-lg tables  w-full rounded-xl ">
+                        <div className="tableWrap pr-4  mb-4">
+                            <table class="shadow-lg tables blurrTable w-full rounded-xl ">
                                 <thead className=''>
                                     <tr className=' table_head text-center   bg-blue-100 '>
                                         <td class="  py-3 px-2"> ID</td>
@@ -411,6 +419,11 @@ function Articles() {
                                 </li>
                             </ul>
                         </nav>
+
+                        <div className='absolute bottom-0   right-0  -z-10  '>
+                                <img src={DesignLogin} alt='empty' className='w-full'></img>
+                            </div>
+
 
                         {/* ================================Model================== */}
 

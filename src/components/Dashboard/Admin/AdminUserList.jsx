@@ -185,24 +185,27 @@ function AdminUserList() {
 
                     <div className=' my-4  pr-4    '>
 
-                        <div className='flex justify-between items-center pb-4'>
-                            <div className='flex justify-between w-[40%]'>
-                                <div class=" relative  w-[75%] text-gray-600 ">
+                        <div className='flex justify-between items-center my-2'>
+                            <div className=' w-[400px]   '>
+                                <div class=" relative w-full  text-gray-600 ">
                                     <input class="border-2  w-full border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
                                         type="search" name="search" placeholder="Search..." value={FilterSearch} onChange={(e) => setFilterSearch(e.target.value)} />
                                     <button type="submit" class="absolute right-0 top-2 mr-5">
                                         <BsSearch className='p-1 ' size={25} />
                                     </button>
                                 </div>
-                                {/* 
-                                <button class="inline-flex items-center px-4 py-1 bg-red-800 hover:bg-red-700 text-white text-sm font-medium rounded-md">
 
-                                    Filter
-                                    <BiFilter className='mx-1' size={30} />
 
-                                </button> */}
-
-                                <button type="button" class="inline-flex items-center text-white bg-gradient-to-r from-orange-500  to-yellow-400 hover:bg-gradient-to-bl font-medium rounded-lg text-sm px-3 py-1 text-center mr-2 mb-2"> Filter   <BiFilter className='mx-1' size={30} /></button>
+                            </div>
+                            <div>
+                                <button type="button" class="inline-flex items-center text-white bg-gradient-to-r
+                                 from-orange-500  to-yellow-400 hover:bg-gradient-to-bl font-medium rounded-lg text-lg px-4 py-1 text-center mr-40 mb-2"> 
+                                {/* Filter   <BiFilter className='mx-1' size={30} /> */}
+                                Admins List
+                                
+                                
+                                
+                                </button>
 
                             </div>
                             <div>
@@ -219,9 +222,16 @@ function AdminUserList() {
                                 </select>
 
                             </div>
+
                         </div>
-                        <div className="tableWrap mb-2   blurrTable ">
-                            <table class="shadow-lg tables  w-full rounded-xl ">
+
+
+
+
+
+
+                        <div className="tableWrap mb-2    ">
+                            <table class="shadow-lg tables  w-full rounded-xl blurrTable ">
                                 <thead className=''>
                                     <tr className='   '>
                                         <td class="bg-blue-100   px-2 text-center">ID</td>
@@ -301,6 +311,7 @@ function AdminUserList() {
                             </table>
 
                         </div>
+
                         <nav aria-label="Page navigation example  " className='text-center relative z-10  '>
                             <ul class="inline-flex justify-center items-center ">
                                 <li>
@@ -321,9 +332,9 @@ function AdminUserList() {
                     </div>
 
                 </div>
-                {/* <div className='absolute bottom-0 right-0 -z-10    '>
+                <div className='absolute bottom-0 right-0 -z-10    '>
                     <img src={DesignLogin} alt='empty' className='w-full'></img>
-                </div> */}
+                </div>
             </div>
 
 

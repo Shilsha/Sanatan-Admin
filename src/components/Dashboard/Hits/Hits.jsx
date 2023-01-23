@@ -136,7 +136,7 @@ function Hits() {
 
                             </div>
                         </div> */}
-                        <div className="tableWrapsss  relative z-10 ">
+                        <div className="tableWrapsss  relative ">
                             {/* <h1 className='text-center font-bold text-xl text-red-800'> All Module Hits</h1> */}
                             <h1 className='text-center text-xl  mt-2  text-gray-500 font-bold  underline underline-offset-8'>All Module Hits</h1>
                             <div className='grid grid-cols-4  items-center'>
@@ -399,7 +399,7 @@ function Hits() {
 
                         </div>
 
-                          <div className='absolute bottom-0   right-0   '>
+                          <div className='absolute bottom-0  -z-10 right-0   '>
                     <img src={DesignLogin} alt='empty' className='w-full'></img>
                 </div>
 

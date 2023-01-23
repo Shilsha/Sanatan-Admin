@@ -11,6 +11,8 @@ import Modal from 'react-modal';
 import { toast, ToastContainer } from 'react-toastify'
 import { Link } from 'react-router-dom'
 import { getAllQueriesAction } from '../../../Redux/Fetures/Reducers/QueriesSlice'
+
+import DesignLogin from '../../../Assets/images/DesignLogin.png'
 const customStyles = {
     content: {
         top: '50%',
@@ -44,7 +46,7 @@ function QueriesList() {
     const dispatch = useDispatch()
 
     const allQueries = useSelector((state) => state.query)
-    console.log(allQueries.result.numberOfElements, 'query')
+    console.log(allQueries.result, 'query')
 
     useEffect(() => {
         const data = {
@@ -160,30 +162,30 @@ function QueriesList() {
 
 
     useEffect(() => {
-        if(allQueries.result.numberOfElements<16){
+        if (allQueries.result.numberOfElements < 16) {
             // console.log('chhota')
             setButtonNext(true)
-    
-        }else{
+
+        } else {
             // console.log('bada')
             setButtonNext(false)
         }
-    
+
     }, [allQueries.result.numberOfElements])
 
     return (
         <>
             <ToastContainer />
-            <div className='   w-[100%] h-[100vh] flex flex-col-2 gap-4'>
+            <div className='  bgGradient w-[100%] h-[100vh] flex flex-col-2 gap-4'>
                 <Sidebar />
                 <div className='  w-[93%] ' >
                     <Navbar />
-                    <div className='mt-6 '>
+                    <div className='my-4 '>
 
 
                         <div className='flex justify-between items-center pb-4 pr-4 '>
-                            <div className='flex justify-between w-[40%]'>
-                                <div class=" relative  w-[75%] text-gray-600 ">
+                            <div className=' w-[400px]'>
+                                <div class=" relative  w-full text-gray-600 ">
                                     <input class="border-2  w-full border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
                                         type="search" name="search" placeholder="Search..." value={FilterSearch} onChange={(e) => setFilterSearch(e.target.value)} />
                                     <button type="submit" class="absolute right-0 top-2 mr-5">
@@ -191,16 +193,14 @@ function QueriesList() {
                                     </button>
                                 </div>
 
-                                <button type="button" class= "inline-flex items-center text-white bg-gradient-to-r from-orange-500  to-yellow-400 hover:bg-gradient-to-bl font-medium rounded-lg text-sm px-3 py-1 text-center mr-2 mb-2"> Filter   <BiFilter className='mx-1' size={30} /></button>
                             </div>
                             <div>
-                                {/* <button class="inline-flex items-center px-4 py-[10px] bg-red-800 hover:bg-red-700 text-white text-sm font-medium rounded-md">
-
-
-
-                                    Queries
-                                </button> */}
-
+                            <button type="button" class= "inline-flex items-center text-white bg-gradient-to-r from-orange-500  to-yellow-400 hover:bg-gradient-to-bl font-medium rounded-lg text-lg px-3 py-1 text-center mr-40 mb-2"> Queries List
+                            
+                            </button>
+                     
+                            </div>
+                            <div>
                                 <select id="countries" class="bg-gray-50 border border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5
                                  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white
                                   dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -215,7 +215,7 @@ function QueriesList() {
                             </div>
                         </div>
                         <div className='tableWrap pr-4'>
-                            <table class="shadow-lg tables  w-full rounded-xl  ">
+                            <table class="shadow-lg tables blurrTable  w-full rounded-xl  ">
                                 <thead className=''>
                                     <tr className=' table_head bg-blue-100  text-center '>
                                         <td class="   px-2  ">ID</td>
@@ -302,6 +302,11 @@ function QueriesList() {
                             </li>
                         </ul>
                     </nav>
+
+                    <div className='absolute bottom-0   right-0  -z-10  '>
+                                <img src={DesignLogin} alt='empty' className='w-full'></img>
+                            </div>
+
 
                 </div>
 

@@ -233,24 +233,32 @@ function User() {
     return (
         <>
             <ToastContainer />
-            <div className='  w-[100%] h-[100vh] flex flex-col-2 gap-4  '>
+            <div className='  w-[100%] h-[100vh] flex flex-col-2 gap-4 bgGradient '>
                 <Sidebar />
 
                 <div className=' w-[93%] '>
                     <Navbar />
-                    <div className=' my-6 mx-auto  '>
+                    <div className=' my-4 mx-auto  '>
 
                         <div className='flex justify-between items-center pb-4 pr-4'>
-                            <div className='flex justify-between w-[40%]'>
-                                <div class=" relative  w-[75%] text-gray-600 ">
+                            <div className=' w-[400px]'>
+                                <div class=" relative w-full   text-gray-600 ">
                                     <input class="border-2  w-full border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
                                         type="search" name="search" placeholder="Search..." value={FilterSearch} onChange={(e) => setFilterSearch(e.target.value)} />
                                     <button type="submit" class="absolute right-0 top-2 mr-5">
                                         <BsSearch className='p-1 ' size={25} />
                                     </button>
                                 </div>
+                            </div>
 
-                                <button type="button" class="inline-flex items-center text-white bg-gradient-to-r from-orange-500  to-yellow-400 hover:bg-gradient-to-bl font-medium rounded-lg text-sm px-3 py-1 text-center mr-2 mb-2"> Filter   <BiFilter className='mx-1' size={30} /></button>
+                            <div>
+                                
+                            <button type="button" class="inline-flex items-center text-white bg-gradient-to-r from-orange-500 
+                             to-yellow-400 hover:bg-gradient-to-bl font-medium rounded-lg text-lg px-4 py-1 text-center mr-40 mb-2"> 
+                            Users List
+                             
+                             </button>
+                
                             </div>
                             <div>
                                 <select id="countries" className="bg-gray-50 border border-gray-400 text-gray-900 
@@ -265,9 +273,9 @@ function User() {
 
                             </div>
                         </div>
-                        <div className="tableWrap pr-4">
+                        <div className="tableWrap pr-4  mb-4">
 
-                            <table class="shadow-lg tables  w-full rounded-xl ">
+                            <table class="shadow-lg tables  w-full rounded-xl blurrTable">
                                 <thead className=''>
                                     <tr className='  text-center '>
                                         <td class="bg-blue-100   px-2 text-center">ID</td>
@@ -362,7 +370,7 @@ function User() {
                         </div>
                         {/* -----------------------------------------------pagination--------------------------------------------------------- */}
 
-                        <nav aria-label="Page navigation example  " className='text-center relative z-10    '>
+                        <nav aria-label="Page navigation example   " className='text-center relative z-10    '>
                             <ul class="inline-flex justify-center items-center ">
                                 <li>
                                     <button class={`px-3 inline-flex justify-center  items-center cursor-pointer py-2 ml-0 leading-tight text-white font-bold bg-red-800 disabled:opacity-50  rounded-lg mx-4 hover:bg-red-700  dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white`} disabled={buttonPre} onClick={prev} >
@@ -379,9 +387,9 @@ function User() {
                             </ul>
                         </nav>
 
-                        {/* <div className='absolute bottom-0      '>
+                        <div className='absolute bottom-0   right-0  -z-10  '>
                                 <img src={DesignLogin} alt='empty' className='w-full'></img>
-                            </div> */}
+                            </div>
 
                     </div>
                 </div>
@@ -451,57 +459,57 @@ function User() {
                 <div class="shadow-xl   bg-[rgb(254 214 172)] rounded-lg md:max-w-md md:mx-auto p-4 fixed inset-x-0 bottom-0 z-50 mb-4 mx-4 md:relative">
 
                     {Status == "Deactivate" ? <>
-                    <div class="md:flex items-center">
-                        <div class="rounded-full border border-red-900 flex items-center justify-center w-16 h-16 flex-shrink-0 mx-auto">
-                            <AiOutlineWarning size={40} onClick={closeModal} fill='#8E2E0F' />
+                        <div class="md:flex items-center">
+                            <div class="rounded-full border border-red-900 flex items-center justify-center w-16 h-16 flex-shrink-0 mx-auto">
+                                <AiOutlineWarning size={40} onClick={closeModal} fill='#8E2E0F' />
+                            </div>
+                            <div class="mt-4 md:mt-0 md:ml-6 text-center md:text-left">
+                                <p class="font-bold text-red-800">Deactivate user account</p>
+                                <p class="text-sm text-gray-700 mt-1">Are you sure to Deactivate User account.
+                                </p>
+                            </div>
                         </div>
-                        <div class="mt-4 md:mt-0 md:ml-6 text-center md:text-left">
-                            <p class="font-bold text-red-800">Deactivate user account</p>
-                            <p class="text-sm text-gray-700 mt-1">Are you sure to Deactivate User account.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="text-center md:text-right mt-4 md:flex md:justify-end">
+                        <div class="text-center md:text-right mt-4 md:flex md:justify-end">
 
-                        <button class="block w-full md:inline-block md:w-auto px-4 py-3 md:py-2
+                            <button class="block w-full md:inline-block md:w-auto px-4 py-3 md:py-2
                                  bg-red-500 text-white rounded-lg font-semibold text-sm md:ml-2 md:order-2
                                   hover:bg-red-700 hover:text-white"
-                            onClick={handleDeactivatedSingleUser}
-                        >Deactivate
-                            Account</button>
-                        <button class="block w-full md:inline-block md:w-auto px-4 py-3 md:py-2
+                                onClick={handleDeactivatedSingleUser}
+                            >Deactivate
+                                Account</button>
+                            <button class="block w-full md:inline-block md:w-auto px-4 py-3 md:py-2
                                  bg-gray-200 rounded-lg font-semibold text-sm mt-4
                        md:mt-0 md:order-1 hover:bg-slate-500 hover:text-white"
-                            onClick={closeModal}
-                        >Cancel</button>
-                    </div>
+                                onClick={closeModal}
+                            >Cancel</button>
+                        </div>
 
                     </> : <>
-                    
-                    <div class="md:flex items-center">
-                        <div class="rounded-full border border-red-900 flex items-center justify-center w-16 h-16 flex-shrink-0 mx-auto">
-                            <AiOutlineWarning size={40} onClick={closeModal} fill='#8E2E0F' />
+
+                        <div class="md:flex items-center">
+                            <div class="rounded-full border border-red-900 flex items-center justify-center w-16 h-16 flex-shrink-0 mx-auto">
+                                <AiOutlineWarning size={40} onClick={closeModal} fill='#8E2E0F' />
+                            </div>
+                            <div class="mt-4 md:mt-0 md:ml-6 text-center md:text-left">
+                                <p class="font-bold text-red-800">Activate user account</p>
+                                <p class="text-sm text-gray-700 mt-1">Are you sure to Activate User account.
+                                </p>
+                            </div>
                         </div>
-                        <div class="mt-4 md:mt-0 md:ml-6 text-center md:text-left">
-                            <p class="font-bold text-red-800">Activate user account</p>
-                            <p class="text-sm text-gray-700 mt-1">Are you sure to Activate User account.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="text-center md:text-right mt-4 md:flex md:justify-end">
-                        <button class="block w-full md:inline-block md:w-auto px-4 py-3 md:py-2
+                        <div class="text-center md:text-right mt-4 md:flex md:justify-end">
+                            <button class="block w-full md:inline-block md:w-auto px-4 py-3 md:py-2
                                  bg-blue-500 text-white rounded-lg font-semibold text-sm md:ml-2 md:order-2
                                   hover:bg-blue-700 hover:text-white"
-                           onClick={handleActivatedSingleUser}
-                          >Activate Account</button>
-                        <button class="block w-full md:inline-block md:w-auto px-4 py-3 md:py-2
+                                onClick={handleActivatedSingleUser}
+                            >Activate Account</button>
+                            <button class="block w-full md:inline-block md:w-auto px-4 py-3 md:py-2
                                  bg-gray-200 rounded-lg font-semibold text-sm mt-4
                        md:mt-0 md:order-1 hover:bg-slate-500 hover:text-white"
-                            onClick={closeModal}
-                        >Cancel</button>
-                    </div>
+                                onClick={closeModal}
+                            >Cancel</button>
+                        </div>
                     </>}
-                    
+
                 </div>
 
 

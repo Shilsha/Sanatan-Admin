@@ -6,6 +6,7 @@ import 'react-calendar/dist/Calendar.css';
 import { HiClipboardDocumentList } from 'react-icons/hi2'
 import { GiArcheryTarget } from 'react-icons/gi'
 import { BsFillQuestionSquareFill, BsCaretDownFill } from 'react-icons/bs'
+import { VscBroadcast } from 'react-icons/vsc'
 import { AiOutlineClose } from 'react-icons/ai'
 import { RiShieldUserLine } from 'react-icons/ri'
 import { useDispatch, useSelector } from 'react-redux';
@@ -22,7 +23,7 @@ import { panchangeAction } from '../../Redux/Fetures/Reducers/PanchangSlice'
 import { getUser } from '../../Redux/Fetures/Reducers/GetUserSlice';
 import { getAllArticleAction } from '../../Redux/Fetures/Reducers/ArticleSlice'
 import { getAllQueriesAction } from '../../Redux/Fetures/Reducers/QueriesSlice'
-import {getBroadCastAction} from '../../Redux/Fetures/Reducers/BroadcastSplice'
+import { getBroadCastAction } from '../../Redux/Fetures/Reducers/BroadcastSplice'
 import DesignLogin from '../../Assets/images/DesignLogin.png'
 import Button from '../Screen/Button/Button';
 import LoaderN from '../Loader/LoaderN';
@@ -41,7 +42,7 @@ const customStyles = {
         background: "white",
         position: 'relative',
         border: 'none',
-       
+
 
     },
 };
@@ -59,14 +60,14 @@ function Dashboard() {
     const queryLen = useSelector((state) => state.query)
     const { loading, result, error } = useSelector((state) => state.thoughtOfDay)
     const panchangData = useSelector((state) => state.panchang)
-    const broadcastStatus=useSelector((state)=>state.broadcast)
-    console.log(broadcastStatus,'this is broadcast ')
-    const broadCast=broadcastStatus.result.filter(data=>data.announcementStatus==true)
-    console.log(broadCast.length   ,'this is braod case repeted')
+    const broadcastStatus = useSelector((state) => state.broadcast)
+    console.log(broadcastStatus, 'this is broadcast ')
+    const broadCast = broadcastStatus.result.filter(data => data.announcementStatus == true)
+    console.log(broadCast.length, 'this is braod case repeted')
 
-    const role=JSON.parse(sessionStorage.getItem('user'))
+    const role = JSON.parse(sessionStorage.getItem('user'))
 
-    // console.log(role.isSuperAdmin,'this is role')
+
     const requestOptions1 = {
         method: 'POST',
         headers: {
@@ -80,16 +81,20 @@ function Dashboard() {
                 "day": moment(value).format('DD'),
                 "month": moment(value).format('M'),
                 "year": moment(value).format('yy'),
-                "hour": 0,
-                "min": 0,
-                // "hour": currentTime.getHours(),
-                // "min": currentTime.getMinutes(),
-                "lat": '28.679079',
-                "lon": '28.679079',
+                // "hour": hour,
+                // "min": min,
+                "hour": value.getHours(),
+                "min": value.getMinutes(),
+                "lat": '28.7041',
+                "lon": '77.1025',
                 "tzone": '5.5'
             })
     };
 
+  
+
+
+    
     function getUserLength() {
         const data = {
             page: 0,
@@ -148,11 +153,11 @@ function Dashboard() {
         dispatch(updateThoughtAction(data))
         setIsOpen(false);
     }
+    console.log(value,'on change calender')
 
-    // console.log(process,'process')
-    // console.log(process.env.REACT_APP_BASE_URL,'env file ')
-   
-
+    useEffect(()=>{
+        dispatch(panchangeAction(requestOptions1))
+    },[value])
 
     return (
         <>
@@ -160,7 +165,7 @@ function Dashboard() {
                 <Sidebar />
                 <div className='   w-full ' >
                     <Navbar />
-                    
+
                     {/* ---------------------------------------------------------------- 1 row---------------------------------------------------------------------------*/}
 
                     <div className=" ScrollStyle  pr-4 ">
@@ -202,11 +207,11 @@ function Dashboard() {
                                     </div>
                                 </div>
 
-                                {role.isSuperAdmin?<>
-                                <button class="bg-orange-500 rounded font-medium absolute bottom-2 right-2 py-1
+                                {role.isSuperAdmin ? <>
+                                    <button class="bg-orange-500 rounded font-medium absolute bottom-2 right-2 py-1
                                  hover:bg-orange-600 px-3 text-white " onClick={openEdiotor}>Edit</button>
-                                </>:<></>}
-                                
+                                </> : <></>}
+
 
                                 {/* <FaEdit className='absolute bottom-2 right-2  text-orange-500 cursor-pointer' onClick={openEdiotor} size={25} /> */}
 
@@ -251,60 +256,60 @@ function Dashboard() {
 
                                 {
                                     panchangData.loading ? <>
-                                    <div className='grid justify-center h-full place-content-center '>
-                                    <LoaderN />
-                                    </div>
+                                        <div className='grid justify-center h-full place-content-center '>
+                                            <LoaderN />
+                                        </div>
                                     </>
-                                    
-                                    
-                                    : <>
-                                        <div className=' '>
 
 
-                                            <div className='flex justify-between items-center px-4 '>
-                                                <div className=' text-sm font-[500] leading-6'>
-                                                    <h3>Sunrise</h3>
-                                                    <h3>Sunset</h3>
-                                                    <h3>Moonrise</h3>
-                                                    <h3>Moonset</h3>
-                                                    <h3>Sun sign</h3>
-                                                    <h3>Moon sign</h3>
-                                                    <h3>Vedic Ritu</h3>
-                                                    <h3>Ayana</h3>
-                                                    <h3>Tithi</h3>
-                                                    <h3>Yog</h3>
-                                                    <h3>Nakshatra</h3>
-                                                    <h3>Karan</h3>
-                                                    <h3>Abhijit Muhurta</h3>
-                                                    <h3>Adhik</h3>
+                                        : <>
+                                            <div className=' '>
 
+
+                                                <div className='flex justify-between items-center px-4 '>
+                                                    <div className=' text-sm font-[500] leading-6'>
+                                                        <h3>Sunrise</h3>
+                                                        <h3>Sunset</h3>
+                                                        <h3>Moonrise</h3>
+                                                        <h3>Moonset</h3>
+                                                        <h3>Sun sign</h3>
+                                                        <h3>Moon sign</h3>
+                                                        <h3>Vedic Ritu</h3>
+                                                        <h3>Ayana</h3>
+                                                        <h3>Tithi</h3>
+                                                        <h3>Yog</h3>
+                                                        <h3>Nakshatra</h3>
+                                                        <h3>Karan</h3>
+                                                        <h3>Abhijit Muhurta</h3>
+                                                        <h3>Adhik</h3>
+
+                                                    </div>
+                                                    <div className='text-[13px]  text-end  text-gray-500 leading-6'>
+                                                        <p>{panchangData?.result?.sunrise}</p>
+                                                        <p>{panchangData?.result?.sunset}</p>
+                                                        <p>{panchangData?.result?.moonrise}</p>
+                                                        <p>{panchangData?.result?.moonset}</p>
+                                                        <p>{panchangData?.result?.sun_sign}</p>
+                                                        <p>{panchangData?.result?.moon_sign}</p>
+                                                        <p>{panchangData?.result?.ritu}</p>
+                                                        <p>{panchangData?.result?.ayana}</p>
+                                                        <p>{panchangData?.result?.tithi?.details?.tithi_name} &nbsp;Till {panchangData?.result?.tithi?.end_time?.hour}:{panchangData?.result?.tithi?.end_time?.minute}</p>
+                                                        <p>{panchangData?.result?.yog?.details?.yog_name} &nbsp;Till {panchangData?.result?.yog?.end_time?.hour}:{panchangData?.result?.yog?.end_time?.minute}</p>
+                                                        <p>{panchangData?.result?.nakshatra?.details?.nak_name}&nbsp;Till {panchangData?.result?.nakshatra?.end_time?.hour}:{panchangData?.result?.nakshatra?.end_time?.minute}</p>
+
+                                                        <p>{panchangData?.result?.karan?.details?.nak_name}&nbsp;Till {panchangData?.result?.karan?.end_time?.hour}:{panchangData?.result?.karan?.end_time?.minute}</p>
+                                                        <p>{panchangData?.result?.abhijit_muhurta?.start}&nbsp; |&nbsp;{panchangData?.result?.abhijit_muhurta?.end}</p>
+                                                        <p>{true ? 'Yes' : 'No'}</p>
+
+                                                    </div>
                                                 </div>
-                                                <div className='text-[13px]  text-end  text-gray-500 leading-6'>
-                                                    <p>{panchangData?.result?.sunrise}</p>
-                                                    <p>{panchangData?.result?.sunset}</p>
-                                                    <p>{panchangData?.result?.moonrise}</p>
-                                                    <p>{panchangData?.result?.moonset}</p>
-                                                    <p>{panchangData?.result?.sun_sign}</p>
-                                                    <p>{panchangData?.result?.moon_sign}</p>
-                                                    <p>{panchangData?.result?.ritu}</p>
-                                                    <p>{panchangData?.result?.ayana}</p>
-                                                    <p>{panchangData?.result?.tithi?.details?.tithi_name} &nbsp;Till {panchangData?.result?.tithi?.end_time?.hour}:{panchangData?.result?.tithi?.end_time?.minute}</p>
-                                                    <p>{panchangData?.result?.yog?.details?.yog_name} &nbsp;Till {panchangData?.result?.yog?.end_time?.hour}:{panchangData?.result?.yog?.end_time?.minute}</p>
-                                                    <p>{panchangData?.result?.nakshatra?.details?.nak_name}&nbsp;Till {panchangData?.result?.nakshatra?.end_time?.hour}:{panchangData?.result?.nakshatra?.end_time?.minute}</p>
 
-                                                    <p>{panchangData?.result?.karan?.details?.nak_name}&nbsp;Till {panchangData?.result?.karan?.end_time?.hour}:{panchangData?.result?.karan?.end_time?.minute}</p>
-                                                    <p>{panchangData?.result?.abhijit_muhurta?.start}&nbsp; |&nbsp;{panchangData?.result?.abhijit_muhurta?.end}</p>
-                                                    <p>{true ? 'Yes' : 'No'}</p>
 
-                                                </div>
                                             </div>
 
 
-                                        </div>
 
-
-
-                                    </>
+                                        </>
                                 }
 
 
@@ -315,30 +320,30 @@ function Dashboard() {
                             <div className='shadow col-span bg-gray-50/20 blurr rounded-lg '>
                                 {/* <h1 className='text-center text-red-800  font-bold'>Inausupicious Period</h1> */}
                                 <h1 className='text-center text-lg mt-2  text-gray-500 font-medium  underline underline-offset-8'>Inausupicious Period</h1>
-                               {  panchangData.loading ?<>
-                               
-                                <div className='grid justify-center h-full place-content-center '>
-                                    <LoaderN />
-                                    </div>
-                               </>:<>
-                                <div className='flex justify-between items-center px-3 pt-2 '>
-                                    <div className=' text-sm font-medium'>
-                                        <h3>Rahu kaal</h3>
-                                        <h3>Yamghant kaal</h3>
-                                        <h3>Gulikaal</h3>
-                                    </div>
-                                    <div className='text-[13px] font-sans  text-gray-500'>
-                                        <p>{panchangData?.result?.rahukaal?.start} |{panchangData?.result?.rahukaal?.end}</p>
-                                        <p>{panchangData?.result?.yamghant_kaal?.start} | {panchangData?.result?.yamghant_kaal?.end}</p>
-                                        <p>{panchangData?.result?.guliKaal?.start}| {panchangData?.result?.guliKaal?.end}</p>
-                                    </div>
-                                </div>
-                               
-                               </>}
+                                {panchangData.loading ? <>
 
-                               
+                                    <div className='grid justify-center h-full place-content-center '>
+                                        <LoaderN />
+                                    </div>
+                                </> : <>
+                                    <div className='flex justify-between items-center px-3 pt-2 '>
+                                        <div className=' text-sm font-medium'>
+                                            <h3>Rahu kaal</h3>
+                                            <h3>Yamghant kaal</h3>
+                                            <h3>Gulikaal</h3>
+                                        </div>
+                                        <div className='text-[13px] font-sans  text-gray-500'>
+                                            <p>{panchangData?.result?.rahukaal?.start} |{panchangData?.result?.rahukaal?.end}</p>
+                                            <p>{panchangData?.result?.yamghant_kaal?.start} | {panchangData?.result?.yamghant_kaal?.end}</p>
+                                            <p>{panchangData?.result?.guliKaal?.start}| {panchangData?.result?.guliKaal?.end}</p>
+                                        </div>
+                                    </div>
+
+                                </>}
+
+
                                 <h1 className='text-center text-lg mt-20 text-gray-500 font-medium  underline underline-offset-8'>Lunar Month</h1>
-                              
+
                                 <div className='flex justify-between items-center px-3 my-2  '>
                                     <div className=' text-sm font-medium'>
                                         <h3>Amanta</h3>
@@ -453,13 +458,13 @@ function Dashboard() {
                                     <div className='rounded-lg bg-gray-50/20 blurr   shadow py-2 h-[175px]'>
                                         <div className='flex justify-between px-1 items-center my-3 '>
                                             <div className=' rounded-full p-2'>
-                                                <RiShieldUserLine className='text-orange-500 ' size={50} />
+                                                <VscBroadcast className='text-orange-500 ' size={50} />
                                             </div>
                                             <div className='flex flex-col '>
                                                 <Link to='/broadcast'>
                                                     <h1 className=' py-4 text-2xl text-center font-medium  text-gray-500 underline underline-offset-8 '>Broadcast</h1>
                                                 </Link>
-                                                <h1 className='text-5xl text-gray-500 font-medium    text-center '>{broadCast.length?<>{broadCast.length}</>:<>0</>}</h1>
+                                                <h1 className='text-5xl text-gray-500 font-medium    text-center '>{broadCast.length ? <>{broadCast.length}</> : <>0</>}</h1>
                                             </div>
                                         </div>
                                     </div>
@@ -480,12 +485,12 @@ function Dashboard() {
 
                         </div>
                         <div className='absolute bottom-0  -z-10 right-0   '>
-                    <img src={DesignLogin} alt='empty' className='w-full '></img>
-                </div>
+                            <img src={DesignLogin} alt='empty' className='w-full '></img>
+                        </div>
                     </div>
 
                 </div>
-              
+
 
             </div>
 

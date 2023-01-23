@@ -9,6 +9,7 @@ import LoaderN from '../../Loader/Loader'
 import { MdSystemSecurityUpdateGood } from 'react-icons/md'
 import { addBroadcastAction, updateBroadcastAction, deleteBroadcastAction } from '../../../Redux/Fetures/Reducers/BroadcastSplice'
 import { ToastContainer } from 'react-toastify'
+import DesignLogin from '../../../Assets/images/DesignLogin.png'
 
 function BroadCast() {
     const dispatch = useDispatch()
@@ -111,7 +112,7 @@ function BroadCast() {
     return (
         <>
             <ToastContainer />
-            <div className='   w-[100%] h-[100vh] flex flex-col-2 gap-4  '>
+            <div className='   w-[100%] h-[100vh] flex flex-col-2 gap-4  bgGradient '>
                 <Sidebar />
 
                 <div className=' w-full '>
@@ -135,7 +136,7 @@ function BroadCast() {
 
                                     <form onSubmit={handleSubmit}>
 
-                                        <div class="w-[70%] shadow-xl mx-auto  border border-gray-200 rounded-lg bg-slate-300/20 dark:bg-gray-700 dark:border-gray-600">
+                                        <div class="w-[70%] shadow-xl mx-auto blurrTable  border border-gray-200 rounded-lg bg-slate-300/20 dark:bg-gray-700 dark:border-gray-600">
                                             {/* <h1 class="text-2xl font-bold  drop-shadow-lg text-gray-500 shadow text-center py-2">Broadcast</h1> */}
                                             <h1 className='text-center text-2xl py-2  text-gray-500 font-medium  underline underline-offset-8'>Broadcast</h1>
 
@@ -178,7 +179,7 @@ function BroadCast() {
 
                         {/* ================================================table============================================ */}
                         <div className='w- mx-auto tableWrapBroadcast  mt-8  pr-4'>
-                            <table class="shadow-xl tables    w-full rounded-xl ">
+                            <table class="shadow-xl tables    w-full rounded-xl blurrTable ">
                                
                                 <thead className=''>
                                 <tr className='  bg-blue-100  text-center '>
@@ -251,6 +252,10 @@ function BroadCast() {
                         </div>
 
                     </div>
+                    <div className='absolute bottom-0   right-0  -z-10  '>
+                                <img src={DesignLogin} alt='empty' className='w-full'></img>
+                            </div>
+
                 </div>
             </div>
         </>
