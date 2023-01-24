@@ -112,7 +112,12 @@ const getBroadCastOfDay = createSlice({
         [addBroadcastAction.fulfilled]: (state, action) => {
             // toast.success('Added successfully')
             console.log( action.payload.data.status,'action add')
-            toast.success( action.payload.data.status.message)
+            // toast.warning( action.payload.data.status.message)
+            if(action.payload.data.status.message=='Success'){
+                toast.success( action.payload.data.status.message)
+            }else{
+                toast.warning( action.payload.data.status.message)
+            }
             state.loading = false
             [state.result.push(action.payload.data.data)]
         },

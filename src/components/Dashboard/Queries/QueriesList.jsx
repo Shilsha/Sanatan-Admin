@@ -106,7 +106,9 @@ function QueriesList() {
             type: type
         }
         dispatch(getAllQueriesAction(data))
-        toast.success('Your query type has changed.')
+        toast('Your query type has changed.',{
+            className: 'toast-typeChanged'
+        })
 
     }
 
