@@ -7,126 +7,49 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getBroadCastAction } from '../../../Redux/Fetures/Reducers/BroadcastSplice'
 import LoaderN from '../../Loader/Loader'
 import { MdSystemSecurityUpdateGood } from 'react-icons/md'
-import { addBroadcastAction, updateBroadcastAction, deleteBroadcastAction } from '../../../Redux/Fetures/Reducers/BroadcastSplice'
-import { ToastContainer } from 'react-toastify'
-import axios from 'axios'
-
+import { toast, ToastContainer } from 'react-toastify'
+import RichTextEditor from '../../Editor/RichTextEditor'
+import { useNavigate } from 'react-router-dom'
+import DesignLogin from '../../../Assets/images/DesignLogin.png'
 function BlogsPost() {
-    const dispatch = useDispatch()
-    const [id, setId] = useState('')
-    const [date, setDate] = useState('')
-    const [msg, setMsg] = useState('')
-    const [selectedImage, setSelectedImage] = useState(null);
-    const [image, setImage] = useState(null);
-
-    const broadCast = useSelector((state) => state.broadcast)
-
-    console.log(selectedImage, "selectedImage")
-
-    useEffect(() => {
-        dispatch(getBroadCastAction())
-    }, [])
-
-
-
-
-
-    // ===========================text length slice========================
-    const truncateString = (str, num) => {
-        if (str?.length > num) {
-            return str.slice(0, num) + '...';
-        } else {
-            return str;
-        }
+    const [editorText, setEditorText] = useState('')
+    const [myimage, setMyImage] = React.useState('');
+    const navigate = useNavigate()
+    const uploadImage = e => {
+        setMyImage(URL.createObjectURL(e.target.files[0]));
     };
+    // ================================================callback data=====================================
+    const sendData = (data) => {
 
+        setEditorText(data)
 
-    // =============================handle submit create new Post==================
+    }
+    // ==================================================
     const handleSubmit = (e) => {
         e.preventDefault()
 
-
-        if (!id) {
-
-            const data = {
-                announcementOfTheDay: msg
-            }
-            console.log('add')
-            dispatch(addBroadcastAction(data))
-            setMsg('')
-            setId('')
-            setDate('')
-
+        const data = { editorText, myimage }
+        if (!data.myimage) {
+            toast.warning('Fields are required!')
         }
+
         else {
-
-            const data = {
-                announcementId: id,
-                announcementOfTheDay: msg,
-                date: date,
-                announcementStatus: true
-            }
-            console.log(data, 'update data')
-            console.log('update')
-            dispatch(updateBroadcastAction(data))
-            setMsg('')
-            setId('')
-            setDate('')
-
+            toast.success('Your blog is successfully uploaded')
+            setTimeout(() => {
+                navigate('/dashboard')
+            }, 900)
         }
 
+        console.log(data, 'form')
 
 
-
-
-
-
-    }
-
-    // ==================handle clear=====================
-    const handleClear = (e) => {
-        e.preventDefault()
-
-        setId('')
-        setDate('')
-        setMsg('')
-
-    }
-
-    // =======================handle update msg==================
-
-    const handleChange = (e) => {
-        setMsg(e.target.value)
-    }
-
-    const editHandle = (data) => {
-        console.log(data.data.Msg, 'form')
-        setMsg(data.data.Msg)
-        setId(data.data.Id)
-        setDate(data.data.Date)
-    }
-
-    // ========================delete broadcast msg=================
-    const deleteBroadcast = (id) => {
-        console.log(id, 'del')
-        dispatch(deleteBroadcastAction(id))
-    }
-    function handleImage(e) {
-        console.log(e.target.files)
-        setImage(e.target.files[0])
-    }
-    function handleApi() {
-        const formData = new FormData();
-        formData.append('image', image)
-        axios.post('/api/', formData)
-            .then((res) => { })
 
     }
 
     return (
         <>
             <ToastContainer />
-            <div className='   w-[100%] h-[100vh] flex flex-col-2 gap-4  '>
+            <div className='   w-[100%] h-[100vh] flex flex-col-2 gap-4 bgGradient '>
                 <Sidebar />
 
                 <div className=' w-full '>
@@ -136,96 +59,54 @@ function BlogsPost() {
 
                         <div className=' col-span-4  rounded-lg  relative '>
 
-                            <div className="min-h-[300px]">
-                                <div className='flex justify-center items-center '>
-
-                                    {/* <img src={side1} alt="logo" className='w-16' /> */}
-                                    {/* <h2 className=' text-xl font-extrabold underline underline-offset-8 text-center  
-                                   text-red-800 px-4 '>Broadcast</h2> */}
-
-                                    {/* <img src={side1} alt="logo" className='w-16' /> */}
-                                </div>
+                            <div className="min-h-[300px] ">
 
                                 <div className='  '>
 
                                     <form onSubmit={handleSubmit}>
 
-                                        <div class="w-[70%] shadow-xl mx-auto  border border-gray-200 rounded-lg bg-slate-300/20 dark:bg-gray-700 dark:border-gray-600">
-                                            {/* <h1 class="text-2xl font-bold  drop-shadow-lg text-gray-500 shadow text-center py-2">Broadcast</h1> */}
-                                            <h1 className='text-center text-2xl py-2  text-gray-500 font-medium  underline underline-offset-8'>Broadcast</h1>
+                                        <div class="w-[80%] h-[65F0px] blurrTable shadow-xl mx-auto  border border-gray-200 rounded-lg  dark:bg-gray-700 dark:border-gray-600">
+                                            <h1 className='text-center text-2xl py-4  text-gray-500 font-medium  underline underline-offset-8 '>Create Blog</h1>
 
-                                            <div class="px-4 py-2 rounded-t-lg dark:bg-gray-800">
 
-                                                <textarea id="comment" rows="8" class="w-full  px-2  text-sm text-gray-900 bg-white  dark:bg-gray-800 
-                                                focus:none dark:text-white dark:placeholder-gray-400 focus:none h-96 ..." placeholder="Write a Message..." value={msg}
-                                                    onChange={handleChange}
-                                                    required></textarea>
+                                            <div class="flex items-center justify-center  border-t dark:border-gray-600 ">
+
+                                                < div className='w-full min-h-[400px] bg-white px-4'>
+                                                    <RichTextEditor sendData={sendData} />
+
+                                                </div>
+
                                             </div>
-                                            <div class="flex items-center justify-center px-3 py-3 border-t dark:border-gray-600">
-                                                {id ? <>
-
-                                                    <button type="submit" class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center bg-orange-600 hover:bg-orange-700 text-white shadow-lg rounded-full " >
-                                                        Update Broadcast
-                                                    </button>
-                                                </> : <>
-                                                    <button type="submit" class="inline-flex shadow-lg  items-center py-2.5 px-4 text-xs font-medium text-center bg-orange-600 hover:bg-orange-700 text-white rounded-full ">
-                                                        Post Blog
-                                                    </button>
-                                                </>}
-
-                                                <button type="" class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-orange-500 hover:bg-orange-700 border-2 border-orange-500 mx-2 shadow-lg rounded-full hover:text-white " onClick={handleClear} >
-                                                    Clear Blog
-                                                </button>
-                                                {/* <button type="" class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-orange-500 hover:bg-orange-700 border-2 border-orange-500 mx-2 shadow-lg rounded-full hover:text-white " onClick={handleClear} >
-                                                    Upload Image
-                                                </button> */}
-
-
-                                                <div>
-
-                                                    {/* {selectedImage && (
-                                                        <div>
-                                                            <img alt="not found" width={"250px"} src={URL.createObjectURL(selectedImage)} />
-                                                            <br />
-                                                            <button onClick={() => setSelectedImage(null)}>Remove</button>
-                                                        </div>
-                                                    )}
-
-                                                    <input
-                                                        className='inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-orange-500 hover:bg-orange-700 border-2 border-orange-500 mx-2 shadow-lg rounded-full hover:text-white '
-                                                        type="file"
-                                                        name="myImage"
-                                                        onChange={(event) => {
-                                                            console.log(event.target.files[0]);
-                                                            setSelectedImage(event.target.files[0]);
-                                                        }}
-                                                    /> */}
+                                            <div className='p-5 flex  items-center  '>
+                                                <div className=''>
+                                                    <label class="block mb-2 font-medium text-gray-900 dark:text-white" for="file_input">Upload file</label>
+                                                    <input class="   text-gray-900  rounded-lg cursor-pointer
+                                                     dark:text-gray-400 focus:outline-none dark:bg-gray-700
+                                                     dark:border-gray-600 dark:placeholder-gray-400"  type="file" onChange={uploadImage} />
                                                 </div>
-                                                <div>
-                                                {image && (
-                                                        <div>
-                                                            <img alt="not found" width={"250px"} src={URL.createObjectURL(image)} />
-                                                            <br />
-                                                            <button onClick={() => setImage(null)}>Remove</button>
-                                                        </div>
-                                                    )}
 
-                                                    <input type="file" name='file' onChange={handleImage} />
-                                                    <button type="" class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-orange-500 hover:bg-orange-700 border-2 border-orange-500 mx-2 shadow-lg rounded-full hover:text-white " onClick={handleClear} >
-                                                    Submit
-                                                </button>
-                                                    {/* <button onClick={handleApi}> Submit</button> */}
+                                                <div className=' flex justify-center items-center  border-grey-500 w-full '>
+
+                                                    {myimage ? <img src={myimage} alt="pic" style={{ height: 100, width: 100 }} /> : ''}
                                                 </div>
+                                            </div>
+
+                                            <div className='w-full text-center py-4 '>
+                                                <button class="bg-orange-500 hover:bg-orange-600
+                                         text-white font-medium py-1 shadow-xl  px-5 text-lg rounded-full focus:outline-none
+                                          focus:shadow-outline" type="submit">
+                                                    Post blog
+                                                </button>
                                             </div>
                                         </div>
+
+
                                     </form>
 
                                 </div>
                             </div>
 
-                            {/* <FaEdit className='absolute bottom-2 right-2 text-red-800 cursor-pointer'
 
-                                size={25} /> */}
 
                         </div>
 
@@ -233,6 +114,10 @@ function BlogsPost() {
 
                     </div>
                 </div>
+                <div className='absolute bottom-0   right-0  -z-10  '>
+                    <img src={DesignLogin} alt='empty' className='w-full'></img>
+                </div>
+
             </div>
         </>
     )
