@@ -163,7 +163,7 @@ function Dashboard() {
                                 <Calendar onChange={onChange} value={value} />
 
                             </div>
-                            <div className=' col-span-4 bg-gray-50/20   rounded-lg shadow  relative '>
+                            <div className=' col-span-4 bg-gray-50/20   rounded-lg shadow  relative'>
 
                                 <div>
                                     <div className='flex justify-center items-center'>

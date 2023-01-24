@@ -9,15 +9,19 @@ import LoaderN from '../../Loader/Loader'
 import { MdSystemSecurityUpdateGood } from 'react-icons/md'
 import { addBroadcastAction, updateBroadcastAction, deleteBroadcastAction } from '../../../Redux/Fetures/Reducers/BroadcastSplice'
 import { ToastContainer } from 'react-toastify'
+import axios from 'axios'
 
 function BlogsPost() {
     const dispatch = useDispatch()
     const [id, setId] = useState('')
     const [date, setDate] = useState('')
     const [msg, setMsg] = useState('')
+    const [selectedImage, setSelectedImage] = useState(null);
+    const [image, setImage] = useState(null);
+
     const broadCast = useSelector((state) => state.broadcast)
 
-    console.log(broadCast, 'broadcast')
+    console.log(selectedImage, "selectedImage")
 
     useEffect(() => {
         dispatch(getBroadCastAction())
@@ -107,6 +111,17 @@ function BlogsPost() {
         console.log(id, 'del')
         dispatch(deleteBroadcastAction(id))
     }
+    function handleImage(e) {
+        console.log(e.target.files)
+        setImage(e.target.files[0])
+    }
+    function handleApi() {
+        const formData = new FormData();
+        formData.append('image', image)
+        axios.post('/api/', formData)
+            .then((res) => { })
+
+    }
 
     return (
         <>
@@ -159,13 +174,48 @@ function BlogsPost() {
                                                 </>}
 
                                                 <button type="" class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-orange-500 hover:bg-orange-700 border-2 border-orange-500 mx-2 shadow-lg rounded-full hover:text-white " onClick={handleClear} >
-                                                    Clear Blog  
+                                                    Clear Blog
                                                 </button>
-                                                <button type="" class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-orange-500 hover:bg-orange-700 border-2 border-orange-500 mx-2 shadow-lg rounded-full hover:text-white " onClick={handleClear} >
-                                                    Post Image 
-                                                </button>
+                                                {/* <button type="" class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-orange-500 hover:bg-orange-700 border-2 border-orange-500 mx-2 shadow-lg rounded-full hover:text-white " onClick={handleClear} >
+                                                    Upload Image
+                                                </button> */}
 
 
+                                                <div>
+
+                                                    {/* {selectedImage && (
+                                                        <div>
+                                                            <img alt="not found" width={"250px"} src={URL.createObjectURL(selectedImage)} />
+                                                            <br />
+                                                            <button onClick={() => setSelectedImage(null)}>Remove</button>
+                                                        </div>
+                                                    )}
+
+                                                    <input
+                                                        className='inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-orange-500 hover:bg-orange-700 border-2 border-orange-500 mx-2 shadow-lg rounded-full hover:text-white '
+                                                        type="file"
+                                                        name="myImage"
+                                                        onChange={(event) => {
+                                                            console.log(event.target.files[0]);
+                                                            setSelectedImage(event.target.files[0]);
+                                                        }}
+                                                    /> */}
+                                                </div>
+                                                <div>
+                                                {image && (
+                                                        <div>
+                                                            <img alt="not found" width={"250px"} src={URL.createObjectURL(image)} />
+                                                            <br />
+                                                            <button onClick={() => setImage(null)}>Remove</button>
+                                                        </div>
+                                                    )}
+
+                                                    <input type="file" name='file' onChange={handleImage} />
+                                                    <button type="" class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-orange-500 hover:bg-orange-700 border-2 border-orange-500 mx-2 shadow-lg rounded-full hover:text-white " onClick={handleClear} >
+                                                    Submit
+                                                </button>
+                                                    {/* <button onClick={handleApi}> Submit</button> */}
+                                                </div>
                                             </div>
                                         </div>
                                     </form>
@@ -179,7 +229,7 @@ function BlogsPost() {
 
                         </div>
 
-                        
+
 
                     </div>
                 </div>
