@@ -177,7 +177,7 @@ function Dashboard() {
                                 <Calendar onChange={onChange} value={value} />
 
                             </div>
-                            <div className=' col-span-4 bg-gray-50/20   rounded-lg shadow  relative '>
+                            <div className=' col-span-4 bg-gray-50/20   rounded-lg shadow  relative'>
 
                                 <div>
                                     <div className='flex justify-center items-center'>
@@ -465,6 +465,19 @@ function Dashboard() {
                                                     <h1 className=' py-4 text-2xl text-center font-medium  text-gray-500 underline underline-offset-8 '>Broadcast</h1>
                                                 </Link>
                                                 <h1 className='text-5xl text-gray-500 font-medium    text-center '>{broadCast.length ? <>{broadCast.length}</> : <>0</>}</h1>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className='rounded-lg bg-gray-50/20 blurr   shadow py-2 h-[175px]'>
+                                        <div className='flex justify-between px-1 items-center my-3 '>
+                                            <div className=' rounded-full p-2'>
+                                                <RiShieldUserLine className='text-orange-500 ' size={50} />
+                                            </div>
+                                            <div className='flex flex-col '>
+                                                <Link to='/blogsPost'>
+                                                    <h1 className=' py-4 text-2xl text-center font-medium  text-gray-500 underline underline-offset-8 '>Blogs</h1>
+                                                </Link>
+                                                <h1 className='text-5xl text-gray-500 font-medium    text-center '>500</h1>
                                             </div>
                                         </div>
                                     </div>
