@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from '../../Navbar/Navbar'
 import Sidebar from '../../Sidebar/Sidebar'
-import { BsSearch, BsThreeDots } from 'react-icons/bs'
+import { BsSearch, BsThreeDots, BsFilterLeft } from 'react-icons/bs'
 import { BiFilter, BiSkipNext, BiSkipPrevious } from 'react-icons/bi'
 import { AiOutlinePlus, AiFillDelete, AiTwotoneEdit, AiOutlineClose, AiOutlineClear } from 'react-icons/ai'
 import { useDispatch, useSelector } from 'react-redux'
-import { getLogs } from '../../../Redux/Fetures/Reducers/LogsSlice'
+import { getLogs ,getDateRangeLogs} from '../../../Redux/Fetures/Reducers/LogsSlice'
 import Loader from '../../Loader/Loader'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -22,7 +22,7 @@ function Logs() {
     const [buttonNext, setButtonNext] = useState(false)
     const dispatch = useDispatch()
     const logs = useSelector((state) => state.log)
-    console.log(logs, 'thi si is logS')
+    // console.log(logs, 'thi si is logS')
     useEffect(() => {
         const data = {
             date: moment(date).format('YYYY-MM-DD'),
@@ -37,24 +37,14 @@ function Logs() {
     const dateFilter = (dates) => {
         setDate(dates)
         console.log(dates, 'dates')
-        const data = {
-            date: moment(dates).format('YYYY-MM-DD'),
-            module: type,
-            page: page,
-        }
-        dispatch(getLogs(data))
+
     }
 
 
     // ========================enum search ===============
     const selectArticleType = (type) => {
         setType(type)
-        const data = {
-            date: moment(date).format('YYYY-MM-DD'),
-            module: type,
-            page: page,
-        }
-        dispatch(getLogs(data))
+
     }
     // ==========================clear all filter======================
     const ClearAllFilter = () => {
@@ -118,6 +108,47 @@ function Logs() {
     }, [logs.result])
 
 
+    // ============================date range filter ====================================
+    const [dateRange, setDateRange] = useState([null, null]);
+    const [dateType, setDateType] = useState('SingleDate');
+    const [startDate, endDate] = dateRange;
+
+
+    const HandleSubmit = (e) => {
+        e.preventDefault()
+        // console.log( moment(startDate).format('YYYY-MM-DD'),moment(endDate).format('YYYY-MM-DD'))
+        // console.log(moment(startDate).format('YYYY-MM-DD'), 'what ')
+        console.log(dateType,'hmm')
+        if (dateType=='dateRange') {
+
+            const data = {
+                dateStart:moment(startDate).format('YYYY-MM-DD'),
+                dateEnd: moment(endDate).format('YYYY-MM-DD'),
+                module: type,
+                page: page,
+            }
+            dispatch(getDateRangeLogs(data))
+          
+            console.log('range')
+            
+        } else {
+            const data = {
+                date: moment(date).format('YYYY-MM-DD'),
+                module: type,
+                page: page,
+            }
+            dispatch(getLogs(data))
+            console.log('single')
+        }
+
+
+
+
+
+
+    }
+
+    console.log(dateType, 'date type')
     return (
         <>
 
@@ -131,7 +162,7 @@ function Logs() {
                         < div className='flex justify-between items-center py-4 '>
                             <div className='w-[400px]'>
 
-                                <div class=" relative  w-full text-gray-600 ">
+                                <div class=" relative  w-full text-gray-600  ">
                                     <input class="border-2  w-full border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
                                         type="search" name="search" placeholder="Search..." value={FilterSearch} onChange={(e) => setFilterSearch(e.target.value)} />
                                     <button type="submit" class="absolute right-0 top-2 mr-5">
@@ -142,42 +173,70 @@ function Logs() {
 
 
                             </div>
-                            <button type="button" class= "inline-flex items-center text-white bg-gradient-to-r from-orange-500  to-yellow-400 hover:bg-gradient-to-bl font-medium rounded-lg text-lg px-3 py-1 text-center mr-40 mb-2"> Logs List
-                            
-                            </button>
-                     
 
 
-                            <div className='flex justify-between items-center'>
 
-                                <button class="inline-flex items-center px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white text-sm font-medium rounded-md" onClick={ClearAllFilter}>
+                            <form onSubmit={HandleSubmit} >
+                                <div className='flex justify-start items- '>
+
+                                    <button class="inline-flex items-center px-4 mr-4 py-2 bg-orange-500 hover:bg-orange-600 text-white text-sm font-medium rounded-md" onClick={ClearAllFilter}>
 
 
-                                    <AiOutlineClear className='mx-1  ' size={25} />
+                                        <AiOutlineClear className='mx-1  ' size={25} />
 
-                                </button>
-                                <div className="mx-4 flex justify-between items-center w-[80%]">
+                                    </button>
 
-                                    <DatePicker className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" selected={date} onChange={(date) => dateFilter(date)} />
+                                    <select id="countries" class="bg-gray-50 border border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 mx-2" onChange={(e) => setDateType(e.target.value)}>
+                                        <option disabled selected >  Filter by Date</option>
+                                        <option value="dateRange">Date Range</option>
+                                        <option value="SingleDate">Single Date</option>
+
+                                    </select>
+
+                                    {dateType == 'dateRange' ?
+                                        <div className="mx-4 flex justify-between items-center w-full">
+                                            <DatePicker className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[190px] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500  "
+                                                selectsRange={true}
+                                                // dateFormat="dd-mm-yyyy"
+                                                startDate={startDate}
+                                                endDate={endDate}
+                                                onChange={(update) => {
+                                                    setDateRange(update);
+                                                }}
+                                                isClearable={true}
+
+
+                                            />
+                                        </div> :
+                                        <div className="mx-4 flex justify-between items-center w-full">
+
+                                            <DatePicker className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " selected={date} onChange={(date) => dateFilter(date)} />
+
+                                        </div>}
+
+
+
+
+                                    <select id="countries" class="bg-gray-50 border border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ml-2" onChange={(e) => selectArticleType(e.target.value)}>
+                                        <option disabled selected>Select Module Type</option>
+                                        <option value="PanchangModule">Panchang Module</option>
+                                        <option value="ZodiacSignModule">Zodiac Sign Module</option>
+                                        <option value="LoginModule">Login Module</option>
+                                        <option value="LocationModule">Location Module</option>
+                                        <option value="MatchMakingModule">Match Making Module</option>
+                                        <option value="HoroscopeModule">Horoscope Module</option>
+                                        <option value="ContactModule">Contact Module</option>
+                                        <option value="ArticleModule"> Article Module</option>
+                                        <option value="AdminModule">Admin Module</option>
+                                        <option value="festivalModule">festival Module</option>
+                                        <option value="KundaliModule">Kundali Module</option>
+                                    </select>
+
+                                    <button type='submit' className="inline-flex items-center px-4 mr-4 py-2 bg-orange-500 hover:bg-orange-600 text-white text-sm font-medium rounded-md mx-2">Submit</button>
+
 
                                 </div>
-
-                                <select id="countries" class="bg-gray-50 border border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" onChange={(e) => selectArticleType(e.target.value)}>
-                                    <option disabled selected>Select Module Type</option>
-                                    <option value="PanchangModule">Panchang Module</option>
-                                    <option value="ZodiacSignModule">Zodiac Sign Module</option>
-                                    <option value="LoginModule">Login Module</option>
-                                    <option value="LocationModule">Location Module</option>
-                                    <option value="MatchMakingModule">Match Making Module</option>
-                                    <option value="HoroscopeModule">Horoscope Module</option>
-                                    <option value="ContactModule">Contact Module</option>
-                                    <option value="ArticleModule"> Article Module</option>
-                                    <option value="AdminModule">Admin Module</option>
-                                    <option value="festivalModule">festival Module</option>
-                                    <option value="KundaliModule">Kundali Module</option>
-                                </select>
-
-                            </div>
+                            </form>
                         </div>
                         <div className="tableWrap">
                             <table class="shadow-lg tables  w-full rounded-xl blurrTable">
@@ -249,8 +308,8 @@ function Logs() {
                         </ul>
                     </nav>
                     <div className='absolute bottom-0   right-0  -z-10  '>
-                                <img src={DesignLogin} alt='empty' className='w-full'></img>
-                            </div>
+                        <img src={DesignLogin} alt='empty' className='w-full'></img>
+                    </div>
                 </div>
 
 

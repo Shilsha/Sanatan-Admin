@@ -70,6 +70,9 @@ function User() {
 
 
     // console.log(updateForm,'upadte form')
+    const userData = useSelector((state) => state.user)
+    const adminRole = JSON.parse(sessionStorage.getItem('user'))
+    console.log(adminRole.role, "admin role")
 
 
 
@@ -83,13 +86,8 @@ function User() {
             type: types
         }
         dispatch(getUser(data))
+
     }, [])
-
-
-
-    const userData = useSelector((state) => state.user)
-    console.log(userData, "usr data")
-
 
 
     const PageNumbers = []
@@ -204,9 +202,6 @@ function User() {
         setPage(page - 1)
 
     }
-
-
-
     useEffect(() => {
 
 
@@ -229,294 +224,296 @@ function User() {
         dispatch(getUser(data))
 
     }, [page])
+     
+        return (
+            <>
+                <ToastContainer />
+                <div className='  w-[100%] h-[100vh] flex flex-col-2 gap-4 bgGradient '>
+                    <Sidebar />
 
-    return (
-        <>
-            <ToastContainer />
-            <div className='  w-[100%] h-[100vh] flex flex-col-2 gap-4 bgGradient '>
-                <Sidebar />
+                    <div className=' w-[93%] '>
+                        <Navbar />
+                        <div className=' my-4 mx-auto  '>
 
-                <div className=' w-[93%] '>
-                    <Navbar />
-                    <div className=' my-4 mx-auto  '>
+                            <div className='flex justify-between items-center pb-4 pr-4'>
+                                <div className=' w-[400px]'>
+                                    <div class=" relative w-full   text-gray-600 ">
+                                        <input class="border-2  w-full border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
+                                            type="search" name="search" placeholder="Search..." value={FilterSearch} onChange={(e) => setFilterSearch(e.target.value)} />
+                                        <button type="submit" class="absolute right-0 top-2 mr-5">
+                                            <BsSearch className='p-1 ' size={25} />
+                                        </button>
+                                    </div>
+                                </div>
 
-                        <div className='flex justify-between items-center pb-4 pr-4'>
-                            <div className=' w-[400px]'>
-                                <div class=" relative w-full   text-gray-600 ">
-                                    <input class="border-2  w-full border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
-                                        type="search" name="search" placeholder="Search..." value={FilterSearch} onChange={(e) => setFilterSearch(e.target.value)} />
-                                    <button type="submit" class="absolute right-0 top-2 mr-5">
-                                        <BsSearch className='p-1 ' size={25} />
+                                <div>
+
+                                    <button type="button" class="inline-flex items-center text-white bg-gradient-to-r from-orange-500 
+                                 to-yellow-400 hover:bg-gradient-to-bl font-medium rounded-lg text-lg px-4 py-1 text-center mr-40 mb-2">
+                                        Users List
+
                                     </button>
+
+                                </div>
+                                <div>
+                                    <select id="countries" className="bg-gray-50 border border-gray-400 text-gray-900 
+                                    text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700
+                                     dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        onChange={(e) => setUserType(e.target.value)}     >
+                                        <option disabled={true} selected={true}>Select User Type</option>
+                                        <option value="true">Active</option>
+                                        <option value="false">Inactive</option>
+                                    </select>
+
+
                                 </div>
                             </div>
+                            <div className="tableWrap pr-4  mb-4">
 
-                            <div>
-                                
-                            <button type="button" class="inline-flex items-center text-white bg-gradient-to-r from-orange-500 
-                             to-yellow-400 hover:bg-gradient-to-bl font-medium rounded-lg text-lg px-4 py-1 text-center mr-40 mb-2"> 
-                            Users List
-                             
-                             </button>
-                
+                                <table class="shadow-lg tables  w-full rounded-xl blurrTable">
+                                    <thead className=''>
+                                        <tr className='  text-center '>
+                                            <td class="bg-blue-100   px-2 text-center">ID</td>
+                                            <td class="bg-blue-100   px-2  py-3">Name</td>
+                                            <td class="bg-blue-100   px-2 py-2">Email</td>
+                                            <td class="bg-blue-100   py-2">Mobile Number</td>
+                                            <td class="bg-blue-100   py-2">Create</td>
+                                            <td class="bg-blue-100   py-2">Modify</td>
+                                            <td class="bg-blue-100   py-2">Status</td>
+                                            <td class="bg-blue-100   py-2">Action</td>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody  >
+
+
+
+
+
+                                        {
+                                            userData?.loading ? <>
+                                                <Loader />
+                                            </> :
+
+                                                <>
+                                                    {
+                                                        (userData?.result.filter((user) => user.fullName?.toLowerCase().includes(FilterSearch)))?.map((data) => {
+                                                            // userData?.result.map((data) => {
+                                                            return (
+                                                                <>
+                                                                    <tr key={data.id} className="text-center  text-gray-500 border-b-[3px]">
+                                                                        <td class="py-3 text-center">{data.userId}</td>
+                                                                        <td class="py-2  px-2 ">{data.fullName}
+                                                                        </td>
+                                                                        <td class="py-2    px-2">{data.email} </td>
+                                                                        <td class="py-3  px-2">{data.mobileNo == null ? '---' : data.mobileNo} </td>
+                                                                        <td class="py-3  px-2">
+                                                                            {moment(data.createdDate).format("MM/DD/YYYY")}
+                                                                        </td>
+                                                                        <td class="py-3  px-2">
+                                                                            {moment(data.modifiedDate).format("MM/DD/YYYY")}
+                                                                        </td>
+                                                                        <td class="py-2 text-center pt-1  ">
+                                                                            {JSON.stringify(data?.enabled)}
+
+
+
+                                                                        </td>
+                                                                        <td class=" px-4 flex justify-evenly items-center pt-3" >
+
+                                                                            {data?.enabled ? <>
+                                                                                <button class="border-2 border-red-500 text-red-500 hover:bg-red-700
+                                                                            py-1.5  hover:text-white font-bold  text-xs px-3   rounded-full"
+                                                                                    onClick={() => openModel(data.userId, 'Deactivate')}
+                                                                                // onClick={() => handleDeactivatedSingleUser(data.userId)}
+                                                                                >
+                                                                                    Deactivate
+                                                                                </button>
+                                                                            </> : <>
+                                                                                <button class="border-2 border-green-500 text-green-500 hover:bg-green-700
+                                                                            py-1.5  hover:text-white font-bold  text-xs px-3   rounded-full"
+                                                                                    // onClick={() => handleActivatedSingleUser(data.userId)}
+                                                                                    onClick={() => openModel(data.userId, 'Activate')}
+                                                                                >
+                                                                                    Activate
+                                                                                </button>
+                                                                            </>}
+
+                                                                        </td>
+
+
+                                                                    </tr>
+
+
+                                                                </>
+
+                                                            )
+                                                        })
+                                                    }
+                                                </>
+                                        }
+
+
+                                    </tbody>
+
+                                </table>
+
+
+
+
+
                             </div>
-                            <div>
-                                <select id="countries" className="bg-gray-50 border border-gray-400 text-gray-900 
-                                text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700
-                                 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    onChange={(e) => setUserType(e.target.value)}     >
-                                    <option disabled={true} selected={true}>Select User Type</option>
-                                    <option value="true">Active</option>
-                                    <option value="false">Inactive</option>
-                                </select>
+                            {/* -----------------------------------------------pagination--------------------------------------------------------- */}
+
+                            <nav aria-label="Page navigation example   " className='text-center relative z-10    '>
+                                <ul class="inline-flex justify-center items-center ">
+                                    <li>
+                                        <button class={`px-3 inline-flex justify-center  items-center cursor-pointer py-2 ml-0 leading-tight text-white font-bold bg-red-800 disabled:opacity-50  rounded-lg mx-4 hover:bg-red-700  dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white`} disabled={buttonPre} onClick={prev} >
+                                            <BiSkipPrevious className='pt-1' size={25} />  Prev</button>
+
+                                    </li>
+
+                                    <li className=' mr-4 font-bold'>  {page + 1}</li>
+                                    <li>
+                                        <button type='button' class="px-3 py-2 inline-flex items-center justify-center  leading-tight text-white font-bold bg-red-800 disabled:opacity-50 rounded-l-lg hover:bg-red-700 rounded-r-lg   dark:hover:text-white" disabled={buttonNext} onClick={next}>Next <BiSkipNext className='pt-1' size={25} /></button>
 
 
-                            </div>
-                        </div>
-                        <div className="tableWrap pr-4  mb-4">
+                                    </li>
+                                </ul>
+                            </nav>
 
-                            <table class="shadow-lg tables  w-full rounded-xl blurrTable">
-                                <thead className=''>
-                                    <tr className='  text-center '>
-                                        <td class="bg-blue-100   px-2 text-center">ID</td>
-                                        <td class="bg-blue-100   px-2  py-3">Name</td>
-                                        <td class="bg-blue-100   px-2 py-2">Email</td>
-                                        <td class="bg-blue-100   py-2">Mobile Number</td>
-                                        <td class="bg-blue-100   py-2">Create</td>
-                                        <td class="bg-blue-100   py-2">Modify</td>
-                                        <td class="bg-blue-100   py-2">Status</td>
-                                        <td class="bg-blue-100   py-2">Action</td>
-                                    </tr>
-                                </thead>
-
-                                <tbody  >
-
-
-
-
-
-                                    {
-                                        userData?.loading ? <>
-                                            <Loader />
-                                        </> :
-
-                                            <>
-                                                {
-                                                    (userData?.result.filter((user) => user.fullName?.toLowerCase().includes(FilterSearch)))?.map((data) => {
-                                                        // userData?.result.map((data) => {
-                                                        return (
-                                                            <>
-                                                                <tr key={data.id} className="text-center  text-gray-500 border-b-[3px]">
-                                                                    <td class="py-3 text-center">{data.userId}</td>
-                                                                    <td class="py-2  px-2 ">{data.fullName}
-                                                                    </td>
-                                                                    <td class="py-2    px-2">{data.email} </td>
-                                                                    <td class="py-3  px-2">{data.mobileNo == null ? '---' : data.mobileNo} </td>
-                                                                    <td class="py-3  px-2">
-                                                                        {moment(data.createdDate).format("MM/DD/YYYY")}
-                                                                    </td>
-                                                                    <td class="py-3  px-2">
-                                                                        {moment(data.modifiedDate).format("MM/DD/YYYY")}
-                                                                    </td>
-                                                                    <td class="py-2 text-center pt-1  ">
-                                                                        {JSON.stringify(data?.enabled)}
-
-
-
-                                                                    </td>
-                                                                    <td class=" px-4 flex justify-evenly items-center pt-3" >
-
-                                                                        {data?.enabled ? <>
-                                                                            <button class="border-2 border-red-500 text-red-500 hover:bg-red-700
-                                                                        py-1.5  hover:text-white font-bold  text-xs px-3   rounded-full"
-                                                                                onClick={() => openModel(data.userId, 'Deactivate')}
-                                                                            // onClick={() => handleDeactivatedSingleUser(data.userId)}
-                                                                            >
-                                                                                Deactivate
-                                                                            </button>
-                                                                        </> : <>
-                                                                            <button class="border-2 border-green-500 text-green-500 hover:bg-green-700
-                                                                        py-1.5  hover:text-white font-bold  text-xs px-3   rounded-full"
-                                                                                // onClick={() => handleActivatedSingleUser(data.userId)}
-                                                                                onClick={() => openModel(data.userId, 'Activate')}
-                                                                            >
-                                                                                Activate
-                                                                            </button>
-                                                                        </>}
-
-                                                                    </td>
-
-
-                                                                </tr>
-
-
-                                                            </>
-
-                                                        )
-                                                    })
-                                                }
-                                            </>
-                                    }
-
-
-                                </tbody>
-
-                            </table>
-
-
-
-
-
-                        </div>
-                        {/* -----------------------------------------------pagination--------------------------------------------------------- */}
-
-                        <nav aria-label="Page navigation example   " className='text-center relative z-10    '>
-                            <ul class="inline-flex justify-center items-center ">
-                                <li>
-                                    <button class={`px-3 inline-flex justify-center  items-center cursor-pointer py-2 ml-0 leading-tight text-white font-bold bg-red-800 disabled:opacity-50  rounded-lg mx-4 hover:bg-red-700  dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white`} disabled={buttonPre} onClick={prev} >
-                                        <BiSkipPrevious className='pt-1' size={25} />  Prev</button>
-
-                                </li>
-
-                                <li className=' mr-4 font-bold'>  {page + 1}</li>
-                                <li>
-                                    <button type='button' class="px-3 py-2 inline-flex items-center justify-center  leading-tight text-white font-bold bg-red-800 disabled:opacity-50 rounded-l-lg hover:bg-red-700 rounded-r-lg   dark:hover:text-white" disabled={buttonNext} onClick={next}>Next <BiSkipNext className='pt-1' size={25} /></button>
-
-
-                                </li>
-                            </ul>
-                        </nav>
-
-                        <div className='absolute bottom-0   right-0  -z-10  '>
+                            <div className='absolute bottom-0   right-0  -z-10  '>
                                 <img src={DesignLogin} alt='empty' className='w-full'></img>
                             </div>
 
-                    </div>
-                </div>
-
-            </div>
-
-
-            {/* <Modal
-                isOpen={modalIsOpen}
-                onAfterOpen={afterOpenModal}
-                onRequestClose={closeModal}
-                style={customStyles}
-                contentLabel="Example Modal"
-                className=""
-
-            >
-
-                <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 " onSubmit={UpdateHandelSubmit} >
-                    <AiOutlineClose onClick={closeModal} className="relative top-0 left-[100%] cursor-pointer" size={25} />
-                    <h1 className='text-center font-sans  mb-4 text-4xl font-bold text-red-800'>Update Data </h1>
-
-                    <div class="mb-4">
-                        <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
-                            Name
-                        </label>
-                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Name" required value={updateForm.name} name='name' onChange={handleOnChange} />
-                    </div>
-
-                    <div class="mb-4">
-                        <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
-                            Email
-                        </label>
-                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Email" required value={updateForm.email} name='email' onChange={handleOnChange} />
-                    </div>
-
-                    <div class="mb-4">
-                        <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
-                            Mobile Number
-                        </label>
-                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="number" placeholder="Mobile No" required value={updateForm.mobileNo} name='mobileNo' onChange={handleOnChange} />
-                    </div>
-
-                   
-                    <div class="flex items-center justify-center">
-                        <button class="bg-red-800 hover:bg-red-700 text-white font-bold  px-5 py-2 rounded focus:outline-none focus:shadow-outline" type="submit">
-                            Save
-                        </button>
-
-                    </div>
-                </form>
-
-
-            </Modal> */}
-
-            <Modal
-                isOpen={modalIsOpen}
-                // onAfterOpen={afterOpenModal}
-                onRequestClose={closeModal}
-                style={customStyles}
-                contentLabel="Example Modal"
-                className=" "
-
-            >
-
-
-
-                <div class="shadow-xl   bg-[rgb(254 214 172)] rounded-lg md:max-w-md md:mx-auto p-4 fixed inset-x-0 bottom-0 z-50 mb-4 mx-4 md:relative">
-
-                    {Status == "Deactivate" ? <>
-                        <div class="md:flex items-center">
-                            <div class="rounded-full border border-red-900 flex items-center justify-center w-16 h-16 flex-shrink-0 mx-auto">
-                                <AiOutlineWarning size={40} onClick={closeModal} fill='#8E2E0F' />
-                            </div>
-                            <div class="mt-4 md:mt-0 md:ml-6 text-center md:text-left">
-                                <p class="font-bold text-red-800">Deactivate user account</p>
-                                <p class="text-sm text-gray-700 mt-1">Are you sure to Deactivate User account.
-                                </p>
-                            </div>
                         </div>
-                        <div class="text-center md:text-right mt-4 md:flex md:justify-end">
-
-                            <button class="block w-full md:inline-block md:w-auto px-4 py-3 md:py-2
-                                 bg-red-500 text-white rounded-lg font-semibold text-sm md:ml-2 md:order-2
-                                  hover:bg-red-700 hover:text-white"
-                                onClick={handleDeactivatedSingleUser}
-                            >Deactivate
-                                Account</button>
-                            <button class="block w-full md:inline-block md:w-auto px-4 py-3 md:py-2
-                                 bg-gray-200 rounded-lg font-semibold text-sm mt-4
-                       md:mt-0 md:order-1 hover:bg-slate-500 hover:text-white"
-                                onClick={closeModal}
-                            >Cancel</button>
-                        </div>
-
-                    </> : <>
-
-                        <div class="md:flex items-center">
-                            <div class="rounded-full border border-red-900 flex items-center justify-center w-16 h-16 flex-shrink-0 mx-auto">
-                                <AiOutlineWarning size={40} onClick={closeModal} fill='#8E2E0F' />
-                            </div>
-                            <div class="mt-4 md:mt-0 md:ml-6 text-center md:text-left">
-                                <p class="font-bold text-red-800">Activate user account</p>
-                                <p class="text-sm text-gray-700 mt-1">Are you sure to Activate User account.
-                                </p>
-                            </div>
-                        </div>
-                        <div class="text-center md:text-right mt-4 md:flex md:justify-end">
-                            <button class="block w-full md:inline-block md:w-auto px-4 py-3 md:py-2
-                                 bg-blue-500 text-white rounded-lg font-semibold text-sm md:ml-2 md:order-2
-                                  hover:bg-blue-700 hover:text-white"
-                                onClick={handleActivatedSingleUser}
-                            >Activate Account</button>
-                            <button class="block w-full md:inline-block md:w-auto px-4 py-3 md:py-2
-                                 bg-gray-200 rounded-lg font-semibold text-sm mt-4
-                       md:mt-0 md:order-1 hover:bg-slate-500 hover:text-white"
-                                onClick={closeModal}
-                            >Cancel</button>
-                        </div>
-                    </>}
+                    </div>
 
                 </div>
 
 
-            </Modal>
+                {/* <Modal
+                    isOpen={modalIsOpen}
+                    onAfterOpen={afterOpenModal}
+                    onRequestClose={closeModal}
+                    style={customStyles}
+                    contentLabel="Example Modal"
+                    className=""
+    
+                >
+    
+                    <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 " onSubmit={UpdateHandelSubmit} >
+                        <AiOutlineClose onClick={closeModal} className="relative top-0 left-[100%] cursor-pointer" size={25} />
+                        <h1 className='text-center font-sans  mb-4 text-4xl font-bold text-red-800'>Update Data </h1>
+    
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+                                Name
+                            </label>
+                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Name" required value={updateForm.name} name='name' onChange={handleOnChange} />
+                        </div>
+    
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+                                Email
+                            </label>
+                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Email" required value={updateForm.email} name='email' onChange={handleOnChange} />
+                        </div>
+    
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+                                Mobile Number
+                            </label>
+                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="number" placeholder="Mobile No" required value={updateForm.mobileNo} name='mobileNo' onChange={handleOnChange} />
+                        </div>
+    
+                       
+                        <div class="flex items-center justify-center">
+                            <button class="bg-red-800 hover:bg-red-700 text-white font-bold  px-5 py-2 rounded focus:outline-none focus:shadow-outline" type="submit">
+                                Save
+                            </button>
+    
+                        </div>
+                    </form>
+    
+    
+                </Modal> */}
 
-        </>
-    )
+                <Modal
+                    isOpen={modalIsOpen}
+                    // onAfterOpen={afterOpenModal}
+                    onRequestClose={closeModal}
+                    style={customStyles}
+                    contentLabel="Example Modal"
+                    className=" "
+
+                >
+
+
+
+                    <div class="shadow-xl   bg-[rgb(254 214 172)] rounded-lg md:max-w-md md:mx-auto p-4 fixed inset-x-0 bottom-0 z-50 mb-4 mx-4 md:relative">
+
+                        {Status == "Deactivate" ? <>
+                            <div class="md:flex items-center">
+                                <div class="rounded-full border border-red-900 flex items-center justify-center w-16 h-16 flex-shrink-0 mx-auto">
+                                    <AiOutlineWarning size={40} onClick={closeModal} fill='#8E2E0F' />
+                                </div>
+                                <div class="mt-4 md:mt-0 md:ml-6 text-center md:text-left">
+                                    <p class="font-bold text-red-800">Deactivate user account</p>
+                                    <p class="text-sm text-gray-700 mt-1">Are you sure to Deactivate User account.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="text-center md:text-right mt-4 md:flex md:justify-end">
+
+                                <button class="block w-full md:inline-block md:w-auto px-4 py-3 md:py-2
+                                     bg-red-500 text-white rounded-lg font-semibold text-sm md:ml-2 md:order-2
+                                      hover:bg-red-700 hover:text-white"
+                                    onClick={handleDeactivatedSingleUser}
+                                >Deactivate
+                                    Account</button>
+                                <button class="block w-full md:inline-block md:w-auto px-4 py-3 md:py-2
+                                     bg-gray-200 rounded-lg font-semibold text-sm mt-4
+                           md:mt-0 md:order-1 hover:bg-slate-500 hover:text-white"
+                                    onClick={closeModal}
+                                >Cancel</button>
+                            </div>
+
+                        </> : <>
+
+                            <div class="md:flex items-center">
+                                <div class="rounded-full border border-red-900 flex items-center justify-center w-16 h-16 flex-shrink-0 mx-auto">
+                                    <AiOutlineWarning size={40} onClick={closeModal} fill='#8E2E0F' />
+                                </div>
+                                <div class="mt-4 md:mt-0 md:ml-6 text-center md:text-left">
+                                    <p class="font-bold text-red-800">Activate user account</p>
+                                    <p class="text-sm text-gray-700 mt-1">Are you sure to Activate User account.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="text-center md:text-right mt-4 md:flex md:justify-end">
+                                <button class="block w-full md:inline-block md:w-auto px-4 py-3 md:py-2
+                                     bg-blue-500 text-white rounded-lg font-semibold text-sm md:ml-2 md:order-2
+                                      hover:bg-blue-700 hover:text-white"
+                                    onClick={handleActivatedSingleUser}
+                                >Activate Account</button>
+                                <button class="block w-full md:inline-block md:w-auto px-4 py-3 md:py-2
+                                     bg-gray-200 rounded-lg font-semibold text-sm mt-4
+                           md:mt-0 md:order-1 hover:bg-slate-500 hover:text-white"
+                                    onClick={closeModal}
+                                >Cancel</button>
+                            </div>
+                        </>}
+
+                    </div>
+
+
+                </Modal>
+
+            </>
+        )
+    
+
 }
 
 export default User 

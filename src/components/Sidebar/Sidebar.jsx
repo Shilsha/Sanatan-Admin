@@ -27,7 +27,6 @@ const customStyles = {
 
         width: '40%',
         height: 'auto',
-        background: "white",
         position: 'relative',
         border: 'none'
 
@@ -37,7 +36,7 @@ const customStyles = {
 function Sidebar() {
 
     const [modalIsOpen, setIsOpen] = React.useState(false);
-    const [role, setRole] = useState('')
+    const [role, setRole] = useState()
     const [passShow, setPassShow] = useState(false)
     const [form, setForm] = useState({
 
@@ -86,6 +85,41 @@ function Sidebar() {
     const showPass = () => {
         setPassShow(!passShow)
     }
+
+
+    // =============================== give permission =======================================
+    const [permission, setPermission] = useState([
+        { name: "users" },
+        { name: "articles" },
+        { name: "adminlists" },
+        { name: "queries" },
+        { name: "logs" },
+        { name: "broadcast" },
+        { name: "blogsPost" },
+    ]);
+
+    const handleChangePer = (e) => {
+        const { name, checked } = e.target;
+        if (name === "allSelect") {
+            let tempUser = permission.map((user) => {
+                return { ...user, isChecked: checked };
+            });
+            
+            setPermission(tempUser);
+                 
+            const tempUser2 = tempUser.filter(item => item.isChecked === true)
+            setRole(tempUser2.map(data => data.name))
+        } else {
+            let tempUser = permission.map((user) => user.name === name ? { ...user, isChecked: checked } : user);
+            setPermission(tempUser);
+
+            const tempUser2 = tempUser.filter(item => item.isChecked === true)
+            setRole(tempUser2.map(data => data.name))
+        }
+    };
+
+    // console.log(tempUser2.map(data => data.name), 'new data')
+    console.log(role,'role is this ')
     return (
 
         <>
@@ -203,25 +237,40 @@ function Sidebar() {
 
 
                         {/* ================================================================================================= */}
-                                
+                        <label for="countries" class="block mb-2 text-sm  text-gray-900 font-bold dark:text-white">Select Role</label>
+                        <div className=" grid grid-cols-3 justify-between items-center  w-full   " >
 
 
+                            <div className="form-check">
+                                <input
+                                    type="checkbox"
+                                    className="form-check-input"
+                                    name="allSelect"
+                                    checked={!permission.some((user) => user?.isChecked !== true)}
+                                    onChange={handleChangePer}
+                                />
+                                <label className="text-xs px-2">Super Admin</label>
+                            </div>
 
 
+                            {permission.map((user, index) => (
+                                <div className="form-check" key={index}>
+                                    <input
+                                        type="checkbox"
+                                        className="form-check-input"
+                                        name={user.name}
+                                        checked={user?.isChecked || false}
+                                        onChange={handleChangePer}
+                                    />
+                                    <label className="text-xs px-2 ">{user.name}</label>
+                                </div>
+                            ))}
 
 
-
-
-
-
-
-
-
-
-
+                        </div>
 
                         {/* ================================================================================================= */}
-                        <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+                        <label class="block text-gray-700 text-sm font-bold my-2" for="username">
                             Password
                         </label>
                         <div class="relative flex w-full flex-wrap items-stretch mb-3">

@@ -17,11 +17,26 @@ export const getLogs = createAsyncThunk('LOGS/GET_LOGS',
         return axios(OPTIONS)
             .then(res => res)
     })
+export const getDateRangeLogs = createAsyncThunk('LOGS_DATE_RANGE/GET_LOGS_DATE_RANGE',
+    async (data) => {
+        console.log(data,'is this slice riht')
+        let OPTIONS = {
+            // url: `${import.meta.env.VITE_BASE_URL}/article/filter?category=All&keyword=&articleType=NEW&page=0&size=20`,
+            url:`${import.meta.env.VITE_BASE_URL}/api/getlogsOnFilter?createdAt=${data.dateStart}&module=${data.module}&endDate=${data.dateEnd}&page=${data.page}&size=60`,
+                                    
+            method: "GET",
+            headers: {
+              'Accept': 'application/json'
+            },
+          };
+        return axios(OPTIONS)
+            .then(res => res)
+    })
 
 
     
 const logs = createSlice({
-        name: 'Single Article',
+        name: 'LOGS',
     initialState: {
         loading: false,
         result: [],
@@ -38,6 +53,19 @@ const logs = createSlice({
                 state.result = action.payload.data.data
         },
         [getLogs.rejected]: (state, action) => {
+            state.loading = false,
+                state.error = action
+        },
+
+        // ========================date range filter================================
+        [getDateRangeLogs.pending]: (state, action) => {
+            state.loading = true;
+        },
+        [getDateRangeLogs.fulfilled]: (state, action) => {
+            state.loading = false,
+                state.result = action.payload.data.data
+        },
+        [getDateRangeLogs.rejected]: (state, action) => {
             state.loading = false,
                 state.error = action
         },

@@ -199,7 +199,7 @@ function Dashboard() {
                                         <p className="text-sm text-gray-500 leading-7 tracking-widest ">
                                             {loading ? <Loader /> : <>
 
-                                                {result.thoughtOfTheDay}
+                                                {result?.thoughtOfTheDay}
 
 
                                             </>}
@@ -211,9 +211,6 @@ function Dashboard() {
                                     <button class="bg-orange-500 rounded font-medium absolute bottom-2 right-2 py-1
                                  hover:bg-orange-600 px-3 text-white " onClick={openEdiotor}>Edit</button>
                                 </> : <></>}
-
-
-                                {/* <FaEdit className='absolute bottom-2 right-2  text-orange-500 cursor-pointer' onClick={openEdiotor} size={25} /> */}
 
                             </div>
                             <div className=' col-span-5   rounded-lg    '>
@@ -372,7 +369,7 @@ function Dashboard() {
                                                 <RiShieldUserLine className='text-orange-500 ' size={50} />
                                             </div>
                                             <div className='flex flex-col '>
-                                                <Link to='/user'>
+                                                <Link to='/users'>
                                                     <h1 className=' cursor-pointer py-4 text-2xl text-center 
                                                     font-medium underline underline-offset-8 text-gray-500 '>Users</h1>
 
