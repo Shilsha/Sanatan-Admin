@@ -105,9 +105,9 @@ function Sidebar() {
             let tempUser = permission.map((user) => {
                 return { ...user, isChecked: checked };
             });
-            
+
             setPermission(tempUser);
-                 
+
             const tempUser2 = tempUser.filter(item => item.isChecked === true)
             setRole(tempUser2.map(data => data.name))
         } else {
@@ -119,8 +119,26 @@ function Sidebar() {
         }
     };
 
-    // console.log(tempUser2.map(data => data.name), 'new data')
-    // console.log(role,'role is this ')
+    //   *****************************************Module access***********************************************************
+
+    const isModuleAuth = JSON.parse(sessionStorage.getItem('user'))
+
+    const isSuperAdmin = isModuleAuth?.role.some(data => data == 'SuperAdmin')
+    console.log(isSuperAdmin, 'super  role')
+
+    const userModuleAuth = isModuleAuth?.role.some(data => data == 'User')
+    const articlesModuleAuth = isModuleAuth?.role.some(data => data == 'Articles')
+    const HitsModuleAuth = isModuleAuth?.role.some(data => data == 'Hits')
+    const AdminUserListModuleAuth = isModuleAuth?.role.some(data => data == 'AdminUserList')
+    const QueriesListModuleAuth = isModuleAuth?.role.some(data => data == 'QueriesList')
+    const LogstModuleAuth = isModuleAuth?.role.some(data => data == 'Logs')
+    const BroadcastModuleAuth = isModuleAuth?.role.some(data => data == 'Broadcast')
+    const BlogsPosttModuleAuth = isModuleAuth?.role.some(data => data == 'BlogsPost')
+    // console.log(userModuleAuth, 'userModuleAuth auth')
+    const unAutherizedHndle = () => {
+        toast.warning('You are not authrized for this module')
+    }
+    //   *****************************************Module access***********************************************************
     return (
 
         <>
@@ -134,17 +152,12 @@ function Sidebar() {
                 </div>
 
                 <div className='flex flex-col justify-between items-center -mt-16 gap-6  '>
-                    {/* <div className='  rounded cursor-pointer hover:bg-red-800 text-black hover:text-white p-1'> */}
-
                     <NavLink to='/dashboard'  >
                         <CgMenuGridR className='text-white iconsColor p-1 rounded cursor-pointer' size={35} />
                     </NavLink>
                     <NavLink to='/dashboard'>
                         <p className='text-center text-[16px] -mt-6 font-medium text-white'>Dashboard</p>
                     </NavLink>
-
-                    {/* </div> */}
-
                     <div class=" dropdown">
                         <Link to='/adminlists'>
                             <MdOutlineGroupAdd className=' cursor-pointer mx-2  text-white hover:text-white  p-1 rounded' size={35} />
@@ -162,24 +175,37 @@ function Sidebar() {
 
                         </ul>
                     </div>
-                    {/* <div className='  rounded cursor-pointer hover:bg-red-800 text-black hover:text-white p-1  '> */}
-                    <NavLink to='/user'>
-                        <RiShieldUserLine className='text-white iconsColor  ' size={35} />
-                    </NavLink>
-                    {/* </div> */}
+
+                    {userModuleAuth || isSuperAdmin ? <>
+                        <NavLink to='/users'>
+                            <RiShieldUserLine className='text-white iconsColor  ' size={35} />
+                        </NavLink>
+                    </> : <>
+                    <RiShieldUserLine onClick={unAutherizedHndle} className='text-white iconsColor  ' size={35} />
+                    </>}
                     <p className='text-center -mt-6 text-[16px]    text-white'>Users</p>
-                    {/* <div className='  rounded cursor-pointer hover:bg-red-800 text-black  hover:text-white p-1  '> */}
-                    <NavLink to='/articles'>
+
+                    {articlesModuleAuth || isSuperAdmin ? <>
+                        <NavLink to='/articles'>
                         <HiClipboardDocumentList className=' text-white iconsColor' size={35} />
                     </NavLink>
-                    {/* </div> */}
+                    </> : <>
+                    <HiClipboardDocumentList onClick={unAutherizedHndle}  className=' text-white iconsColor' size={35} />
+                    </>}
+
                     <p className='text-center -mt-6 text-[16px]    text-white'>Articles</p>
-                    {/* <div className='  rounded cursor-pointer hover:bg-red-800 text-black  hover:text-white p-1  '> */}
-                    <NavLink to='/queries'>
+                   
+
+                    {QueriesListModuleAuth || isSuperAdmin ? <>
+                        <NavLink to='/queries'>
                         <BsFillQuestionSquareFill className='text-white iconsColor ' size={30} />
                     </NavLink>
+                    </> : <>
+                  
+                        <BsFillQuestionSquareFill onClick={unAutherizedHndle}  className='text-white iconsColor ' size={30} />
+                 
+                         </>}
 
-                    {/* </div> */}
                     <p className='text-center -mt-6 text-[16px]    text-white'>Queries</p>
 
 
