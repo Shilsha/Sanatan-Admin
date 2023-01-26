@@ -46,7 +46,7 @@ function Sidebar() {
     const navigate = useNavigate()
 
     const adminMsg = useSelector((state) => state.adminList)
-    console.log(adminMsg, 'adminMsg')
+    // console.log(adminMsg, 'adminMsg')
     // =======================================add staff model===========================
 
     function closeModal() {
@@ -89,13 +89,14 @@ function Sidebar() {
 
     // =============================== give permission =======================================
     const [permission, setPermission] = useState([
-        { name: "users" },
-        { name: "articles" },
-        { name: "adminlists" },
-        { name: "queries" },
-        { name: "logs" },
-        { name: "broadcast" },
-        { name: "blogsPost" },
+        { name: "User" },
+        { name: "Articles" },
+        { name: "Hits" },
+        { name: "AdminUserList" },
+        { name: "QueriesList" },
+        { name: "Logs" },
+        { name: "Broadcast" },
+        { name: "BlogsPost" },
     ]);
 
     const handleChangePer = (e) => {
@@ -119,7 +120,7 @@ function Sidebar() {
     };
 
     // console.log(tempUser2.map(data => data.name), 'new data')
-    console.log(role,'role is this ')
+    // console.log(role,'role is this ')
     return (
 
         <>
