@@ -27,6 +27,7 @@ import { getBroadCastAction } from '../../Redux/Fetures/Reducers/BroadcastSplice
 import DesignLogin from '../../Assets/images/DesignLogin.png'
 import Button from '../Screen/Button/Button';
 import LoaderN from '../Loader/LoaderN';
+import { toast } from 'react-toastify';
 
 const customStyles = {
     content: {
@@ -61,9 +62,9 @@ function Dashboard() {
     const { loading, result, error } = useSelector((state) => state.thoughtOfDay)
     const panchangData = useSelector((state) => state.panchang)
     const broadcastStatus = useSelector((state) => state.broadcast)
-    console.log(broadcastStatus, 'this is broadcast ')
+    // console.log(broadcastStatus, 'this is broadcast ')
     const broadCast = broadcastStatus.result.filter(data => data.announcementStatus == true)
-    console.log(broadCast.length, 'this is braod case repeted')
+    // console.log(broadCast.length, 'this is braod case repeted')
 
     const role = JSON.parse(sessionStorage.getItem('user'))
 
@@ -91,10 +92,10 @@ function Dashboard() {
             })
     };
 
-  
 
 
-    
+
+
     function getUserLength() {
         const data = {
             page: 0,
@@ -153,11 +154,32 @@ function Dashboard() {
         dispatch(updateThoughtAction(data))
         setIsOpen(false);
     }
-    console.log(value,'on change calender')
+    // console.log(value, 'on change calender')
 
-    useEffect(()=>{
+    useEffect(() => {
         dispatch(panchangeAction(requestOptions1))
-    },[value])
+    }, [value])
+
+
+    // ************************************************************Role based Module accces*******************************************************************
+    const isModuleAuth = JSON.parse(sessionStorage.getItem('user'))
+
+    const isSuperAdmin = isModuleAuth?.role.some(data => data == 'SuperAdmin')
+    console.log(isSuperAdmin, 'super  role')
+
+    const userModuleAuth = isModuleAuth?.role.some(data => data == 'User')
+    const articlesModuleAuth = isModuleAuth?.role.some(data => data == 'Articles')
+    const HitsModuleAuth = isModuleAuth?.role.some(data => data == 'Hits')
+    const AdminUserListModuleAuth = isModuleAuth?.role.some(data => data == 'AdminUserList')
+    const QueriesListModuleAuth = isModuleAuth?.role.some(data => data == 'QueriesList')
+    const LogstModuleAuth = isModuleAuth?.role.some(data => data == 'Logs')
+    const BroadcastModuleAuth = isModuleAuth?.role.some(data => data == 'Broadcast')
+    const BlogsPosttModuleAuth = isModuleAuth?.role.some(data => data == 'BlogsPost')
+    // console.log(userModuleAuth, 'userModuleAuth auth')
+    const unAutherizedHndle = () => {
+        toast.warning('You are not authrized for this module')
+    }
+    // ********************************************************************************************************************
 
     return (
         <>
@@ -369,11 +391,17 @@ function Dashboard() {
                                                 <RiShieldUserLine className='text-orange-500 ' size={50} />
                                             </div>
                                             <div className='flex flex-col '>
-                                                <Link to='/users'>
-                                                    <h1 className=' cursor-pointer py-4 text-2xl text-center 
-                                                    font-medium underline underline-offset-8 text-gray-500 '>Users</h1>
 
-                                                </Link>
+                                                {userModuleAuth || isSuperAdmin ? <>
+                                                    <Link to='/users'>
+                                                        <h1 className=' cursor-pointer py-4 text-2xl text-center font-medium underline underline-offset-8 text-gray-500 '>Users</h1>
+
+                                                    </Link>
+                                                </> : <>
+                                                    <h1 onClick={unAutherizedHndle} className=' cursor-pointer py-4 text-2xl text-center font-medium underline underline-offset-8 text-red-500/60 '>Users</h1>
+
+                                                </>}
+
                                                 {
 
                                                     <h1 className='text-5xl font-medium text-gray-500    text-center '>{userData.result?.length}</h1>
@@ -390,9 +418,14 @@ function Dashboard() {
                                                 <HiClipboardDocumentList className='cursor-pointer text-orange-500 ' size={50} />
                                             </div>
                                             <div className='flex flex-col '>
-                                                <Link to='/articles'>
-                                                    <h1 className=' py-4 text-2xl text-center font-medium underline underline-offset-8 text-gray-500 '>Articles</h1>
-                                                </Link>
+                                                {articlesModuleAuth || isSuperAdmin ? <>
+                                                    <Link to='/articles'>
+                                                        <h1 className=' py-4 text-2xl text-center font-medium underline underline-offset-8 text-gray-500 '>Articles</h1>
+                                                    </Link>
+                                                </> : <>
+                                                    <h1 onClick={unAutherizedHndle} className=' cursor-pointer py-4 text-2xl text-center font-medium underline underline-offset-8 text-red-500/60 '>Articles</h1>
+
+                                                </>}
 
                                                 <h1 className='text-5xl   font-medium  text-center text-gray-500 '>{articleLen.result?.length}</h1>
                                             </div>
@@ -405,10 +438,17 @@ function Dashboard() {
                                                 <GiArcheryTarget className='text-orange-500 ' size={50} />
                                             </div>
                                             <div className='flex flex-col '>
-                                                <Link to='/hits'>
-                                                    <h1 className=' py-4 text-2xl text-center font-medium underline underline-offset-8 text-gray-500 '>Hits
-                                                    </h1>
-                                                </Link>
+
+
+                                                {HitsModuleAuth || isSuperAdmin ? <>
+                                                    <Link to='/hits'>
+                                                        <h1 className=' py-4 text-2xl text-center font-medium underline underline-offset-8 text-gray-500 '>Hits
+                                                        </h1>
+                                                    </Link>
+                                                </> : <>
+                                                    <h1 onClick={unAutherizedHndle} className=' cursor-pointer py-4 text-2xl text-center font-medium underline underline-offset-8 text-red-500/60 '>Hits</h1>
+
+                                                </>}
                                                 <h1 className='text-5xl text-gray-500  font-medium  text-center '>500</h1>
                                             </div>
                                         </div>
@@ -426,9 +466,17 @@ function Dashboard() {
                                                     size={40} />
                                             </div>
                                             <div className='flex flex-col '>
-                                                <Link to='/queries'>
-                                                    <h1 className=' py-4 text-2xl text-center text-gray-500 font-medium underline underline-offset-8 '>Queries</h1>
-                                                </Link>
+
+                                                {QueriesListModuleAuth || isSuperAdmin ? <>
+
+                                                    <Link to='/queries'>
+                                                        <h1 className=' py-4 text-2xl text-center text-gray-500 font-medium underline underline-offset-8 '>Queries</h1>
+                                                    </Link>
+
+                                                </> : <>
+                                                    <h1 onClick={unAutherizedHndle} className=' cursor-pointer py-4 text-2xl text-center font-medium underline underline-offset-8 text-red-500/60 '>Queries</h1>
+
+                                                </>}
                                                 <h1 className='text-5xl   font-medium text-gray-500  text-center '>{queryLen.result.content?.length}</h1>
                                             </div>
                                         </div>
@@ -441,10 +489,19 @@ function Dashboard() {
                                             </div>
                                             <div className='flex flex-col '>
 
-                                                <Link to='/logs'>
-                                                    <h1 className=' py-4 text-2xl text-center font-medium text-gray-500 underline underline-offset-8 '>Logs</h1>
 
-                                                </Link>
+
+                                                {LogstModuleAuth || isSuperAdmin ? <>
+
+                                                    <Link to='/logs'>
+                                                        <h1 className=' py-4 text-2xl text-center font-medium text-gray-500 underline underline-offset-8 '>Logs</h1>
+
+                                                    </Link>
+
+                                                </> : <>
+                                                    <h1 onClick={unAutherizedHndle} className=' cursor-pointer py-4 text-2xl text-center font-medium underline underline-offset-8 text-red-500/60 '>logs</h1>
+
+                                                </>}
 
                                                 <h1 className='text-5xl   text-gray-500 font-medium  text-center '>500</h1>
                                             </div>
@@ -458,9 +515,20 @@ function Dashboard() {
                                                 <VscBroadcast className='text-orange-500 ' size={50} />
                                             </div>
                                             <div className='flex flex-col '>
-                                                <Link to='/broadcast'>
-                                                    <h1 className=' py-4 text-2xl text-center font-medium  text-gray-500 underline underline-offset-8 '>Broadcast</h1>
-                                                </Link>
+
+
+                                                {BroadcastModuleAuth  || isSuperAdmin? <>
+
+                                                    <Link to='/broadcast'>
+                                                        <h1 className=' py-4 text-2xl text-center font-medium  text-gray-500 underline underline-offset-8 '>Broadcast</h1>
+                                                    </Link>
+
+                                                </> : <>
+                                                    <h1 onClick={unAutherizedHndle} className=' cursor-pointer py-4 text-2xl text-center font-medium underline underline-offset-8 text-red-500/60 '>Broadcast</h1>
+
+                                                </>}
+
+
                                                 <h1 className='text-5xl text-gray-500 font-medium    text-center '>{broadCast.length ? <>{broadCast.length}</> : <>0</>}</h1>
                                             </div>
                                         </div>
@@ -471,10 +539,19 @@ function Dashboard() {
                                                 <RiShieldUserLine className='text-orange-500 ' size={50} />
                                             </div>
                                             <div className='flex flex-col '>
-                                                <Link to='/blogsPost'>
+                                               
+
+                                                {BlogsPosttModuleAuth || isSuperAdmin ? <>
+
+                                                    <Link to='/blogsPost'>
                                                     <h1 className=' py-4 text-2xl text-center font-medium  text-gray-500 underline underline-offset-8 '>Blogs</h1>
                                                 </Link>
-                                                <h1 className='text-5xl text-gray-500 font-medium    text-center '>500</h1>
+
+                                                </> : <>
+                                                    <h1 onClick={unAutherizedHndle} className=' cursor-pointer py-4 text-2xl text-center font-medium underline underline-offset-8 text-red-600/60 '>Blogs</h1>
+
+                                                </>}
+                                                <h1 className='text-5xl text-gray-500 font-medium  text-center '>500</h1>
                                             </div>
                                         </div>
                                     </div>
