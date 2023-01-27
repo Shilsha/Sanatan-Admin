@@ -12,11 +12,13 @@ import moment from 'moment/moment';
 import { getHitsFestival, getDateRangeHitsFestival } from '../../../Redux/Fetures/Reducers/HitsReducers/FestivalSlice'
 import { getHitsPanchang, getDateRangeHitsPanchang } from '../../../Redux/Fetures/Reducers/HitsReducers/PanchangSlice'
 import { getHitsArticle, getDateRangeHitsArticle } from '../../../Redux/Fetures/Reducers/HitsReducers/ArticlessSlice'
-import { getHitsContact } from '../../../Redux/Fetures/Reducers/HitsReducers/HitsContact'
+import { getHitsContact, getDateRangeHitsContact } from '../../../Redux/Fetures/Reducers/HitsReducers/HitsContact'
 import { getHitsHoroscope, getDateRangeHitsHoro } from '../../../Redux/Fetures/Reducers/HitsReducers/Horoscope'
 import { getHitsMatchMaking, getDateRangeHitsMatchMaking } from '../../../Redux/Fetures/Reducers/HitsReducers/MatchMakingSplice'
 import { getHitsLogin, getDateRangeHitsLogin } from '../../../Redux/Fetures/Reducers/HitsReducers/LoginSlice'
 import { getHitsKundali, getDateRangeHitsKundali } from '../../../Redux/Fetures/Reducers/HitsReducers/KundliSplice'
+import { getHitsAdmin, getDateRangeHitsAdmin } from '../../../Redux/Fetures/Reducers/HitsReducers/AdminSlice'
+import {getHitsZodiacSign,getDateRangeHitsZodiacSign} from '../../../Redux/Fetures/Reducers/HitsReducers/ZodiacSlice'
 import LoaderN from '../../Loader/LoaderN'
 import DesignLogin from '../../../Assets/images/DesignLogin.png'
 
@@ -32,9 +34,33 @@ function Hits() {
     const [dateMatch, setDateMatch] = useState(new Date());
     const [dateArt, setDateArt] = useState(new Date());
     const [dateLogin, setDateLogin] = useState(new Date());
+    const [dateAdmin, setDateAdmin] = useState(new Date());
+    const [dateZodiac, setDateZodiac] = useState(new Date());
+
     const [dateRange, setDateRange] = useState([null, null]);
-    const [dateTypes, setDateTypes] = useState('SingleDate');
     const [startDate, endDate] = dateRange;
+
+    const [dateTypes, setDateTypes] = useState('SingleDate');
+    const [dateRangePan, setDateRangePan] = useState([null, null]);
+    const [startDatePan, endDatePan] = dateRangePan;
+    const [dateRangeFes, setDateRangeFes] = useState([null, null]);
+    const [startDateFes, endDateFes] = dateRangeFes;
+    const [dateRangeKun, setDateRangeKun] = useState([null, null]);
+    const [startDateKun, endDateKun] = dateRangeKun;
+    const [dateRangeCon, setDateRangeCon] = useState([null, null]);
+    const [startDateCon, endDateCon] = dateRangeCon;
+    const [dateRangeHoro, setDateRangeHoro] = useState([null, null]);
+    const [startDateHoro, endDateHoro] = dateRangeHoro;
+    const [dateRangeMatch, setDateRangeMatch] = useState([null, null]);
+    const [startDateMatch, endDateMatch] = dateRangeMatch;
+    const [dateRangeArt, setDateRangeArt] = useState([null, null]);
+    const [startDateArt, endDateArt] = dateRangeArt;
+    const [dateRangeLogin, setDateRangeLogin] = useState([null, null]);
+    const [startDateLogin, endDateLogin] = dateRangeLogin;
+    const [dateRangeAdmin, setDateRangeAdmin] = useState([null, null]);
+    const [startDateAdmin, endDateAdmin] = dateRangeAdmin;
+    const [dateRangeZodiac, setDateRangeZodiac] = useState([null, null]);
+    const [startDateZodiac, endDateZodiac] = dateRangeZodiac;
     const dispatch = useDispatch()
 
     const hitPan = useSelector((state) => state.panchangHit)
@@ -45,9 +71,11 @@ function Hits() {
     const hitLogin = useSelector((state) => state.loginHit)
     const hitMatch = useSelector((state) => state.matchMakingHit)
     const hitKundli = useSelector((state) => state.kundliHit)
+    const hitAdmin = useSelector((state) => state.adminHit)
+    const hitZodiacSign = useSelector((state) => state.zodiacSignHit)
 
 
-    console.log(hitCon, 'this contact  horo is hits')
+    console.log(hitZodiacSign, 'this hitZodiacSign  horo is hits')
 
 
     useEffect(() => {
@@ -62,45 +90,10 @@ function Hits() {
         dispatch(getHitsLogin(data))
         dispatch(getHitsPanchang(data))
         dispatch(getHitsFestival(data))
+        dispatch(getHitsAdmin(data))
+        dispatch(getHitsZodiacSign(data))
 
     }, [])
-
-    //========================== filter method---=====================-------
-
-    // useEffect(() => {
-    //     const data = moment(date).format('YYYY-MM-DD')
-    //     dispatch(getHitsPanchang(data))
-    // }, [date])
-
-    // useEffect(() => {
-    //     const data = moment(dateFes).format('YYYY-MM-DD')
-    //     dispatch(getHitsFestival(data))
-    // }, [dateFes])
-    // useEffect(() => {
-    //     const data = moment(dateKundli).format('YYYY-MM-DD')
-    //     dispatch(getHitsKundali(data))
-    // }, [dateKundli])
-    // useEffect(() => {
-    //     const data = moment(dateCont).format('YYYY-MM-DD')
-    //     dispatch(getHitsContact(data))
-    // }, [dateCont])
-    // useEffect(() => {
-    //     const data = moment(dateHoro).format('YYYY-MM-DD')
-    //     dispatch(getHitsHoroscope(data))
-    // }, [dateHoro])
-    // useEffect(() => {
-    //     const data = moment(dateMatch).format('YYYY-MM-DD')
-    //     dispatch(getHitsMatchMaking(data))
-    // }, [dateMatch])
-    // useEffect(() => {
-    //     const data = moment(dateArt).format('YYYY-MM-DD')
-    //     dispatch(getHitsArticle(data))
-    // }, [dateArt])
-    // useEffect(() => {
-    //     const data = moment(dateLogin).format('YYYY-MM-DD')
-    //     dispatch(getHitsLogin(data))
-    // }, [dateLogin])
-
 
     // ================================================date range==============================
 
@@ -115,12 +108,12 @@ function Hits() {
 
         } else {
             const data = {
-                startDate: moment(startDate).format('YYYY-MM-DD'),
-                endDate: moment(endDate).format('YYYY-MM-DD'),
+                startDate: moment(startDatePan).format('YYYY-MM-DD'),
+                endDate: moment(endDatePan).format('YYYY-MM-DD'),
                 module: "PanchangModule"
             }
             dispatch(getDateRangeHitsPanchang(data))
-            console.log(moment(startDate).format('YYYY-MM-DD'), moment(endDate).format('YYYY-MM-DD'), 'date range')
+            // console.log(moment(startDate).format('YYYY-MM-DD'), moment(endDate).format('YYYY-MM-DD'), 'date range')
         }
 
     }
@@ -134,12 +127,12 @@ function Hits() {
 
         } else {
             const data = {
-                startDate: moment(startDate).format('YYYY-MM-DD'),
-                endDate: moment(endDate).format('YYYY-MM-DD'),
+                startDate: moment(startDateFes).format('YYYY-MM-DD'),
+                endDate: moment(endDateFes).format('YYYY-MM-DD'),
                 module: "festivalModule"
             }
             dispatch(getDateRangeHitsFestival(data))
-            console.log(moment(startDate).format('YYYY-MM-DD'), moment(endDate).format('YYYY-MM-DD'), 'date range')
+            // console.log(moment(startDate).format('YYYY-MM-DD'), moment(endDate).format('YYYY-MM-DD'), 'date range')
         }
 
     }
@@ -153,12 +146,12 @@ function Hits() {
 
         } else {
             const data = {
-                startDate: moment(startDate).format('YYYY-MM-DD'),
-                endDate: moment(endDate).format('YYYY-MM-DD'),
+                startDate: moment(startDateKun).format('YYYY-MM-DD'),
+                endDate: moment(endDateKun).format('YYYY-MM-DD'),
                 module: "KundaliModule"
             }
             dispatch(getDateRangeHitsKundali(data))
-            console.log(moment(startDate).format('YYYY-MM-DD'), moment(endDate).format('YYYY-MM-DD'), 'date range')
+            // console.log(moment(startDate).format('YYYY-MM-DD'), moment(endDate).format('YYYY-MM-DD'), 'date range')
         }
 
     }
@@ -172,12 +165,12 @@ function Hits() {
 
         } else {
             const data = {
-                startDate: moment(startDate).format('YYYY-MM-DD'),
-                endDate: moment(endDate).format('YYYY-MM-DD'),
+                startDate: moment(startDateHoro).format('YYYY-MM-DD'),
+                endDate: moment(endDateHoro).format('YYYY-MM-DD'),
                 module: "HoroscopeModule"
             }
             dispatch(getDateRangeHitsHoro(data))
-            console.log(moment(startDate).format('YYYY-MM-DD'), moment(endDate).format('YYYY-MM-DD'), 'date range')
+            // console.log(moment(startDate).format('YYYY-MM-DD'), moment(endDate).format('YYYY-MM-DD'), 'date range')
         }
 
     }
@@ -191,16 +184,15 @@ function Hits() {
 
         } else {
             const data = {
-                startDate: moment(startDate).format('YYYY-MM-DD'),
-                endDate: moment(endDate).format('YYYY-MM-DD'),
+                startDate: moment(startDateCon).format('YYYY-MM-DD'),
+                endDate: moment(endDateCon).format('YYYY-MM-DD'),
                 module: "ContactModule"
             }
-            dispatch(getDateRangeHitsKundali(data))
-            console.log(moment(startDate).format('YYYY-MM-DD'), moment(endDate).format('YYYY-MM-DD'), 'date range')
+            dispatch(getDateRangeHitsContact(data))
+            // console.log(moment(startDate).format('YYYY-MM-DD'), moment(endDate).format('YYYY-MM-DD'), 'date range')
         }
 
     }
-
 
     const handleSubmitMatchMaking = (e) => {
         e.preventDefault()
@@ -211,12 +203,12 @@ function Hits() {
 
         } else {
             const data = {
-                startDate: moment(startDate).format('YYYY-MM-DD'),
-                endDate: moment(endDate).format('YYYY-MM-DD'),
+                startDate: moment(startDateMatch).format('YYYY-MM-DD'),
+                endDate: moment(endDateMatch).format('YYYY-MM-DD'),
                 module: "MatchMakingModule"
             }
             dispatch(getDateRangeHitsMatchMaking(data))
-            console.log(moment(startDate).format('YYYY-MM-DD'), moment(endDate).format('YYYY-MM-DD'), 'date range')
+
         }
 
     }
@@ -230,12 +222,12 @@ function Hits() {
 
         } else {
             const data = {
-                startDate: moment(startDate).format('YYYY-MM-DD'),
-                endDate: moment(endDate).format('YYYY-MM-DD'),
+                startDate: moment(startDateArt).format('YYYY-MM-DD'),
+                endDate: moment(endDateArt).format('YYYY-MM-DD'),
                 module: "ArticleModule"
             }
             dispatch(getDateRangeHitsArticle(data))
-            console.log(moment(startDate).format('YYYY-MM-DD'), moment(endDate).format('YYYY-MM-DD'), 'date range')
+
         }
 
     }
@@ -248,12 +240,49 @@ function Hits() {
 
         } else {
             const data = {
-                startDate: moment(startDate).format('YYYY-MM-DD'),
-                endDate: moment(endDate).format('YYYY-MM-DD'),
+                startDate: moment(startDateLogin).format('YYYY-MM-DD'),
+                endDate: moment(endDateLogin).format('YYYY-MM-DD'),
                 module: "LoginModule"
             }
             dispatch(getDateRangeHitsLogin(data))
-            console.log(moment(startDate).format('YYYY-MM-DD'), moment(endDate).format('YYYY-MM-DD'), 'date range')
+            // console.log(moment(startDate).format('YYYY-MM-DD'), moment(endDate).format('YYYY-MM-DD'), 'date range')
+        }
+
+    }
+    const handleSubmitaAdmin = (e) => {
+        e.preventDefault()
+
+        if (dateTypes == 'SingleDate') {
+            const data = moment(dateAdmin).format('YYYY-MM-DD')
+            dispatch(getHitsAdmin(data))
+
+        } else {
+            const data = {
+                startDate: moment(startDateAdmin).format('YYYY-MM-DD'),
+                endDate: moment(endDateAdmin).format('YYYY-MM-DD'),
+                module: "AdminModule"
+            }
+            dispatch(getDateRangeHitsAdmin(data))
+
+        }
+
+    }
+
+    const handleSubmitaZodiacSign = (e) => {
+        e.preventDefault()
+
+        if (dateTypes == 'SingleDate') {
+            const data = moment(dateZodiac).format('YYYY-MM-DD')
+            dispatch(getHitsAdmin(data))
+
+        } else {
+            const data = {
+                startDate: moment(startDateZodiac).format('YYYY-MM-DD'),
+                endDate: moment(endDateZodiac).format('YYYY-MM-DD'),
+                module: "ZodiacSignModule"
+            }
+            dispatch(getDateRangeHitsAdmin(data))
+
         }
 
     }
@@ -269,8 +298,8 @@ function Hits() {
 
                     <div className="tableWrapsss  HitsScrollBar ">
 
-                        <h1 className='text-center text-xl  mt-2  text-gray-500 font-bold  underline underline-offset-8'>All Module Hits</h1>
-                        <div className='grid grid-cols-4  gap-6 mt-4 '>
+                        <h1 className='text-center text-xl  my-2  text-gray-500 font-bold  underline underline-offset-8'>All Module Hits</h1>
+                        <div className='grid grid-cols-4  gap-6 my-2'>
 
                             <div class="max-w-[300px] ">
 
@@ -306,10 +335,10 @@ function Hits() {
                                                         <DatePicker className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500  w-full"
                                                             selectsRange={true}
                                                             // dateFormat="dd-mm-yyyy"
-                                                            startDate={startDate}
-                                                            endDate={endDate}
+                                                            startDate={startDatePan}
+                                                            endDate={endDatePan}
                                                             onChange={(update) => {
-                                                                setDateRange(update);
+                                                                setDateRangePan(update);
                                                             }}
                                                             isClearable={true}
                                                         />
@@ -378,10 +407,10 @@ function Hits() {
                                                         <DatePicker className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500  w-full"
                                                             selectsRange={true}
                                                             // dateFormat="dd-mm-yyyy"
-                                                            startDate={startDate}
-                                                            endDate={endDate}
+                                                            startDate={startDateFes}
+                                                            endDate={endDateFes}
                                                             onChange={(update) => {
-                                                                setDateRange(update);
+                                                                setDateRangeFes(update);
                                                             }}
                                                             isClearable={true}
                                                         />
@@ -449,10 +478,10 @@ function Hits() {
                                                         <DatePicker className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500  w-full"
                                                             selectsRange={true}
                                                             // dateFormat="dd-mm-yyyy"
-                                                            startDate={startDate}
-                                                            endDate={endDate}
+                                                            startDate={startDateKun}
+                                                            endDate={endDateKun}
                                                             onChange={(update) => {
-                                                                setDateRange(update);
+                                                                setDateRangeKun(update);
                                                             }}
                                                             isClearable={true}
                                                         />
@@ -516,10 +545,10 @@ function Hits() {
                                                         <DatePicker className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500  w-full"
                                                             selectsRange={true}
                                                             // dateFormat="dd-mm-yyyy"
-                                                            startDate={startDate}
-                                                            endDate={endDate}
+                                                            startDate={startDateCon}
+                                                            endDate={endDateCon}
                                                             onChange={(update) => {
-                                                                setDateRange(update);
+                                                                setDateRangeCon(update);
                                                             }}
                                                             isClearable={true}
                                                         />
@@ -586,10 +615,10 @@ function Hits() {
                                                         <DatePicker className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500  w-full"
                                                             selectsRange={true}
                                                             // dateFormat="dd-mm-yyyy"
-                                                            startDate={startDate}
-                                                            endDate={endDate}
+                                                            startDate={startDateHoro}
+                                                            endDate={endDateHoro}
                                                             onChange={(update) => {
-                                                                setDateRange(update);
+                                                                setDateRangeHoro(update);
                                                             }}
                                                             isClearable={true}
                                                         />
@@ -653,10 +682,10 @@ function Hits() {
                                                         <DatePicker className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500  w-full"
                                                             selectsRange={true}
                                                             // dateFormat="dd-mm-yyyy"
-                                                            startDate={startDate}
-                                                            endDate={endDate}
+                                                            startDate={startDateMatch}
+                                                            endDate={endDateMatch}
                                                             onChange={(update) => {
-                                                                setDateRange(update);
+                                                                setDateRangeMatch(update);
                                                             }}
                                                             isClearable={true}
                                                         />
@@ -711,10 +740,10 @@ function Hits() {
                                                         <DatePicker className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500  w-full"
                                                             selectsRange={true}
                                                             // dateFormat="dd-mm-yyyy"
-                                                            startDate={startDate}
-                                                            endDate={endDate}
+                                                            startDate={startDateArt}
+                                                            endDate={endDateArt}
                                                             onChange={(update) => {
-                                                                setDateRange(update);
+                                                                setDateRangeArt(update);
                                                             }}
                                                             isClearable={true}
                                                         />
@@ -737,63 +766,180 @@ function Hits() {
                                 </div>
 
                             </div>
-                       
-                                <div class="max-w-[300px] ">
-                                
-                                        <div class=" shadow-lg hover:scale-105 duration-150 hover:bg-orange-500/30 px-2 rounded-lg ">
-                                            <div>
-                                                <h1 className='text-center font-bold text-lg text-gray-500   underline underline-offset-8 py-2 '>Login Hits </h1>
 
-                                                <div className='p-5 bg-white rounded-lg'>
-                                                    <form onSubmit={handleSubmitaLogin}>
-                                                        <select id="countries" class="bg-gray-50 border w-full border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " onChange={(e) => setDateTypes(e.target.value)}>
-                                                            <option disabled selected >  Filter by Date</option>
-                                                            <option value="dateRange">Date Range</option>
-                                                            <option value="SingleDate">Single Date</option>
+                            <div class="max-w-[300px] ">
 
-                                                        </select>
+                                <div class=" shadow-lg hover:scale-105 duration-150 hover:bg-orange-500/30 px-2 rounded-lg ">
+                                    <div>
+                                        <h1 className='text-center font-bold text-lg text-gray-500   underline underline-offset-8 py-2 '>Login Hits </h1>
 
-                                                        {dateTypes == 'SingleDate' ? <>
-                                                            <div class="my-4">
-                                                                <label class="block text-gray-700 text-sm font-bold mb-1" for="username">
-                                                                    Select Date
-                                                                </label>
-                                                                <DatePicker className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+                                        <div className='p-5 bg-white rounded-lg'>
+                                            <form onSubmit={handleSubmitaLogin}>
+                                                <select id="countries" class="bg-gray-50 border w-full border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " onChange={(e) => setDateTypes(e.target.value)}>
+                                                    <option disabled selected >  Filter by Date</option>
+                                                    <option value="dateRange">Date Range</option>
+                                                    <option value="SingleDate">Single Date</option>
+
+                                                </select>
+
+                                                {dateTypes == 'SingleDate' ? <>
+                                                    <div class="my-4">
+                                                        <label class="block text-gray-700 text-sm font-bold mb-1" for="username">
+                                                            Select Date
+                                                        </label>
+                                                        <DatePicker className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
                                                          focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                                    selected={dateLogin} dateFormat="dd/MM/yyyy" onChange={(date) => setDateLogin(date)} />
+                                                            selected={dateLogin} dateFormat="dd/MM/yyyy" onChange={(date) => setDateLogin(date)} />
 
-                                                            </div>
+                                                    </div>
 
-                                                        </> : <>
-                                                            <div class="my-4">
-                                                                <label class="block text-gray-700 text-sm font-bold mb-1" for="username">
-                                                                    Select Date Range
-                                                                </label>
-                                                                <DatePicker className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500  w-full"
-                                                                    selectsRange={true}
-                                                                    // dateFormat="dd-mm-yyyy"
-                                                                    startDate={startDate}
-                                                                    endDate={endDate}
-                                                                    onChange={(update) => {
-                                                                        setDateRange(update);
-                                                                    }}
-                                                                    isClearable={true}
-                                                                />
-                                                            </div>
+                                                </> : <>
+                                                    <div class="my-4">
+                                                        <label class="block text-gray-700 text-sm font-bold mb-1" for="username">
+                                                            Select Date Range
+                                                        </label>
+                                                        <DatePicker className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500  w-full"
+                                                            selectsRange={true}
+                                                            // dateFormat="dd-mm-yyyy"
+                                                            startDate={startDateLogin}
+                                                            endDate={endDateLogin}
+                                                            onChange={(update) => {
+                                                                setDateRangeLogin(update);
+                                                            }}
+                                                            isClearable={true}
+                                                        />
+                                                    </div>
 
-                                                        </>}
+                                                </>}
 
-                                                        <div className='text-center'>
-                                                            <button type='submit' className="inline-flex items-center px-4 mr-4 py-2 bg-orange-500 hover:bg-orange-600 text-white text-sm font-medium rounded-md mx-2">Submit</button>
+                                                <div className='text-center'>
+                                                    <button type='submit' className="inline-flex items-center px-4 mr-4 py-2 bg-orange-500 hover:bg-orange-600 text-white text-sm font-medium rounded-md mx-2">Submit</button>
 
-                                                        </div>
-                                                    </form>
                                                 </div>
-                                                <div className='px-4 inline-flex  items-center py-2'>
-                                                    <p className='font-bold  text-gray-500 py-1'>Total hits: </p>
-                                                    {hitLogin.loading ? <div className='pl-10'><LoaderN /></div> : <p className='font-extrabold text-orange-500 pl-10  text-lg text-center  rounded-full  ' >{hitLogin?.result}</p >}
+                                            </form>
+                                        </div>
+                                        <div className='px-4 inline-flex  items-center py-2'>
+                                            <p className='font-bold  text-gray-500 py-1'>Total hits: </p>
+                                            {hitLogin.loading ? <div className='pl-10'><LoaderN /></div> : <p className='font-extrabold text-orange-500 pl-10  text-lg text-center  rounded-full  ' >{hitLogin?.result}</p >}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="max-w-[300px] ">
+
+                                <div class=" shadow-lg hover:scale-105 duration-150 hover:bg-orange-500/30 px-2 rounded-lg ">
+                                    <div>
+                                        <h1 className='text-center font-bold text-lg text-gray-500   underline underline-offset-8 py-2 '>Admin Hits </h1>
+
+                                        <div className='p-5 bg-white rounded-lg'>
+                                            <form onSubmit={handleSubmitaAdmin}>
+                                                <select id="countries" class="bg-gray-50 border w-full border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " onChange={(e) => setDateTypes(e.target.value)}>
+                                                    <option disabled selected >  Filter by Date</option>
+                                                    <option value="dateRange">Date Range</option>
+                                                    <option value="SingleDate">Single Date</option>
+
+                                                </select>
+
+                                                {dateTypes == 'SingleDate' ? <>
+                                                    <div class="my-4">
+                                                        <label class="block text-gray-700 text-sm font-bold mb-1" for="username">
+                                                            Select Date
+                                                        </label>
+                                                        <DatePicker className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+                                                 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                            selected={dateAdmin} dateFormat="dd/MM/yyyy" onChange={(date) => setDateAdmin(date)} />
+
+                                                    </div>
+
+                                                </> : <>
+                                                    <div class="my-4">
+                                                        <label class="block text-gray-700 text-sm font-bold mb-1" for="username">
+                                                            Select Date Range
+                                                        </label>
+                                                        <DatePicker className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500  w-full"
+                                                            selectsRange={true}
+                                                            // dateFormat="dd-mm-yyyy"
+                                                            startDate={startDateAdmin}
+                                                            endDate={endDateAdmin}
+                                                            onChange={(update) => {
+                                                                setDateRangeAdmin(update);
+                                                            }}
+                                                            isClearable={true}
+                                                        />
+                                                    </div>
+
+                                                </>}
+
+                                                <div className='text-center'>
+                                                    <button type='submit' className="inline-flex items-center px-4 mr-4 py-2 bg-orange-500 hover:bg-orange-600 text-white text-sm font-medium rounded-md mx-2">Submit</button>
+
                                                 </div>
-                                            </div>                                    
+                                            </form>
+                                        </div>
+                                        <div className='px-4 inline-flex  items-center py-2'>
+                                            <p className='font-bold  text-gray-500 py-1'>Total hits: </p>
+                                            {hitAdmin.loading ? <div className='pl-10'><LoaderN /></div> : <p className='font-extrabold text-orange-500 pl-10  text-lg text-center  rounded-full  ' >{hitAdmin?.result}</p >}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="max-w-[300px] ">
+
+                                <div class=" shadow-lg hover:scale-105 duration-150 hover:bg-orange-500/30 px-2 rounded-lg ">
+                                    <div>
+                                        <h1 className='text-center font-bold text-lg text-gray-500   underline underline-offset-8 py-2 '>ZodiacSign Hits </h1>
+
+                                        <div className='p-5 bg-white rounded-lg'>
+                                            <form onSubmit={handleSubmitaZodiacSign}>
+                                                <select id="countries" class="bg-gray-50 border w-full border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " onChange={(e) => setDateTypes(e.target.value)}>
+                                                    <option disabled selected >  Filter by Date</option>
+                                                    <option value="dateRange">Date Range</option>
+                                                    <option value="SingleDate">Single Date</option>
+
+                                                </select>
+
+                                                {dateTypes == 'SingleDate' ? <>
+                                                    <div class="my-4">
+                                                        <label class="block text-gray-700 text-sm font-bold mb-1" for="username">
+                                                            Select Date
+                                                        </label>
+                                                        <DatePicker className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+                                                 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                            selected={dateZodiac} dateFormat="dd/MM/yyyy" onChange={(date) => setDateZodiac(date)} />
+
+                                                    </div>
+
+                                                </> : <>
+                                                    <div class="my-4">
+                                                        <label class="block text-gray-700 text-sm font-bold mb-1" for="username">
+                                                            Select Date Range
+                                                        </label>
+                                                        <DatePicker className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500  w-full"
+                                                            selectsRange={true}
+                                                            // dateFormat="dd-mm-yyyy"
+                                                            startDate={startDateZodiac}
+                                                            endDate={endDateZodiac}
+                                                            onChange={(update) => {
+                                                                setDateRangeZodiac(update);
+                                                            }}
+                                                            isClearable={true}
+                                                        />
+                                                    </div>
+
+                                                </>}
+
+                                                <div className='text-center'>
+                                                    <button type='submit' className="inline-flex items-center px-4 mr-4 py-2 bg-orange-500 hover:bg-orange-600 text-white text-sm font-medium rounded-md mx-2">Submit</button>
+
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div className='px-4 inline-flex  items-center py-2'>
+                                            <p className='font-bold  text-gray-500 py-1'>Total hits: </p>
+                                            {hitZodiacSign.loading ? <div className='pl-10'><LoaderN /></div> : <p className='font-extrabold text-orange-500 pl-10  text-lg text-center  rounded-full  ' >{hitZodiacSign?.result}</p >}
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 

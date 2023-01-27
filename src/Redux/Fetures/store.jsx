@@ -22,6 +22,8 @@ import horoscopeHits from './Reducers/HitsReducers/Horoscope'
 import loginHits from './Reducers/HitsReducers/LoginSlice'
 import matchMakingHits from './Reducers/HitsReducers/MatchMakingSplice'
 import kundliHits from './Reducers/HitsReducers/KundliSplice'
+import adminHits from './Reducers/HitsReducers/AdminSlice'
+import zodiacSignHits from './Reducers/HitsReducers/ZodiacSlice'
 
 export default configureStore({
     reducer: {
@@ -49,6 +51,8 @@ export default configureStore({
        loginHit:loginHits,
        matchMakingHit:matchMakingHits,
        kundliHit:kundliHits,
+       adminHit:adminHits,
+       zodiacSignHit:zodiacSignHits
     
 
 

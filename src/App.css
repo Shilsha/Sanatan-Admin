@@ -426,17 +426,15 @@ tr:hover{
   vertical-align: middle;
 }
 
-/* 
+
 .HitsScrollBar 
   {
-      max-height: 95%;
+      max-height: 700px;
       overflow-y: scroll;
-     
-  
+    
   }
-  
-  
+    
   .HitsScrollBar::-webkit-scrollbar {
       display: none;
-    } */
+    }
   
