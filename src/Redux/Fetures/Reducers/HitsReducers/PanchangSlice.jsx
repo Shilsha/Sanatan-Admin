@@ -16,6 +16,23 @@ export const getHitsPanchang = createAsyncThunk('HITS_PANCHANG/GET_HITS_PANCHANG
             .then(res => res)
     })
 
+
+// ==============================date range=================================
+
+export const getDateRangeHitsPanchang = createAsyncThunk('HITS_DATE_RANGE_PANCHANG/GET_HITS_DATE_RANGE_PANCHANG',
+    async (data) => {     
+        console.log(data,'this is action date') 
+        let OPTIONS = {
+            url:`${import.meta.env.VITE_BASE_URL}/api/Hits?createdAt=${data.startDate}&endDate=${data.endDate}&module=${data.module}`,
+            method: "GET",
+            headers: {
+              'Accept': 'application/json'
+            },
+          };
+        return axios(OPTIONS)
+            .then(res => res)
+    })
+
 const panchangHits = createSlice({
         name: 'GET HITS',
     initialState: {
@@ -35,6 +52,18 @@ const panchangHits = createSlice({
             state.result = action.payload.data.data
     },
     [getHitsPanchang.rejected]: (state, action) => {
+        state.loading = false,
+            state.error = action
+    },
+    // ======================date range==============================
+    [getDateRangeHitsPanchang.pending]: (state, action) => {
+        state.loading = true;
+    },
+    [getDateRangeHitsPanchang.fulfilled]: (state, action) => {
+        state.loading = false,
+            state.result = action.payload.data.data
+    },
+    [getDateRangeHitsPanchang.rejected]: (state, action) => {
         state.loading = false,
             state.error = action
     },
