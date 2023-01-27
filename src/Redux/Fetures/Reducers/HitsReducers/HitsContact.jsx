@@ -14,6 +14,21 @@ async (data) => {
     return axios(OPTIONS)
         .then(res => res)
 })
+
+
+export const getDateRangeHitsContact = createAsyncThunk('HITS_DATE_RANGE_CONTACT/GET_HITS_DATE_RANGE_CONTACT',
+async (data) => {     
+    console.log(data,'this is action date') 
+    let OPTIONS = {
+        url:`${import.meta.env.VITE_BASE_URL}/api/Hits?createdAt=${data.startDate}&endDate=${data.endDate}&module=${data.module}`,
+        method: "GET",
+        headers: {
+          'Accept': 'application/json'
+        },
+      };
+    return axios(OPTIONS)
+        .then(res => res)
+})
 const contactHits = createSlice({
         name: 'GET HITS',
     initialState: {
@@ -33,6 +48,17 @@ const contactHits = createSlice({
             state.result = action.payload.data.data
     },
     [getHitsContact.rejected]: (state, action) => {
+        state.loading = false,
+            state.error = action
+    },
+    [getDateRangeHitsContact.pending]: (state, action) => {
+        state.loading = true;
+    },
+    [getDateRangeHitsContact.fulfilled]: (state, action) => {
+        state.loading = false,
+            state.result = action.payload.data.data
+    },
+    [getDateRangeHitsContact.rejected]: (state, action) => {
         state.loading = false,
             state.error = action
     },

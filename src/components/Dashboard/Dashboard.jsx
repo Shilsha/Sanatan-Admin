@@ -145,7 +145,7 @@ function Dashboard() {
         e.preventDefault()
 
         const data = {
-            thoughtId: 2,
+            thoughtId: 10,
             thoughtOfTheDay: thoughtText
 
         }

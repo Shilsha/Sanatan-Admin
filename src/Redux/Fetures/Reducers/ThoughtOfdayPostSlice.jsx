@@ -5,7 +5,7 @@ import axios from 'axios'
 export const getThoughtAction = createAsyncThunk('THOUGHT_OF_DAY/GET_THOUGHT_OF_DAY',
     async () => {
         let OPTIONS = {
-            url: `${import.meta.env.VITE_BASE_URL}/api/get_thought?thoughtId=2&todayDate=`,
+            url: `${import.meta.env.VITE_BASE_URL}/api/get_thought?thoughtId=10&todayDate=`,
             method: "GET",
             headers: {
                 'Accept': 'application/json'
