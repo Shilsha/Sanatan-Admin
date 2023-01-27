@@ -13,7 +13,7 @@ import { HiClipboardDocumentList } from 'react-icons/hi2'
 import { BsFillQuestionSquareFill } from 'react-icons/bs'
 import { BiHide, BiShow } from 'react-icons/bi'
 import { addAdmin } from '../../Redux/Fetures/Reducers/AdminListSlice'
-import { ToastContainer } from 'react-toastify'
+import { toast, ToastContainer } from 'react-toastify'
 import { Link } from 'react-router-dom'
 
 const customStyles = {
@@ -134,7 +134,7 @@ function Sidebar() {
     const LogstModuleAuth = isModuleAuth?.role.some(data => data == 'Logs')
     const BroadcastModuleAuth = isModuleAuth?.role.some(data => data == 'Broadcast')
     const BlogsPosttModuleAuth = isModuleAuth?.role.some(data => data == 'BlogsPost')
-    // console.log(userModuleAuth, 'userModuleAuth auth')
+    console.log(userModuleAuth, 'userModuleAuth auth')
     const unAutherizedHndle = () => {
         toast.warning('You are not authrized for this module')
     }

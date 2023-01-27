@@ -16,6 +16,23 @@ async (data) => {
     return axios(OPTIONS)
         .then(res => res)
 })
+
+
+
+export const getDateRangeHitsMatchMaking = createAsyncThunk('HITS_DATE_RANGE_MATCH-MAKING/GET_HITS_DATE_RANGE_MATCH_MAKING',
+    async (data) => {
+        console.log(data, 'this is action date')
+        let OPTIONS = {
+            url: `${import.meta.env.VITE_BASE_URL}/api/Hits?createdAt=${data.startDate}&endDate=${data.endDate}&module=${data.module}`,
+            method: "GET",
+            headers: {
+                'Accept': 'application/json'
+            },
+        };
+        return axios(OPTIONS)
+            .then(res => res)
+    })
+
 const matchMakingHits = createSlice({
         name: 'GET HITS',
     initialState: {
@@ -35,6 +52,17 @@ const matchMakingHits = createSlice({
             state.result = action.payload.data.data
     },
     [getHitsMatchMaking.rejected]: (state, action) => {
+        state.loading = false,
+            state.error = action
+    },
+    [getDateRangeHitsMatchMaking.pending]: (state, action) => {
+        state.loading = true;
+    },
+    [getDateRangeHitsMatchMaking.fulfilled]: (state, action) => {
+        state.loading = false,
+            state.result = action.payload.data.data
+    },
+    [getDateRangeHitsMatchMaking.rejected]: (state, action) => {
         state.loading = false,
             state.error = action
     },

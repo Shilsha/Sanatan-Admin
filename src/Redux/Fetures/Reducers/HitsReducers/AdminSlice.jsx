@@ -1,10 +1,10 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
 
-export const getHitsContact  = createAsyncThunk('HITS_CONTACT/GET_HITS_CONTACT',
+export const getHitsAdmin  = createAsyncThunk('HITS_Admin/GET_HITS_Admin',
 async (data) => {      
     let OPTIONS = {
-        url: `${import.meta.env.VITE_BASE_URL}/api/getHits?module=ContactModule&createdAt=${data}`,
+        url: `${import.meta.env.VITE_BASE_URL}/api/getHits?module=AdminModule&createdAt=${data}`,
         // url: `https://62be-2405-201-4041-c01c-20fb-c0da-32bc-a7e6.in.ngrok.io/api/getHits?module=ContactModule&createdAt=${data}`,
         method: "GET",
         headers: {
@@ -16,7 +16,7 @@ async (data) => {
 })
 
 
-export const getDateRangeHitsContact = createAsyncThunk('HITS_DATE_RANGE_CONTACT/GET_HITS_DATE_RANGE_CONTACT',
+export const getDateRangeHitsAdmin = createAsyncThunk('HITS_DATE_RANGE_ADMIN/GET_HITS_DATE_RANGE_ADMIN',
 async (data) => {     
     console.log(data,'this is action date') 
     let OPTIONS = {
@@ -29,8 +29,8 @@ async (data) => {
     return axios(OPTIONS)
         .then(res => res)
 })
-const contactHits = createSlice({
-        name: 'GET HITS',
+const adminHits = createSlice({
+        name: 'GET ADMIN HITS',
     initialState: {
         loading: false,
         result: [],
@@ -40,25 +40,25 @@ const contactHits = createSlice({
     
   extraReducers: {
     // ==============GET REQUEST PANCHNAG=============
-    [getHitsContact.pending]: (state, action) => {
+    [getHitsAdmin.pending]: (state, action) => {
         state.loading = true;
     },
-    [getHitsContact.fulfilled]: (state, action) => {
+    [getHitsAdmin.fulfilled]: (state, action) => {
         state.loading = false,
             state.result = action.payload.data.data
     },
-    [getHitsContact.rejected]: (state, action) => {
+    [getHitsAdmin.rejected]: (state, action) => {
         state.loading = false,
             state.error = action
     },
-    [getDateRangeHitsContact.pending]: (state, action) => {
+    [getDateRangeHitsAdmin.pending]: (state, action) => {
         state.loading = true;
     },
-    [getDateRangeHitsContact.fulfilled]: (state, action) => {
+    [getDateRangeHitsAdmin.fulfilled]: (state, action) => {
         state.loading = false,
             state.result = action.payload.data.data
     },
-    [getDateRangeHitsContact.rejected]: (state, action) => {
+    [getDateRangeHitsAdmin.rejected]: (state, action) => {
         state.loading = false,
             state.error = action
     },
@@ -68,4 +68,4 @@ const contactHits = createSlice({
 })
 
 
-export default contactHits.reducer;
+export default adminHits.reducer;

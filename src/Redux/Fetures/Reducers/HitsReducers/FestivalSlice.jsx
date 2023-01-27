@@ -15,6 +15,21 @@ async (data) => {
         .then(res => res)
 })
 
+
+export const getDateRangeHitsFestival = createAsyncThunk('HITS_DATE_RANGE_FESTIVAL/GET_HITS_DATE_RANGE_FESTIVAL',
+    async (data) => {     
+        console.log(data,'this is action date') 
+        let OPTIONS = {
+            url:`${import.meta.env.VITE_BASE_URL}/api/Hits?createdAt=${data.startDate}&endDate=${data.endDate}&module=${data.module}`,
+            method: "GET",
+            headers: {
+              'Accept': 'application/json'
+            },
+          };
+        return axios(OPTIONS)
+            .then(res => res)
+    })
+
     const festivalsHits = createSlice({
         name: 'GET HITS',
         initialState: {
@@ -34,6 +49,17 @@ async (data) => {
             state.result = action.payload.data.data
     },
     [getHitsFestival.rejected]: (state, action) => {
+        state.loading = false,
+            state.error = action
+    },
+    [getDateRangeHitsFestival.pending]: (state, action) => {
+        state.loading = true;
+    },
+    [getDateRangeHitsFestival.fulfilled]: (state, action) => {
+        state.loading = false,
+            state.result = action.payload.data.data
+    },
+    [getDateRangeHitsFestival.rejected]: (state, action) => {
         state.loading = false,
             state.error = action
     },

@@ -16,6 +16,20 @@ export const getHitsKundali = createAsyncThunk('HITS_KUNDLI/GET_HITS_KUNDLI',
         return axios(OPTIONS)
             .then(res => res)
     })
+ export const getDateRangeHitsKundali = createAsyncThunk('HITS_DATE_RANGE_KUNDLI/GET_HITS_DATE_RANGE_KUNDALI',
+    async (data) => {     
+        console.log(data,'this is action date') 
+        let OPTIONS = {
+            url:`${import.meta.env.VITE_BASE_URL}/api/Hits?createdAt=${data.startDate}&endDate=${data.endDate}&module=${data.module}`,
+            method: "GET",
+            headers: {
+              'Accept': 'application/json'
+            },
+          };
+        return axios(OPTIONS)
+            .then(res => res)
+    })
+
 const kundliHits = createSlice({
         name: 'GET HITS',
     initialState: {
@@ -27,6 +41,7 @@ const kundliHits = createSlice({
     
   extraReducers: {
     // ==============GET REQUEST PANCHNAG=============
+    
     [getHitsKundali.pending]: (state, action) => {
         state.loading = true;
     },
@@ -38,7 +53,17 @@ const kundliHits = createSlice({
         state.loading = false,
             state.error = action
     },
-
+    [getDateRangeHitsKundali.pending]: (state, action) => {
+        state.loading = true;
+    },
+    [getDateRangeHitsKundali.fulfilled]: (state, action) => {
+        state.loading = false,
+            state.result = action.payload.data
+    },
+    [getDateRangeHitsKundali.rejected]: (state, action) => {
+        state.loading = false,
+            state.error = action
+    },
 }
 
 })
