@@ -24,7 +24,7 @@ import matchMakingHits from './Reducers/HitsReducers/MatchMakingSplice'
 import kundliHits from './Reducers/HitsReducers/KundliSplice'
 import adminHits from './Reducers/HitsReducers/AdminSlice'
 import zodiacSignHits from './Reducers/HitsReducers/ZodiacSlice'
-
+import locationHits from './Reducers/HitsReducers/Location'
 export default configureStore({
     reducer: {
         thoughtOfDay: getThoughtOfDay,
@@ -52,7 +52,8 @@ export default configureStore({
        matchMakingHit:matchMakingHits,
        kundliHit:kundliHits,
        adminHit:adminHits,
-       zodiacSignHit:zodiacSignHits
+       zodiacSignHit:zodiacSignHits,
+       locationHit:locationHits
     
 
 
