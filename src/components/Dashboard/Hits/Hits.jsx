@@ -18,7 +18,8 @@ import { getHitsMatchMaking, getDateRangeHitsMatchMaking } from '../../../Redux/
 import { getHitsLogin, getDateRangeHitsLogin } from '../../../Redux/Fetures/Reducers/HitsReducers/LoginSlice'
 import { getHitsKundali, getDateRangeHitsKundali } from '../../../Redux/Fetures/Reducers/HitsReducers/KundliSplice'
 import { getHitsAdmin, getDateRangeHitsAdmin } from '../../../Redux/Fetures/Reducers/HitsReducers/AdminSlice'
-import {getHitsZodiacSign,getDateRangeHitsZodiacSign} from '../../../Redux/Fetures/Reducers/HitsReducers/ZodiacSlice'
+import { getHitsZodiacSign, getDateRangeHitsZodiacSign } from '../../../Redux/Fetures/Reducers/HitsReducers/ZodiacSlice'
+import {getHitsLocation,getDateRangeHitsLocation} from '../../../Redux/Fetures//Reducers/HitsReducers/Location'
 import LoaderN from '../../Loader/LoaderN'
 import DesignLogin from '../../../Assets/images/DesignLogin.png'
 
@@ -36,6 +37,7 @@ function Hits() {
     const [dateLogin, setDateLogin] = useState(new Date());
     const [dateAdmin, setDateAdmin] = useState(new Date());
     const [dateZodiac, setDateZodiac] = useState(new Date());
+    const [dateLoc, setDateLoc] = useState(new Date());
 
     const [dateRange, setDateRange] = useState([null, null]);
     const [startDate, endDate] = dateRange;
@@ -61,7 +63,9 @@ function Hits() {
     const [startDateAdmin, endDateAdmin] = dateRangeAdmin;
     const [dateRangeZodiac, setDateRangeZodiac] = useState([null, null]);
     const [startDateZodiac, endDateZodiac] = dateRangeZodiac;
-    const dispatch = useDispatch()
+    const [dateRangeLoc, setDateRangeLoc] = useState([null, null]);
+    const [startDateLoc, endDateLoc] = dateRangeLoc
+        const dispatch = useDispatch()
 
     const hitPan = useSelector((state) => state.panchangHit)
     const hitFes = useSelector((state) => state.festivalsHit)
@@ -73,9 +77,10 @@ function Hits() {
     const hitKundli = useSelector((state) => state.kundliHit)
     const hitAdmin = useSelector((state) => state.adminHit)
     const hitZodiacSign = useSelector((state) => state.zodiacSignHit)
+    const hitLocation = useSelector((state) => state.locationHit)
 
 
-    console.log(hitZodiacSign, 'this hitZodiacSign  horo is hits')
+    console.log(hitLocation, 'this hitLocation  horo is hits')
 
 
     useEffect(() => {
@@ -92,6 +97,7 @@ function Hits() {
         dispatch(getHitsFestival(data))
         dispatch(getHitsAdmin(data))
         dispatch(getHitsZodiacSign(data))
+        dispatch(getHitsLocation(data))
 
     }, [])
 
@@ -273,7 +279,7 @@ function Hits() {
 
         if (dateTypes == 'SingleDate') {
             const data = moment(dateZodiac).format('YYYY-MM-DD')
-            dispatch(getHitsAdmin(data))
+            dispatch(getHitsZodiacSign(data))
 
         } else {
             const data = {
@@ -281,17 +287,35 @@ function Hits() {
                 endDate: moment(endDateZodiac).format('YYYY-MM-DD'),
                 module: "ZodiacSignModule"
             }
-            dispatch(getDateRangeHitsAdmin(data))
+            dispatch(getDateRangeHitsZodiacSign(data))
+
+        }
+
+    }
+    
+    const handleSubmitaLocation = (e) => {
+        e.preventDefault()
+
+        if (dateTypes == 'SingleDate') {
+            const data = moment(dateLoc).format('YYYY-MM-DD')
+            dispatch(getHitsLocation(data))
+
+        } else {
+            const data = {
+                startDate: moment(startDateLoc).format('YYYY-MM-DD'),
+                endDate: moment(endDateLoc).format('YYYY-MM-DD'),
+                module: "LocationModule"
+            }
+            dispatch(getDateRangeHitsLocation(data))
 
         }
 
     }
 
-
     return (
         <>
 
-            <div className='   w-[100%] h-[100vh] flex flex-col-2 gap-4 bgGradient '>
+            <div className='   w-[100%] h-[100vh] flex flex-col-2  bgGradient '>
                 <Sidebar />
                 <div className=' w-full '>
                     <Navbar />
@@ -299,9 +323,9 @@ function Hits() {
                     <div className="tableWrapsss  HitsScrollBar ">
 
                         <h1 className='text-center text-xl  my-2  text-gray-500 font-bold  underline underline-offset-8'>All Module Hits</h1>
-                        <div className='grid grid-cols-4  gap-6 my-2'>
+                        <div className='grid grid-cols-4 gap-6 my-2 px-4'>
 
-                            <div class="max-w-[300px] ">
+                            <div class="p-1 ">
 
 
                                 <div class=" shadow-lg hover:scale-105 duration-150 hover:bg-orange-500/30  rounded-lg px-2 ">
@@ -360,7 +384,7 @@ function Hits() {
 
                                         <div className='px-4 inline-flex  items-center py-2'>
                                             <p className='font-bold  text-gray-500 '>Total hits: </p>
-                                            {hitPan?.loading ? <div className=' pl-10'><LoaderN /></div> : <p className='font-extrabold pl-10  text-xl text-orange-500  rounded-full  text-center' >{hitPan?.result}</p >}
+                                            {hitPan?.loading ? <div className=' pl-14'><LoaderN /></div> : <p className='font-extrabold pl-14  text-2xl text-orange-500  rounded-full  text-center' >{hitPan?.result}</p >}
 
                                         </div>
                                     </div>
@@ -370,7 +394,7 @@ function Hits() {
                             </div>
 
 
-                            <div class="max-w-[300px] ">
+                            <div class="p-1 ">
 
                                 <div class=" shadow-lg hover:scale-105 duration-150 hover:bg-orange-500/30 px-2  rounded-lg ">
                                     <div>
@@ -432,7 +456,7 @@ function Hits() {
 
                                         <div className='px-4 inline-flex  items-center py-2'>
                                             <p className='font-bold  text-gray-500 '>Total hits: </p>
-                                            {hitFes?.loading ? <div className=' pl-10'><LoaderN /></div> : <p className='font-extrabold pl-10  text-lg text-orange-500  rounded-full  text-center' >{hitFes?.result}</p >}
+                                            {hitFes?.loading ? <div className=' pl-14'><LoaderN /></div> : <p className='font-extrabold pl-14  text-2xl text-orange-500  rounded-full  text-center' >{hitFes?.result}</p >}
 
                                         </div>
 
@@ -442,7 +466,7 @@ function Hits() {
                                 </div>
                             </div>
 
-                            <div class="max-w-[300px] ">
+                            <div class="p-1 ">
 
                                 <div class="  shadow-lg hover:scale-105 duration-150 hover:bg-orange-500/30 px-2 rounded-lg ">
                                     <div>
@@ -502,14 +526,14 @@ function Hits() {
                                         </div>
                                         <div className='px-4 inline-flex  items-center py-2'>
                                             <p className='font-bold  text-gray-500 py-1 '>Total hits: </p>
-                                            {hitKundli.loading ? <LoaderN /> : <p className='font-extrabold text-orange-500 pl-10  text-lg text-center  rounded-full  ' >{hitKundli?.result?.data}</p >}
+                                            {hitKundli.loading ? <LoaderN /> : <p className='font-extrabold text-orange-500 pl-14  text-2xl text-center  rounded-full  ' >{hitKundli?.result?.data}</p >}
                                         </div>
 
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="max-w-[300px] ">
+                            <div class="p-1 ">
 
 
                                 <div class="relative shadow-lg hover:scale-105 duration-150 hover:bg-orange-500/30 px-2   rounded-lg">
@@ -570,7 +594,7 @@ function Hits() {
 
                                         <div className='px-4 inline-flex  items-center py-2'>
                                             <p className='font-bold  text-gray-500 py-1 '>Total hits: </p>
-                                            {hitCon.loading ? <div className='pl-10'><LoaderN /></div> : <p className='font-extrabold text-orange-500 pl-10  text-lg text-center  rounded-full  ' >{hitCon?.result}</p >}
+                                            {hitCon.loading ? <div className='pl-14'><LoaderN /></div> : <p className='font-extrabold text-orange-500 pl-14  text-2xl text-center  rounded-full  ' >{hitCon?.result}</p >}
                                         </div>
 
 
@@ -581,7 +605,7 @@ function Hits() {
                             </div>
 
 
-                            <div class="max-w-[300px] ">
+                            <div class="p-1 ">
 
                                 <div class="  shadow-lg hover:scale-105 duration-150 hover:bg-orange-500/30 px-2 rounded-lg ">
                                     <div>
@@ -639,13 +663,13 @@ function Hits() {
                                         </div>
                                         <div className='px-4 inline-flex  items-center py-2'>
                                             <p className='font-bold  text-gray-500 py-1 '>Total hits: </p>
-                                            {hitHoro.loading ? <div className='pl-10'><LoaderN /></div> : <p className='font-extrabold text-orange-500 pl-10  text-lg text-center  rounded-full  ' >{hitHoro?.result}</p >}
+                                            {hitHoro.loading ? <div className='pl-14'><LoaderN /></div> : <p className='font-extrabold text-orange-500 pl-14  text-2xl text-center  rounded-full  ' >{hitHoro?.result}</p >}
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="max-w-[300px] ">
+                            <div class="p-1 ">
 
 
                                 <div class=" shadow-lg hover:scale-105 duration-150 hover:bg-orange-500/30 px-2   rounded-lg">
@@ -701,13 +725,13 @@ function Hits() {
                                         </div>
                                         <div className='px-4 inline-flex  items-center py-2'>
                                             <p className='font-bold  text-gray-500 py-1 '>Total hits: </p>
-                                            {hitMatch.loading ? <div className='pl-10'><LoaderN /></div> : <p className='font-extrabold text-orange-500 pl-10  text-lg text-center  rounded-full  ' >{hitMatch?.result}</p >}
+                                            {hitMatch.loading ? <div className='pl-14'><LoaderN /></div> : <p className='font-extrabold text-orange-500 pl-14  text-2xl text-center  rounded-full  ' >{hitMatch?.result}</p >}
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="max-w-[300px] ">
+                            <div class="p-1 ">
                                 <div class="  shadow-lg hover:scale-105 duration-150 hover:bg-orange-500/30 px-2 rounded-lg ">
                                     <div>
                                         <h1 className='text-center font-bold text-lg text-gray-500   underline underline-offset-8 py-2 '>Article Hits </h1>
@@ -759,7 +783,7 @@ function Hits() {
                                         </div>
                                         <div className='px-4 inline-flex  items-center py-2'>
                                             <p className='font-bold  text-gray-500 py-1 '>Total hits: </p>
-                                            {hitArt.loading ? <div className='pl-10'><LoaderN /></div> : <p className='font-extrabold text-orange-500 pl-10  text-lg text-center  rounded-full  ' >{hitArt?.result}</p >}
+                                            {hitArt.loading ? <div className='pl-14'><LoaderN /></div> : <p className='font-extrabold text-orange-500 pl-14  text-2xl text-center  rounded-full  ' >{hitArt?.result}</p >}
                                         </div>
                                     </div>
 
@@ -767,7 +791,7 @@ function Hits() {
 
                             </div>
 
-                            <div class="max-w-[300px] ">
+                            <div class="p-1 ">
 
                                 <div class=" shadow-lg hover:scale-105 duration-150 hover:bg-orange-500/30 px-2 rounded-lg ">
                                     <div>
@@ -820,13 +844,13 @@ function Hits() {
                                         </div>
                                         <div className='px-4 inline-flex  items-center py-2'>
                                             <p className='font-bold  text-gray-500 py-1'>Total hits: </p>
-                                            {hitLogin.loading ? <div className='pl-10'><LoaderN /></div> : <p className='font-extrabold text-orange-500 pl-10  text-lg text-center  rounded-full  ' >{hitLogin?.result}</p >}
+                                            {hitLogin.loading ? <div className='pl-14'><LoaderN /></div> : <p className='font-extrabold text-orange-500 pl-14 text-2xl text-center  rounded-full  ' >{hitLogin?.result}</p >}
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="max-w-[300px] ">
+                            <div class="p-1 ">
 
                                 <div class=" shadow-lg hover:scale-105 duration-150 hover:bg-orange-500/30 px-2 rounded-lg ">
                                     <div>
@@ -879,12 +903,12 @@ function Hits() {
                                         </div>
                                         <div className='px-4 inline-flex  items-center py-2'>
                                             <p className='font-bold  text-gray-500 py-1'>Total hits: </p>
-                                            {hitAdmin.loading ? <div className='pl-10'><LoaderN /></div> : <p className='font-extrabold text-orange-500 pl-10  text-lg text-center  rounded-full  ' >{hitAdmin?.result}</p >}
+                                            {hitAdmin.loading ? <div className='pl-14'><LoaderN /></div> : <p className='font-extrabold text-orange-500 pl-14  text-2xl text-center  rounded-full  ' >{hitAdmin?.result}</p >}
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="max-w-[300px] ">
+                            <div class="p-1 ">
 
                                 <div class=" shadow-lg hover:scale-105 duration-150 hover:bg-orange-500/30 px-2 rounded-lg ">
                                     <div>
@@ -937,7 +961,66 @@ function Hits() {
                                         </div>
                                         <div className='px-4 inline-flex  items-center py-2'>
                                             <p className='font-bold  text-gray-500 py-1'>Total hits: </p>
-                                            {hitZodiacSign.loading ? <div className='pl-10'><LoaderN /></div> : <p className='font-extrabold text-orange-500 pl-10  text-lg text-center  rounded-full  ' >{hitZodiacSign?.result}</p >}
+                                            {hitZodiacSign.loading ? <div className='pl-14'><LoaderN /></div> : <p className='font-extrabold text-orange-500 pl-14  text-2xl text-center  rounded-full  ' >{hitZodiacSign?.result}</p >}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="p-1 ">
+
+                                <div class=" shadow-lg hover:scale-105 duration-150 hover:bg-orange-500/30 px-2 rounded-lg ">
+                                    <div>
+                                        <h1 className='text-center font-bold text-lg text-gray-500   underline underline-offset-8 py-2 '>Location Hits </h1>
+
+                                        <div className='p-5 bg-white rounded-lg'>
+                                            <form onSubmit={handleSubmitaLocation}>
+                                                <select id="countries" class="bg-gray-50 border w-full border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " onChange={(e) => setDateTypes(e.target.value)}>
+                                                    <option disabled selected >  Filter by Date</option>
+                                                    <option value="dateRange">Date Range</option>
+                                                    <option value="SingleDate">Single Date</option>
+
+                                                </select>
+
+                                                {dateTypes == 'SingleDate' ? <>
+                                                    <div class="my-4">
+                                                        <label class="block text-gray-700 text-sm font-bold mb-1" for="username">
+                                                            Select Date
+                                                        </label>
+                                                        <DatePicker className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+                 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                            selected={dateLoc} dateFormat="dd/MM/yyyy" onChange={(date) => setDateLoc(date)} />
+
+                                                    </div>
+
+                                                </> : <>
+                                                    <div class="my-4">
+                                                        <label class="block text-gray-700 text-sm font-bold mb-1" for="username">
+                                                            Select Date Range
+                                                        </label>
+                                                        <DatePicker className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500  w-full"
+                                                            selectsRange={true}
+                                                            // dateFormat="dd-mm-yyyy"
+                                                            startDate={startDateLoc}
+                                                            endDate={endDateLoc}
+                                                            onChange={(update) => {
+                                                                setDateRangeLoc(update);
+                                                            }}
+                                                            isClearable={true}
+                                                        />
+                                                    </div>
+
+                                                </>}
+
+                                                <div className='text-center'>
+                                                    <button type='submit' className="inline-flex items-center px-4 mr-4 py-2 bg-orange-500 hover:bg-orange-600 text-white text-sm font-medium rounded-md mx-2">Submit</button>
+
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div className='px-4 inline-flex  items-center py-2'>
+                                            <p className='font-bold  text-gray-500 py-1'>Total hits: </p>
+                                            {hitLocation.loading ? <div className='pl-14'><LoaderN /></div> : <p className='font-extrabold text-orange-500 pl-14  text-2xl text-center  rounded-full  ' >{hitLocation?.result}</p >}
                                         </div>
                                     </div>
                                 </div>
