@@ -25,6 +25,7 @@ import kundliHits from './Reducers/HitsReducers/KundliSplice'
 import adminHits from './Reducers/HitsReducers/AdminSlice'
 import zodiacSignHits from './Reducers/HitsReducers/ZodiacSlice'
 import locationHits from './Reducers/HitsReducers/Location'
+import blogs from './Reducers/CreateBlogSlice'
 export default configureStore({
     reducer: {
         thoughtOfDay: getThoughtOfDay,
@@ -36,7 +37,7 @@ export default configureStore({
         user:users,
         adminList:adminLists,
         log:logs,
-        // hit:getHits,
+      
         login:logins,
         articlesLike:articlesLikes,
         articlesComment:articlesComments,
@@ -53,7 +54,8 @@ export default configureStore({
        kundliHit:kundliHits,
        adminHit:adminHits,
        zodiacSignHit:zodiacSignHits,
-       locationHit:locationHits
+       locationHit:locationHits,
+       blog:blogs
     
 
 

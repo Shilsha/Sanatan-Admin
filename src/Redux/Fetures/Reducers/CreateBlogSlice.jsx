@@ -1,0 +1,41 @@
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from 'axios'
+import { toast } from "react-toastify";
+export const createBlogAction = createAsyncThunk('BLOG/CREATE_BLOG',
+    async (data) => {
+      
+         let OPTIONS = {
+
+            method: "POST",
+            data:data
+
+        };
+        return axios('https://16c7-2405-201-4041-c01c-3cc7-96f3-1a0c-1495.in.ngrok.io/article/add_blog',OPTIONS)
+            .then(res => res)
+    })
+
+const blogs = createSlice({
+    name: 'BLOG',
+    initialState: {
+        loading: false,
+        result: [],
+        error: null
+    },
+    extraReducers: {
+        [createBlogAction.pending]: (state, action) => {
+            state.loading = true;
+        },
+        [createBlogAction.fulfilled]: (state, action) => {
+            // console.log(action.payload,'payload')
+            state.loading = false
+                state.result = action.payload.data.data
+                toast.success('Your blog is successfully uploaded')
+        },
+        [createBlogAction.rejected]: (state, action) => {
+            state.loading = false,
+                state.error = action
+        }
+    }
+})
+
+export default blogs.reducer;

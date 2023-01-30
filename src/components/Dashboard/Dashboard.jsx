@@ -177,7 +177,7 @@ function Dashboard() {
     const BlogsPosttModuleAuth = isModuleAuth?.role.some(data => data == 'BlogsPost')
     // console.log(userModuleAuth, 'userModuleAuth auth')
     const unAutherizedHndle = () => {
-        toast.warning('You are not authrized for this module')
+        toast.error('You are not authrized for this module')
     }
     // ********************************************************************************************************************
 
