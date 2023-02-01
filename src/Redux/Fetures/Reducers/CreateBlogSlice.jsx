@@ -10,7 +10,7 @@ export const createBlogAction = createAsyncThunk('BLOG/CREATE_BLOG',
             data:data
 
         };
-        return axios('https://16c7-2405-201-4041-c01c-3cc7-96f3-1a0c-1495.in.ngrok.io/article/add_blog',OPTIONS)
+        return axios(`${import.meta.env.VITE_BASE_URL}/article/add_blog`,OPTIONS)
             .then(res => res)
     })
 
