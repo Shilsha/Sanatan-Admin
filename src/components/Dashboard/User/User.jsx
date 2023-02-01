@@ -64,9 +64,9 @@ function User() {
     const userData = useSelector((state) => state.user)
     const adminRole = JSON.parse(sessionStorage.getItem('user'))
     const apiData = useSelector(state => state.export)
- 
 
-    console.log(apiData.result, 'daadtatdadatdtdatdatadtdadattadtadttdtadtda')
+
+    // console.log(apiData.result, 'daadtatdadatdtdatdatadtdadattadtadttdtadtda')
 
     // ----------------------get api call-------------
 
@@ -114,14 +114,14 @@ function User() {
     const [modalIsOpen, setIsOpen] = React.useState(false);
     const [userId, setUserid] = useState('')
     const [Status, setStatus] = useState('')
+    const [clean, setclean] = useState('')
 
 
-   
 
     function closeModal() {
         setIsOpen(false);
     }
-   
+
     // ---------------------------deleteSingleUser-----------------------
     const handleDeactivatedSingleUser = () => {
 
@@ -188,27 +188,53 @@ function User() {
         dispatch(getUser(data))
 
     }, [page])
+
+
+
+
+    console.log(userData?.result?.length,'thi si si lenght')
+    useEffect(() => {
+        if (userData?.result.length < 11) {
+            console.log('chhota')
+            setButtonNext(true)
+
+        } else {
+            console.log('bada')
+            setButtonNext(false)
+        }
+
+    }, [userData?.result])
     // ============================export data============================
+
+
+
     const fileName = "myfile";
-    const exportData = () => {
+    const exportData = (CleanData) => {
+        setclean(CleanData)
         dispatch(exportDataAction(types))
-        setTimeout(() => {
-           
-            // console.log(apiData, 'daadtatdadatdtdatdatadtdadattadtadttdtadtda')
-            exportToCSV(apiData?.result)
-        }, 5000);
-
-
+        
     }
 
+    useEffect(() => {
 
+        if(clean=='CleanData'){
+ 
+            exportToCSV(apiData?.result)
+        }
+ 
+          setTimeout(() => {
+            setclean('')
+          }, 1000);
+ 
+       
+     }, [apiData?.result])
 
     const fileType =
         "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8";
     const fileExtension = ".xlsx";
 
     const exportToCSV = (apiData) => {
-
+        console.log(apiData.result, 'called')
         const ws = XLSX.utils.json_to_sheet(apiData);
         const wb = { Sheets: { data: ws }, SheetNames: ["data"] };
         const excelBuffer = XLSX.write(wb, { bookType: "xlsx", type: "array" });
@@ -237,7 +263,7 @@ function User() {
                                     </button>
                                 </div>
                                 <button class="inline-flex items-center px-4 ml-10 py-2 bg-green-600
-                                 hover:bg-green-800 text-white  font-medium rounded-md" onClick={() => exportData()} >
+                                 hover:bg-green-800 text-white  font-medium rounded-md" onClick={() => exportData('CleanData')} >
 
                                     Export All
                                     <IoDownloadSharp className='mx-1  ' size={25} />
