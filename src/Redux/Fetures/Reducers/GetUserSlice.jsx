@@ -7,7 +7,8 @@ export const getUser = createAsyncThunk('USER/GET_ALL_USER',
         let OPTIONS = {
             method: "GET",
             // url: `${import.meta.env.VITE_BASE_URL}/api/get_registeredUsers?enabled=${data.type}&page=${data.page}&size=16`,
-            url: `${import.meta.env.VITE_BASE_URL}/api/get_registeredUsers?enabled=${data.type}&page=${data.page}&size=16`,
+            url: `${import.meta.env.VITE_BASE_URL}/api/get_registeredUsers?enabled=${data.type}&page=${data.page}&size=11`,
+                                             
             headers: {
               'Accept': 'application/json'
             },

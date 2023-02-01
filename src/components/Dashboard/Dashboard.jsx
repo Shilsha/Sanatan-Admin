@@ -235,7 +235,7 @@ function Dashboard() {
                                 </> : <></>}
 
                             </div>
-                            <div className=' col-span-5   rounded-lg    '>
+                            <div className=' col-span-5   rounded-lg  '>
 
                                 <div className='grid grid-cols-2 gap-4 h-full '>
                                     <div className='shadow bg-gray-50/20 rounded-xl flex justify-center items-center'>
@@ -247,7 +247,7 @@ function Dashboard() {
                                         <div className=''>
                                             <h1 className='text-2xl font-bold  text-transparent bg-clip-text bg-gradient-to-br from-orange-400 to-red-600 '> {moment(value).format('dddd')}</h1>
                                             <h2 className='text-xl font-bold  text-gray-500 my-2'>{moment(value).format('DD')}</h2>
-                                            <h1 className='text-2xl font-bold  text-transparent bg-clip-text bg-gradient-to-br from-orange-400 to-red-600'>September</h1>
+                                            <h1 className='text-2xl font-bold  text-transparent bg-clip-text bg-gradient-to-br from-orange-400 to-red-600'>{moment(value).format('MMMM')}</h1>
                                             <h2 className='text-xl font-bold text-gray-500  my-2'>{moment(value).format('YYYY')}</h2>
                                         </div>
                                     </div>

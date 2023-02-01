@@ -14,7 +14,8 @@ import moment from 'moment/moment'
 import DesignLogin from '../../../Assets/images/DesignLogin.png'
 import * as FileSaver from "file-saver";
 import * as XLSX from "xlsx";
-import {exportLogsDataAction} from '../../../Redux/Fetures/Reducers/DownloadSlice'
+import { exportLogsDataAction } from '../../../Redux/Fetures/Reducers/DownloadSlice'
+import LoaderN from '../../../components/Loader/LoaderN'
 
 function Logs() {
     const [FilterSearch, setFilterSearch] = useState('')
@@ -25,8 +26,9 @@ function Logs() {
     const [buttonNext, setButtonNext] = useState(false)
     const dispatch = useDispatch()
     const logs = useSelector((state) => state.log)
-    const apiData=useSelector(state=>state.export)
-    console.log(apiData, 'thi apiData is logS')
+    const apiData = useSelector(state => state.export)
+    const [clean, setclean] = useState('')
+    console.log(apiData.loading, 'thi apiData loading is logS')
     useEffect(() => {
         const data = {
             date: moment(date).format('YYYY-MM-DD'),
@@ -120,7 +122,7 @@ function Logs() {
 
     const HandleSubmit = (e) => {
         e.preventDefault()
-      
+
         if (dateType == 'dateRange') {
 
             const data = {
@@ -142,36 +144,39 @@ function Logs() {
             dispatch(getLogs(data))
             console.log('single')
         }
-
-
-
-
-
-
     }
 
     // ============================export data============================
     const fileName = "myfile";
-    const exportData = () => {
-        const start=startDate==null?moment(date).format('YYYY-MM-DD'):moment(startDate).format('YYYY-MM-DD')
-        const end=endDate==null?moment(date).format('YYYY-MM-DD'):moment(endDate).format('YYYY-MM-DD')
-        console.log(start,end,'hmm')
-        const data={
-            dateStart:start,
-            dateEnd:end,
+    const exportData = (CleanData) => {
+        setclean(CleanData)
+        const start = startDate == null ? moment(date).format('YYYY-MM-DD') : moment(startDate).format('YYYY-MM-DD')
+        const end = endDate == null ? moment(date).format('YYYY-MM-DD') : moment(endDate).format('YYYY-MM-DD')
+        // console.log(start, end, 'hmm')
+        const data = {
+            dateStart: start,
+            dateEnd: end,
             module: type,
         }
-        console.log(data,'this is')
+
         dispatch(exportLogsDataAction(data))
-        setTimeout(() => {
-
-            // console.log(apiData, 'daadtatdadatdtdatdatadtdadattadtadttdtadtda')
-            exportToCSV(apiData?.result)
-        }, 5000);
-
 
     }
 
+   
+    useEffect(() => {
+
+       if(clean=='CleanData'){
+
+           exportToCSV(apiData?.result)
+       }
+
+         setTimeout(() => {
+           setclean('')
+         }, 1000);
+
+      
+    }, [apiData?.result])
 
 
     const fileType =
@@ -208,15 +213,24 @@ function Logs() {
                                         <BsSearch className='p-1 ' size={25} />
                                     </button>
                                 </div>
+                                {apiData.loading?<> <button class="flex items-center justify-center  px-3 ml-10 py-1 bg-green-600
+                                 hover:bg-green-800 text-white  font-medium rounded-md" >
+                                    Processing
+                                    <div className='w-8 h-8 pl-2'>< LoaderN/></div>
+                                </button></>:<>
+                                
+                                
                                 <button class="inline-flex items-center px-4 ml-10 py-2 bg-green-600
-                                 hover:bg-green-800 text-white  font-medium rounded-md" onClick={() => exportData()} >
+                                 hover:bg-green-800 text-white  font-medium rounded-md" onClick={() => exportData('CleanData')} >
                                     Export All
                                     <IoDownloadSharp className='mx-1  ' size={25} />
                                 </button>
-
+                               
+                                </>}
+                             
                             </div>
 
-
+                           
 
                             <form onSubmit={HandleSubmit} >
                                 <div className='flex justify-start items- '>
