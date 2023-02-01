@@ -20,6 +20,7 @@ import { getUser, deleteUser } from '../../../Redux/Fetures/Reducers/GetUserSlic
 
 import DesignLogin from '../../../Assets/images/DesignLogin.png'
 import { exportDataAction } from '../../../Redux/Fetures/Reducers/DownloadSlice'
+import LoaderN from '../../Loader/LoaderN'
 
 
 const customStyles = {
@@ -262,13 +263,20 @@ function User() {
                                         <BsSearch className='p-1 ' size={25} />
                                     </button>
                                 </div>
+                                {apiData.loading?<> <button class="flex items-center justify-center  px-3 ml-10 py-1 bg-green-600
+                                 hover:bg-green-800 text-white  font-medium rounded-md" >
+                                    Processing
+                                    <div className='w-8 h-8 pl-2'>< LoaderN/></div>
+                                </button></>:<>
+                                
+                                
                                 <button class="inline-flex items-center px-4 ml-10 py-2 bg-green-600
                                  hover:bg-green-800 text-white  font-medium rounded-md" onClick={() => exportData('CleanData')} >
-
                                     Export All
                                     <IoDownloadSharp className='mx-1  ' size={25} />
-
                                 </button>
+                               
+                                </>}
 
                                 {/* <ExportToExcel  apiData={apiData} fileName={fileName}/> */}
                             </div>
