@@ -13,7 +13,6 @@ import logins from './Reducers/LoginSplice'
 import articlesLikes from './Reducers/GetArticleLikeSlice'
 import articlesComments  from './Reducers/GetArticleCommentSlice'
 import getBroadCastOfDay from './Reducers/BroadcastSplice'
-
 import panchangHits from './Reducers/HitsReducers/PanchangSlice'
 import festivalsHits from './Reducers/HitsReducers/FestivalSlice'
 import articleHits from './Reducers/HitsReducers/ArticlessSlice'
@@ -26,6 +25,7 @@ import adminHits from './Reducers/HitsReducers/AdminSlice'
 import zodiacSignHits from './Reducers/HitsReducers/ZodiacSlice'
 import locationHits from './Reducers/HitsReducers/Location'
 import blogs from './Reducers/CreateBlogSlice'
+import exportData from './Reducers/DownloadSlice'
 export default configureStore({
     reducer: {
         thoughtOfDay: getThoughtOfDay,
@@ -55,7 +55,8 @@ export default configureStore({
        adminHit:adminHits,
        zodiacSignHit:zodiacSignHits,
        locationHit:locationHits,
-       blog:blogs
+       blog:blogs,
+       export:exportData
     
 
 

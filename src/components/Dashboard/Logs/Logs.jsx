@@ -4,14 +4,17 @@ import Sidebar from '../../Sidebar/Sidebar'
 import { BsSearch, BsThreeDots, BsFilterLeft } from 'react-icons/bs'
 import { BiFilter, BiSkipNext, BiSkipPrevious } from 'react-icons/bi'
 import { AiOutlinePlus, AiFillDelete, AiTwotoneEdit, AiOutlineClose, AiOutlineClear } from 'react-icons/ai'
+import { IoDownloadSharp } from 'react-icons/io5'
 import { useDispatch, useSelector } from 'react-redux'
-import { getLogs ,getDateRangeLogs} from '../../../Redux/Fetures/Reducers/LogsSlice'
+import { getLogs, getDateRangeLogs } from '../../../Redux/Fetures/Reducers/LogsSlice'
 import Loader from '../../Loader/Loader'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import moment from 'moment/moment'
 import DesignLogin from '../../../Assets/images/DesignLogin.png'
-
+import * as FileSaver from "file-saver";
+import * as XLSX from "xlsx";
+import {exportLogsDataAction} from '../../../Redux/Fetures/Reducers/DownloadSlice'
 
 function Logs() {
     const [FilterSearch, setFilterSearch] = useState('')
@@ -22,7 +25,8 @@ function Logs() {
     const [buttonNext, setButtonNext] = useState(false)
     const dispatch = useDispatch()
     const logs = useSelector((state) => state.log)
-    // console.log(logs, 'thi si is logS')
+    const apiData=useSelector(state=>state.export)
+    console.log(apiData, 'thi apiData is logS')
     useEffect(() => {
         const data = {
             date: moment(date).format('YYYY-MM-DD'),
@@ -116,21 +120,19 @@ function Logs() {
 
     const HandleSubmit = (e) => {
         e.preventDefault()
-        // console.log( moment(startDate).format('YYYY-MM-DD'),moment(endDate).format('YYYY-MM-DD'))
-        // console.log(moment(startDate).format('YYYY-MM-DD'), 'what ')
-        console.log(dateType,'hmm')
-        if (dateType=='dateRange') {
+      
+        if (dateType == 'dateRange') {
 
             const data = {
-                dateStart:moment(startDate).format('YYYY-MM-DD'),
+                dateStart: moment(startDate).format('YYYY-MM-DD'),
                 dateEnd: moment(endDate).format('YYYY-MM-DD'),
                 module: type,
                 page: page,
             }
             dispatch(getDateRangeLogs(data))
-          
-            console.log('range')
-            
+
+            // console.log('range')
+
         } else {
             const data = {
                 date: moment(date).format('YYYY-MM-DD'),
@@ -148,6 +150,43 @@ function Logs() {
 
     }
 
+    // ============================export data============================
+    const fileName = "myfile";
+    const exportData = () => {
+        const start=startDate==null?moment(date).format('YYYY-MM-DD'):moment(startDate).format('YYYY-MM-DD')
+        const end=endDate==null?moment(date).format('YYYY-MM-DD'):moment(endDate).format('YYYY-MM-DD')
+        console.log(start,end,'hmm')
+        const data={
+            dateStart:start,
+            dateEnd:end,
+            module: type,
+        }
+        console.log(data,'this is')
+        dispatch(exportLogsDataAction(data))
+        setTimeout(() => {
+
+            // console.log(apiData, 'daadtatdadatdtdatdatadtdadattadtadttdtadtda')
+            exportToCSV(apiData?.result)
+        }, 5000);
+
+
+    }
+
+
+
+    const fileType =
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8";
+    const fileExtension = ".xlsx";
+
+    const exportToCSV = (apiData) => {
+
+        const ws = XLSX.utils.json_to_sheet(apiData);
+        const wb = { Sheets: { data: ws }, SheetNames: ["data"] };
+        const excelBuffer = XLSX.write(wb, { bookType: "xlsx", type: "array" });
+        const data = new Blob([excelBuffer], { type: fileType });
+        FileSaver.saveAs(data, fileName + fileExtension);
+    };
+
     console.log(dateType, 'date type')
     return (
         <>
@@ -160,17 +199,20 @@ function Logs() {
                     <div className=' my-2 pr-4 '>
 
                         < div className='flex justify-between items-center py-4 '>
-                            <div className='w-[400px]'>
+                            <div className=' inline-flex justify-between  border-red-500 items-center'>
 
-                                <div class=" relative  w-full text-gray-600  ">
+                                <div class=" relative w-[300px] text-gray-600  ">
                                     <input class="border-2  w-full border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
                                         type="search" name="search" placeholder="Search..." value={FilterSearch} onChange={(e) => setFilterSearch(e.target.value)} />
                                     <button type="submit" class="absolute right-0 top-2 mr-5">
                                         <BsSearch className='p-1 ' size={25} />
                                     </button>
                                 </div>
-
-
+                                <button class="inline-flex items-center px-4 ml-10 py-2 bg-green-600
+                                 hover:bg-green-800 text-white  font-medium rounded-md" onClick={() => exportData()} >
+                                    Export All
+                                    <IoDownloadSharp className='mx-1  ' size={25} />
+                                </button>
 
                             </div>
 
@@ -213,7 +255,7 @@ function Logs() {
                                             <DatePicker className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " selected={date} onChange={(date) => dateFilter(date)} />
 
                                         </div>
-                                        }
+                                    }
 
                                     <select id="countries" class="bg-gray-50 border border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ml-2" onChange={(e) => selectArticleType(e.target.value)}>
                                         <option disabled selected>Select Module Type</option>
