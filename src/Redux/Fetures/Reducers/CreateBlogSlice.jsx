@@ -3,6 +3,7 @@ import axios from 'axios'
 import { toast } from "react-toastify";
 export const createBlogAction = createAsyncThunk('BLOG/CREATE_BLOG',
     async (data) => {
+        console.log(data,'data')
       
          let OPTIONS = {
 
