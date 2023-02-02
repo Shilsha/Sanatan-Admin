@@ -35,6 +35,7 @@ const exportData = createSlice({
         result: [],
         error: null
     },
+   
     extraReducers: {
         [exportDataAction.pending]: (state, action) => {
             state.loading = true;
