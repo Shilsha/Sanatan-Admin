@@ -28,8 +28,13 @@ export const addBroadcastAction = createAsyncThunk('BROADCAST_OF_DAY/ADD_BROADCA
             },
             data: data
         };
-        return axios(OPTIONS)
+        return await axios(OPTIONS)
             .then(res => res)
+            .catch(err => {
+                // console.log(err.response.data.status.message,'errororooroor')
+                toast.warning(err.response.data.status.message)
+                return rejectWithValue(err.response.data.status.message)
+            })
     })
 
 // ========================Update==============================================================
@@ -48,6 +53,10 @@ export const updateBroadcastAction = createAsyncThunk('UPDATE_BROADCAST_OF_DAY/U
         };
         return axios(OPTIONS)
             .then(res => res)
+            .catch(err => {
+                toast.warning(err.response.data.status.message)
+                return rejectWithValue(err.response.data.status.message)
+            })
     })
 
 // ======================delete broadcast============================
@@ -111,17 +120,19 @@ const getBroadCastOfDay = createSlice({
         },
         [addBroadcastAction.fulfilled]: (state, action) => {
             // toast.success('Added successfully')
-            console.log( action.payload.data.status,'action add')
+            console.log(action.payload.data.status, 'action add')
             // toast.warning( action.payload.data.status.message)
-            if(action.payload.data.status.message=='Success'){
-                toast.success( action.payload.data.status.message)
-            }else{
-                toast.warning( action.payload.data.status.message)
+            if (action.payload.data.status.message == 'Success') {
+                toast.success(action.payload.data.status.message)
+            } else {
+                toast.warning(action.payload.data.status.message)
             }
             state.loading = false
             [state.result.push(action.payload.data.data)]
         },
         [addBroadcastAction.rejected]: (state, action) => {
+            console.log('error')
+            console.log(action, 'thid is action error')
             state.loading = false,
                 state.error = action
         },
@@ -132,15 +143,15 @@ const getBroadCastOfDay = createSlice({
         },
         [deleteBroadcastAction.fulfilled]: (state, action) => {
             toast.success('Broadcast has deactivated successfully')
-        
+
             state.loading = false
             state.result = [...state.result.filter(d => d.announcementId !== action.payload.data.data.announcementId), action.payload.data.data,];
 
-       
+
             // state.result=state.result.filter((data)=>data.announcementId==action.payload.data.data.announcementId)
         },
         [deleteBroadcastAction.rejected]: (state, action) => {
-           
+
             state.loading = false,
                 state.error = action
         },

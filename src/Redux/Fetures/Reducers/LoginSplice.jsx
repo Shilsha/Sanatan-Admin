@@ -24,6 +24,50 @@ export const getLogin = createAsyncThunk('LOGIN/GET_LOGIN',
             })
     })
 
+    export const forgetPassword = createAsyncThunk('FORGET/FORGET_PASSWORD',
+    async (data) => {
+        
+       
+        let OPTIONS = {
+            url:`${import.meta.env.VITE_BASE_URL}/api/send_email_to_Admin`,
+            method: "POST",
+            data: {
+                email:data
+            },
+           headers: {
+               'Accept': 'application/json'
+             },
+         }; 
+        return axios(OPTIONS)
+            .then(res => {
+                
+                // sessionStorage.setItem("user",JSON.stringify( res.data.data))
+
+              
+                return res
+            })
+    })
+
+    export const verifyOtp = createAsyncThunk('VERIFY/VERIFY_OTP',
+    async (data) => {
+        
+       
+        let OPTIONS = {
+            url:`${import.meta.env.VITE_BASE_URL}/api/resetCode/verify`,
+            method: "POST",
+            data: data,
+           headers: {
+               'Accept': 'application/json'
+             },
+         }; 
+        return axios(OPTIONS)
+            .then(res => {
+                         
+                return res
+            })
+    })
+
+
 
     
 const logins = createSlice({
@@ -65,6 +109,46 @@ const logins = createSlice({
             state.loading = false,
                 state.error = action
         },
+
+        // ==========================FOREGET PASSWORD==============================
+        [forgetPassword.pending]: (state, action) => {
+            state.loading = true;
+        },
+        [forgetPassword.fulfilled]: (state, action) => {
+            console.log( action.payload.data.data,'FOREGT PASS')
+           
+                state.loading = false,
+                state.result = action.payload.data.data
+                state.error = null
+                              
+        },
+        [forgetPassword.rejected]: (state, action) => {
+           
+                state.loading = false,
+
+                state.error = action
+        },
+
+
+        // ===============verify OTP==========================
+        [verifyOtp.pending]: (state, action) => {
+            state.loading = true;
+        },
+        [verifyOtp.fulfilled]: (state, action) => {
+            console.log( action.payload.data.data,'verify otp')
+           
+                state.loading = false,
+                state.result = action.payload.data.data
+                state.error = null
+                              
+        },
+        [verifyOtp.rejected]: (state, action) => {
+           
+                state.loading = false,
+
+                state.error = action
+        },
+
     }
 
 })

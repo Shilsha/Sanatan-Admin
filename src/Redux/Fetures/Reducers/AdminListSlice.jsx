@@ -17,20 +17,21 @@ export const getAdminList = createAsyncThunk('ADMIN_LIST/GET_ALL_ADMIN_LIST',
             .then(res => res)
     })
 
-export const addAdmin = createAsyncThunk('ADD_ADMIN/ADD_ADMIN',
-    async (data) => {
-        let OPTIONS = {
-            url: `${import.meta.env.VITE_BASE_URL}/api/addAdmin`,
-            data: data,
-            method: "POST",
-            headers: {
-                'Accept': 'application/json'
-            },
-        };
+// export const addAdmin = createAsyncThunk('ADD_ADMIN/ADD_ADMIN',
+//     async (data) => {
+//         let OPTIONS = {
+//             url: `${import.meta.env.VITE_BASE_URL}/api/addAdmin`,
+//             data: data,
+//             method: "POST",
+//             headers: {
+//                 'Accept': 'application/json'
+//             },
+//         };
 
-        return axios(OPTIONS)
-            .then((res) => res)
-    })
+//         return axios(OPTIONS)
+//             .then((res) => res)
+//             .catch(error=>error)
+//     })
 export const delelteAdmin = createAsyncThunk('DELETE_ADMIN/DELETE_ADMIN',
     async (id) => {
         let OPTIONS = {
@@ -83,24 +84,22 @@ const adminLists = createSlice({
         },
 
         // ==================ADD ADMIN ===================
-        [addAdmin.pending]: (state, action) => {
-            state.loading = true;
-        },
-        [addAdmin.fulfilled]: (state, action) => {
-            // console.log(state,'this is state')
-            // console.log(action.payload.data.data,'this is action ')
-            // console.log( [state.result.push(action.payload.data.data)],'what is this')
-            // toast.success('Admin added successfully')
-            state.loading = false,
-                [state.result.push(action.payload.data.data)]
-                console.log(action.payload.data.status.message,'err')
-                toast.success(action.payload.data.status.message)
-        },
-        [addAdmin.rejected]: (state, action) => {
-            state.loading = false,
-                state.error = action,
-                toast.warning("Please enter strong password like a test@123")
-        },
+        // [addAdmin.pending]: (state, action) => {
+        //     state.loading = true;
+        // },
+        // [addAdmin.fulfilled]: (state, action) => {
+    
+        //     state.loading = false,
+        //         // [state.result.push(action.payload.data.data)]
+                
+        //         console.log(action.payload.data.status.message,'err')
+        //         toast.success(action.payload.data.status.message)
+        // },
+        // [addAdmin.rejected]: (state, action) => {
+        //     state.loading = false,
+        //         state.error = action,
+        //         toast.warning("Please enter strong password like a test@123")
+        // },
 
         // =========================DELETE ADMIN ======================================
         [delelteAdmin.pending]: (state, action) => {

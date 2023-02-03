@@ -26,6 +26,7 @@ import zodiacSignHits from './Reducers/HitsReducers/ZodiacSlice'
 import locationHits from './Reducers/HitsReducers/Location'
 import blogs from './Reducers/CreateBlogSlice'
 import exportData from './Reducers/DownloadSlice'
+import addAdmins from './Reducers/AddAdminSlice'
 export default configureStore({
     reducer: {
         thoughtOfDay: getThoughtOfDay,
@@ -56,7 +57,8 @@ export default configureStore({
        zodiacSignHit:zodiacSignHits,
        locationHit:locationHits,
        blog:blogs,
-       export:exportData
+       export:exportData,
+       addAdmin:addAdmins
     
 
 

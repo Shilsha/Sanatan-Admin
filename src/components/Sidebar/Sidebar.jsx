@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import side1 from '../../Assets/images/sanatandark.png'
 import { CgMenuGridR } from 'react-icons/cg'
 import { MdOutlineGroupAdd } from 'react-icons/md'
@@ -12,9 +12,10 @@ import { RiShieldUserLine } from 'react-icons/ri'
 import { HiClipboardDocumentList } from 'react-icons/hi2'
 import { BsFillQuestionSquareFill } from 'react-icons/bs'
 import { BiHide, BiShow } from 'react-icons/bi'
-import { addAdmin } from '../../Redux/Fetures/Reducers/AdminListSlice'
+import { addAdmin } from '../../Redux/Fetures/Reducers/AddAdminSlice'
 import { toast, ToastContainer } from 'react-toastify'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
 
 const customStyles = {
     content: {
@@ -45,8 +46,8 @@ function Sidebar() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    const adminMsg = useSelector((state) => state.adminList)
-    // console.log(adminMsg, 'adminMsg')
+    const AddRes = useSelector((state) => state.addAdmin)
+    // console.log(AddRes, 'adminMsg')
     // =======================================add staff model===========================
 
     function closeModal() {
@@ -56,6 +57,7 @@ function Sidebar() {
         setIsOpen(true)
     }
     // ============================handle form submit=====================================
+    const formData = { ...form, role, isSuperAdmin: false, }
     const handleChangeInput = (e) => {
         const { name, value } = e.target;
         setForm({ ...form, [name]: value })
@@ -64,13 +66,13 @@ function Sidebar() {
 
     }
 
-    const data = { ...form, role, isSuperAdmin: false, }
+
     const HandleOnSubmit = (e) => {
         e.preventDefault()
-        dispatch(addAdmin(data))
-        console.log(data, 'form')
+        setResError('')
+        setErrors(validate());
+        setIsSubmitting(true);
 
-        setIsOpen(false)
 
 
     }
@@ -124,7 +126,7 @@ function Sidebar() {
     const isModuleAuth = JSON.parse(sessionStorage.getItem('user'))
 
     const isSuperAdmin = isModuleAuth?.role.some(data => data == 'SuperAdmin')
-    console.log(isSuperAdmin, 'super  role')
+    // console.log(isSuperAdmin, 'super  role')
 
     const userModuleAuth = isModuleAuth?.role.some(data => data == 'User')
     const articlesModuleAuth = isModuleAuth?.role.some(data => data == 'Articles')
@@ -134,11 +136,91 @@ function Sidebar() {
     const LogstModuleAuth = isModuleAuth?.role.some(data => data == 'Logs')
     const BroadcastModuleAuth = isModuleAuth?.role.some(data => data == 'Broadcast')
     const BlogsPosttModuleAuth = isModuleAuth?.role.some(data => data == 'BlogsPost')
-    console.log(userModuleAuth, 'userModuleAuth auth')
+    // console.log(userModuleAuth, 'userModuleAuth auth')
     const unAutherizedHndle = () => {
         toast.error('You are not authrized for this module')
     }
     //   *****************************************Module access***********************************************************
+
+
+    // ===========================================form validation ===================================================
+    const [isSubmitting, setIsSubmitting] = useState(false)
+    const [resError, setResError] = useState('')
+    const [errors, setErrors] = useState([])
+
+    // console.log(formData, 'form data')
+    const validate = () => {
+
+        let errors = {}
+        if (!formData.role) {
+            errors.role = 'Role is required!'
+        }
+        if (!formData.role?.length > 0) {
+            errors.role = 'Role is required!'
+
+        }
+
+        if (resError) {
+            errors.Email = resError
+        }
+        return errors
+    }
+
+
+    // =================api calll======================
+    const apiCall = async () => {
+
+        let OPTIONS = {
+            url: `${import.meta.env.VITE_BASE_URL}/api/addAdmin`,
+            data: formData,
+            method: "POST",
+            headers: {
+                'Accept': 'application/json'
+            },
+        };
+        setResError('')
+        console.log(resError, 'errors')
+        return await axios(OPTIONS)
+            .then(res => {
+                setResError('')
+                setIsOpen(false)
+                // alert('ok')
+                console.log(res, 'res')
+                toast.success(res.data.status.message)
+                console.log(formData,'eeee form data')
+                setForm('')
+                // setRole([])
+            })
+            .catch(err => {
+                // console.log(err.response.data.status.message, 'err')
+                setResError(err.response.data.status.message)
+            }
+            )
+
+    }
+    useEffect(() => {
+        console.log(errors, 'errroes')
+        if (Object.keys(errors).length === 0 && isSubmitting) {
+
+            // dispatch(addAdmin(formData))
+            // console.log(formData, 'form')
+            // setResError('')
+            // console.log(resError,'errors')
+            apiCall()
+            // setIsOpen(false)
+
+
+
+        }
+    }, [errors]);
+
+    useEffect(() => {
+      console.log(resError.length,'lenghth')
+      
+        if (resError.length > 0) {
+            // setIsOpen(false)
+        }
+    }, [resError])
     return (
 
         <>
@@ -181,30 +263,30 @@ function Sidebar() {
                             <RiShieldUserLine className='text-white iconsColor  ' size={35} />
                         </NavLink>
                     </> : <>
-                    <RiShieldUserLine onClick={unAutherizedHndle} className='text-white iconsColor  ' size={35} />
+                        <RiShieldUserLine onClick={unAutherizedHndle} className='text-white iconsColor  ' size={35} />
                     </>}
                     <p className='text-center -mt-6 text-[16px]    text-white'>Users</p>
 
                     {articlesModuleAuth || isSuperAdmin ? <>
                         <NavLink to='/articles'>
-                        <HiClipboardDocumentList className=' text-white iconsColor' size={35} />
-                    </NavLink>
+                            <HiClipboardDocumentList className=' text-white iconsColor' size={35} />
+                        </NavLink>
                     </> : <>
-                    <HiClipboardDocumentList onClick={unAutherizedHndle}  className=' text-white iconsColor' size={35} />
+                        <HiClipboardDocumentList onClick={unAutherizedHndle} className=' text-white iconsColor' size={35} />
                     </>}
 
                     <p className='text-center -mt-6 text-[16px]    text-white'>Articles</p>
-                   
+
 
                     {QueriesListModuleAuth || isSuperAdmin ? <>
                         <NavLink to='/queries'>
-                        <BsFillQuestionSquareFill className='text-white iconsColor ' size={30} />
-                    </NavLink>
+                            <BsFillQuestionSquareFill className='text-white iconsColor ' size={30} />
+                        </NavLink>
                     </> : <>
-                  
-                        <BsFillQuestionSquareFill onClick={unAutherizedHndle}  className='text-white iconsColor ' size={30} />
-                 
-                         </>}
+
+                        <BsFillQuestionSquareFill onClick={unAutherizedHndle} className='text-white iconsColor ' size={30} />
+
+                    </>}
 
                     <p className='text-center -mt-6 text-[16px]    text-white'>Queries</p>
 
@@ -250,17 +332,8 @@ function Sidebar() {
                             </label>
                             <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="adminEmail" type="email" placeholder="Admin Email" required name='email' value={form.email} onChange={handleChangeInput}
                             />
+                            {resError && (<p className='text-red-500 text-sm pt-1'>{resError}</p>)}
                         </div>
-
-                        {/* <div className="mb-4">
-                            <label for="countries" class="block mb-2 text-sm  text-gray-900 font-bold dark:text-white">Select Role</label>
-                            <select id="selectRole" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                onChange={(e) => setRole(e.target.value)}>
-                                <option disabled selected>Choose role</option>
-                                <option name='role' value='Admin'>Admin</option>
-                                <option name='role' value='SuperAdmin'>SuperAdmin</option>
-                            </select>
-                        </div> */}
 
 
                         {/* ================================================================================================= */}
@@ -292,7 +365,7 @@ function Sidebar() {
                                     <label className="text-xs px-2 ">{user.name}</label>
                                 </div>
                             ))}
-
+                            {errors.role && (<p className='text-red-500 text-sm pt-1'>{errors.role}</p>)}
 
                         </div>
 
