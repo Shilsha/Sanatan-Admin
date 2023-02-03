@@ -126,7 +126,8 @@ function AdminUserList() {
 
 
         const data = {
-            page: page
+            page: page,
+            type: types
         }
 
         console.log(page, 'length')
@@ -194,17 +195,12 @@ function AdminUserList() {
                                         <BsSearch className='p-1 ' size={25} />
                                     </button>
                                 </div>
-
-
                             </div>
                             <div>
                                 <button type="button" class="inline-flex items-center text-white bg-gradient-to-r
                                  from-orange-500  to-yellow-400 hover:bg-gradient-to-bl font-medium rounded-lg text-lg px-4 py-1 text-center mr-40 mb-2"> 
                                 {/* Filter   <BiFilter className='mx-1' size={30} /> */}
-                                Admins List
-                                
-                                
-                                
+                                Staff List
                                 </button>
 
                             </div>
