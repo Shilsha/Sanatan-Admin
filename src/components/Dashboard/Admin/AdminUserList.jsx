@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Navbar from '../../Navbar/Navbar'
 import Sidebar from '../../Sidebar/Sidebar'
 import { BsSearch, BsThreeDots } from 'react-icons/bs'
-import { BiFilter, BiSkipNext, BiSkipPrevious } from 'react-icons/bi'
+import { BiFilter, BiSkipNext, BiSkipPrevious, BiShowAlt } from 'react-icons/bi'
 import { AiOutlinePlus, AiFillDelete, AiTwotoneEdit, AiOutlineClose, AiOutlineWarning } from 'react-icons/ai'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
@@ -198,9 +198,9 @@ function AdminUserList() {
                             </div>
                             <div>
                                 <button type="button" class="inline-flex items-center text-white bg-gradient-to-r
-                                 from-orange-500  to-yellow-400 hover:bg-gradient-to-bl font-medium rounded-lg text-lg px-4 py-1 text-center mr-40 mb-2"> 
-                                {/* Filter   <BiFilter className='mx-1' size={30} /> */}
-                                Staff List
+                                 from-orange-500  to-yellow-400 hover:bg-gradient-to-bl font-medium rounded-lg text-lg px-4 py-1 text-center mr-40 mb-2">
+                                    {/* Filter   <BiFilter className='mx-1' size={30} /> */}
+                                    Staff List
                                 </button>
 
                             </div>
@@ -257,7 +257,24 @@ function AdminUserList() {
                                                                 <td class=" py-2 text-center">{data.adminId}</td>
                                                                 <td class=" py-2 text-center">{data.adminName}</td>
                                                                 <td class=" py-2 text-center">{data.email}</td>
-                                                                <td class=" py-2 text-center">{data.role}</td>
+                                                                <td class=" py-2 text-center">
+                                                                    {/* {data.isSuperAdmin ? <>
+                                                                        SuperAdmin
+                                                                    </> : <>
+
+                                                                        <p className=" underline py-2 px-4 rounded-full hover:text-orange-500 inline-flex items-center">
+                                                                            <span>View  </span>
+                                                                            
+                                                                        </p>
+                                                                    </>} */}
+
+
+                                                                  
+
+                                                                    {data.role}
+
+
+                                                                </td>
                                                                 <td class=" py-2 text-center">{data.password}</td>
                                                                 <td class=" py-2 text-center">{JSON.stringify(data.isSuperAdmin)}</td>
                                                                 <td class=" py-2 text-center">{data.createdDate}</td>
