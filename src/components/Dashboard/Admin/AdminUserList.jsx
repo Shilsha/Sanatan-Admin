@@ -10,6 +10,7 @@ import Loader from '../../Loader/Loader'
 import { ToastContainer } from 'react-toastify'
 import Modal from 'react-modal';
 import { getAdminList, delelteAdmin, updateAdmin } from '../../../Redux/Fetures/Reducers/AdminListSlice'
+import { updateRole } from '../../../Redux/Fetures/Reducers/AddAdminSlice'
 import DesignLogin from '../../../Assets/images/DesignLogin.png'
 const customStyles = {
     content: {
@@ -44,8 +45,9 @@ function AdminUserList() {
     const [action, setAction] = useState('')
 
     const [types, setTypes] = useState(true)
+    const [adminStat, setAdminStat] = useState('')
     const dispatch = useDispatch()
-
+    const [role, setRole] = useState()
     const allAdminList = useSelector((state) => state.adminList)
     // const allAdminList2 = useSelector((state) => state.getAllAdminReducer.result2)
     // console.log(allAdminList, 'get all admin list')
@@ -71,16 +73,30 @@ function AdminUserList() {
             setAdminId(data.Id)
 
         } else {
-            setIsOpen(true)
-            setAdminId(data.Id)
-            setAction(data.action)
-            setAdminName(data.name)
+
+            if (data.action == 'Update') {
+                console.log('Aaa gaya ')
+                setIsOpen(true)
+                setAction(data.action)
+                setAdminId(data.Id)
+                setAdminStat(data.AdminStatus)
+
+            } else {
+                setIsOpen(true)
+                setAdminId(data.Id)
+                setAction(data.action)
+                setAdminName(data.name)
+
+            }
+
+
+
 
         }
 
 
     }
-    // console.log(action, 'this is action')
+    console.log(action, 'this is action')
 
     // ==========================================update admin =====================
     const handleUpdateAdmin = () => {
@@ -144,7 +160,7 @@ function AdminUserList() {
 
 
     useEffect(() => {
-        console.log(allAdminList.result.length,'length')
+        console.log(allAdminList.result.length, 'length')
         if (allAdminList.result.length < 10) {
             // console.log('chhota')
             setButtonNext(true)
@@ -161,7 +177,7 @@ function AdminUserList() {
     const setAdminType = (type) => {
         setTypes(type)
         // console.log(type, '22')
-       
+
         const data = {
             page: page,
             type: type
@@ -174,8 +190,90 @@ function AdminUserList() {
     }
 
 
+    // =====================================================assign role===============================
+
+    const [isSubmitting, setIsSubmitting] = useState(false)
+     const [errors, setErrors] = useState([])
+
+    const [permission, setPermission] = useState([
+        { name: "User" },
+        { name: "Articles" },
+        { name: "Hits" },
+        { name: "AdminUserList" },
+        { name: "QueriesList" },
+        { name: "Logs" },
+        { name: "Broadcast" },
+        { name: "BlogsPost" },
+    ]);
+
+    const handleChangePer = (e) => {
+        const { name, checked } = e.target;
+        if (name === "allSelect") {
+            let tempUser = permission.map((user) => {
+                return { ...user, isChecked: checked };
+            });
+
+            setPermission(tempUser);
+
+            const tempUser2 = tempUser.filter(item => item.isChecked === true)
+            setRole(tempUser2.map(data => data.name))
+        } else {
+            let tempUser = permission.map((user) => user.name === name ? { ...user, isChecked: checked } : user);
+            setPermission(tempUser);
+
+            const tempUser2 = tempUser.filter(item => item.isChecked === true)
+            setRole(tempUser2.map(data => data.name))
+        }
+    };
+
+
+
+    const handleUpdateRole = (e) => {
+        e.preventDefault()
+       
+        setErrors(validate());
+        setIsSubmitting(true);
+    }
+
+
+    const validate = () => {
+
+        let errors = {}
+        if (!role) {
+            errors.role = 'Role is required!'
+        }
+        if (!role?.length > 0) {
+            errors.role = 'Role is required!'
+
+        }
+
+        return errors
+    }
+
+
+
+    useEffect(() => {
+        console.log(errors, 'errroes')
+        if (Object.keys(errors).length === 0 && isSubmitting) {
+            const data = {
+                adminId: adminId,
+                adminStatus: adminStat,
+                role: role
+            }
+            console.log(data, 'assign rolessssssssssss')
+    
+            
+            dispatch(updateRole(data))
+            setIsOpen(false)
+
+
+
+        }
+    }, [errors]);
+    // ===========================================================================================
+    console.log(errors,'errors')
     const LoginAdmin = JSON.parse(sessionStorage.getItem('user'))
-    console.log(LoginAdmin.adminId, 'login id')
+    // console.log(LoginAdmin.adminId, 'login id')
     return (
 
         <>
@@ -206,10 +304,10 @@ function AdminUserList() {
                                 </button>
 
                             </div>
-                            
+
                             <div className='flex justify-center items-center '>
-                            <div className='text-green-500 mr-2 font-medium'>
-                                    {types==='true'?'Activated' : <p className='text-red-500 inline-flex'>De-<span>Activated</span></p>}
+                                <div className='text-green-500 mr-2 font-medium'>
+                                    {types === 'true' ? 'Activated' : <p className='text-red-500 inline-flex'>De-<span>Activated</span></p>}
                                 </div>
                                 <select id="countries" className="bg-gray-50 border border-gray-400 text-gray-900 
                                 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700
@@ -244,7 +342,7 @@ function AdminUserList() {
                                         {/* <td class="bg-blue-100   py-3">IsSuperAdmin</td> */}
                                         <td class="bg-blue-100   py-3">Create Date</td>
                                         {/* <td class="bg-blue-100   py-3">Admin Status</td> */}
-                                        <td class="bg-blue-100 text-center   py-3">Action</td>
+                                        <td class={`bg-blue-100 text-center   py-3 ${LoginAdmin?.isSuperAdmin!=true?'hidden':null}`}>Action</td>
                                     </tr>
                                 </thead>
 
@@ -252,9 +350,9 @@ function AdminUserList() {
 
                                     {
                                         allAdminList.loading ? <>
-                                         <div className='mt-48 '>
-                                         <Loader />
-                                         </div>
+                                            <div className='mt-48 '>
+                                                <Loader />
+                                            </div>
                                         </> : <>
                                             {
                                                 // allAdminList?.result.map((data) => {
@@ -302,18 +400,30 @@ function AdminUserList() {
 
                                                                     &nbsp;
                                                                     {data.adminStatus ? <>
+                                                                        {LoginAdmin?.isSuperAdmin ?<>
+                                                                            <button class={`border-2 border-blue-500 text-blue-500  hover:text-white  hover:bg-blue-700 mx-2 font-bold py-1.5 text-xs px-3 
+                                                                      rounded-full  disabled:opacity-50 disabled:cursor-not-allowed`}
+
+                                                                            onClick={() => openModel({ Id: data.adminId, AdminStatus: data.adminStatus, action: 'Update' })}
+                                                                        >
+                                                                            Edit Role
+                                                                        </button>
+
                                                                         <button class={`border-2 border-red-500 text-red-500 hover:bg-red-700 hover:text-white font-bold py-1.5 text-xs px-3 
                                                                       rounded-full     disabled:opacity-50 disabled:cursor-not-allowed`  }
-                                                                               disabled={data.isSuperAdmin}
+                                                                            disabled={data.isSuperAdmin}
                                                                             onClick={() => openModel({ Id: data.adminId, name: data.adminName, action: 'Deactivate' })}
                                                                         >
                                                                             Deactivate
                                                                         </button>
+                                                                        
+                                                                        </>:<></>}
+                                                                      
 
                                                                     </> : <>
                                                                         <button class={`border-2 border-green-500 hover:text-white  hover:bg-green-700 text-green-500 font-bold py-1.5 text-xs px-3 
                                                                       rounded-full  disabled:opacity-50 disabled:cursor-not-allowed`}
-                                                                              disabled={data.isSuperAdmin}
+                                                                            disabled={data.isSuperAdmin}
                                                                             onClick={() => openModel({ Id: data.adminId, name: data.adminName, action: 'Activate' })}
                                                                         >
                                                                             Activate
@@ -374,72 +484,76 @@ function AdminUserList() {
                 className=" "
 
             >
-                {/* {action=='Delete'?<>
-                  <div class="shadow-xl   bg-[rgb(254 214 172)] rounded-lg md:max-w-md md:mx-auto p-4 fixed inset-x-0 bottom-0 z-50 mb-4 mx-4 md:relative">
-                    <div class="md:flex items-center">
-                        <div class="rounded-full border border-red-900 flex items-center justify-center w-16 h-16 flex-shrink-0 mx-auto">
-                            <AiOutlineWarning size={40} fill='#8E2E0F' />
+
+
+                {action == 'Update' ? <>
+
+                    <form class="bg-white shadow-md rounded px-8  pb-8 relative z-50" onSubmit={handleUpdateRole} >
+                        <AiOutlineClose onClick={closeModal} className="relative top-0 left-[100%] cursor-pointer" size={25} />
+                        <h1 className='text-center font-sans  mb-4 text-4xl font-bold text-orange-500'>Update Role </h1>
+
+                        <div className='bg-gray-100 rounded p-6'>
+
+                            <label for="countries" class="block mb-2 text-sm  text-gray-900 font-bold dark:text-white">Select Role</label>
+                            <div className=" grid grid-cols-3 justify-between items-center  w-full   " >
+
+
+                                {permission.map((user, index) => (
+                                    <div className="form-check" key={index}>
+                                        <input
+                                            type="checkbox"
+                                            className="form-check-input"
+                                            name={user.name}
+                                            checked={user?.isChecked || false}
+                                            onChange={handleChangePer}
+                                        />
+                                        <label className="text-xs px-2 ">{user.name}</label>
+                                    </div>
+                                ))}
+
+                            </div>
+                            {errors.role && (<p className='text-red-500 text-sm pt-1'>{errors.role}</p>)}
                         </div>
-                        <div class="mt-4 md:mt-0 md:ml-6 text-center md:text-left">
-                            <p class="font-bold text-red-800">Delete admin account</p>
-                            <p class="text-sm text-gray-700 mt-1">Are you sure to delete Admin account. This action cannot be undone.
-                            </p>
+
+
+                        <div class="flex items-center pt-4 justify-center">
+
+
+                            <button class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-1 shadow-xl  px-5 rounded focus:outline-none focus:shadow-outline" type="submit">
+                                Update Role
+                            </button>
+
                         </div>
-                    </div>
-                    <div class="text-center md:text-right mt-4 md:flex md:justify-end">
-                        <button class="block w-full md:inline-block md:w-auto px-4 py-3 md:py-2
-                                 bg-red-200 text-red-700 rounded-lg font-semibold text-sm md:ml-2 md:order-2
-                                  hover:bg-red-400 hover:text-white" onClick={deleteAdmin}>Delete
-                            Account</button>
-                        <button class="block w-full md:inline-block md:w-auto px-4 py-3 md:py-2
-                                 bg-gray-200 rounded-lg font-semibold text-sm mt-4
-                                  md:mt-0 md:order-1 hover:bg-slate-500 hover:text-white" onClick={closeModal}>Cancel</button>
-                    </div>
-                </div>
-                </>:<>
-                <div class="shadow-xl   bg-[rgb(254 214 172)] rounded-lg md:max-w-md md:mx-auto p-4 fixed inset-x-0 bottom-0 z-50 mb-4 mx-4 md:relative">
-                    <div class="md:flex items-center">
-                        <div class="rounded-full border border-red-900 flex items-center justify-center w-16 h-16 flex-shrink-0 mx-auto">
-                            <AiOutlineWarning size={40} fill='#8E2E0F' />
+                    </form>
+
+
+                </> : <>
+
+                    <div class="shadow-xl   bg-[rgb(254 214 172)] rounded-lg md:max-w-md md:mx-auto p-4 fixed inset-x-0 bottom-0 z-50 mb-4 mx-4 md:relative">
+                        <div class="md:flex items-center">
+                            <div class="rounded-full border border-red-900 flex items-center justify-center w-16 h-16 flex-shrink-0 mx-auto">
+                                <AiOutlineWarning size={40} fill='#8E2E0F' />
+                            </div>
+                            <div class="mt-4 md:mt-0 md:ml-6 text-center md:text-left">
+                                <p class="font-bold text-red-800">Update admin account</p>
+                                <p class="text-sm text-gray-700 mt-1">Are you sure to Update Admin account.
+                                </p>
+                            </div>
                         </div>
-                        <div class="mt-4 md:mt-0 md:ml-6 text-center md:text-left">
-                            <p class="font-bold text-red-800">Update admin account</p>
-                            <p class="text-sm text-gray-700 mt-1">Are you sure to Update Admin account.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="text-center md:text-right mt-4 md:flex md:justify-end">
-                        <button class="block w-full md:inline-block md:w-auto px-5 py-3 md:py-2
+                        <div class="text-center md:text-right mt-4 md:flex md:justify-end">
+                            <button class="block w-full md:inline-block md:w-auto px-5 py-3 md:py-2
                                  bg-red-200 text-red-700 rounded-lg font-semibold text-sm md:ml-2 md:order-2
                                   hover:bg-red-400 hover:text-white" onClick={handleUpdateAdmin}>Yes</button>
-                        <button class="block w-full md:inline-block md:w-auto px-5 py-3 md:py-2
+                            <button class="block w-full md:inline-block md:w-auto px-5 py-3 md:py-2
                                  bg-gray-200 rounded-lg font-semibold text-sm mt-4
                                   md:mt-0 md:order-1 hover:bg-slate-500 hover:text-white" onClick={closeModal}>No</button>
-                    </div>
-                </div>
-
-                </>} */}
-
-                <div class="shadow-xl   bg-[rgb(254 214 172)] rounded-lg md:max-w-md md:mx-auto p-4 fixed inset-x-0 bottom-0 z-50 mb-4 mx-4 md:relative">
-                    <div class="md:flex items-center">
-                        <div class="rounded-full border border-red-900 flex items-center justify-center w-16 h-16 flex-shrink-0 mx-auto">
-                            <AiOutlineWarning size={40} fill='#8E2E0F' />
-                        </div>
-                        <div class="mt-4 md:mt-0 md:ml-6 text-center md:text-left">
-                            <p class="font-bold text-red-800">Update admin account</p>
-                            <p class="text-sm text-gray-700 mt-1">Are you sure to Update Admin account.
-                            </p>
                         </div>
                     </div>
-                    <div class="text-center md:text-right mt-4 md:flex md:justify-end">
-                        <button class="block w-full md:inline-block md:w-auto px-5 py-3 md:py-2
-                                 bg-red-200 text-red-700 rounded-lg font-semibold text-sm md:ml-2 md:order-2
-                                  hover:bg-red-400 hover:text-white" onClick={handleUpdateAdmin}>Yes</button>
-                        <button class="block w-full md:inline-block md:w-auto px-5 py-3 md:py-2
-                                 bg-gray-200 rounded-lg font-semibold text-sm mt-4
-                                  md:mt-0 md:order-1 hover:bg-slate-500 hover:text-white" onClick={closeModal}>No</button>
-                    </div>
-                </div>
+
+                </>}
+
+
+
 
 
 
@@ -447,19 +561,6 @@ function AdminUserList() {
 
             </Modal>
 
-
-            {/* <Modal 
-             isOpen={modalIsOpenUpdate}
-             // onAfterOpen={afterOpenModal}
-            //  onRequestClose={closeModalUpdate}
-             style={customStyles}
-             contentLabel="Example Modal"
-             className=""
-            >
-
-
-
-            </Modal> */}
         </>
     )
 }
