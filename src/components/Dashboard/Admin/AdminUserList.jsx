@@ -6,10 +6,7 @@ import { BiFilter, BiSkipNext, BiSkipPrevious, BiShowAlt } from 'react-icons/bi'
 import { AiOutlinePlus, AiFillDelete, AiTwotoneEdit, AiOutlineClose, AiOutlineWarning } from 'react-icons/ai'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
-
 import Loader from '../../Loader/Loader'
-
-
 import { ToastContainer } from 'react-toastify'
 import Modal from 'react-modal';
 import { getAdminList, delelteAdmin, updateAdmin } from '../../../Redux/Fetures/Reducers/AdminListSlice'
@@ -83,7 +80,7 @@ function AdminUserList() {
 
 
     }
-    console.log(action, 'this is action')
+    // console.log(action, 'this is action')
 
     // ==========================================update admin =====================
     const handleUpdateAdmin = () => {
@@ -132,12 +129,12 @@ function AdminUserList() {
 
         console.log(page, 'length')
         if (page > 0) {
-            console.log('bada hia')
+            // console.log('bada hia')
             setButtonPre(false)
 
 
         } else {
-            console.log('chhoota hai')
+            // console.log('chhoota hai')
             setButtonPre(true)
         }
 
@@ -147,7 +144,8 @@ function AdminUserList() {
 
 
     useEffect(() => {
-        if (allAdminList.result.length < 16) {
+        console.log(allAdminList.result.length,'length')
+        if (allAdminList.result.length < 10) {
             // console.log('chhota')
             setButtonNext(true)
 
@@ -162,7 +160,8 @@ function AdminUserList() {
     // ==========================admin type==========================
     const setAdminType = (type) => {
         setTypes(type)
-        console.log(type, '22')
+        // console.log(type, '22')
+       
         const data = {
             page: page,
             type: type
@@ -175,8 +174,8 @@ function AdminUserList() {
     }
 
 
-    const LoginAdmin=JSON.parse(sessionStorage.getItem('user'))
-    console.log(LoginAdmin?.isSuperAdmin,'login id')
+    const LoginAdmin = JSON.parse(sessionStorage.getItem('user'))
+    console.log(LoginAdmin.adminId, 'login id')
     return (
 
         <>
@@ -207,7 +206,11 @@ function AdminUserList() {
                                 </button>
 
                             </div>
-                            <div>
+                            
+                            <div className='flex justify-center items-center '>
+                            <div className='text-green-500 mr-2 font-medium'>
+                                    {types==='true'?'Activated' : <p className='text-red-500 inline-flex'>De-<span>Activated</span></p>}
+                                </div>
                                 <select id="countries" className="bg-gray-50 border border-gray-400 text-gray-900 
                                 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700
                                  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -229,19 +232,19 @@ function AdminUserList() {
 
 
 
-                        <div className="tableWrap mb-2    ">
+                        <div className="tableWrap mb-2   ">
                             <table class="shadow-lg tables  w-full rounded-xl blurrTable ">
                                 <thead className=''>
                                     <tr className='   '>
-                                        <td class="bg-blue-100   px-2 text-center">ID</td>
-                                        <td class="bg-blue-100   px-2 text-center">Admin Name</td>
-                                        <td class="bg-blue-100  text-center py-3">Email</td>
-                                        <td class="bg-blue-100  text-center py-3">Role</td>
-                                        <td class="bg-blue-100  text-center py-3">Password</td>
-                                        {/* <td class="bg-blue-100  text-center py-3">IsSuperAdmin</td> */}
-                                        <td class="bg-blue-100  text-center py-3">Create Date</td>
-                                        {/* <td class="bg-blue-100  text-center py-3">Admin Status</td> */}
-                                        <td class="bg-blue-100  text-center py-3">Action</td>
+                                        <td class="bg-blue-100   pl-2 ">ID</td>
+                                        <td class="bg-blue-100    ">Admin Name</td>
+                                        <td class="bg-blue-100   py-3">Email</td>
+                                        <td class="bg-blue-100 text-center  py-3">Role</td>
+                                        <td class="bg-blue-100   py-3">Password</td>
+                                        {/* <td class="bg-blue-100   py-3">IsSuperAdmin</td> */}
+                                        <td class="bg-blue-100   py-3">Create Date</td>
+                                        {/* <td class="bg-blue-100   py-3">Admin Status</td> */}
+                                        <td class="bg-blue-100 text-center   py-3">Action</td>
                                     </tr>
                                 </thead>
 
@@ -249,18 +252,20 @@ function AdminUserList() {
 
                                     {
                                         allAdminList.loading ? <>
-                                            <Loader />
+                                         <div className='mt-48 '>
+                                         <Loader />
+                                         </div>
                                         </> : <>
                                             {
                                                 // allAdminList?.result.map((data) => {
                                                 (allAdminList?.result.filter((user) => user.email?.toLowerCase().includes(FilterSearch)))?.map((data) => {
-                                                    console.log(data.role, 'this is role')
+                                                    // console.log(data.role, 'this is role')
                                                     return (
                                                         <>
-                                                            <tr key={data.id} className="text-center text-gray-500  ">
-                                                                <td class=" py-2 text-center">{data.adminId}</td>
-                                                                <td class=" py-2 text-center">{data.adminName}</td>
-                                                                <td class=" py-2 text-center">{data.email}</td>
+                                                            <tr key={data.id} className={` text-gray-500 `}>
+                                                                <td class=" py-2 pl-2 ">{data.adminId}</td>
+                                                                <td class=" py-2 ">{data.adminName}</td>
+                                                                <td class=" py-2 ">{data.email}</td>
                                                                 <td class=" py-2 text-center">
                                                                     {data.isSuperAdmin ? <>
                                                                         SuperAdmin
@@ -270,7 +275,7 @@ function AdminUserList() {
                                                                             <span className='tooltip-on-hover'>View  </span>
                                                                             <div className="tooltip absolute bg-gray-50 shadow rounded-lg p-3 ml-10 text-sm -mt-10 ">
                                                                                 {data.role?.map((data, index) => {
-                                                                                    console.log(data, 'role data')
+                                                                                    // console.log(data, 'role data')
                                                                                     return <>
                                                                                         <ul key={index} className='text-start space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400 '>
                                                                                             <li className='p-1 font-bold' >{data}</li>
@@ -284,21 +289,22 @@ function AdminUserList() {
                                                                     </>}
 
 
-                                    
+
 
                                                                 </td>
-                                                                <td class=" py-2 text-center">
-                                                                    {LoginAdmin?.isSuperAdmin?<>{data.password}</>:'*****'}
-                                                                    </td>
-                                                                {/* <td class=" py-2 text-center">{JSON.stringify(data.isSuperAdmin)}</td> */}
-                                                                <td class=" py-2 text-center">{data.createdDate}</td>
-                                                                {/* <td class=" py-2 text-center">{JSON.stringify(data.adminStatus)}</td> */}
-                                                                <td class=" py-2 text-center">
+                                                                <td class=" py-2 ">
+                                                                    {LoginAdmin?.isSuperAdmin ? <>{data.password}</> : '*****'}
+                                                                </td>
+                                                                {/* <td class=" py-2 ">{JSON.stringify(data.isSuperAdmin)}</td> */}
+                                                                <td class=" py-2 ">{data.createdDate}</td>
+                                                                {/* <td class=" py-2 ">{JSON.stringify(data.adminStatus)}</td> */}
+                                                                <td class=" py-2 text-center ">
 
                                                                     &nbsp;
                                                                     {data.adminStatus ? <>
                                                                         <button class={`border-2 border-red-500 text-red-500 hover:bg-red-700 hover:text-white font-bold py-1.5 text-xs px-3 
-                                                                      rounded-full     disabled:opacity-50 disabled:cursor-not-allowed`  } disabled={data.isSuperAdmin}
+                                                                      rounded-full     disabled:opacity-50 disabled:cursor-not-allowed`  }
+                                                                               disabled={data.isSuperAdmin}
                                                                             onClick={() => openModel({ Id: data.adminId, name: data.adminName, action: 'Deactivate' })}
                                                                         >
                                                                             Deactivate
@@ -306,19 +312,12 @@ function AdminUserList() {
 
                                                                     </> : <>
                                                                         <button class={`border-2 border-green-500 hover:text-white  hover:bg-green-700 text-green-500 font-bold py-1.5 text-xs px-3 
-                                                                      rounded-full  disabled:opacity-50 disabled:cursor-not-allowed`} disabled={data.isSuperAdmin}
+                                                                      rounded-full  disabled:opacity-50 disabled:cursor-not-allowed`}
+                                                                              disabled={data.isSuperAdmin}
                                                                             onClick={() => openModel({ Id: data.adminId, name: data.adminName, action: 'Activate' })}
                                                                         >
                                                                             Activate
                                                                         </button>
-
-
-                                                                        {/* <button class="border-red-500 text-red-500 ml-2 hover:text-white hover:bg-red-600  font-bold py-1.5 text-xs px-3 border
-                                                                      rounded-full"
-                                                                            onClick={() => openModel({ Id: data.adminId, action: 'Delete' })}
-                                                                        >
-                                                                            Delete
-                                                                        </button> */}
                                                                     </>}
 
                                                                 </td>

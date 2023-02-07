@@ -243,13 +243,16 @@ function Articles() {
 
                             </div>
                             <div>
-                            <button type="button" class="inline-flex items-center text-white bg-gradient-to-r 
+                                <button type="button" class="inline-flex items-center text-white bg-gradient-to-r 
                             from-orange-500  to-yellow-400 hover:bg-gradient-to-bl font-medium rounded-lg text-lg px-3 py-1 text-center mr-40 mb-2">
-                          Articles List
-                                 </button>
-                      
+                                    Articles List
+                                </button>
+
                             </div>
-                            <div>
+                            <div className='flex justify-center items-center'>
+                                <div className='text-green-500 mr-2 font-medium'>
+                                {types=='REJECTED'?<><span className='text-red-500'>REJECTED</span></>:types}
+                                </div>
 
                                 <select id="countries" class="bg-gray-50 border border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" onChange={(e) => selectArticleType(e.target.value)}>
                                     <option disabled selected>Select Article Type</option>
@@ -263,17 +266,17 @@ function Articles() {
                         <div className="tableWrap pr-4  mb-4">
                             <table class="shadow-lg tables blurrTable w-full rounded-xl ">
                                 <thead className=''>
-                                    <tr className=' table_head text-center   bg-blue-100 '>
+                                    <tr className=' table_head   bg-blue-100 '>
                                         <td class="  py-3 px-2"> ID</td>
-                                        <td class="   px-2 ">Title</td>
-                                        <td class="   px-2 ">Category</td>
-                                        <td class="   px-2 ">Subject</td>
-                                        <td class="   px-2 ">Content</td>
-                                        <td class="   px-2">Author</td>
-                                        <td class="  px-2 "> Create Date</td>
-                                        <td class="  px-2 ">Open/Publish</td>
-                                        <td class="  px-2">Action</td>
-                                        <td class="  px-2">View</td>
+                                        <td class="    ">Title</td>
+                                        <td class="    ">Category</td>
+                                        <td class="    ">Subject</td>
+                                        <td class="    ">Content</td>
+                                        <td class="   ">Author</td>
+                                        <td class="   "> Create Date</td>
+                                        <td class="  text-center ">Open/Publish</td>
+                                        <td class=" text-center ">Action</td>
+                                        <td class="  ">View</td>
                                     </tr>
                                 </thead>
                                 <tbody style={{ background: '' }}>
@@ -288,35 +291,35 @@ function Articles() {
                                                     return (
                                                         <>
 
-                                                            <tr key={data.id} className="text-gray-500 text-center text-sm border-b-[3px] ">
-                                                                <td class="   py-3  ">{data.articleId}</td>
+                                                            <tr key={data.id} className="text-gray-500  text-sm border-b-[3px] ">
+                                                                <td class="   py-3 px-2 ">{data.articleId}</td>
 
-                                                                <td class="  py-2    px-2 ">
+                                                                <td class="  ">
 
                                                                     {truncateTitle(data.title, 20)}
                                                                 </td>
-                                                                <td class="    px-2">{data.category} </td>
-                                                                <td class="    px-2">
+                                                                <td class="   ">{data.category} </td>
+                                                                <td class="   ">
 
                                                                     {truncateSubject(data.subject, 20)}
 
                                                                 </td>
-                                                                <td class="    px-2">
+                                                                <td class="   ">
 
 
                                                                     {truncateString(data?.content, 50)}
 
                                                                 </td>
 
-                                                                <td class="    px-2">{data.author} </td>
+                                                                <td class="   ">{data.author} </td>
 
-                                                                <td class="  px-2">
+                                                                <td class=" ">
                                                                     {data.createdDate}
 
                                                                 </td>
 
 
-                                                                <td class="  pt-1  ">
+                                                                <td class="  pt-1 text-center ">
 
                                                                     {data.articleType}
 
@@ -324,7 +327,7 @@ function Articles() {
 
 
                                                                 </td>
-                                                                <td class=" px-2  flex justify-between items-center py-3 " >
+                                                                <td class="   flex justify-between items-center py-3 " >
 
 
                                                                     {data.articleType == 'PUBLISH' ? <>
@@ -421,8 +424,8 @@ function Articles() {
                         </nav>
 
                         <div className='absolute bottom-0   right-0  -z-10  '>
-                                <img src={DesignLogin} alt='empty' className='w-full'></img>
-                            </div>
+                            <img src={DesignLogin} alt='empty' className='w-full'></img>
+                        </div>
 
 
                         {/* ================================Model================== */}
