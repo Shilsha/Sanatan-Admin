@@ -55,7 +55,12 @@ export const updateBroadcastAction = createAsyncThunk('UPDATE_BROADCAST_OF_DAY/U
             .then(res => res)
             .catch(err => {
                 toast.warning(err.response.data.status.message)
-                return rejectWithValue(err.response.data.status.message)
+
+                // console.log(rejectWithValue(err),'error from rec=ject with value redu')
+                console.log(err, 'error from redu')
+                const reaerr = err
+                console.log(reaerr, 'what is')
+                return thunkApi.rejectWithValue(err.response.data.status.message)
             })
     })
 

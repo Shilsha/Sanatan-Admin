@@ -51,7 +51,7 @@ function AdminUserList() {
 
     const allAdminList = useSelector((state) => state.adminList)
     // const allAdminList2 = useSelector((state) => state.getAllAdminReducer.result2)
-    console.log(allAdminList, 'get all admin list')
+    // console.log(allAdminList, 'get all admin list')
 
 
     useEffect(() => {
@@ -174,6 +174,9 @@ function AdminUserList() {
 
     }
 
+
+    const LoginAdmin=JSON.parse(sessionStorage.getItem('user'))
+    console.log(LoginAdmin?.isSuperAdmin,'login id')
     return (
 
         <>
@@ -235,9 +238,9 @@ function AdminUserList() {
                                         <td class="bg-blue-100  text-center py-3">Email</td>
                                         <td class="bg-blue-100  text-center py-3">Role</td>
                                         <td class="bg-blue-100  text-center py-3">Password</td>
-                                        <td class="bg-blue-100  text-center py-3">IsSuperAdmin</td>
-                                        <td class="bg-blue-100  text-center py-3">Create</td>
-                                        <td class="bg-blue-100  text-center py-3">Admin Status</td>
+                                        {/* <td class="bg-blue-100  text-center py-3">IsSuperAdmin</td> */}
+                                        <td class="bg-blue-100  text-center py-3">Create Date</td>
+                                        {/* <td class="bg-blue-100  text-center py-3">Admin Status</td> */}
                                         <td class="bg-blue-100  text-center py-3">Action</td>
                                     </tr>
                                 </thead>
@@ -251,6 +254,7 @@ function AdminUserList() {
                                             {
                                                 // allAdminList?.result.map((data) => {
                                                 (allAdminList?.result.filter((user) => user.email?.toLowerCase().includes(FilterSearch)))?.map((data) => {
+                                                    console.log(data.role, 'this is role')
                                                     return (
                                                         <>
                                                             <tr key={data.id} className="text-center text-gray-500  ">
@@ -258,41 +262,51 @@ function AdminUserList() {
                                                                 <td class=" py-2 text-center">{data.adminName}</td>
                                                                 <td class=" py-2 text-center">{data.email}</td>
                                                                 <td class=" py-2 text-center">
-                                                                    {/* {data.isSuperAdmin ? <>
+                                                                    {data.isSuperAdmin ? <>
                                                                         SuperAdmin
                                                                     </> : <>
 
-                                                                        <p className=" underline py-2 px-4 rounded-full hover:text-orange-500 inline-flex items-center">
-                                                                            <span>View  </span>
-                                                                            
+                                                                        <p className="tooltip-on-hover underline py-2 px-4 rounded-full hover:text-orange-500 inline-flex items-center">
+                                                                            <span className='tooltip-on-hover'>View  </span>
+                                                                            <div className="tooltip absolute bg-gray-50 shadow rounded-lg p-3 ml-10 text-sm -mt-10 ">
+                                                                                {data.role?.map((data, index) => {
+                                                                                    console.log(data, 'role data')
+                                                                                    return <>
+                                                                                        <ul key={index} className='text-start space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400 '>
+                                                                                            <li className='p-1 font-bold' >{data}</li>
+                                                                                        </ul>
+
+                                                                                    </>
+                                                                                })}
+
+                                                                            </div>
                                                                         </p>
-                                                                    </>} */}
+                                                                    </>}
 
 
-                                                                  
-
-                                                                    {data.role}
-
+                                    
 
                                                                 </td>
-                                                                <td class=" py-2 text-center">{data.password}</td>
-                                                                <td class=" py-2 text-center">{JSON.stringify(data.isSuperAdmin)}</td>
+                                                                <td class=" py-2 text-center">
+                                                                    {LoginAdmin?.isSuperAdmin?<>{data.password}</>:'*****'}
+                                                                    </td>
+                                                                {/* <td class=" py-2 text-center">{JSON.stringify(data.isSuperAdmin)}</td> */}
                                                                 <td class=" py-2 text-center">{data.createdDate}</td>
-                                                                <td class=" py-2 text-center">{JSON.stringify(data.adminStatus)}</td>
+                                                                {/* <td class=" py-2 text-center">{JSON.stringify(data.adminStatus)}</td> */}
                                                                 <td class=" py-2 text-center">
 
                                                                     &nbsp;
                                                                     {data.adminStatus ? <>
-                                                                        <button class="border-2 border-red-500 text-red-500 hover:bg-red-700 hover:text-white font-bold py-1.5 text-xs px-3 
-                                                                      rounded-full"
+                                                                        <button class={`border-2 border-red-500 text-red-500 hover:bg-red-700 hover:text-white font-bold py-1.5 text-xs px-3 
+                                                                      rounded-full     disabled:opacity-50 disabled:cursor-not-allowed`  } disabled={data.isSuperAdmin}
                                                                             onClick={() => openModel({ Id: data.adminId, name: data.adminName, action: 'Deactivate' })}
                                                                         >
                                                                             Deactivate
                                                                         </button>
 
                                                                     </> : <>
-                                                                        <button class="border-2 border-green-500 hover:text-white  hover:bg-green-700 text-green-500 font-bold py-1.5 text-xs px-3 
-                                                                      rounded-full"
+                                                                        <button class={`border-2 border-green-500 hover:text-white  hover:bg-green-700 text-green-500 font-bold py-1.5 text-xs px-3 
+                                                                      rounded-full  disabled:opacity-50 disabled:cursor-not-allowed`} disabled={data.isSuperAdmin}
                                                                             onClick={() => openModel({ Id: data.adminId, name: data.adminName, action: 'Activate' })}
                                                                         >
                                                                             Activate
