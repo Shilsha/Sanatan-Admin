@@ -129,7 +129,7 @@ console.log(forgetOTp?.result,'here')
         e.preventDefault()
         const data = {
             adminId: forgetOTp?.result.adminId,
-            adminName: true,
+            adminName: forgetOTp?.result.adminName,
             adminStatus:forgetOTp?.result.adminStatus,
             password: pass
         }

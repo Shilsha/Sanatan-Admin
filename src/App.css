@@ -480,3 +480,13 @@ tr:hover {
 inputStyles{
   border:2px solid red
 }
+
+
+.tooltip {
+  
+  visibility: hidden; 
+}
+
+.tooltip-on-hover:hover + .tooltip {    /* Uses the adjacent sibling selector */
+  visibility: visible;  /* Or display: block */
+}

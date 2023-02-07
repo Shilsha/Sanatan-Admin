@@ -43,6 +43,22 @@ function Hits() {
     const [startDate, endDate] = dateRange;
 
     const [dateTypes, setDateTypes] = useState('SingleDate');
+    // ============================date Type=======================
+    const [dateTypesPan, setDateTypesPan] = useState('SingleDate');
+    const [dateTypesFes, setDateTypesFes] = useState('SingleDate');
+    const [dateTypesKun, setDateTypesKun] = useState('SingleDate');
+    const [dateTypesCon, setDateTypesCon] = useState('SingleDate');
+    const [dateTypesHoro, setDateTypesHoro] = useState('SingleDate');
+    const [dateTypesMatch, setDateTypesMatch] = useState('SingleDate');
+    const [dateTypesArt, setDateTypesArt] = useState('SingleDate');
+    const [dateTypesLogin, setDateTypesLogin] = useState('SingleDate');
+    const [dateTypesAdmin, setDateTypesAdmin] = useState('SingleDate');
+    const [dateTypesZodiac, setDateTypesZodiac] = useState('SingleDate');
+    const [dateTypesLoc, setDateTypesLoc] = useState('SingleDate');
+    
+
+
+    // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     const [dateRangePan, setDateRangePan] = useState([null, null]);
     const [startDatePan, endDatePan] = dateRangePan;
     const [dateRangeFes, setDateRangeFes] = useState([null, null]);
@@ -107,7 +123,7 @@ function Hits() {
     const handleSubmitPan = (e) => {
         e.preventDefault()
 
-        if (dateTypes == 'SingleDate') {
+        if (dateTypesPan == 'SingleDate') {
             const data = moment(date).format('YYYY-MM-DD')
             dispatch(getHitsPanchang(data))
             console.log(moment(date).format('YYYY-MM-DD'), 'single date')
@@ -127,7 +143,7 @@ function Hits() {
     const handleSubmitFes = (e) => {
         e.preventDefault()
 
-        if (dateTypes == 'SingleDate') {
+        if (dateTypesFes == 'SingleDate') {
             const data = moment(dateFes).format('YYYY-MM-DD')
             dispatch(getHitsFestival(data))
 
@@ -146,7 +162,7 @@ function Hits() {
     const handleSubmitKun = (e) => {
         e.preventDefault()
 
-        if (dateTypes == 'SingleDate') {
+        if (dateTypesKun == 'SingleDate') {
             const data = moment(dateKundli).format('YYYY-MM-DD')
             dispatch(getHitsKundali(data))
 
@@ -165,7 +181,7 @@ function Hits() {
     const handleSubmitHoro = (e) => {
         e.preventDefault()
 
-        if (dateTypes == 'SingleDate') {
+        if (dateTypesHoro == 'SingleDate') {
             const data = moment(dateHoro).format('YYYY-MM-DD')
             dispatch(getHitsHoroscope(data))
 
@@ -184,7 +200,7 @@ function Hits() {
     const handleSubmitCon = (e) => {
         e.preventDefault()
 
-        if (dateTypes == 'SingleDate') {
+        if (dateTypesCon == 'SingleDate') {
             const data = moment(dateCont).format('YYYY-MM-DD')
             dispatch(getHitsContact(data))
 
@@ -203,7 +219,7 @@ function Hits() {
     const handleSubmitMatchMaking = (e) => {
         e.preventDefault()
 
-        if (dateTypes == 'SingleDate') {
+        if (dateTypesMatch == 'SingleDate') {
             const data = moment(dateMatch).format('YYYY-MM-DD')
             dispatch(getHitsMatchMaking(data))
 
@@ -222,7 +238,7 @@ function Hits() {
     const handleSubmitaArt = (e) => {
         e.preventDefault()
 
-        if (dateTypes == 'SingleDate') {
+        if (dateTypesArt == 'SingleDate') {
             const data = moment(dateArt).format('YYYY-MM-DD')
             dispatch(getHitsArticle(data))
 
@@ -240,7 +256,7 @@ function Hits() {
     const handleSubmitaLogin = (e) => {
         e.preventDefault()
 
-        if (dateTypes == 'SingleDate') {
+        if (dateTypesLogin == 'SingleDate') {
             const data = moment(dateLogin).format('YYYY-MM-DD')
             dispatch(getHitsLogin(data))
 
@@ -258,7 +274,7 @@ function Hits() {
     const handleSubmitaAdmin = (e) => {
         e.preventDefault()
 
-        if (dateTypes == 'SingleDate') {
+        if (dateTypesAdmin == 'SingleDate') {
             const data = moment(dateAdmin).format('YYYY-MM-DD')
             dispatch(getHitsAdmin(data))
 
@@ -277,7 +293,7 @@ function Hits() {
     const handleSubmitaZodiacSign = (e) => {
         e.preventDefault()
 
-        if (dateTypes == 'SingleDate') {
+        if (dateTypesZodiac == 'SingleDate') {
             const data = moment(dateZodiac).format('YYYY-MM-DD')
             dispatch(getHitsZodiacSign(data))
 
@@ -296,7 +312,7 @@ function Hits() {
     const handleSubmitaLocation = (e) => {
         e.preventDefault()
 
-        if (dateTypes == 'SingleDate') {
+        if (dateTypesLoc == 'SingleDate') {
             const data = moment(dateLoc).format('YYYY-MM-DD')
             dispatch(getHitsLocation(data))
 
@@ -333,14 +349,14 @@ function Hits() {
                                         <h1 className='text-center font-bold text-lg text-gray-500   underline underline-offset-8 py-2  '>Panchang Hits </h1>
                                         <div className='p-5 bg-white rounded-lg'>
                                             <form onSubmit={handleSubmitPan}>
-                                                <select id="countries" class="bg-gray-50 border w-full border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " onChange={(e) => setDateTypes(e.target.value)}>
+                                                <select id="countries" class="bg-gray-50 border w-full border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " onChange={(e) => setDateTypesPan(e.target.value)}>
                                                     <option disabled selected >  Filter by Date</option>
                                                     <option value="dateRange">Date Range</option>
                                                     <option value="SingleDate">Single Date</option>
 
                                                 </select>
 
-                                                {dateTypes == 'SingleDate' ? <>
+                                                {dateTypesPan == 'SingleDate' ? <>
                                                     <div class="my-4">
                                                         <label class="block text-gray-700 text-sm font-bold mb-1" for="username">
                                                             Select Date
@@ -403,14 +419,14 @@ function Hits() {
 
                                         <div className='p-5 bg-white rounded-lg'>
                                             <form onSubmit={handleSubmitFes}>
-                                                <select id="countries" class="bg-gray-50 border w-full border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " onChange={(e) => setDateTypes(e.target.value)}>
+                                                <select id="countries" class="bg-gray-50 border w-full border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " onChange={(e) => setDateTypesFes(e.target.value)}>
                                                     <option disabled selected >  Filter by Date</option>
                                                     <option value="dateRange">Date Range</option>
                                                     <option value="SingleDate">Single Date</option>
 
                                                 </select>
 
-                                                {dateTypes == 'SingleDate' ? <>
+                                                {dateTypesFes == 'SingleDate' ? <>
                                                     <div class="my-4">
                                                         <label class="block text-gray-700 text-sm font-bold mb-1" for="username">
                                                             Select Date
@@ -474,14 +490,14 @@ function Hits() {
 
                                         <div className='p-5 bg-white rounded-lg'>
                                             <form onSubmit={handleSubmitKun}>
-                                                <select id="countries" class="bg-gray-50 border w-full border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " onChange={(e) => setDateTypes(e.target.value)}>
+                                                <select id="countries" class="bg-gray-50 border w-full border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " onChange={(e) => setDateTypesKun(e.target.value)}>
                                                     <option disabled selected >  Filter by Date</option>
                                                     <option value="dateRange">Date Range</option>
                                                     <option value="SingleDate">Single Date</option>
 
                                                 </select>
 
-                                                {dateTypes == 'SingleDate' ? <>
+                                                {dateTypesKun == 'SingleDate' ? <>
                                                     <div class="my-4">
                                                         <label class="block text-gray-700 text-sm font-bold mb-1" for="username">
                                                             Select Date
@@ -526,7 +542,7 @@ function Hits() {
                                         </div>
                                         <div className='px-4 inline-flex  items-center py-2'>
                                             <p className='font-bold  text-gray-500 py-1 '>Total hits: </p>
-                                            {hitKundli.loading ? <LoaderN /> : <p className='font-extrabold text-orange-500 pl-14  text-2xl text-center  rounded-full  ' >{hitKundli?.result?.data}</p >}
+                                            {hitKundli.loading ?<div className='pl-14'> <LoaderN /></div> : <p className='font-extrabold text-orange-500 pl-14  text-2xl text-center  rounded-full  ' >{hitKundli?.result?.data}</p >}
                                         </div>
 
                                     </div>
@@ -541,14 +557,14 @@ function Hits() {
                                         <h1 className='text-center font-bold text-lg text-gray-500   underline underline-offset-8 py-2 '>Contact Hits </h1>
                                         <div className='p-5 bg-white rounded-lg'>
                                             <form onSubmit={handleSubmitCon}>
-                                                <select id="countries" class="bg-gray-50 border w-full border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " onChange={(e) => setDateTypes(e.target.value)}>
+                                                <select id="countries" class="bg-gray-50 border w-full border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " onChange={(e) => setDateTypesCon(e.target.value)}>
                                                     <option disabled selected >  Filter by Date</option>
                                                     <option value="dateRange">Date Range</option>
                                                     <option value="SingleDate">Single Date</option>
 
                                                 </select>
 
-                                                {dateTypes == 'SingleDate' ? <>
+                                                {dateTypesCon == 'SingleDate' ? <>
                                                     <div class="my-4">
                                                         <label class="block text-gray-700 text-sm font-bold mb-1" for="username">
                                                             Select Date
@@ -612,14 +628,14 @@ function Hits() {
                                         <h1 className='text-center font-bold text-lg text-gray-500   underline underline-offset-8 py-2 '>Horoscope Hits </h1>
                                         <div className='p-5 bg-white rounded-lg'>
                                             <form onSubmit={handleSubmitHoro}>
-                                                <select id="countries" class="bg-gray-50 border w-full border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " onChange={(e) => setDateTypes(e.target.value)}>
+                                                <select id="countries" class="bg-gray-50 border w-full border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " onChange={(e) => setDateTypesHoro(e.target.value)}>
                                                     <option disabled selected >  Filter by Date</option>
                                                     <option value="dateRange">Date Range</option>
                                                     <option value="SingleDate">Single Date</option>
 
                                                 </select>
 
-                                                {dateTypes == 'SingleDate' ? <>
+                                                {dateTypesHoro == 'SingleDate' ? <>
                                                     <div class="my-4">
                                                         <label class="block text-gray-700 text-sm font-bold mb-1" for="username">
                                                             Select Date
@@ -678,14 +694,14 @@ function Hits() {
 
                                         <div className='p-5 bg-white rounded-lg'>
                                             <form onSubmit={handleSubmitMatchMaking}>
-                                                <select id="countries" class="bg-gray-50 border w-full border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " onChange={(e) => setDateTypes(e.target.value)}>
+                                                <select id="countries" class="bg-gray-50 border w-full border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " onChange={(e) => setDateTypesMatch(e.target.value)}>
                                                     <option disabled selected >  Filter by Date</option>
                                                     <option value="dateRange">Date Range</option>
                                                     <option value="SingleDate">Single Date</option>
 
                                                 </select>
 
-                                                {dateTypes == 'SingleDate' ? <>
+                                                {dateTypesMatch == 'SingleDate' ? <>
                                                     <div class="my-4">
                                                         <label class="block text-gray-700 text-sm font-bold mb-1" for="username">
                                                             Select Date
@@ -738,14 +754,14 @@ function Hits() {
 
                                         <div className='p-5 bg-white rounded-lg'>
                                             <form onSubmit={handleSubmitaArt}>
-                                                <select id="countries" class="bg-gray-50 border w-full border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " onChange={(e) => setDateTypes(e.target.value)}>
+                                                <select id="countries" class="bg-gray-50 border w-full border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " onChange={(e) => setDateTypesArt(e.target.value)}>
                                                     <option disabled selected >  Filter by Date</option>
                                                     <option value="dateRange">Date Range</option>
                                                     <option value="SingleDate">Single Date</option>
 
                                                 </select>
 
-                                                {dateTypes == 'SingleDate' ? <>
+                                                {dateTypesArt == 'SingleDate' ? <>
                                                     <div class="my-4">
                                                         <label class="block text-gray-700 text-sm font-bold mb-1" for="username">
                                                             Select Date
@@ -799,14 +815,14 @@ function Hits() {
 
                                         <div className='p-5 bg-white rounded-lg'>
                                             <form onSubmit={handleSubmitaLogin}>
-                                                <select id="countries" class="bg-gray-50 border w-full border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " onChange={(e) => setDateTypes(e.target.value)}>
+                                                <select id="countries" class="bg-gray-50 border w-full border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " onChange={(e) => setDateTypesLogin(e.target.value)}>
                                                     <option disabled selected >  Filter by Date</option>
                                                     <option value="dateRange">Date Range</option>
                                                     <option value="SingleDate">Single Date</option>
 
                                                 </select>
 
-                                                {dateTypes == 'SingleDate' ? <>
+                                                {dateTypesLogin == 'SingleDate' ? <>
                                                     <div class="my-4">
                                                         <label class="block text-gray-700 text-sm font-bold mb-1" for="username">
                                                             Select Date
@@ -858,14 +874,14 @@ function Hits() {
 
                                         <div className='p-5 bg-white rounded-lg'>
                                             <form onSubmit={handleSubmitaAdmin}>
-                                                <select id="countries" class="bg-gray-50 border w-full border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " onChange={(e) => setDateTypes(e.target.value)}>
+                                                <select id="countries" class="bg-gray-50 border w-full border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " onChange={(e) => setDateTypesAdmin(e.target.value)}>
                                                     <option disabled selected >  Filter by Date</option>
                                                     <option value="dateRange">Date Range</option>
                                                     <option value="SingleDate">Single Date</option>
 
                                                 </select>
 
-                                                {dateTypes == 'SingleDate' ? <>
+                                                {dateTypesAdmin == 'SingleDate' ? <>
                                                     <div class="my-4">
                                                         <label class="block text-gray-700 text-sm font-bold mb-1" for="username">
                                                             Select Date
@@ -916,14 +932,14 @@ function Hits() {
 
                                         <div className='p-5 bg-white rounded-lg'>
                                             <form onSubmit={handleSubmitaZodiacSign}>
-                                                <select id="countries" class="bg-gray-50 border w-full border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " onChange={(e) => setDateTypes(e.target.value)}>
+                                                <select id="countries" class="bg-gray-50 border w-full border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " onChange={(e) => setDateTypesZodiac(e.target.value)}>
                                                     <option disabled selected >  Filter by Date</option>
                                                     <option value="dateRange">Date Range</option>
                                                     <option value="SingleDate">Single Date</option>
 
                                                 </select>
 
-                                                {dateTypes == 'SingleDate' ? <>
+                                                {dateTypesZodiac == 'SingleDate' ? <>
                                                     <div class="my-4">
                                                         <label class="block text-gray-700 text-sm font-bold mb-1" for="username">
                                                             Select Date
@@ -975,14 +991,14 @@ function Hits() {
 
                                         <div className='p-5 bg-white rounded-lg'>
                                             <form onSubmit={handleSubmitaLocation}>
-                                                <select id="countries" class="bg-gray-50 border w-full border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " onChange={(e) => setDateTypes(e.target.value)}>
+                                                <select id="countries" class="bg-gray-50 border w-full border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " onChange={(e) => setDateTypesLoc(e.target.value)}>
                                                     <option disabled selected >  Filter by Date</option>
                                                     <option value="dateRange">Date Range</option>
                                                     <option value="SingleDate">Single Date</option>
 
                                                 </select>
 
-                                                {dateTypes == 'SingleDate' ? <>
+                                                {dateTypesLoc == 'SingleDate' ? <>
                                                     <div class="my-4">
                                                         <label class="block text-gray-700 text-sm font-bold mb-1" for="username">
                                                             Select Date

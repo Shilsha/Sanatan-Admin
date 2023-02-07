@@ -18,7 +18,7 @@ function BroadCast() {
     const [msg, setMsg] = useState('')
     const broadCast = useSelector((state) => state.broadcast)
 
-    // console.log(broadCast, 'broadcast') 
+    console.log(broadCast, 'broadcast') 
 
     useEffect(() => {
         dispatch(getBroadCastAction())
