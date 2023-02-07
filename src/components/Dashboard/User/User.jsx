@@ -292,7 +292,11 @@ function User() {
                                 </button>
 
                             </div>
-                            <div>
+                            <div className='flex justify-center items-center'>
+
+                            <div className='text-green-500 mr-2 font-medium'>
+                                    {types==='true'?'Activated' : <p className='text-red-500 inline-flex'>De-<span>Activated</span></p>}
+                                </div>
                                 <select id="countries" className="bg-gray-50 border border-gray-400 text-gray-900 
                                     text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700
                                      dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -309,15 +313,15 @@ function User() {
 
                             <table class="shadow-lg tables  w-full rounded-xl blurrTable">
                                 <thead className=''>
-                                    <tr className='  text-center '>
-                                        <td class="bg-blue-100   px-2 text-center">ID</td>
-                                        <td class="bg-blue-100   px-2  py-3">Name</td>
-                                        <td class="bg-blue-100   px-2 py-2">Email</td>
-                                        <td class="bg-blue-100   py-2">Mobile Number</td>
-                                        <td class="bg-blue-100   py-2">Create</td>
-                                        <td class="bg-blue-100   py-2">Modify</td>
-                                        <td class="bg-blue-100   py-2">Status</td>
-                                        <td class="bg-blue-100   py-2">Action</td>
+                                    <tr className='   '>
+                                        <td class="bg-blue-100 py-3  px-2 ">ID</td>
+                                        <td class="bg-blue-100   ">Name</td>
+                                        <td class="bg-blue-100   ">Email</td>
+                                        <td class="bg-blue-100   ">Mobile Number</td>
+                                        <td class="bg-blue-100   ">Create</td>
+                                        <td class="bg-blue-100   ">Modify</td>
+                                        <td class="bg-blue-100   ">Status</td>
+                                        <td class="bg-blue-100   text-center">Action</td>
                                     </tr>
                                 </thead>
 
@@ -338,19 +342,19 @@ function User() {
                                                         // userData?.result.map((data) => {
                                                         return (
                                                             <>
-                                                                <tr key={data.id} className="text-center  text-gray-500 border-b-[3px]">
-                                                                    <td class="py-3 text-center">{data.userId}</td>
-                                                                    <td class="py-2  px-2 ">{data.fullName}
+                                                                <tr key={data.id} className="  text-gray-500 border-b-[3px]">
+                                                                    <td class="py-3 px-2 ">{data.userId}</td>
+                                                                    <td class="">{data.fullName}
                                                                     </td>
-                                                                    <td class="py-2    px-2">{data.email} </td>
-                                                                    <td class="py-3  px-2">{data.mobileNo == null ? '---' : data.mobileNo} </td>
-                                                                    <td class="py-3  px-2">
+                                                                    <td class="">{data.email} </td>
+                                                                    <td class="">{data.mobileNo == null ? '---' : data.mobileNo} </td>
+                                                                    <td class="">
                                                                         {moment(data.createdDate).format("MM/DD/YYYY")}
                                                                     </td>
-                                                                    <td class="py-3  px-2">
+                                                                    <td class="">
                                                                         {moment(data.modifiedDate).format("MM/DD/YYYY")}
                                                                     </td>
-                                                                    <td class="py-2 text-center pt-1  ">
+                                                                    <td class="py-2  pt-1  ">
                                                                         {JSON.stringify(data?.enabled)}
 
 

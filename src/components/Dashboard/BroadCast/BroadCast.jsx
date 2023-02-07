@@ -176,12 +176,12 @@ function BroadCast() {
                             <table class="shadow-xl tables    w-full rounded-xl blurrTable ">
                                
                                 <thead className=''>
-                                <tr className='  bg-blue-100  text-center '>
+                                <tr className='  bg-blue-100  '>
                                         <td class=" py-3  px-2">ID</td>
-                                        <td class=" py-3 "> Date</td>
-                                        <td class=" py-3 ">Status</td>
-                                        <td class=" py-3 ">Message</td>
-                                        <td class=" py-3  ">Action</td>
+                                        <td class=" "> Date</td>
+                                        <td class=" ">Status</td>
+                                        <td class=" ">Message</td>
+                                        <td class=" text-center ">Action</td>
                                     </tr>
                                 </thead>
                                 {
@@ -190,12 +190,12 @@ function BroadCast() {
                                         {broadCast.result.map((data) => {
                                             return (
                                                 <>
-                                                    <tr key={data.id} className='text-center border-b-[3px] text-gray-500'>
+                                                    <tr key={data.id} className=' border-b-[3px] text-gray-500'>
                                                         <td class="py-2 px-2 ">{data.announcementId}</td>
-                                                        <td class="py-2  px-2 ">{data.announcementDate}</td>
-                                                        <td class="py-2  px-2 ">{JSON.stringify(data.announcementStatus)}</td>
-                                                        <td class="py-2  px-2 ">{truncateString(data.announcementOfTheDay, 90)}</td>
-                                                        <td class="py-2  px-2 ">
+                                                        <td class=" ">{data.announcementDate}</td>
+                                                        <td class=" ">{JSON.stringify(data.announcementStatus)}</td>
+                                                        <td class=" ">{truncateString(data.announcementOfTheDay, 90)}</td>
+                                                        <td class="text-center ">
 {/* 
 
                                                             <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold 

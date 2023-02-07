@@ -341,7 +341,7 @@ function Sidebar() {
                         <div className=" grid grid-cols-3 justify-between items-center  w-full   " >
 
 
-                            <div className="form-check">
+                            {/* <div className="form-check">
                                 <input
                                     type="checkbox"
                                     className="form-check-input"
@@ -350,7 +350,7 @@ function Sidebar() {
                                     onChange={handleChangePer}
                                 />
                                 <label className="text-xs px-2">Super Admin</label>
-                            </div>
+                            </div> */}
 
 
                             {permission.map((user, index) => (

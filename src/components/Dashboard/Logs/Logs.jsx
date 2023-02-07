@@ -295,9 +295,9 @@ function Logs() {
                         <div className="tableWrap">
                             <table class="shadow-lg tables  w-full rounded-xl blurrTable">
                                 <thead className=''>
-                                    <tr className='  bg-blue-100 text-center  '>
-                                        <td class=" py-3  "> ID</td>
-                                        <td class=" py-3   ">User Id</td>
+                                    <tr className='  bg-blue-100   '>
+                                        <td class=" py-3 px-2 "> ID</td>
+                                        <td class="   ">User Id</td>
                                         <td class="   ">Module</td>
                                         <td class="   ">Sub Module</td>
                                         <td class="   ">Status</td>
@@ -318,15 +318,15 @@ function Logs() {
 
 
                                                 return (<>
-                                                    <tr key={data.id} className="text-center text-gray-500 border-b-[3px]">
-                                                        <td class=" py-3">{data.id}</td>
-                                                        <td class=" py-3">{data.userId == null ? '---' : data.userId}</td>
-                                                        <td class=" py-3 px-2 ">{data.module}</td>
-                                                        <td class=" py-3 px-2 ">{data.subModule}</td>
-                                                        <td class=" py-3 px-2 ">{JSON.stringify(data.status)}</td>
-                                                        <td class=" py-3 px-2 ">{data.methodOperation}</td>
-                                                        <td class=" py-3 px-2 ">{data.createdAt}</td>
-                                                        <td class=" py-3 px-2 ">{data.createdTime}</td>
+                                                    <tr key={data.id} className=" text-gray-500 border-b-[3px]">
+                                                        <td class=" py-3 px-2">{data.id}</td>
+                                                        <td class=" ">{data.userId == null ? '---' : data.userId}</td>
+                                                        <td class="  ">{data.module}</td>
+                                                        <td class="  ">{data.subModule}</td>
+                                                        <td class="  ">{JSON.stringify(data.status)}</td>
+                                                        <td class="  ">{data.methodOperation}</td>
+                                                        <td class="  ">{data.createdAt}</td>
+                                                        <td class="  ">{data.createdTime}</td>
                                                     </tr>
 
                                                 </>)

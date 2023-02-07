@@ -106,9 +106,7 @@ function QueriesList() {
             type: type
         }
         dispatch(getAllQueriesAction(data))
-        toast('Your query type has changed.',{
-            className: 'toast-typeChanged'
-        })
+      toast.success('Your query type has changed.')
 
     }
 
@@ -202,7 +200,10 @@ function QueriesList() {
                             </button>
                      
                             </div>
-                            <div>
+                            <div className='flex justify-center items-center '>
+                            <div className='text-green-500 mr-2 font-medium'>
+                                    {types=='REJECTED'?<><span className='text-red-500'>REJECTED</span></>:types}
+                                </div>
                                 <select id="countries" class="bg-gray-50 border border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5
                                  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white
                                   dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -219,16 +220,16 @@ function QueriesList() {
                         <div className='tableWrap pr-4'>
                             <table class="shadow-lg tables blurrTable  w-full rounded-xl  ">
                                 <thead className=''>
-                                    <tr className=' table_head bg-blue-100  text-center '>
-                                        <td class="   px-2  ">ID</td>
-                                        <td class=" px-2 py-3">Name</td>
-                                        <td class=" px-2 py-3">Email</td>
-                                        <td class=" px-2 py-2">Message</td>
-                                        <td class=" px-2 py-2">Comment</td>
-                                        <td class=" px-2 py-2">Phone No</td>
-                                        <td class=" px-2 py-2"> Create Date</td>
-                                        <td class=" px-2 py-2">Status</td>
-                                        <td class=" px-2 py-2">View</td>
+                                    <tr className=' table_head bg-blue-100 '>
+                                        <td class="   px-2 py-3 ">ID</td>
+                                        <td class=" ">Email</td>
+                                        <td class=" ">Name</td>
+                                        <td class=" ">Message</td>
+                                        <td class=" ">Comment</td>
+                                        <td class=" ">Phone No</td>
+                                        <td class=" "> Create Date</td>
+                                        <td class=" ">Status</td>
+                                        <td class="text-center ">View</td>
                                     </tr>
                                 </thead>
 
@@ -246,15 +247,15 @@ function QueriesList() {
                                                         return (
                                                             <>
 
-                                                                <tr key={data.id} className="text-center text-gray-500 border-b-[3px]  ">
-                                                                    <td class="  text-center">{data.contactId}</td>
-                                                                    <td class="   px-2 py-3 ">{data.name}</td>
-                                                                    <td class="   px-2 py-3 ">{data.email}</td>
-                                                                    <td class="   px-2 py-3 ">{data.msg}</td>
-                                                                    <td class="   px-2 py-3 ">{data.comment}</td>
-                                                                    <td class="   px-2 py-3 ">{data.phoneNo}</td>
-                                                                    <td class="   px-2 py-3 ">{data.createdDate}</td>
-                                                                    <td class="   px-2 py-3 ">{data.status}</td>
+                                                                <tr key={data.id} className=" text-gray-500 border-b-[3px]  ">
+                                                                    <td class="  py-3 px-2">{data.contactId}</td>
+                                                                    <td class=" ">{data.name}</td>
+                                                                    <td class=" ">{data.email}</td>
+                                                                    <td class=" ">{data.msg}</td>
+                                                                    <td class=" ">{data.comment}</td>
+                                                                    <td class=" ">{data.phoneNo}</td>
+                                                                    <td class=" ">{data.createdDate}</td>
+                                                                    <td class=" ">{data.status}</td>
 
                                                                     <td class=" px-4 flex  justify-evenly items-center pt-2" >
 
@@ -283,8 +284,6 @@ function QueriesList() {
 
                             </table>
                         </div>
-
-
                     </div>
                     {/* ================================================next and Previous================================================== */}
 
