@@ -44,7 +44,7 @@ function AdminUserList() {
     const [adminName, setAdminName] = useState('')
     const [action, setAction] = useState('')
 
-    const [types, setTypes] = useState(true)
+    const [types, setTypes] = useState('true')
     const [adminStat, setAdminStat] = useState('')
     const dispatch = useDispatch()
     const [role, setRole] = useState()
@@ -274,6 +274,7 @@ function AdminUserList() {
     console.log(errors,'errors')
     const LoginAdmin = JSON.parse(sessionStorage.getItem('user'))
     // console.log(LoginAdmin.adminId, 'login id')
+    console.log(types,'typesssssssssssssssssssssssssssssssssss')
     return (
 
         <>
@@ -307,7 +308,7 @@ function AdminUserList() {
 
                             <div className='flex justify-center items-center '>
                                 <div className='text-green-500 mr-2 font-medium'>
-                                    {types === 'true' ? 'Activated' : <p className='text-red-500 inline-flex'>De-<span>Activated</span></p>}
+                                    {types == 'true' ? 'Activated' : <p className='text-red-500 inline-flex'>De-<span>Activated</span></p>}
                                 </div>
                                 <select id="countries" className="bg-gray-50 border border-gray-400 text-gray-900 
                                 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700
