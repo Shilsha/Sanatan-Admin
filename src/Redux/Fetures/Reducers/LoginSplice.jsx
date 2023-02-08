@@ -41,11 +41,13 @@ export const forgetPassword = createAsyncThunk('FORGET/FORGET_PASSWORD',
         return axios(OPTIONS)
             .then(res => {
 
-                // sessionStorage.setItem("user",JSON.stringify( res.data.data))
-
-
                 return res
             })
+            .catch((err)=>{
+                console.log(err.response.data.status)
+                toast.error(err.response.data.status.message)
+                return rejectWithValue(err.response.data)
+            } )
     })
 
 export const verifyOtp = createAsyncThunk('VERIFY/VERIFY_OTP',
@@ -143,7 +145,7 @@ const logins = createSlice({
 
         },
         [forgetPassword.rejected]: (state, action) => {
-
+            // console.log(action ,'this is error otp')
             state.loading = false,
 
                 state.error = action

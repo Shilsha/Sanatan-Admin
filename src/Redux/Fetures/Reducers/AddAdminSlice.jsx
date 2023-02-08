@@ -92,6 +92,9 @@ const addAdmins = createSlice({
             state.loading = false,
                 state.updateRoles = action.payload.data.data
                 toast.success('Role updated succesfully')
+                setTimeout(() => {
+                    window.location.reload();  
+                }, 1000);
 
         },
         [updateRole.rejected]: (state, action) => {

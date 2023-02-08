@@ -159,6 +159,7 @@ function Dashboard() {
     useEffect(() => {
         dispatch(panchangeAction(requestOptions1))
     }, [value])
+    console.log(value,'this is value')
 
 
     // ************************************************************Role based Module accces*******************************************************************

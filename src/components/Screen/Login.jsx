@@ -12,7 +12,8 @@ import Modal from 'react-modal';
 import OTPInput, { ResendOTP } from "otp-input-react";
 import { useEffect } from 'react';
 import { BiHide, BiShow } from 'react-icons/bi'
-import {AiOutlineClose} from 'react-icons/ai'
+import { AiOutlineClose } from 'react-icons/ai'
+import Loader from '../../components/Loader/Loader'
 
 const customStyles = {
     content: {
@@ -43,7 +44,7 @@ function Login() {
     const [adminId, setAdminId] = useState('')
     const [adminStatus, setAdminStatus] = useState('')
     const [passShow, setPassShow] = useState(false)
-    const [buttonDi,setButtonDi]=useState(false)
+    const [buttonDi, setButtonDi] = useState(false)
 
     const AdminLoginFunction = (e) => {
         e.preventDefault()
@@ -80,7 +81,7 @@ function Login() {
 
     // ============================= otp function =========================
     const forgetOTp = useSelector(state => state.login)
-    // console.log(forgetOTp.result, 'otp')
+    console.log(forgetOTp, 'otp')
 
     const isVerefied = useSelector(state => state.login)
     console.log(isVerefied.verefied, 'is verefied')
@@ -89,10 +90,11 @@ function Login() {
     const [confirmPass, setConfirmPass] = useState('')
     console.log(OTP, 'OTP')
 
-    const forgetPasswordHandle = () => {
+    const forgetPasswordHandle = (e) => {
+        e.preventDefault()
 
         dispatch(forgetPassword(email))
-        setForgetDiv(false)
+       
     }
 
     const verifyOtps = () => {
@@ -121,21 +123,26 @@ function Login() {
         if (forgetOTp?.result?.isOtpVerified) {
             setResPass(true)
         }
-      
+        console.log(forgetOTp?.result.adminId,'lenght')
+        if(forgetOTp?.result?.adminId){
+             setForgetDiv(false)
+        }
+
     }, [forgetOTp.result])
-console.log(forgetOTp?.result,'here')
+
+    console.log(forgetOTp?.result, 'here')
     console.log(adminName, adminId, adminStatus, 'all')
     const handleCreatePassword = (e) => {
         e.preventDefault()
         const data = {
             adminId: forgetOTp?.result.adminId,
             adminName: forgetOTp?.result.adminName,
-            adminStatus:forgetOTp?.result.adminStatus,
+            adminStatus: forgetOTp?.result.adminStatus,
             password: pass
         }
         console.log(pass, confirmPass, 'passoword')
         if (pass == confirmPass) {
-            console.log(data,'data reset')
+            console.log(data, 'data reset')
 
             dispatch(resetPassword(data))
         } else {
@@ -174,7 +181,7 @@ console.log(forgetOTp?.result,'here')
                                 <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
                                     Email
                                 </label>
-                                <input type="email" id="email" class="bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@flowbite.com" required
+                                <input type="email" id="email" class="bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Email" required
                                     value={email} onChange={(e) => setEmail(e.target.value)} />
                             </div>
                             <div class="mb-6">
@@ -195,7 +202,7 @@ console.log(forgetOTp?.result,'here')
 
 
                                         placeholder="Password"
-                                        required  value={password} onChange={(e) => setPassword(e.target.value)}  />
+                                        required value={password} onChange={(e) => setPassword(e.target.value)} />
                                     <span class="z-10 h-full leading-snug font-normal cursor-pointer  text-center text-slate-300 absolute bg-transparent rounded text-base items-center justify-center w-8 right-0 pr-3 py-3">
 
                                         {passShow ? <><BiShow className='text-gray-500' onClick={showPass} /></> : <>    <BiHide className='text-gray-500' onClick={showPass} /></>}
@@ -209,8 +216,8 @@ console.log(forgetOTp?.result,'here')
                             </div>
                             <div class="flex items-center justify-between">
                                 <button class="bg-orange-500 hover:bg-red-700 text-white font-bold  px-5 rounded focus:outline-none focus:shadow-outline
-                                disabled:opacity-50 disabled:cursor-not-allowed" 
-                                type="submit" disabled={buttonDi}>
+                                disabled:opacity-50 disabled:cursor-not-allowed"
+                                    type="submit" disabled={buttonDi}>
                                     Sign In
                                 </button>
 
@@ -246,7 +253,7 @@ console.log(forgetOTp?.result,'here')
                 {forgetDiv ? <>
 
                     <div class="w-full  bg-white p-5 rounded-lg lg:rounded-l-none shadow">
-                    <AiOutlineClose onClick={closeModal} className="relative top-0 left-[95%] shadow text-red-500 cursor-pointer" size={25} />
+                        <AiOutlineClose onClick={closeModal} className="relative top-0 left-[95%] shadow text-red-500 cursor-pointer" size={25} />
                         <div class="px-8 mb-4 text-center">
                             <h3 class="pt-4 mb-2 text-2xl font-bold">Forgot Your Password?</h3>
                             <p class="mb-4 text-sm text-gray-700">
@@ -269,11 +276,13 @@ console.log(forgetOTp?.result,'here')
 
                                 />
                             </div>
+                            {forgetOTp.loading?<Loader/>:''}
                             <div class="mb-6 text-center">
                                 <button
                                     class=" w-full  text-white bg-gradient-to-r from-orange-500 
-                                    to-yellow-400 hover:bg-gradient-to-bl font-medium rounded-lg text-lg px-4 py-1 text-center "
+                                    to-yellow-400 hover:bg-gradient-to-bl font-medium rounded-lg text-lg px-4 py-1 text-center     disabled:opacity-50 disabled:cursor-not-allowed "
                                     type="submit"
+                                    disabled={forgetOTp?.loading}
                                 >
                                     Reset Password
                                 </button>
@@ -282,12 +291,14 @@ console.log(forgetOTp?.result,'here')
                             <hr class=" border-t" />
 
                             <div class="text-center">
-                                <a
-                                    class="inline-block text-sm text-blue-500 align-baseline hover:text-blue-800"
-
+                             
+                               <a
+                                    class="inline-block text-sm cursor-pointer text-blue-500 align-baseline hover:text-blue-800"
+                                onClick={()=>closeModal(false)}
                                 >
                                     Already have an account? Login!
                                 </a>
+                             
                             </div>
                         </form>
 
