@@ -58,7 +58,7 @@ function User() {
     const [page, setPage] = useState(0)
     const [buttonPre, setButtonPre] = useState(false)
     const [buttonNext, setButtonNext] = useState(false)
-    const [types, setTypes] = useState(true)
+    const [types, setTypes] = useState('true')
     // const [apiData,setApiData]=useState('')
 
 
@@ -318,18 +318,14 @@ function User() {
                                         <td class="bg-blue-100   ">Name</td>
                                         <td class="bg-blue-100   ">Email</td>
                                         <td class="bg-blue-100   ">Mobile Number</td>
-                                        <td class="bg-blue-100   ">Create</td>
-                                        <td class="bg-blue-100   ">Modify</td>
+                                        <td class="bg-blue-100   ">Create Date </td>
+                                        <td class="bg-blue-100   ">Modified Date</td>
                                         <td class="bg-blue-100   ">Status</td>
                                         <td class="bg-blue-100   text-center">Action</td>
                                     </tr>
                                 </thead>
 
                                 <tbody  >
-
-
-
-
 
                                     {
                                         userData?.loading ? <>
