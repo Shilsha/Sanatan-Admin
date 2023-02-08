@@ -172,7 +172,15 @@ function QueriesList() {
         }
 
     }, [allQueries.result.numberOfElements])
+    
+   // *****************************************************Module auth*******************************************
+   const Role = JSON.parse(sessionStorage.getItem('user'))
+   console.log(Role.role)
+   const isModuleAuth = Role?.role.some(data => data == 'QueriesList')
+   console.log(isModuleAuth, 'isModuleAuth  isModuleAuthisModuleAuthisModuleAuthisModuleAuth')
 
+   // **************************************************************
+if(isModuleAuth){
     return (
         <>
             <ToastContainer />
@@ -365,6 +373,9 @@ function QueriesList() {
 
         </>
     )
+
+}
+    
 }
 
 export default QueriesList

@@ -328,6 +328,15 @@ function Hits() {
 
     }
 
+     // *****************************************************Module auth*******************************************
+   const Role = JSON.parse(sessionStorage.getItem('user'))
+   console.log(Role.role)
+   const isModuleAuth = Role?.role.some(data => data == 'Hits')
+   console.log(isModuleAuth, 'isModuleAuth  isModuleAuthisModuleAuthisModuleAuthisModuleAuth')
+
+   // **************************************************************
+
+if(isModuleAuth){
     return (
         <>
 
@@ -1056,6 +1065,9 @@ function Hits() {
             </div>
         </>
     )
+
+}
+   
 }
 
 export default Hits
