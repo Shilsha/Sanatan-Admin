@@ -193,7 +193,7 @@ function User() {
 
 
 
-    console.log(userData?.result?.length,'thi si si lenght')
+    console.log(userData?.result?.length, 'thi si si lenght')
     useEffect(() => {
         if (userData?.result.length < 11) {
             console.log('chhota')
@@ -213,22 +213,22 @@ function User() {
     const exportData = (CleanData) => {
         setclean(CleanData)
         dispatch(exportDataAction(types))
-        
+
     }
 
     useEffect(() => {
 
-        if(clean=='CleanData'){
- 
+        if (clean == 'CleanData') {
+
             exportToCSV(apiData?.result)
         }
- 
-          setTimeout(() => {
+
+        setTimeout(() => {
             setclean('')
-          }, 1000);
- 
-       
-     }, [apiData?.result])
+        }, 1000);
+
+
+    }, [apiData?.result])
 
     const fileType =
         "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8";
@@ -263,19 +263,19 @@ function User() {
                                         <BsSearch className='p-1 ' size={25} />
                                     </button>
                                 </div>
-                                {apiData.loading?<> <button class="flex items-center justify-center  px-3 ml-10 py-1 bg-green-600
+                                {apiData.loading ? <> <button class="flex items-center justify-center  px-3 ml-10 py-1 bg-green-600
                                  hover:bg-green-800 text-white  font-medium rounded-md" >
                                     Processing
-                                    <div className='w-8 h-8 pl-2'>< LoaderN/></div>
-                                </button></>:<>
-                                
-                                
-                                <button class="inline-flex items-center px-4 ml-10 py-2 bg-green-600
+                                    <div className='w-8 h-8 pl-2'>< LoaderN /></div>
+                                </button></> : <>
+
+
+                                    <button class="inline-flex items-center px-4 ml-10 py-2 bg-green-600
                                  hover:bg-green-800 text-white  font-medium rounded-md" onClick={() => exportData('CleanData')} >
-                                    Export All
-                                    <IoDownloadSharp className='mx-1  ' size={25} />
-                                </button>
-                               
+                                        Export All
+                                        <IoDownloadSharp className='mx-1  ' size={25} />
+                                    </button>
+
                                 </>}
 
                                 {/* <ExportToExcel  apiData={apiData} fileName={fileName}/> */}
@@ -294,8 +294,8 @@ function User() {
                             </div>
                             <div className='flex justify-center items-center'>
 
-                            <div className='text-green-500 mr-2 font-medium'>
-                                    {types==='true'?'Activated' : <p className='text-red-500 inline-flex'>De-<span>Activated</span></p>}
+                                <div className='text-green-500 mr-2 font-medium'>
+                                    {types === 'true' ? 'Activated' : <p className='text-red-500 inline-flex'>De-<span>Activated</span></p>}
                                 </div>
                                 <select id="countries" className="bg-gray-50 border border-gray-400 text-gray-900 
                                     text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700
@@ -325,67 +325,66 @@ function User() {
                                     </tr>
                                 </thead>
                                 <tbody  >
-                                    {
-                                        userData?.loading ? <>
-                                            <Loader />
-                                        </> :
+                                    {userData?.loading ? <>
+                                        <Loader />
+                                    </> :
 
-                                            <>
-                                                {
-                                                    (userData?.result.filter((user) => user.fullName?.toLowerCase().includes(FilterSearch)))?.map((data) => {
-                                                        // userData?.result.map((data) => {
-                                                        return (
-                                                            <>
-                                                                <tr key={data.id} className="  text-gray-500 border-b-[3px]">
-                                                                    <td class="py-3 px-2 ">{data.userId}</td>
-                                                                    <td class="">{data.fullName}
-                                                                    </td>
-                                                                    <td class="">{data.email} </td>
-                                                                    <td class="">{data.mobileNo == null ? '---' : data.mobileNo} </td>
-                                                                    <td class="">
-                                                                        {moment(data.createdDate).format("MM/DD/YYYY")}
-                                                                    </td>
-                                                                    <td class="">
-                                                                        {moment(data.modifiedDate).format("MM/DD/YYYY")}
-                                                                    </td>
-                                                                    <td class="py-2  pt-1  ">
-                                                                        {JSON.stringify(data?.enabled)}
-
+                                        <>
+                                            {
+                                                (userData?.result.filter((user) => user.fullName?.toLowerCase().includes(FilterSearch)))?.map((data) => {
+                                                    // userData?.result.map((data) => {
+                                                    return (
+                                                        <>
+                                                            <tr key={data.id} className="  text-gray-500 border-b-[3px]">
+                                                                <td class="py-3 px-2 ">{data.userId}</td>
+                                                                <td class="">{data.fullName}
+                                                                </td>
+                                                                <td class="">{data.email} </td>
+                                                                <td class="">{data.mobileNo == null ? '---' : data.mobileNo} </td>
+                                                                <td class="">
+                                                                    {moment(data.createdDate).format("MM/DD/YYYY")}
+                                                                </td>
+                                                                <td class="">
+                                                                    {moment(data.modifiedDate).format("MM/DD/YYYY")}
+                                                                </td>
+                                                                <td class="py-2  pt-1  ">
+                                                                    {JSON.stringify(data?.enabled)}
 
 
-                                                                    </td>
-                                                                    <td class=" px-4 flex justify-evenly items-center pt-3" >
 
-                                                                        {data?.enabled ? <>
-                                                                            <button class="border-2 border-red-500 text-red-500 hover:bg-red-700
+                                                                </td>
+                                                                <td class=" px-4 flex justify-evenly items-center pt-3" >
+
+                                                                    {data?.enabled ? <>
+                                                                        <button class="border-2 border-red-500 text-red-500 hover:bg-red-700
                                                                             py-1.5  hover:text-white font-bold  text-xs px-3   rounded-full"
-                                                                                onClick={() => openModel(data.userId, 'Deactivate')}
-                                                                            // onClick={() => handleDeactivatedSingleUser(data.userId)}
-                                                                            >
-                                                                                Deactivate
-                                                                            </button>
-                                                                        </> : <>
-                                                                            <button class="border-2 border-green-500 text-green-500 hover:bg-green-700
+                                                                            onClick={() => openModel(data.userId, 'Deactivate')}
+                                                                        // onClick={() => handleDeactivatedSingleUser(data.userId)}
+                                                                        >
+                                                                            Deactivate
+                                                                        </button>
+                                                                    </> : <>
+                                                                        <button class="border-2 border-green-500 text-green-500 hover:bg-green-700
                                                                             py-1.5  hover:text-white font-bold  text-xs px-3   rounded-full"
-                                                                                // onClick={() => handleActivatedSingleUser(data.userId)}
-                                                                                onClick={() => openModel(data.userId, 'Activate')}
-                                                                            >
-                                                                                Activate
-                                                                            </button>
-                                                                        </>}
+                                                                            // onClick={() => handleActivatedSingleUser(data.userId)}
+                                                                            onClick={() => openModel(data.userId, 'Activate')}
+                                                                        >
+                                                                            Activate
+                                                                        </button>
+                                                                    </>}
 
-                                                                    </td>
-
-
-                                                                </tr>
+                                                                </td>
 
 
-                                                            </>
+                                                            </tr>
 
-                                                        )
-                                                    })
-                                                }
-                                            </>
+
+                                                        </>
+
+                                                    )
+                                                })
+                                            }
+                                        </>
                                     }
 
 

@@ -372,7 +372,7 @@ function AdminUserList() {
 
                                                                         <p className="tooltip-on-hover underline py-2 px-4 rounded-full hover:text-orange-500 inline-flex items-center">
                                                                             <span className='tooltip-on-hover'>View  </span>
-                                                                            <div className="tooltip absolute bg-gray-50 shadow rounded-lg p-3 ml-10 text-sm -mt-10 ">
+                                                                            <div className="tooltip absolute z-100 bg-gray-50 shadow rounded-lg p-3 ml-10 text-sm -mt-10 ">
                                                                                 {data.role?.map((data, index) => {
                                                                                     // console.log(data, 'role data')
                                                                                     return <>

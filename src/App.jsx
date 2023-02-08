@@ -15,6 +15,7 @@ import Hits from './components/Dashboard/Hits/Hits';
 import PrivateRoutes from './components/Dashboard/PrivateRoutes/PrivateRoutes';
 import BroadCast from './components/Dashboard/BroadCast/BroadCast';
 import BlogsPost from './components/Dashboard/BlogsPost/BlogsPost';
+import Profile from './components/Dashboard/Profile/Profile';
 function Routing() {
   return (
     <div> 
@@ -26,6 +27,7 @@ function Routing() {
 
           {/* <Route exact path="/dashboard" element={<Dashboard />} /> */}
           <Route exact path="/users" element={<PrivateRoutes Component={User}/>}> </Route>
+          <Route exact path="/dashboard/profile" element={<PrivateRoutes Component={Profile}/>}> </Route>
           <Route exact path="/articles"  element={<PrivateRoutes Component={Articles}/>}> </Route>
           <Route exact path="/articles/:id"  element={<PrivateRoutes Component={ReadMoreArticle}/>}> </Route>
           <Route exact path="/adminlists"  element={<PrivateRoutes Component={AdminUserList}/>}> </Route>

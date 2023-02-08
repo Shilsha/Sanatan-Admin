@@ -1,6 +1,7 @@
 import React from 'react'
 import { IoMdNotifications } from "react-icons/io";
 import {BiChevronDown} from "react-icons/bi"
+import {Link} from 'react-router-dom'
 function Navbar() {
 
   const userID=JSON.parse(sessionStorage.getItem('user'))
@@ -45,13 +46,16 @@ function Navbar() {
           </div>
         </div>
 
-        <div className='flex justify-between items-center   '>
-          
+        <div className='flex justify-between items-center cursor-pointer  '>
+         
+
             <IoMdNotifications className='text-white text-2xl shadow-lg mx-3'   />
+            <Link to='/dashboard/profile'>
           <div className=' flex items-center px-2  bg-white rounded py-1 shadow-lg mr-1'>
               <h2>{userID?.email}</h2>
               <BiChevronDown size={18} />
           </div>
+          </Link>
 
 
 
