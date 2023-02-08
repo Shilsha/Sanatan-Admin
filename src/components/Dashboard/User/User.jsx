@@ -59,17 +59,10 @@ function User() {
     const [buttonPre, setButtonPre] = useState(false)
     const [buttonNext, setButtonNext] = useState(false)
     const [types, setTypes] = useState('true')
-    // const [apiData,setApiData]=useState('')
-
-
     const userData = useSelector((state) => state.user)
-    const adminRole = JSON.parse(sessionStorage.getItem('user'))
     const apiData = useSelector(state => state.export)
 
 
-    // console.log(apiData.result, 'daadtatdadatdtdatdatadtdadattadtadttdtadtda')
-
-    // ----------------------get api call-------------
 
 
     useEffect(() => {
@@ -243,7 +236,14 @@ function User() {
         FileSaver.saveAs(data, fileName + fileExtension);
     };
 
+   // *****************************************************Module auth*******************************************
+   const Role = JSON.parse(sessionStorage.getItem('user'))
+   console.log(Role.role)
+   const isModuleAuth = Role?.role.some(data => data == 'User')
+   console.log(isModuleAuth, 'isModuleAuth  isModuleAuthisModuleAuthisModuleAuthisModuleAuth')
 
+   // **************************************************************
+if(isModuleAuth){
     return (
         <>
             <ToastContainer />
@@ -546,6 +546,8 @@ function User() {
 
         </>
     )
+}
+    
 
 
 }
