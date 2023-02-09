@@ -186,7 +186,7 @@ if(isModuleAuth){
             <ToastContainer />
             <div className='  bgGradient w-[100%] h-[100vh] flex flex-col-2 gap-4'>
                 <Sidebar />
-                <div className='  w-[93%] ' >
+                <div className='  w-full ' >
                     <Navbar />
                     <div className='my-4 '>
 
@@ -203,7 +203,7 @@ if(isModuleAuth){
 
                             </div>
                             <div>
-                            <button type="button" class= "inline-flex items-center text-white bg-gradient-to-r from-orange-500  to-yellow-400 hover:bg-gradient-to-bl font-medium rounded-lg text-lg px-3 py-1 text-center mr-40 mb-2"> Queries List
+                            <button type="button" class= "inline-flex items-center text-white bg-gradient-to-r from-orange-500  to-yellow-400 hover:bg-gradient-to-bl font-medium rounded-lg text-lg px-3 py-1 text-center mr-40 mb-2"> Query Management
                             
                             </button>
                      
@@ -244,7 +244,7 @@ if(isModuleAuth){
                                 <tbody>
                                     {
                                         allQueries?.loading ? <>
-                                            <Loader />
+                                          <div className='mt-48'>  <Loader /></div>
                                         </> :
                                             <>
                                                 {

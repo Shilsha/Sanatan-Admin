@@ -10,8 +10,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Navigate, NavLink, useNavigate } from 'react-router-dom'
 import { RiShieldUserLine } from 'react-icons/ri'
 import { HiClipboardDocumentList } from 'react-icons/hi2'
-import { BsFillQuestionSquareFill } from 'react-icons/bs'
+import { BsQuestionOctagonFill,BsClipboardData } from 'react-icons/bs'
 import { BiHide, BiShow } from 'react-icons/bi'
+import {SiBloglovin} from 'react-icons/si'
+import {VscBroadcast} from 'react-icons/vsc'
 import { addAdmin } from '../../Redux/Fetures/Reducers/AddAdminSlice'
 import { toast, ToastContainer } from 'react-toastify'
 import { Link } from 'react-router-dom'
@@ -225,34 +227,34 @@ function Sidebar() {
 
         <>
             <ToastContainer />
-            <div className='  flex flex-col justify-between py-5 items-center shadow-xl navbar_bg    -ml-4 px-2 mr-2  '>
+            <div className='  flex flex-col justify-between py-5 items-center shadow-xl navbar_bg    -ml-4 px-6  '>
 
-                <div className='-mt-4'>
+                <div className=''>
                     <Link to='/dashboard'>
-                        <img src={side1} alt="logo" className='w-20' />
+                        <img src={side1} alt="logo" className='w-32' />
                     </Link>
                 </div>
-
+{/* 
                 <div className='flex flex-col justify-between items-center -mt-16 gap-6  '>
                     <NavLink to='/dashboard'  >
                         <CgMenuGridR className='text-white iconsColor p-1 rounded cursor-pointer' size={35} />
                     </NavLink>
                     <NavLink to='/dashboard'>
-                        <p className='text-center text-[16px] -mt-6 font-medium text-white'>Dashboard</p>
+                        <p className='text-center text-[16px] -mt-6  text-white'>Dashboard</p>
                     </NavLink>
                     <div class=" dropdown">
                         <Link to='/adminlists'>
-                            <MdOutlineGroupAdd className=' cursor-pointer mx-2  text-white hover:text-white  p-1 rounded' size={35} />
+                            <MdOutlineGroupAdd className=' cursor-pointer ml-7  text-white hover:text-white   rounded' size={35} />
                         </Link>
-                        <p className='text-center  text-[16px]    text-white'>Staff List </p>
+                        <p className='text-center  text-[16px]   leading-5 text-white'>User <br /> Management </p>
                         <ul class="dropdown-menu absolute hidden z-10  rounded-lg  text-black bg-white shadow-xl ml-8">
                             <li class="">
                                 <a class="  hover:text-white hover:rounded-lg  hover:bg-orange-600 py-2 
-                                  px-4 block whitespace-no-wrap cursor-pointer " onClick={addStaff} >Add Staff</a>
+                                  px-4 block whitespace-no-wrap cursor-pointer " onClick={addStaff} >Add User</a>
                             </li>
                             <Link to='/adminlists'>
                                 <li class=""><a class="  hover:text-white hover:rounded-lg hover:bg-orange-600 py-2 px-4 block
-                             whitespace-no-wrap cursor-pointer" >Staff List</a></li>
+                             whitespace-no-wrap cursor-pointer" >User  List</a></li>
                             </Link>
 
                         </ul>
@@ -265,7 +267,7 @@ function Sidebar() {
                     </> : <>
                         <RiShieldUserLine onClick={unAutherizedHndle} className='text-white iconsColor  ' size={35} />
                     </>}
-                    <p className='text-center -mt-6 text-[16px]    text-white'>Users</p>
+                    <p className='text-center -mt-6 text-[16px]   leading-5 text-white'>Customer <br /> Management</p>
 
                     {articlesModuleAuth || isSuperAdmin ? <>
                         <NavLink to='/articles'>
@@ -275,31 +277,153 @@ function Sidebar() {
                         <HiClipboardDocumentList onClick={unAutherizedHndle} className=' text-white iconsColor' size={35} />
                     </>}
 
-                    <p className='text-center -mt-6 text-[16px]    text-white'>Articles</p>
+                    <p className='text-center -mt-6 text-[16px]   leading-5 text-white'>Article <br /> Management</p>
 
 
                     {QueriesListModuleAuth || isSuperAdmin ? <>
                         <NavLink to='/queries'>
-                            <BsFillQuestionSquareFill className='text-white iconsColor ' size={30} />
+                            <BsQuestionOctagonFill className='text-white iconsColor ' size={30} />
                         </NavLink>
                     </> : <>
 
-                        <BsFillQuestionSquareFill onClick={unAutherizedHndle} className='text-white iconsColor ' size={30} />
+                        <BsQuestionOctagonFill onClick={unAutherizedHndle} className='text-white iconsColor ' size={30} />
 
                     </>}
 
-                    <p className='text-center -mt-6 text-[16px]    text-white'>Queries</p>
+                    <p className='text-center -mt-6 text-[16px]   leading-5 text-white'>Query <br /> Management</p>
 
 
 
-                </div>
+                </div> */}
+
+{/* *************************************************************************************** */}
 
 
+<nav className='-mt-4'>
+		<ul class="mcd-menu">
+			<li className=''>
+				<NavLink to='/dashboard'>
+                <CgMenuGridR className='iconss ' size={25} />
+					<strong>Dashboard</strong>
+					
+                    </NavLink> 
+			</li>
+            <li>
+            <NavLink to='/adminlists'>
+                <MdOutlineGroupAdd className=' ' size={25} />
+					<strong>User  Management</strong>
+					
+                    </NavLink> 
+				<ul>
+					<li>
+                        <a onClick={addStaff} className='cursor-pointer'>Add user</a></li>	
+					<li>
+                        <NavLink   to='/adminlists'>User List</NavLink>
+                        </li>
+				
+				</ul>
+			</li>
 
-                <div className=' justify-center  rounded-full'>
+            <li>
+            {userModuleAuth || isSuperAdmin ? <>
+            
+                <NavLink to='/users'>
+                <HiClipboardDocumentList className=' ' size={25} />
+					<strong>Customer Management</strong>
+					
+                    </NavLink> 
+            </>:<>
+          <a  onClick={unAutherizedHndle} >
+          <HiClipboardDocumentList className=' ' size={25} />
+					<strong>Customer Management</strong>
+          </a>
+            </>}
+				
+			</li>
+         
+            <li>
+
+            {QueriesListModuleAuth || isSuperAdmin ? <>
+            
+                <NavLink to='/queries'>
+                <BsQuestionOctagonFill className=' ' size={25} />
+					<strong>Query Management</strong>
+					
+                    </NavLink> 
+            
+            </>:<>
+            <a onClick={unAutherizedHndle}>
+            <BsQuestionOctagonFill className=' ' size={25} />
+					<strong>Query Management</strong>
+					
+               
+            </a>
+            </>}
+				
+			</li>
+            <li>
+                {LogstModuleAuth || isSuperAdmin?<>
+                    <NavLink to='/logs'>
+                <BsClipboardData className=' ' size={25} />
+					<strong>log Management</strong>
+					
+                    </NavLink> 
+                </>:<>
+                
+                <a onClick={unAutherizedHndle}>
+                <BsClipboardData className=' ' size={25} />
+					<strong>log Management</strong>
+					
+                </a>
+                </>}
+				
+			</li>
+            <li>
+                {BroadcastModuleAuth || isSuperAdmin?<>
+                
+                    <NavLink to='/broadcast'>
+                <VscBroadcast className=' ' size={25} />
+					<strong>Broadcast Management</strong>
+					
+                    </NavLink> 
+                </>:<>
+                <a onClick={unAutherizedHndle}>
+                <VscBroadcast className=' ' size={25} />
+					<strong>Broadcast Management</strong>              
+                </a>
+                </>}
+				
+			</li>
+            <li>
+                {BlogsPosttModuleAuth || isSuperAdmin?<>
+                	<NavLink to='/blogsPost'>
+                <SiBloglovin className=' ' size={25} />
+					<strong>Blog Management</strong>
+					
+                    </NavLink> 
+                </>:<>
+                <a onClick={unAutherizedHndle}>
+                <SiBloglovin className=' ' size={25} />
+					<strong>Blog Management</strong>
+                </a>
+                </>}
+			
+			</li>
+			
+			
+			
+			
+			
+		
+		</ul>
+	</nav>
+
+{/* *************************************************************************************** */}
+
+                <div className=' justify-center   rounded-full'>
                     <TbLogout className='text-white  p-1 hover:bg-red-800 iconsColor rounded-lg hover:text-white  cursor-pointer'
                         onClick={logout} size={35} />
-                    <p className='text-center text-[16px]    text-white' >Logout</p>
+                    <p className='text-center  text-[16px]   leading-5 text-white font-bold' >Logout</p>
 
 
                 </div>
@@ -316,7 +440,7 @@ function Sidebar() {
 
                     <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 relative z-50" onSubmit={HandleOnSubmit}>
                         <AiOutlineClose onClick={closeModal} className="relative top-0 left-[100%] cursor-pointer" size={25} />
-                        <h1 className='text-center font-sans  mb-4 text-4xl font-bold text-orange-500'>Add Staff </h1>
+                        <h1 className='text-center font-sans  mb-4 text-4xl font-bold text-orange-500'>Add User </h1>
 
 
                         <div class="mb-4">

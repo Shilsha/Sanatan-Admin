@@ -258,7 +258,7 @@ function Articles() {
                                 <div>
                                     <button type="button" class="inline-flex items-center text-white bg-gradient-to-r 
                                 from-orange-500  to-yellow-400 hover:bg-gradient-to-bl font-medium rounded-lg text-lg px-3 py-1 text-center mr-40 mb-2">
-                                        Articles List
+                                        Article Management
                                     </button>
     
                                 </div>

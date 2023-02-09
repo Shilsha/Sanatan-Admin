@@ -76,7 +76,7 @@ function BlogsPost() {
     }
     // console.log(category,title,'value')
 
-         // *****************************************************Module auth*******************************************
+         // *****************************************************Module auth**************************************************
          const Role = JSON.parse(sessionStorage.getItem('user'))
          console.log(Role.role)
          const isModuleAuth = Role?.role.some(data => data == 'BlogsPost')

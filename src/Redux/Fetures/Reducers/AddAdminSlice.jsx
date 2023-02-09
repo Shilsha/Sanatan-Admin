@@ -75,6 +75,7 @@ const addAdmins = createSlice({
                 state.result = action
             // console.log(action.payload.data.status.message,'err')
             // toast.success(action.payload.data.status.message)
+        
         },
         [addAdmin.rejected]: (state, action) => {
             // console.log(action,'action error')

@@ -159,7 +159,7 @@ function Dashboard() {
     useEffect(() => {
         dispatch(panchangeAction(requestOptions1))
     }, [value])
-    console.log(value,'this is value')
+    console.log(value, 'this is value')
 
 
     // ************************************************************Role based Module accces*******************************************************************
@@ -383,183 +383,158 @@ function Dashboard() {
 
                             <div className=' col-span-2 rounded-lg   '>
 
-                                <div className="row grid grid-cols-3 gap-5  "  >
+                                <div className="row grid grid-cols-3 gap-5  dashBoardModule  "  >
 
-                                    <div className='rounded-lg bg-gray-50/20 blurr  shadow  px-2 h-[175px]  ' >
-                                        <div className='flex justify-between px-3 items-center my-3 '>
-                                            <div className=' rounded-full p-2'>
-
-                                                <RiShieldUserLine className='text-orange-500 ' size={50} />
+                                    <div className='rounded-lg bg-gray-50/20 blurr  shadow  px-2 h-[175px] ' >
+                                        <div className='  my-3'> 
+                                            <div className='flex  justify-around items-center  pr-5 py-2 '>
+                                                <RiShieldUserLine className='text-orange-500  pt-2' size={40} />
+                                                {<h1 className='text-6xl font-medium text-gray-500    text-start '>{userData.result?.length}</h1>}
                                             </div>
-                                            <div className='flex flex-col '>
-
+                                           
+                                            <div className=''>
                                                 {userModuleAuth || isSuperAdmin ? <>
                                                     <Link to='/users'>
-                                                        <h1 className=' cursor-pointer py-4 text-2xl text-center font-medium underline underline-offset-8 text-gray-500 '>Users</h1>
+                                                        <h1 className='py-3 cursor-pointer hover:text-orange-600 text-xl leading-6 text-center font-medium   text-gray-500 '>Customer  Management</h1>
 
                                                     </Link>
                                                 </> : <>
-                                                    <h1 onClick={unAutherizedHndle} className=' cursor-pointer py-4 text-2xl text-center font-medium underline underline-offset-8 text-red-500/60 '>Users</h1>
+                                                    <h1 onClick={unAutherizedHndle} className=' py-3 cursor-pointer  text-xl leading-6 text-center font-medium   text-red-500/60 '>Customer Management</h1>
 
                                                 </>}
-
-                                                {
-
-                                                    <h1 className='text-5xl font-medium text-gray-500    text-center '>{userData.result?.length}</h1>
-                                                }
-
                                             </div>
                                         </div>
 
                                     </div>
 
-                                    <div className='  rounded-lg bg-gray-50/20 blurr   shadow  py-2 h-[175px] '>
-                                        <div className='flex justify-between px-2 items-center my-3 '>
-                                            <div className='  rounded-full p-2'>
-                                                <HiClipboardDocumentList className='cursor-pointer text-orange-500 ' size={50} />
+                                    <div className='rounded-lg bg-gray-50/20 blurr  shadow  px-2 h-[175px] ' >
+                                        <div className='  my-3'> 
+                                            <div className='flex  justify-around items-center  pr-5 py-2 '>
+                                                <HiClipboardDocumentList className='text-orange-500  pt-2' size={40} />
+                                                {<h1 className='text-6xl font-medium text-gray-500    text-start '>{articleLen.result?.length}</h1>}
                                             </div>
-                                            <div className='flex flex-col '>
-                                                {articlesModuleAuth || isSuperAdmin ? <>
+                                           
+                                            <div className=''>
+                                            {articlesModuleAuth || isSuperAdmin ? <>
                                                     <Link to='/articles'>
-                                                        <h1 className=' py-4 text-2xl text-center font-medium underline underline-offset-8 text-gray-500 '>Articles</h1>
+                                                        <h1 className=' py-3 leading-6 text-2xl text-center font-medium  text-gray-500 '>Article Management</h1>
                                                     </Link>
                                                 </> : <>
-                                                    <h1 onClick={unAutherizedHndle} className=' cursor-pointer py-4 text-2xl text-center font-medium underline underline-offset-8 text-red-500/60 '>Articles</h1>
+                                                    <h1 onClick={unAutherizedHndle} className=' cursor-pointer py-3 leading-6 text-2xl text-center font-medium  text-red-500/60 '>Article Management</h1>
 
                                                 </>}
-
-                                                <h1 className='text-5xl   font-medium  text-center text-gray-500 '>{articleLen.result?.length}</h1>
                                             </div>
                                         </div>
 
                                     </div>
-                                    <div className=' rounded-lg bg-gray-50/20  blurr  shadow  py-2 h-[175px] '>
-                                        <div className='flex justify-between px-2 items-center my-3 '>
-                                            <div className='  rounded-full p-2'>
-                                                <GiArcheryTarget className='text-orange-500 ' size={50} />
+
+                                    <div className='rounded-lg bg-gray-50/20 blurr  shadow  px-2 h-[175px] ' >
+                                        <div className='  my-3'> 
+                                            <div className='flex  justify-around items-center  pr-5 py-2 '>
+                                                <GiArcheryTarget className='text-orange-500  pt-2' size={40} />
+                                                {<h1 className='text-6xl font-medium text-gray-500    text-start '>50</h1>}
                                             </div>
-                                            <div className='flex flex-col '>
+                                           
+                                            <div className=''>
+                                            {HitsModuleAuth || isSuperAdmin ? <>
+                                                <Link to='/hits'>
+                                                        <h1 className='py-3 cursor-pointer hover:text-orange-600 text-xl leading-6 text-center font-medium   text-gray-500 '>Hit <br />  Management</h1>
 
-
-                                                {HitsModuleAuth || isSuperAdmin ? <>
-                                                    <Link to='/hits'>
-                                                        <h1 className=' py-4 text-2xl text-center font-medium underline underline-offset-8 text-gray-500 '>Hits
-                                                        </h1>
                                                     </Link>
                                                 </> : <>
-                                                    <h1 onClick={unAutherizedHndle} className=' cursor-pointer py-4 text-2xl text-center font-medium underline underline-offset-8 text-red-500/60 '>Hits</h1>
+                                                    <h1 onClick={unAutherizedHndle} className=' py-3 cursor-pointer  text-xl leading-6 text-center font-medium   text-red-500/60 '>Hit <br /> Management</h1>
 
                                                 </>}
-                                                <h1 className='text-5xl text-gray-500  font-medium  text-center '>500</h1>
                                             </div>
                                         </div>
 
                                     </div>
-
-
-
-
-
-                                    <div className=' rounded-lg bg-gray-50/20 blurr  shadow  py-2 h-[175px]'>
-                                        <div className='flex justify-between px-2 items-center my-3 '>
-                                            <div className=' rounded-full p-2'>
-                                                <BsFillQuestionSquareFill className='text-orange-500 '
-                                                    size={40} />
+                                    <div className='rounded-lg bg-gray-50/20 blurr  shadow  px-2 h-[175px] ' >
+                                        <div className='  my-3'> 
+                                            <div className='flex  justify-around items-center  pr-5 py-2 '>
+                                                <BsFillQuestionSquareFill className='text-orange-500  pt-2' size={40} />
+                                                {<h1 className='text-6xl font-medium text-gray-500    text-start '>{queryLen.result.content?.length}</h1>}
                                             </div>
-                                            <div className='flex flex-col '>
-
-                                                {QueriesListModuleAuth || isSuperAdmin ? <>
-
-                                                    <Link to='/queries'>
-                                                        <h1 className=' py-4 text-2xl text-center text-gray-500 font-medium underline underline-offset-8 '>Queries</h1>
-                                                    </Link>
-
-                                                </> : <>
-                                                    <h1 onClick={unAutherizedHndle} className=' cursor-pointer py-4 text-2xl text-center font-medium underline underline-offset-8 text-red-500/60 '>Queries</h1>
-
-                                                </>}
-                                                <h1 className='text-5xl   font-medium text-gray-500  text-center '>{queryLen.result.content?.length}</h1>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <div className='rounded-lg bg-gray-50/20 blurr   shadow  py-2 h-[175px]'>
-                                        <div className='flex justify-between px-2 items-center my-3 '>
-                                            <div className='  rounded-full p-2'>
-                                                <RiShieldUserLine className='text-orange-500 ' size={50} />
-                                            </div>
-                                            <div className='flex flex-col '>
-
-
-
-                                                {LogstModuleAuth || isSuperAdmin ? <>
-
-                                                    <Link to='/logs'>
-                                                        <h1 className=' py-4 text-2xl text-center font-medium text-gray-500 underline underline-offset-8 '>Logs</h1>
+                                           
+                                            <div className=''>
+                                            {QueriesListModuleAuth || isSuperAdmin ? <>
+                                                <Link to='/queries'>
+                                                        <h1 className='py-3 cursor-pointer hover:text-orange-600 text-xl leading-6 text-center font-medium   text-gray-500 '>Query <br />  Management</h1>
 
                                                     </Link>
-
                                                 </> : <>
-                                                    <h1 onClick={unAutherizedHndle} className=' cursor-pointer py-4 text-2xl text-center font-medium underline underline-offset-8 text-red-500/60 '>logs</h1>
+                                                    <h1 onClick={unAutherizedHndle} className=' py-3 cursor-pointer  text-xl leading-6 text-center font-medium   text-red-500/60 '>Query <br /> Management</h1>
 
                                                 </>}
-
-                                                <h1 className='text-5xl   text-gray-500 font-medium  text-center '>500</h1>
                                             </div>
                                         </div>
 
                                     </div>
-
-                                    <div className='rounded-lg bg-gray-50/20 blurr   shadow py-2 h-[175px]'>
-                                        <div className='flex justify-between px-1 items-center my-3 '>
-                                            <div className=' rounded-full p-2'>
-                                                <VscBroadcast className='text-orange-500 ' size={50} />
+                                    <div className='rounded-lg bg-gray-50/20 blurr  shadow  px-2 h-[175px] ' >
+                                        <div className='  my-3'> 
+                                            <div className='flex  justify-around items-center  pr-5 py-2 '>
+                                                <RiShieldUserLine className='text-orange-500  pt-2' size={40} />
+                                                {<h1 className='text-6xl font-medium text-gray-500    text-start '>50</h1>}
                                             </div>
-                                            <div className='flex flex-col '>
+                                           
+                                            <div className=''>
+                                            {LogstModuleAuth || isSuperAdmin ? <>
+                                                <Link to='/logs'>
+                                                        <h1 className='py-3 cursor-pointer hover:text-orange-600 text-xl leading-6 text-center font-medium   text-gray-500 '>Log <br />  Management</h1>
 
-
-                                                {BroadcastModuleAuth  || isSuperAdmin? <>
-
-                                                    <Link to='/broadcast'>
-                                                        <h1 className=' py-4 text-2xl text-center font-medium  text-gray-500 underline underline-offset-8 '>Broadcast</h1>
                                                     </Link>
-
                                                 </> : <>
-                                                    <h1 onClick={unAutherizedHndle} className=' cursor-pointer py-4 text-2xl text-center font-medium underline underline-offset-8 text-red-500/60 '>Broadcast</h1>
+                                                    <h1 onClick={unAutherizedHndle} className=' py-3 cursor-pointer  text-xl leading-6 text-center font-medium   text-red-500/60 '>Log <br /> Management</h1>
 
                                                 </>}
-
-
-                                                <h1 className='text-5xl text-gray-500 font-medium    text-center '>{broadCast.length ? <>{broadCast.length}</> : <>0</>}</h1>
                                             </div>
                                         </div>
+
                                     </div>
-                                    <div className='rounded-lg bg-gray-50/20 blurr   shadow py-2 h-[175px]'>
-                                        <div className='flex justify-between px-1 items-center my-3 '>
-                                            <div className=' rounded-full p-2'>
-                                                <RiShieldUserLine className='text-orange-500 ' size={50} />
+                                    <div className='rounded-lg bg-gray-50/20 blurr  shadow  px-2 h-[175px] ' >
+                                        <div className='  my-3'> 
+                                            <div className='flex  justify-around items-center  pr-5 py-2 '>
+                                                <VscBroadcast className='text-orange-500  pt-2' size={40} />
+                                                {<h1 className='text-6xl font-medium text-gray-500    text-start '>{broadCast.length ? <>{broadCast.length}</> : <>0</>}</h1>}
                                             </div>
-                                            <div className='flex flex-col '>
-                                               
+                                           
+                                            <div className=''>
+                                            {BroadcastModuleAuth || isSuperAdmin ? <>
+                                                <Link to='/broadcast'>
+                                                        <h1 className='py-3 cursor-pointer hover:text-orange-600 text-xl leading-6 text-center font-medium   text-gray-500 '>Broadcast <br />  Management</h1>
 
-                                                {BlogsPosttModuleAuth || isSuperAdmin ? <>
-
-                                                    <Link to='/blogsPost'>
-                                                    <h1 className=' py-4 text-2xl text-center font-medium  text-gray-500 underline underline-offset-8 '>Blogs</h1>
-                                                </Link>
-
+                                                    </Link>
                                                 </> : <>
-                                                    <h1 onClick={unAutherizedHndle} className=' cursor-pointer py-4 text-2xl text-center font-medium underline underline-offset-8 text-red-600/60 '>Blogs</h1>
+                                                    <h1 onClick={unAutherizedHndle} className=' py-3 cursor-pointer  text-xl leading-6 text-center font-medium   text-red-500/60 '>Broadcast <br /> Management</h1>
 
                                                 </>}
-                                                <h1 className='text-5xl text-gray-500 font-medium  text-center '>500</h1>
                                             </div>
                                         </div>
+
                                     </div>
 
+                                    <div className='rounded-lg bg-gray-50/20 blurr  shadow  px-2 h-[175px] ' >
+                                        <div className='  my-3'> 
+                                            <div className='flex  justify-around items-center  pr-5 py-2 '>
+                                                <RiShieldUserLine className='text-orange-500  pt-2' size={40} />
+                                                {<h1 className='text-6xl font-medium text-gray-500    text-start '>{broadCast.length ? <>{broadCast.length}</> : <>0</>}</h1>}
+                                            </div>
+                                           
+                                            <div className=''>
+                                      
+                                            {BlogsPosttModuleAuth || isSuperAdmin ? <>
+                                                <Link to='/blogsPost'>
+                                                        <h1 className='py-3 cursor-pointer hover:text-orange-600 text-xl leading-6 text-center font-medium   text-gray-500 '>Blog <br />  Management</h1>
 
+                                                    </Link>
+                                                </> : <>
+                                                    <h1 onClick={unAutherizedHndle} className=' py-3 cursor-pointer  text-xl leading-6 text-center font-medium   text-red-500/60 '>Blog <br /> Management</h1>
 
+                                                </>}
+                                            </div>
+                                        </div>
 
+                                    </div>
 
                                 </div>
 

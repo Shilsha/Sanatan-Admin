@@ -319,7 +319,7 @@ function Logs() {
                                        </tr>
    
    
-                                       {logs.loading ? <Loader /> : <>
+                                       {logs.loading ?<div className='mt-48'> <Loader /></div> : <>
                                            {
    
                                                // logs.result.map((data) => {

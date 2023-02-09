@@ -16,7 +16,7 @@ function Navbar() {
         </div>
 
         <div>
-          <div class="flex justify-center  pt-3 ">
+          {/* <div class="flex justify-center  pt-3 ">
             <div class="mb-3 xl:w-96">
               <input
                 type="search"
@@ -43,7 +43,7 @@ function Navbar() {
                 placeholder="Search"
               />
             </div>
-          </div>
+          </div> */}
         </div>
 
         <div className='flex justify-between items-center cursor-pointer  '>
