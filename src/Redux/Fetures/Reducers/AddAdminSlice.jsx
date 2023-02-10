@@ -16,13 +16,13 @@ export const addAdmin = createAsyncThunk('ADD_ADMIN/ADD_ADMIN',
         return axios(OPTIONS)
             // .then(unwrapResult)
             .then((res) => {
-                console.log('res')
+                // console.log('res')
                 return res
 
             })
             .catch(err => {
 
-                console.log({ err }, 'err')
+                // console.log({ err }, 'err')
                 const realErr = { err }
                 // console.log(unwrapResult(realErr),'real error')
                 return rejectWithValue((realErr))
@@ -55,6 +55,30 @@ export const updateRole = createAsyncThunk('UPDATE_ROLE/UPDATE_ROLE',
 
 
     })
+
+ export const resetAdminPass = createAsyncThunk('RESET_PASS/RESET_PASS',
+    async (id) => {
+        let OPTIONS = {
+            url: `${import.meta.env.VITE_BASE_URL}/api/reset_Password?adminId=${id}`,
+            method: "PUT",
+            headers: {
+                'Accept': 'application/json'
+            },
+        };
+
+        return axios(OPTIONS)
+
+            .then((res) => {
+
+                return res
+
+            })
+
+
+
+    })
+
+
 const addAdmins = createSlice({
     name: 'DELETE ADMIN',
     initialState: {
@@ -70,15 +94,16 @@ const addAdmins = createSlice({
             state.loading = true;
         },
         [addAdmin.fulfilled]: (state, action) => {
-            console.log('successs')
+            console.log(action,'this is action ')
+            console.log(state,'this is state')
             state.loading = false,
-                state.result = action
+                state.result = action.payload.data.data
             // console.log(action.payload.data.status.message,'err')
             // toast.success(action.payload.data.status.message)
         
         },
         [addAdmin.rejected]: (state, action) => {
-            // console.log(action,'action error')
+            console.log(action,'action error')
             state.loading = false,
                 state.error = action,
                 toast.warning("Please enter strong password like a test@123")
@@ -99,6 +124,25 @@ const addAdmins = createSlice({
 
         },
         [updateRole.rejected]: (state, action) => {
+
+            state.loading = false,
+                state.error = action
+
+        },
+        // =============================reset password===========================
+        [resetAdminPass.pending]: (state, action) => {
+            state.loading = true;
+        },
+        [resetAdminPass.fulfilled]: (state, action) => {
+            console.log(action,'action')
+
+            state.loading = false,
+                state.result = action.payload.data.data
+                toast.success('User password reset succesfully')
+              
+
+        },
+        [resetAdminPass.rejected]: (state, action) => {
 
             state.loading = false,
                 state.error = action

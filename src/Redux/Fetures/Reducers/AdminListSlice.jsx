@@ -7,7 +7,7 @@ export const getAdminList = createAsyncThunk('ADMIN_LIST/GET_ALL_ADMIN_LIST',
     async (data) => {
 
         let OPTIONS = {
-            url: `${import.meta.env.VITE_BASE_URL}/api/getAdminList?adminStatus=${data.type}&page=${data.page}&size=11`,
+            url: `${import.meta.env.VITE_BASE_URL}/api/getAdminList?adminStatus=${data.type}&page=${data.page}&size=15`,
             method: "GET",
             headers: {
                 'Accept': 'application/json'
