@@ -94,7 +94,7 @@ function Login() {
         e.preventDefault()
 
         dispatch(forgetPassword(email))
-       
+
     }
 
     const verifyOtps = () => {
@@ -123,9 +123,17 @@ function Login() {
         if (forgetOTp?.result?.isOtpVerified) {
             setResPass(true)
         }
-        console.log(forgetOTp?.result.adminId,'lenght')
-        if(forgetOTp?.result?.adminId){
-             setForgetDiv(false)
+        console.log(forgetOTp?.result.adminId, 'lenght')
+        if (forgetOTp?.result?.adminId) {
+            setForgetDiv(false)
+        }
+
+        if (forgetOTp.result?.isPasswordReset) {
+            console.log('this is temparary password')
+            setIsOpen(true);
+            setResPass(true)
+           
+
         }
 
     }, [forgetOTp.result])
@@ -138,7 +146,8 @@ function Login() {
             adminId: forgetOTp?.result.adminId,
             adminName: forgetOTp?.result.adminName,
             adminStatus: forgetOTp?.result.adminStatus,
-            password: pass
+            password: pass,
+            isPasswordReset:false,
         }
         console.log(pass, confirmPass, 'passoword')
         if (pass == confirmPass) {
@@ -276,7 +285,7 @@ function Login() {
 
                                 />
                             </div>
-                            {forgetOTp.loading?<Loader/>:''}
+                            {forgetOTp.loading ? <Loader /> : ''}
                             <div class="mb-6 text-center">
                                 <button
                                     class=" w-full  text-white bg-gradient-to-r from-orange-500 
@@ -291,14 +300,14 @@ function Login() {
                             <hr class=" border-t" />
 
                             <div class="text-center">
-                             
-                               <a
+
+                                <a
                                     class="inline-block text-sm cursor-pointer text-blue-500 align-baseline hover:text-blue-800"
-                                onClick={()=>closeModal(false)}
+                                    onClick={() => closeModal(false)}
                                 >
                                     Already have an account? Login!
                                 </a>
-                             
+
                             </div>
                         </form>
 

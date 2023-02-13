@@ -176,7 +176,7 @@ function QueriesList() {
    // *****************************************************Module auth*******************************************
    const Role = JSON.parse(sessionStorage.getItem('user'))
    console.log(Role.role)
-   const isModuleAuth = Role?.role.some(data => data == 'QueriesList')
+   const isModuleAuth = Role?.role.some(data => data == 'Queries')
    console.log(isModuleAuth, 'isModuleAuth  isModuleAuthisModuleAuthisModuleAuthisModuleAuth')
 
    // **************************************************************
