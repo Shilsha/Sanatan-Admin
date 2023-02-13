@@ -56,7 +56,7 @@ export const updateRole = createAsyncThunk('UPDATE_ROLE/UPDATE_ROLE',
 
     })
 
- export const resetAdminPass = createAsyncThunk('RESET_PASS/RESET_PASS',
+export const resetAdminPass = createAsyncThunk('RESET_PASS/RESET_PASS',
     async (id) => {
         let OPTIONS = {
             url: `${import.meta.env.VITE_BASE_URL}/api/reset_Password?adminId=${id}`,
@@ -87,6 +87,15 @@ const addAdmins = createSlice({
         updateRoles: [],
         error: null
     },
+
+    reducers: {
+        setEdit: (state, action) => {
+            console.log(action, 'epmty action')
+            state.loading = false,
+            state.result = action.payload.result
+
+        },
+    },
     extraReducers: {
 
         // ==================ADD ADMIN ===================
@@ -94,16 +103,16 @@ const addAdmins = createSlice({
             state.loading = true;
         },
         [addAdmin.fulfilled]: (state, action) => {
-            console.log(action,'this is action ')
-            console.log(state,'this is state')
+            console.log(action, 'this is action ')
+            console.log(state, 'this is state')
             state.loading = false,
                 state.result = action.payload.data.data
             // console.log(action.payload.data.status.message,'err')
             // toast.success(action.payload.data.status.message)
-        
+
         },
         [addAdmin.rejected]: (state, action) => {
-            console.log(action,'action error')
+            console.log(action, 'action error')
             state.loading = false,
                 state.error = action,
                 toast.warning("Please enter strong password like a test@123")
@@ -113,14 +122,14 @@ const addAdmins = createSlice({
             state.loading = true;
         },
         [updateRole.fulfilled]: (state, action) => {
-            console.log(action,'action')
+            console.log(action, 'action')
 
             state.loading = false,
                 state.updateRoles = action.payload.data.data
-                toast.success('Role updated succesfully')
-                setTimeout(() => {
-                    window.location.reload();  
-                }, 1000);
+            toast.success('Role updated succesfully')
+            setTimeout(() => {
+                window.location.reload();
+            }, 1000);
 
         },
         [updateRole.rejected]: (state, action) => {
@@ -134,12 +143,12 @@ const addAdmins = createSlice({
             state.loading = true;
         },
         [resetAdminPass.fulfilled]: (state, action) => {
-            console.log(action,'action')
+            console.log(action, 'action')
 
             state.loading = false,
                 state.result = action.payload.data.data
-                toast.success('User password reset succesfully')
-              
+            toast.success('Temp password  succesfully generated')
+
 
         },
         [resetAdminPass.rejected]: (state, action) => {
@@ -157,5 +166,5 @@ const addAdmins = createSlice({
 
 })
 
-
+export const { setEdit } = addAdmins.actions;
 export default addAdmins.reducer;

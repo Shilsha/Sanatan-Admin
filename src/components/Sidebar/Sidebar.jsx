@@ -93,14 +93,15 @@ function Sidebar() {
 
     // =============================== give permission =======================================
     const [permission, setPermission] = useState([
-        { name: "User" },
-        { name: "Articles" },
+        { name: "Users" },
         { name: "Hits" },
-        { name: "AdminUserList" },
-        { name: "QueriesList" },
+        { name: "Customers" },
+        { name: "Queries" },
         { name: "Logs" },
         { name: "Broadcast" },
-        { name: "BlogsPost" },
+        { name: "BlogPost" },
+        { name: "BlogReview" },
+        { name: "BlogCategory" },
     ]);
 
     const handleChangePer = (e) => {
@@ -130,17 +131,17 @@ function Sidebar() {
     const isSuperAdmin = isModuleAuth?.role.some(data => data == 'SuperAdmin')
     // console.log(isSuperAdmin, 'super  role')
 
-    const userModuleAuth = isModuleAuth?.role.some(data => data == 'User')
+    const customerModuleAuth = isModuleAuth?.role.some(data => data == 'Customers')
     const articlesModuleAuth = isModuleAuth?.role.some(data => data == 'Articles')
     const HitsModuleAuth = isModuleAuth?.role.some(data => data == 'Hits')
-    const AdminUserListModuleAuth = isModuleAuth?.role.some(data => data == 'AdminUserList')
-    const QueriesListModuleAuth = isModuleAuth?.role.some(data => data == 'QueriesList')
+    const UserListModuleAuth = isModuleAuth?.role.some(data => data == 'Users')
+    const QueriesListModuleAuth = isModuleAuth?.role.some(data => data == 'Queries')
     const LogstModuleAuth = isModuleAuth?.role.some(data => data == 'Logs')
     const BroadcastModuleAuth = isModuleAuth?.role.some(data => data == 'Broadcast')
-    const BlogsPosttModuleAuth = isModuleAuth?.role.some(data => data == 'BlogsPost')
+    const BlogsPosttModuleAuth = isModuleAuth?.role.some(data => data == 'BlogPost')
     // console.log(userModuleAuth, 'userModuleAuth auth')
     const unAutherizedHndle = () => {
-        toast.error('You are not Authorized for this module')
+        toast.error('You are not authrized for this module')
     }
     //   *****************************************Module access***********************************************************
 
@@ -325,7 +326,7 @@ function Sidebar() {
 			</li>
 
             <li>
-            {userModuleAuth || isSuperAdmin ? <>
+            {customerModuleAuth || isSuperAdmin ? <>
             
                 <NavLink to='/users'>
                 <HiClipboardDocumentList className=' ' size={25} />
