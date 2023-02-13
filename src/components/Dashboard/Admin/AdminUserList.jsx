@@ -11,8 +11,10 @@ import LoaderN from '../../Loader/LoaderN'
 import { ToastContainer } from 'react-toastify'
 import Modal from 'react-modal';
 import { getAdminList, delelteAdmin, updateAdmin } from '../../../Redux/Fetures/Reducers/AdminListSlice'
-import { updateRole, resetAdminPass } from '../../../Redux/Fetures/Reducers/AddAdminSlice'
+import { updateRole, resetAdminPass, setEdit } from '../../../Redux/Fetures/Reducers/AddAdminSlice'
 import DesignLogin from '../../../Assets/images/DesignLogin.png'
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+
 const customStyles = {
     content: {
         top: '50%',
@@ -49,9 +51,11 @@ function AdminUserList() {
     const [adminStat, setAdminStat] = useState('')
     const dispatch = useDispatch()
     const [role, setRole] = useState()
+    const [resetToggle, setResetToggle] = useState(false)
+
     const allAdminList = useSelector((state) => state.adminList)
     const allAdminList2 = useSelector((state) => state.addAdmin)
-    console.log(allAdminList2, 'get all admin list')
+    console.log(allAdminList2.result, 'get all admin list')
 
 
     useEffect(() => {
@@ -209,6 +213,7 @@ function AdminUserList() {
 
     const handleChangePer = (e) => {
         const { name, checked } = e.target;
+        console.log(checked,name,'this is e ')
         if (name === "allSelect") {
             let tempUser = permission.map((user) => {
                 return { ...user, isChecked: checked };
@@ -282,6 +287,21 @@ function AdminUserList() {
 
         dispatch(resetAdminPass(id))
     }
+
+    // ===============================copy clipboard+++++++++++========================
+    const [copyTemp, setCopyTemp] = useState({
+        value: 'stark2332@132',
+        copied: false,
+    })
+
+    const tempStateClear = () => {
+
+        dispatch(setEdit({
+            result:''
+        }))
+    }
+
+
     return (
 
         <>
@@ -330,13 +350,7 @@ function AdminUserList() {
                                 </select>
 
                             </div>
-
                         </div>
-
-
-
-
-
 
                         <div className="tableWrap mb-2   ">
                             <table class="shadow-lg tables  w-full rounded-xl blurrTable ">
@@ -401,10 +415,10 @@ function AdminUserList() {
                                                                     {LoginAdmin?.isSuperAdmin ? <>{data.password}</> : '*****'}
                                                                 </td> */}
                                                                 {/* <td class=" py-2 ">{JSON.stringify(data.isSuperAdmin)}</td> */}
-                                                                <td class=" py-2 ">{data.createdDate?data.createdDate:'---'}</td>
-                                                                <td class=" py-2 ">{data.createdTime?data.createdTime:'---'}</td>
-                                                                <td class=" py-2 ">{data.modifiedDate?data.modifiedDate:'---'}</td>
-                                                                <td class=" py-2 ">{data.modifiedtime?data.modifiedtime:'---'}</td>
+                                                                <td class=" py-2 ">{data.createdDate ? data.createdDate : '---'}</td>
+                                                                <td class=" py-2 ">{data.createdTime ? data.createdTime : '---'}</td>
+                                                                <td class=" py-2 ">{data.modifiedDate ? data.modifiedDate : '---'}</td>
+                                                                <td class=" py-2 ">{data.modifiedtime ? data.modifiedtime : '---'}</td>
                                                                 {/* <td class=" py-2 ">{JSON.stringify(data.adminStatus)}</td> */}
                                                                 <td class=" py-2 text-center ">
 
@@ -424,7 +438,8 @@ function AdminUserList() {
                                                                             >
                                                                                 Reset Password
                                                                             </button>
-                                                                            {allAdminList2.loading ? <Loader /> : ''}
+
+                                                                            {allAdminList2.loading ? <Loader /> : null}
                                                                             <button class={`border-2 border-red-500 text-red-500 hover:bg-red-700 hover:text-white font-bold py-1.5 text-xs px-3 
                                                                       rounded-full     disabled:opacity-50 disabled:cursor-not-allowed`  }
                                                                                 disabled={data.isSuperAdmin}
@@ -514,6 +529,7 @@ function AdminUserList() {
                                 {permission.map((user, index) => (
                                     <div className="form-check" key={index}>
                                         <input
+                                        selected ={user?.isChecked || false}
                                             type="checkbox"
                                             className="form-check-input"
                                             name={user.name}
@@ -544,49 +560,49 @@ function AdminUserList() {
 
 
                     {action == 'Activate' ? <>
-                    
-                    <div class="shadow-xl  pt-4 bg-[rgb(254 214 172)] rounded-lg md:max-w-md md:mx-auto p-4 fixed inset-x-0 bottom-0 z-50 mb-4 mx-4 md:relative">
-                        <div class="md:flex items-center">
-                            <div class="rounded-full border border-red-900 flex items-center justify-center w-16 h-16 flex-shrink-0 mx-auto">
-                                <AiOutlineWarning size={40} fill='#8E2E0F' />
+
+                        <div class="shadow-xl  pt-4 bg-[rgb(254 214 172)] rounded-lg md:max-w-md md:mx-auto p-4 fixed inset-x-0 bottom-0 z-50 mb-4 mx-4 md:relative">
+                            <div class="md:flex items-center">
+                                <div class="rounded-full border border-red-900 flex items-center justify-center w-16 h-16 flex-shrink-0 mx-auto">
+                                    <AiOutlineWarning size={40} fill='#8E2E0F' />
+                                </div>
+                                <div class="mt-4 md:mt-0 md:ml-6 text-center md:text-left">
+                                    <p class="font-bold text-red-800">Activate admin account</p>
+                                    <p class="text-sm text-gray-700 mt-1">Are you sure to Activate Admin account.
+                                    </p>
+                                </div>
                             </div>
-                            <div class="mt-4 md:mt-0 md:ml-6 text-center md:text-left">
-                                <p class="font-bold text-red-800">Activate admin account</p>
-                                <p class="text-sm text-gray-700 mt-1">Are you sure to Activate Admin account.
-                                </p>
-                            </div>
-                        </div>
-                        <div class="text-center md:text-right mt-4 md:flex md:justify-end">
-                            <button class="block w-full md:inline-block md:w-auto px-5 py-3 md:py-2
+                            <div class="text-center md:text-right mt-4 md:flex md:justify-end">
+                                <button class="block w-full md:inline-block md:w-auto px-5 py-3 md:py-2
                                  bg-red-200 text-red-700 rounded-lg font-semibold text-sm md:ml-2 md:order-2
                                   hover:bg-red-400 hover:text-white" onClick={handleUpdateAdmin}>Yes</button>
-                            <button class="block w-full md:inline-block md:w-auto px-5 py-3 md:py-2
+                                <button class="block w-full md:inline-block md:w-auto px-5 py-3 md:py-2
                                  bg-gray-200 rounded-lg font-semibold text-sm mt-4
                                   md:mt-0 md:order-1 hover:bg-slate-500 hover:text-white" onClick={closeModal}>No</button>
+                            </div>
                         </div>
-                    </div>
-                    
+
                     </> : <>
-                    <div class="shadow-xl pt-4   bg-[rgb(254 214 172)] rounded-lg md:max-w-md md:mx-auto p-4 fixed inset-x-0 bottom-0 z-50 mb-4 mx-4 md:relative">
-                        <div class="md:flex items-center">
-                            <div class="rounded-full border border-red-900 flex items-center justify-center w-16 h-16 flex-shrink-0 mx-auto">
-                                <AiOutlineWarning size={40} fill='#8E2E0F' />
+                        <div class="shadow-xl pt-4   bg-[rgb(254 214 172)] rounded-lg md:max-w-md md:mx-auto p-4 fixed inset-x-0 bottom-0 z-50 mb-4 mx-4 md:relative">
+                            <div class="md:flex items-center">
+                                <div class="rounded-full border border-red-900 flex items-center justify-center w-16 h-16 flex-shrink-0 mx-auto">
+                                    <AiOutlineWarning size={40} fill='#8E2E0F' />
+                                </div>
+                                <div class="mt-4 md:mt-0 md:ml-6 text-center md:text-left">
+                                    <p class="font-bold text-red-800">De-Activate admin account</p>
+                                    <p class="text-sm text-gray-700 mt-1">Are you sure to De-Activate  Admin account.
+                                    </p>
+                                </div>
                             </div>
-                            <div class="mt-4 md:mt-0 md:ml-6 text-center md:text-left">
-                                <p class="font-bold text-red-800">De-Activate admin account</p>
-                                <p class="text-sm text-gray-700 mt-1">Are you sure to De-Activate  Admin account.
-                                </p>
-                            </div>
-                        </div>
-                        <div class="text-center md:text-right mt-4 md:flex md:justify-end">
-                            <button class="block w-full md:inline-block md:w-auto px-5 py-3 md:py-2
+                            <div class="text-center md:text-right mt-4 md:flex md:justify-end">
+                                <button class="block w-full md:inline-block md:w-auto px-5 py-3 md:py-2
                                  bg-red-200 text-red-700 rounded-lg font-semibold text-sm md:ml-2 md:order-2
                                   hover:bg-red-400 hover:text-white" onClick={handleUpdateAdmin}>Yes</button>
-                            <button class="block w-full md:inline-block md:w-auto px-5 py-3 md:py-2
+                                <button class="block w-full md:inline-block md:w-auto px-5 py-3 md:py-2
                                  bg-gray-200 rounded-lg font-semibold text-sm mt-4
                                   md:mt-0 md:order-1 hover:bg-slate-500 hover:text-white" onClick={closeModal}>No</button>
+                            </div>
                         </div>
-                    </div>
                     </>}
 
                 </>}
@@ -599,6 +615,50 @@ function AdminUserList() {
 
 
             </Modal>
+
+            {/* ==========================temp password================================ */}
+
+            <div class={`absolute inset-0 h-screen ${allAdminList2.result.password?.length ? `flex` : 'hidden'}  bg-gray-100/40 `}>
+                <div class="m-auto bg-white shadow-lg w-[25%] h-[220px] rounded-md   ">
+                    <div className=' flex justify-end '>
+                        <AiOutlineClose onClick={tempStateClear} className=" cursor-pointer shadow text-red-500" size={25} />
+                    </div>
+                    <h1 className='text-xl text-center underline text-orange-600 font-bold'>Temporary Password</h1>
+                    <div className=''>
+
+
+
+
+                        <div className='text-center flex flex-col justify-center items-center py-5'>
+
+                            <div className='flex justify-around items-center py-2'>
+                                <input class="shadow appearance-none border rounded w-full  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" value={allAdminList2.result?.password} disabled />
+                                {copyTemp.copied ? <span className='text-blue-400  ml-2 uper'>Copied!.</span> : null}
+                            </div>
+
+                            <CopyToClipboard text={allAdminList2.result?.password}
+                                onCopy={() => {
+                                    setCopyTemp({ copied: true })
+
+                                }}>
+                                <button class="bg-transparent my-3 hover:bg-orange-500  text-orange-700 font-medium hover:text-white py-2 px-4 border border-orange-500 hover:border-transparent rounded-full">
+
+
+                                    Copy  password!
+                                </button>
+                            </CopyToClipboard>
+
+
+                        </div>
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+
 
         </>
     )

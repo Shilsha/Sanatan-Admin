@@ -239,7 +239,7 @@ function User() {
    // *****************************************************Module auth*******************************************
    const Role = JSON.parse(sessionStorage.getItem('user'))
    console.log(Role.role)
-   const isModuleAuth = Role?.role.some(data => data == 'User')
+   const isModuleAuth = Role?.role.some(data => data == 'Customers')
    console.log(isModuleAuth, 'isModuleAuth  isModuleAuthisModuleAuthisModuleAuthisModuleAuth')
 
    // **************************************************************
@@ -277,8 +277,6 @@ if(isModuleAuth){
                                     </button>
 
                                 </>}
-
-                                {/* <ExportToExcel  apiData={apiData} fileName={fileName}/> */}
                             </div>
 
                             <div>

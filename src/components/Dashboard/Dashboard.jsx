@@ -168,17 +168,17 @@ function Dashboard() {
     const isSuperAdmin = isModuleAuth?.role.some(data => data == 'SuperAdmin')
     console.log(isSuperAdmin, 'super  role')
 
-    const userModuleAuth = isModuleAuth?.role.some(data => data == 'User')
+    const userModuleAuth = isModuleAuth?.role.some(data => data == 'Users')
     const articlesModuleAuth = isModuleAuth?.role.some(data => data == 'Articles')
     const HitsModuleAuth = isModuleAuth?.role.some(data => data == 'Hits')
-    const AdminUserListModuleAuth = isModuleAuth?.role.some(data => data == 'AdminUserList')
-    const QueriesListModuleAuth = isModuleAuth?.role.some(data => data == 'QueriesList')
+    const AdminUserListModuleAuth = isModuleAuth?.role.some(data => data == 'Customers')
+    const QueriesListModuleAuth = isModuleAuth?.role.some(data => data == 'Queries')
     const LogstModuleAuth = isModuleAuth?.role.some(data => data == 'Logs')
     const BroadcastModuleAuth = isModuleAuth?.role.some(data => data == 'Broadcast')
-    const BlogsPosttModuleAuth = isModuleAuth?.role.some(data => data == 'BlogsPost')
+    const BlogsPosttModuleAuth = isModuleAuth?.role.some(data => data == 'BlogPost')
     // console.log(userModuleAuth, 'userModuleAuth auth')
     const unAutherizedHndle = () => {
-        toast.error('You are not Authorized for this module')
+        toast.error('You are not authrized for this module')
     }
     // ********************************************************************************************************************
 
@@ -418,6 +418,27 @@ function Dashboard() {
                                             {articlesModuleAuth || isSuperAdmin ? <>
                                                     <Link to='/articles'>
                                                         <h1 className=' py-3 leading-6 text-2xl text-center font-medium  text-gray-500 '>Article Management</h1>
+                                                    </Link>
+                                                </> : <>
+                                                    <h1 onClick={unAutherizedHndle} className=' cursor-pointer py-3 leading-6 text-2xl text-center font-medium  text-red-500/60 '>Article Management</h1>
+
+                                                </>}
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div className='rounded-lg bg-gray-50/20 blurr  shadow  px-2 h-[175px] ' >
+                                        <div className='  my-3'> 
+                                            <div className='flex  justify-around items-center  pr-5 py-2 '>
+                                                <HiClipboardDocumentList className='text-orange-500  pt-2' size={40} />
+                                                {<h1 className='text-6xl font-medium text-gray-500    text-start '>{articleLen.result?.length}</h1>}
+                                            </div>
+                                           
+                                            <div className=''>
+                                            {articlesModuleAuth || isSuperAdmin ? <>
+                                                    <Link to='/blogReview'>
+                                                        <h1 className=' py-3 leading-6 text-2xl text-center font-medium  text-gray-500 '>Blog Management</h1>
                                                     </Link>
                                                 </> : <>
                                                     <h1 onClick={unAutherizedHndle} className=' cursor-pointer py-3 leading-6 text-2xl text-center font-medium  text-red-500/60 '>Article Management</h1>

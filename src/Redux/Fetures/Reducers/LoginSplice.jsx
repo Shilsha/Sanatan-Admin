@@ -110,8 +110,8 @@ const logins = createSlice({
 
             state.loading = false,
                 state.result = action.payload.data.data
-
-            if (action.payload.data.data) {
+                // console.log(action.payload.data.data,'hmhmh')
+            if (!action.payload.data.data.isPasswordReset) {
                 toast.success("Login Successful")
                 setTimeout(() => {
                     window.location.href = "/dashboard"
@@ -119,7 +119,12 @@ const logins = createSlice({
                 }, 2000)
             } else {
 
-                toast.error("Login failed")
+                if(action.payload.data.data.isPasswordReset){
+
+                }else{
+                    toast.error("Login failed")
+                }
+              
 
             }
 
@@ -189,6 +194,7 @@ const logins = createSlice({
 
         },
         [resetPassword.rejected]: (state, action) => {
+            console.log('error when reset passsword')
 
             state.loading = false,
 
