@@ -163,17 +163,16 @@ table {
 /* Because we must set sticky on th,
    we have to apply background styles here
    rather than on thead */
-th {
+/* th {
   padding: 16px;
   padding-left: 15px;
   border-left: 1px dotted rgba(200, 209, 224, 0.6);
   border-bottom: 1px solid #e8e8e8;
   background: #ffc491;
   text-align: left;
-  /* With border-collapse, we must use box-shadow or psuedo elements
-    for the header borders */
+
   box-shadow: 0px 0px 0 2px #e8e8e8;
-}
+} */
 
 /* Basic Demo styling */
 table {

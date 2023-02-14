@@ -397,7 +397,7 @@ function Sidebar() {
 			</li>
             <li>
                 {BlogsPosttModuleAuth || isSuperAdmin?<>
-                	<NavLink to='/blogsPost'>
+                	<NavLink to='/blog'>
                 <SiBloglovin className=' ' size={25} />
 					<strong>Blog Management</strong>
 					

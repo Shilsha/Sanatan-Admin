@@ -17,6 +17,7 @@ import BroadCast from './components/Dashboard/BroadCast/BroadCast';
 import BlogsPost from './components/Dashboard/BlogsPost/BlogsPost';
 import Profile from './components/Dashboard/Profile/Profile';
 import BlogReview from './components/Dashboard/BlogsPost/BlogReview';
+import BlogCategory from './components/Dashboard/BlogsPost/BlogCategory';
 function Routing() {
   return (
     <div> 
@@ -38,7 +39,8 @@ function Routing() {
           <Route exact path="/hits"  element={<PrivateRoutes Component={Hits}/>}> </Route>
           <Route exact path="/broadcast"  element={<PrivateRoutes Component={BroadCast}/>}> </Route>
           <Route exact path="/blogsPost"  element={<PrivateRoutes Component={BlogsPost}/>}> </Route>
-          <Route exact path="/blogReview"  element={<PrivateRoutes Component={BlogReview}/>}> </Route>
+          <Route exact path="/blog"  element={<PrivateRoutes Component={BlogReview}/>}> </Route>
+          <Route exact path="/blogCategory"  element={<PrivateRoutes Component={BlogCategory}/>}> </Route>
         </Routes>
       </Router>
 

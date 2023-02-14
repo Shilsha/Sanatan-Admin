@@ -437,7 +437,7 @@ function Dashboard() {
                                            
                                             <div className=''>
                                             {BlogsPosttModuleAuth || isSuperAdmin ? <>
-                                                    <Link to='/blogReview'>
+                                                    <Link to='/blog'>
                                                         <h1 className=' py-3 leading-6 text-2xl text-center font-medium  text-gray-500 '>Blog Management</h1>
                                                     </Link>
                                                 </> : <>
@@ -534,7 +534,7 @@ function Dashboard() {
 
                                     </div>
 
-                                    <div className='rounded-lg bg-gray-50/20 blurr  shadow  px-2 h-[175px] ' >
+                                    {/* <div className='rounded-lg bg-gray-50/20 blurr  shadow  px-2 h-[175px] ' >
                                         <div className='  my-3'> 
                                             <div className='flex  justify-around items-center  pr-5 py-2 '>
                                                 <RiShieldUserLine className='text-orange-500  pt-2' size={40} />
@@ -555,7 +555,7 @@ function Dashboard() {
                                             </div>
                                         </div>
 
-                                    </div>
+                                    </div> */}
 
                                 </div>
 

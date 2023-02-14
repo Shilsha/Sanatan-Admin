@@ -27,6 +27,7 @@ import locationHits from './Reducers/HitsReducers/Location'
 import blogs from './Reducers/CreateBlogSlice'
 import exportData from './Reducers/DownloadSlice'
 import addAdmins from './Reducers/AddAdminSlice'
+import category from './Reducers/CategorySlice'
 export default configureStore({
     reducer: {
         thoughtOfDay: getThoughtOfDay,
@@ -58,7 +59,8 @@ export default configureStore({
        locationHit:locationHits,
        blog:blogs,
        export:exportData,
-       addAdmin:addAdmins
+       addAdmin:addAdmins,
+       category:category
     
 
 
