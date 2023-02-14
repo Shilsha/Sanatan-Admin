@@ -626,9 +626,6 @@ function AdminUserList() {
                     <h1 className='text-xl text-center underline text-orange-600 font-bold'>Temporary Password</h1>
                     <div className=''>
 
-
-
-
                         <div className='text-center flex flex-col justify-center items-center py-5'>
 
                             <div className='flex justify-around items-center py-2'>
@@ -642,8 +639,6 @@ function AdminUserList() {
 
                                 }}>
                                 <button class="bg-transparent my-3 hover:bg-orange-500  text-orange-700 font-medium hover:text-white py-2 px-4 border border-orange-500 hover:border-transparent rounded-full">
-
-
                                     Copy  password!
                                 </button>
                             </CopyToClipboard>
