@@ -29,8 +29,8 @@ function Routing() {
           {/* <Route exact path="/dashboard" element={<Dashboard />} /> */}
           <Route exact path="/users" element={<PrivateRoutes Component={User}/>}> </Route>
           <Route exact path="/dashboard/profile" element={<PrivateRoutes Component={Profile}/>}> </Route>
-          <Route exact path="/articles"  element={<PrivateRoutes Component={Articles}/>}> </Route>
-          <Route exact path="/articles/:id"  element={<PrivateRoutes Component={ReadMoreArticle}/>}> </Route>
+          {/* <Route exact path="/articles"  element={<PrivateRoutes Component={Articles}/>}> </Route>
+          <Route exact path="/articles/:id"  element={<PrivateRoutes Component={ReadMoreArticle}/>}> </Route> */}
           <Route exact path="/adminlists"  element={<PrivateRoutes Component={AdminUserList}/>}> </Route>
           <Route exact path="/queries"  element={<PrivateRoutes Component={QueriesList}/>}> </Route>
           <Route exact path="/queries/:id"  element={<PrivateRoutes Component={ViewQuery}/>}> </Route>

@@ -51,11 +51,12 @@ function AdminUserList() {
     const [adminStat, setAdminStat] = useState('')
     const dispatch = useDispatch()
     const [role, setRole] = useState()
+    const [roles, setRoles] = useState()
     const [resetToggle, setResetToggle] = useState(false)
 
     const allAdminList = useSelector((state) => state.adminList)
     const allAdminList2 = useSelector((state) => state.addAdmin)
-    console.log(allAdminList2.result, 'get all admin list')
+    // console.log(allAdminList2.result, 'get all admin list')
 
 
     useEffect(() => {
@@ -70,8 +71,20 @@ function AdminUserList() {
     function closeModal() {
         setIsOpen(false);
     }
-    const openModel = (data) => {
-        console.log(data)
+    const [permission, setPermission] = useState([
+        { name: "Users" },
+        { name: "Hits" },
+        { name: "Customers" },
+        { name: "Queries" },
+        { name: "Logs" },
+        { name: "Broadcast" },
+        { name: "BlogPost" },
+        { name: "BlogReview" },
+        { name: "BlogCategory" },
+    ]);
+
+    const openModel = (data,roless) => {
+        // console.log(data)
         if (data.action == 'Delete') {
             setIsOpen(true)
             setAction(data.action)
@@ -80,11 +93,35 @@ function AdminUserList() {
         } else {
 
             if (data.action == 'Update') {
-                console.log('Aaa gaya ')
+               
                 setIsOpen(true)
                 setAction(data.action)
                 setAdminId(data.Id)
                 setAdminStat(data.AdminStatus)
+                console.log(permission, 'permis')
+                console.log(roless, 'this is roles')
+
+
+                for (let i = 0; i <roless.length; i++) {
+         
+                  
+                    const indexes=permission.findIndex(data=>data.name==roless[i])
+                    // const indexes=permission.findIndex(data=>data.name==arr[i])
+                    // console.log(data.roles,'/roooo')
+                     pushh(indexes)
+
+                }
+
+                function pushh(i) {
+                  
+                    const add = { isChecked: true }
+                    permission[i] = { ...permission[i], ...add }
+                    // console.log(permission, 'new')
+                    setPermission(permission)
+                    console.log(permission)
+                }
+
+
 
             } else {
                 setIsOpen(true)
@@ -101,7 +138,7 @@ function AdminUserList() {
 
 
     }
-    console.log(action, 'this is action')
+    // console.log(action, 'this is action')
 
     // ==========================================update admin =====================
     const handleUpdateAdmin = () => {
@@ -200,20 +237,12 @@ function AdminUserList() {
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [errors, setErrors] = useState([])
 
-    const [permission, setPermission] = useState([
-        { name: "User" },
-        { name: "Articles" },
-        { name: "Hits" },
-        { name: "AdminUserList" },
-        { name: "QueriesList" },
-        { name: "Logs" },
-        { name: "Broadcast" },
-        { name: "BlogsPost" },
-    ]);
+   
+
 
     const handleChangePer = (e) => {
         const { name, checked } = e.target;
-        console.log(checked,name,'this is e ')
+        console.log(checked, name, 'this is e ')
         if (name === "allSelect") {
             let tempUser = permission.map((user) => {
                 return { ...user, isChecked: checked };
@@ -222,12 +251,15 @@ function AdminUserList() {
             setPermission(tempUser);
 
             const tempUser2 = tempUser.filter(item => item.isChecked === true)
+
             setRole(tempUser2.map(data => data.name))
         } else {
             let tempUser = permission.map((user) => user.name === name ? { ...user, isChecked: checked } : user);
+            console.log(tempUser, 'tempuser')
             setPermission(tempUser);
 
             const tempUser2 = tempUser.filter(item => item.isChecked === true)
+            console.log(tempUser2, '222222')
             setRole(tempUser2.map(data => data.name))
         }
     };
@@ -236,7 +268,6 @@ function AdminUserList() {
 
     const handleUpdateRole = (e) => {
         e.preventDefault()
-
         setErrors(validate());
         setIsSubmitting(true);
     }
@@ -297,7 +328,7 @@ function AdminUserList() {
     const tempStateClear = () => {
 
         dispatch(setEdit({
-            result:''
+            result: ''
         }))
     }
 
@@ -428,7 +459,7 @@ function AdminUserList() {
                                                                             <button class={`border-2 border-blue-500 text-blue-500  hover:text-white  hover:bg-blue-700 mx-2 font-bold py-1.5 text-xs px-3 
                                                                       rounded-full  disabled:opacity-50 disabled:cursor-not-allowed`}
 
-                                                                                onClick={() => openModel({ Id: data.adminId, AdminStatus: data.adminStatus, action: 'Update' })}
+                                                                                onClick={() => openModel({ Id: data.adminId, AdminStatus: data.adminStatus, action: 'Update' },data.role)}
                                                                             >
                                                                                 Edit Role
                                                                             </button>
@@ -529,7 +560,7 @@ function AdminUserList() {
                                 {permission.map((user, index) => (
                                     <div className="form-check" key={index}>
                                         <input
-                                        selected ={user?.isChecked || false}
+                                            selected={user?.isChecked || false}
                                             type="checkbox"
                                             className="form-check-input"
                                             name={user.name}

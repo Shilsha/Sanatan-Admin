@@ -171,7 +171,7 @@ function Dashboard() {
     const userModuleAuth = isModuleAuth?.role.some(data => data == 'Users')
     const articlesModuleAuth = isModuleAuth?.role.some(data => data == 'Articles')
     const HitsModuleAuth = isModuleAuth?.role.some(data => data == 'Hits')
-    const AdminUserListModuleAuth = isModuleAuth?.role.some(data => data == 'Customers')
+    const CustomerListModuleAuth = isModuleAuth?.role.some(data => data == 'Customers')
     const QueriesListModuleAuth = isModuleAuth?.role.some(data => data == 'Queries')
     const LogstModuleAuth = isModuleAuth?.role.some(data => data == 'Logs')
     const BroadcastModuleAuth = isModuleAuth?.role.some(data => data == 'Broadcast')
@@ -189,7 +189,7 @@ function Dashboard() {
                 <div className='   w-full ' >
                     <Navbar />
 
-                    {/* ---------------------------------------------------------------- 1 row---------------------------------------------------------------------------*/}
+                    {/* ---------------------------------------------------------------- 1  row---------------------------------------------------------------------------*/}
 
                     <div className=" ScrollStyle  pr-4 ">
                         <div className=' rounded-lg mt-4  grid grid-cols-12 gap-4  '>
@@ -393,7 +393,7 @@ function Dashboard() {
                                             </div>
                                            
                                             <div className=''>
-                                                {userModuleAuth || isSuperAdmin ? <>
+                                                {CustomerListModuleAuth || isSuperAdmin ? <>
                                                     <Link to='/users'>
                                                         <h1 className='py-3 cursor-pointer hover:text-orange-600 text-xl leading-6 text-center font-medium   text-gray-500 '>Customer  Management</h1>
 
@@ -407,7 +407,7 @@ function Dashboard() {
 
                                     </div>
 
-                                    <div className='rounded-lg bg-gray-50/20 blurr  shadow  px-2 h-[175px] ' >
+                                    {/* <div className='rounded-lg bg-gray-50/20 blurr  shadow  px-2 h-[175px] ' >
                                         <div className='  my-3'> 
                                             <div className='flex  justify-around items-center  pr-5 py-2 '>
                                                 <HiClipboardDocumentList className='text-orange-500  pt-2' size={40} />
@@ -426,7 +426,7 @@ function Dashboard() {
                                             </div>
                                         </div>
 
-                                    </div>
+                                    </div> */}
 
                                     <div className='rounded-lg bg-gray-50/20 blurr  shadow  px-2 h-[175px] ' >
                                         <div className='  my-3'> 
@@ -436,12 +436,12 @@ function Dashboard() {
                                             </div>
                                            
                                             <div className=''>
-                                            {articlesModuleAuth || isSuperAdmin ? <>
+                                            {BlogsPosttModuleAuth || isSuperAdmin ? <>
                                                     <Link to='/blogReview'>
                                                         <h1 className=' py-3 leading-6 text-2xl text-center font-medium  text-gray-500 '>Blog Management</h1>
                                                     </Link>
                                                 </> : <>
-                                                    <h1 onClick={unAutherizedHndle} className=' cursor-pointer py-3 leading-6 text-2xl text-center font-medium  text-red-500/60 '>Article Management</h1>
+                                                    <h1 onClick={unAutherizedHndle} className=' cursor-pointer py-3 leading-6 text-2xl text-center font-medium  text-red-500/60 '>Blog Management</h1>
 
                                                 </>}
                                             </div>
