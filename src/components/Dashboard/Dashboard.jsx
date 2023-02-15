@@ -194,7 +194,7 @@ function Dashboard() {
                     <div className=" ScrollStyle  pr-4 ">
                         <div className=' rounded-lg mt-4  grid grid-cols-12 gap-4  '>
 
-                            <div className=' text-[13px] col-span-3 rounded-lg bg-gray-50/20   p-2 flex justify-center shadow '>
+                            <div className=' text-[13px] col-span-full rounded-lg bg-gray-50/20   p-2 flex justify-center shadow '>
 
 
                                 <Calendar onChange={onChange} value={value} />
