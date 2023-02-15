@@ -383,7 +383,8 @@ if(isModuleAuth){
                                                         </label>
                                                         <DatePicker className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500  w-full"
                                                             selectsRange={true}
-                                                            // dateFormat="dd-mm-yyyy"
+                                                            dateFormat="dd-MM-yyyy"
+                                                            
                                                             startDate={startDatePan}
                                                             endDate={endDatePan}
                                                             onChange={(update) => {
@@ -455,7 +456,7 @@ if(isModuleAuth){
                                                         </label>
                                                         <DatePicker className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500  w-full"
                                                             selectsRange={true}
-                                                            // dateFormat="dd-mm-yyyy"
+                                                            dateFormat="dd-MM-yyyy"
                                                             startDate={startDateFes}
                                                             endDate={endDateFes}
                                                             onChange={(update) => {
@@ -526,7 +527,7 @@ if(isModuleAuth){
                                                         </label>
                                                         <DatePicker className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500  w-full"
                                                             selectsRange={true}
-                                                            // dateFormat="dd-mm-yyyy"
+                                                            dateFormat="dd-MM-yyyy"
                                                             startDate={startDateKun}
                                                             endDate={endDateKun}
                                                             onChange={(update) => {
@@ -593,7 +594,7 @@ if(isModuleAuth){
                                                         </label>
                                                         <DatePicker className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500  w-full"
                                                             selectsRange={true}
-                                                            // dateFormat="dd-mm-yyyy"
+                                                            dateFormat="dd-MM-yyyy"
                                                             startDate={startDateCon}
                                                             endDate={endDateCon}
                                                             onChange={(update) => {
@@ -663,7 +664,7 @@ if(isModuleAuth){
                                                         </label>
                                                         <DatePicker className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500  w-full"
                                                             selectsRange={true}
-                                                            // dateFormat="dd-mm-yyyy"
+                                                            dateFormat="dd-MM-yyyy"
                                                             startDate={startDateHoro}
                                                             endDate={endDateHoro}
                                                             onChange={(update) => {
@@ -730,7 +731,7 @@ if(isModuleAuth){
                                                         </label>
                                                         <DatePicker className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500  w-full"
                                                             selectsRange={true}
-                                                            // dateFormat="dd-mm-yyyy"
+                                                            dateFormat="dd-MM-yyyy"
                                                             startDate={startDateMatch}
                                                             endDate={endDateMatch}
                                                             onChange={(update) => {
@@ -788,7 +789,7 @@ if(isModuleAuth){
                                                         </label>
                                                         <DatePicker className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500  w-full"
                                                             selectsRange={true}
-                                                            // dateFormat="dd-mm-yyyy"
+                                                            dateFormat="dd-MM-yyyy"
                                                             startDate={startDateArt}
                                                             endDate={endDateArt}
                                                             onChange={(update) => {
@@ -849,7 +850,7 @@ if(isModuleAuth){
                                                         </label>
                                                         <DatePicker className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500  w-full"
                                                             selectsRange={true}
-                                                            // dateFormat="dd-mm-yyyy"
+                                                            dateFormat="dd-MM-yyyy"
                                                             startDate={startDateLogin}
                                                             endDate={endDateLogin}
                                                             onChange={(update) => {
@@ -908,7 +909,7 @@ if(isModuleAuth){
                                                         </label>
                                                         <DatePicker className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500  w-full"
                                                             selectsRange={true}
-                                                            // dateFormat="dd-mm-yyyy"
+                                                            dateFormat="dd-MM-yyyy"
                                                             startDate={startDateAdmin}
                                                             endDate={endDateAdmin}
                                                             onChange={(update) => {
@@ -966,7 +967,7 @@ if(isModuleAuth){
                                                         </label>
                                                         <DatePicker className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500  w-full"
                                                             selectsRange={true}
-                                                            // dateFormat="dd-mm-yyyy"
+                                                            dateFormat="dd-MM-yyyy"
                                                             startDate={startDateZodiac}
                                                             endDate={endDateZodiac}
                                                             onChange={(update) => {
@@ -1025,7 +1026,7 @@ if(isModuleAuth){
                                                         </label>
                                                         <DatePicker className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500  w-full"
                                                             selectsRange={true}
-                                                            // dateFormat="dd-mm-yyyy"
+                                                            dateFormat="dd-MM-yyyy"
                                                             startDate={startDateLoc}
                                                             endDate={endDateLoc}
                                                             onChange={(update) => {

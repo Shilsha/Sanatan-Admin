@@ -231,10 +231,10 @@ function Logs() {
                                    </button></>:<>
                                    
                                    
-                                   <button class="inline-flex items-center px-4 ml-10 py-2 bg-green-600
-                                    hover:bg-green-800 text-white  font-medium rounded-md" onClick={() => exportData('CleanData')} >
-                                       Export All
-                                       <IoDownloadSharp className='mx-1  ' size={25} />
+                                   <button class="inline-flex items-center px-2 ml-10  bg-green-600
+                                    hover:bg-green-800 text-white lg:mr-2 font-medium  py-2 rounded-md" onClick={() => exportData('CleanData')} >
+                                       Export 
+                                       <IoDownloadSharp className='mx-1  ' size={22} />
                                    </button>
                                   
                                    </>}
@@ -246,7 +246,7 @@ function Logs() {
                                <form onSubmit={HandleSubmit} >
                                    <div className='flex justify-start items- '>
    
-                                       <button class="inline-flex items-center px-4 mr-4 py-2 bg-orange-500 hover:bg-orange-600 text-white text-sm font-medium rounded-md" onClick={ClearAllFilter}>
+                                       <button class="inline-flex items-center px-4  py-2 bg-orange-500 hover:bg-orange-600 text-white text-sm font-medium rounded-md" onClick={ClearAllFilter}>
    
    
                                            <AiOutlineClear className='mx-1  ' size={25} />
@@ -297,7 +297,7 @@ function Logs() {
                                            <option value="KundaliModule">Kundali Module</option>
                                        </select>
    
-                                       <button type='submit' className="inline-flex items-center px-4 mr-4 py-2 bg-orange-500 hover:bg-orange-600 text-white text-sm font-medium rounded-md mx-2">Submit</button>
+                                       <button type='submit' className="inline-flex items-center px-4 mr-2 py-2 bg-orange-500 hover:bg-orange-600 text-white text-sm font-medium rounded-md mx-2">Submit</button>
    
    
                                    </div>

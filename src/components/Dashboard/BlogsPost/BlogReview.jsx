@@ -41,17 +41,20 @@ function BlogReview() {
                                   </Link>
                                 
                               </div><div className='rounded-lg bg-gray-50/20 blurr  grid place-content-center   shadow     h-[175px] ' >
-                                  
+                              <Link to='/blogReview'>
                                   <h1 class=" cursor-pointer uppercase font-medium
                                hover:scale-110 duration-500    ">
                                   Blog  Review
                                   </h1>
+                                  </Link>
                               </div><div className='rounded-lg bg-gray-50/20 blurr   grid place-content-center   shadow     h-[175px] ' >
+                                  <Link to='/blogHistory'>
                                   
                                   <h1 class=" cursor-pointer uppercase font-medium
                                hover:scale-110 duration-500    ">
                                   Blog  History
                                   </h1>
+                                  </Link>
                               </div>
                             </div>
 

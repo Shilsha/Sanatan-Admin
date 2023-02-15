@@ -18,6 +18,8 @@ import BlogsPost from './components/Dashboard/BlogsPost/BlogsPost';
 import Profile from './components/Dashboard/Profile/Profile';
 import BlogReview from './components/Dashboard/BlogsPost/BlogReview';
 import BlogCategory from './components/Dashboard/BlogsPost/BlogCategory';
+import BlogHistory from './components/Dashboard/BlogsPost/BlogHistory';
+import BlogReview2 from './components/Dashboard/BlogsPost/BlogReview2';
 function Routing() {
   return (
     <div> 
@@ -26,7 +28,6 @@ function Routing() {
           <Route exact path="/" element={<Login />} />
 
           <Route exact path="/dashboard"  element={<PrivateRoutes Component={Dashboard}/>}> </Route>
-
           {/* <Route exact path="/dashboard" element={<Dashboard />} /> */}
           <Route exact path="/users" element={<PrivateRoutes Component={User}/>}> </Route>
           <Route exact path="/dashboard/profile" element={<PrivateRoutes Component={Profile}/>}> </Route>
@@ -41,6 +42,8 @@ function Routing() {
           <Route exact path="/blogsPost"  element={<PrivateRoutes Component={BlogsPost}/>}> </Route>
           <Route exact path="/blog"  element={<PrivateRoutes Component={BlogReview}/>}> </Route>
           <Route exact path="/blogCategory"  element={<PrivateRoutes Component={BlogCategory}/>}> </Route>
+          <Route exact path="/blogHistory"  element={<PrivateRoutes Component={BlogHistory}/>}> </Route>
+          <Route exact path="/blogReview"  element={<PrivateRoutes Component={BlogReview2}/>}> </Route>
         </Routes>
       </Router>
 
