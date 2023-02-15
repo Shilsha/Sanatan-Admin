@@ -6,7 +6,7 @@ export const getCategory = createAsyncThunk('GET_CATEGORY/GET_CATEGORY',
     async () => {
         let OPTIONS = {
             url: `${import.meta.env.VITE_BASE_URL}/article/getCategoryList`,
-           
+
             method: "GET",
             headers: {
                 'Accept': 'application/json'
@@ -14,7 +14,8 @@ export const getCategory = createAsyncThunk('GET_CATEGORY/GET_CATEGORY',
         };
 
         return axios(OPTIONS)
-                    .then((res) =>   res  ) })
+            .then((res) => res)
+    })
 
 // =========================add============================
 export const addCategory = createAsyncThunk('ADD_CATEGORY/ADD_CATEGORY',
@@ -29,10 +30,24 @@ export const addCategory = createAsyncThunk('ADD_CATEGORY/ADD_CATEGORY',
         };
         return await axios(OPTIONS)
             .then(res => res)
-           
-    })
 
-const category=createSlice({
+    })
+export const deleteCategory = createAsyncThunk('DELETE_CATEGORY/DELETE_CATEGORY',
+    
+        async (id) => {
+            let OPTIONS = {
+                url: `${import.meta.env.VITE_BASE_URL}/article/delete_Blog?articleId=${id}`,
+                method: "DELETE",
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }
+    
+            return axios(OPTIONS)
+                .then((res) => res)
+        })
+    
+const category = createSlice({
     name: 'Category',
     initialState: {
         loading: false,
@@ -60,9 +75,25 @@ const category=createSlice({
         },
         [addCategory.fulfilled]: (state, action) => {
             state.loading = false,
-            [state.result.push(action.payload.data.data)]
+                [state.result.push(action.payload.data.data)]
         },
         [addCategory.rejected]: (state, action) => {
+            state.loading = false,
+                state.error = action
+        },
+        // ====================delelte============================
+        [deleteCategory.pending]: (state, action) => {
+            state.loading = true;
+        },
+        [deleteCategory.fulfilled]: (state, action) => {
+            console.log('success')
+            state.loading = false,
+                // state.result = state.result.filter(data => data.categoryId !== action.payload.data.data.categoryId),
+                state.error = null
+
+        },
+        [deleteCategory.rejected]: (state, action) => {
+            console.log(action,'fail')
             state.loading = false,
                 state.error = action
         },

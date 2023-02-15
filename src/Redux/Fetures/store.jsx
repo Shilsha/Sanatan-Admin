@@ -28,6 +28,7 @@ import blogs from './Reducers/CreateBlogSlice'
 import exportData from './Reducers/DownloadSlice'
 import addAdmins from './Reducers/AddAdminSlice'
 import category from './Reducers/CategorySlice'
+import BlogHistory from "./Reducers/BlogHistorySlice";
 export default configureStore({
     reducer: {
         thoughtOfDay: getThoughtOfDay,
@@ -60,7 +61,8 @@ export default configureStore({
        blog:blogs,
        export:exportData,
        addAdmin:addAdmins,
-       category:category
+       category:category,
+       BlogsHistory:BlogHistory,
     
 
 
