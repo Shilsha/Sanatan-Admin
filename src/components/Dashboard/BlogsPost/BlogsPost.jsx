@@ -58,7 +58,7 @@ function BlogsPost() {
         const data = {
             title: title,
             content: editorText,
-            categoryId: category,
+            categoryName: category,
             articleType: "OPEN"
         }
         const formData = new FormData();
@@ -147,7 +147,7 @@ function BlogsPost() {
                                                                     categoryList.result.map((data,index)=>{
                                                                         return <>
                                                                         
-                                                                        <option key={index} value={data.categoryId}>{data.categoryName}</option>
+                                                                        <option key={index} value={data.categoryName}>{data.categoryName}</option>
                                                                         
                                                                         </>
                                                                     })
