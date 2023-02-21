@@ -31,6 +31,9 @@ const blogs = createSlice({
             state.loading = false
                 state.result = action.payload.data.data
                 toast.success('Your blog is successfully uploaded')
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1000);
         },
         [createBlogAction.rejected]: (state, action) => {
             state.loading = false,
