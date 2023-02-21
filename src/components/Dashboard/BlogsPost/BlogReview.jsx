@@ -6,6 +6,8 @@ import { BsSearch } from 'react-icons/bs'
 import DesignLogin from '../../../Assets/images/DesignLogin.png'
 import { Link } from 'react-router-dom'
 function BlogReview() {
+
+  
     return (
         <>
             <ToastContainer />
@@ -24,38 +26,48 @@ function BlogReview() {
 
                             <div className='grid grid-cols-5 gap-6 mt-10 '>
                                 <div className='rounded-lg bg-gray-50/20 blurr  grid place-content-center   shadow     h-[175px] ' >
-                                <Link to='/blogsPost'>
-                                    <h1 class=" cursor-pointer uppercase font-medium
+                                    <Link to='/blogsPost'>
+                                        <h1 class=" cursor-pointer uppercase font-medium
                                  hover:scale-110 duration-500    ">
-                                    Blog  Post
-                                    </h1>
+                                            Blog  Post
+                                        </h1>
                                     </Link>
                                 </div>
                                 <div className='rounded-lg bg-gray-50/20  blurr grid place-content-center   shadow     h-[175px] ' >
-                                  <Link to='/blogCategory'>
-                                  <h1 class=" cursor-pointer uppercase font-medium
+                                    <Link to='/blogCategory'>
+                                        <h1 class=" cursor-pointer uppercase font-medium
                                hover:scale-110 duration-500    ">
-                                  Blog  Category
-                                  </h1>
-                                  
-                                  </Link>
-                                
-                              </div><div className='rounded-lg bg-gray-50/20 blurr  grid place-content-center   shadow     h-[175px] ' >
-                              <Link to='/blogReview'>
-                                  <h1 class=" cursor-pointer uppercase font-medium
+                                            Blog  Category
+                                        </h1>
+
+                                    </Link>
+
+                                </div><div className='rounded-lg bg-gray-50/20 blurr  grid place-content-center   shadow     h-[175px] ' >
+                                    <Link to='/blogReview'>
+                                        <h1 class=" cursor-pointer uppercase font-medium
                                hover:scale-110 duration-500    ">
-                                  Blog  Review
-                                  </h1>
-                                  </Link>
-                              </div><div className='rounded-lg bg-gray-50/20 blurr   grid place-content-center   shadow     h-[175px] ' >
-                                  <Link to='/blogHistory'>
-                                  
-                                  <h1 class=" cursor-pointer uppercase font-medium
+                                            Blog  Review
+                                        </h1>
+                                    </Link>
+                                </div><div className='rounded-lg bg-gray-50/20 blurr   grid place-content-center   shadow     h-[175px] ' >
+                                    <Link to='/blogHistory'>
+
+                                        <h1 class=" cursor-pointer uppercase font-medium
                                hover:scale-110 duration-500    ">
-                                  Blog  History
-                                  </h1>
-                                  </Link>
-                              </div>
+                                            Blog  History
+                                        </h1>
+                                    </Link>
+                                </div>
+
+                                <div className='rounded-lg bg-gray-50/20 blurr   grid place-content-center   shadow     h-[175px] ' >
+                                    <Link to='/blogReject'>
+
+                                        <h1 class=" cursor-pointer uppercase font-medium
+                               hover:scale-110 duration-500    ">
+                                            Blog  Reject
+                                        </h1>
+                                    </Link>
+                                </div>
                             </div>
 
                         </div>

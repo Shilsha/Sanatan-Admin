@@ -20,6 +20,9 @@ import BlogReview from './components/Dashboard/BlogsPost/BlogReview';
 import BlogCategory from './components/Dashboard/BlogsPost/BlogCategory';
 import BlogHistory from './components/Dashboard/BlogsPost/BlogHistory';
 import BlogReview2 from './components/Dashboard/BlogsPost/BlogReview2';
+import SingleViewHistory from './components/Dashboard/BlogsPost/SingleViewHistory';
+import BlogReject from './components/Dashboard/BlogsPost/BlogReject';
+import SingleBlogReject from './components/Dashboard/BlogsPost/SingleBlogReject';
 function Routing() {
   return (
     <div> 
@@ -44,6 +47,10 @@ function Routing() {
           <Route exact path="/blogCategory"  element={<PrivateRoutes Component={BlogCategory}/>}> </Route>
           <Route exact path="/blogHistory"  element={<PrivateRoutes Component={BlogHistory}/>}> </Route>
           <Route exact path="/blogReview"  element={<PrivateRoutes Component={BlogReview2}/>}> </Route>
+          <Route exact path="/blogReject"  element={<PrivateRoutes Component={BlogReject}/>}> </Route>
+          <Route exact path="/blogReject/:id"  element={<PrivateRoutes Component={SingleBlogReject}/>}> </Route>
+        <Route exact path="/blogReview/:id"  element={<PrivateRoutes Component={ReadMoreArticle}/>}> </Route> 
+        <Route exact path="/blogHistory/:id"  element={<PrivateRoutes Component={SingleViewHistory}/>}> </Route> 
         </Routes>
       </Router>
 

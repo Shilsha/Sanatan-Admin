@@ -348,6 +348,24 @@ tr:hover {
 }
 
 
+.blogCategoryScrollBar {
+  max-height: 600px;
+  /* border: 2px solid black; */
+  overflow: auto;
+}
+
+.blogCategoryScrollBar {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+.blogCategoryScrollBar::-webkit-scrollbar {
+  display: none;
+}
+
+
 
 .tableWrapBroadcast {
   max-height: 350px;
@@ -382,6 +400,27 @@ tr:hover {
 .tableWrapComment::-webkit-scrollbar {
   display: none;
 }
+.blogDetailsRead {
+  max-height: 640px;
+  /* border: 2px solid black; */
+  overflow: auto;
+}
+
+.blogDetailsRead {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+.blogDetailsRead::-webkit-scrollbar {
+  display: none;
+}
+
+
+
+
+
 
 
 .navbar_bg {

@@ -47,10 +47,12 @@ function BlogsPost() {
     // ==================================================
     const handleSubmit = (e) => {
         e.preventDefault()
+        console.log(editorText,'text')
         const data={
             title:title,
             content:editorText,
-            categoryType:category
+            categoryId:category,
+            articleType:"OPEN"
         }
         const formData = new FormData();
         formData.append('article',JSON.stringify(data))
