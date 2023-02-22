@@ -23,10 +23,10 @@ function BlogsPost() {
     const dispatch = useDispatch()
 
     const blogdata = useSelector(state => state.blog)
-    console.log(blogdata, 'come data form state')
+    // console.log(blogdata, 'come data form state')
 
     const categoryList = useSelector((state) => state.category)
-    console.log(categoryList, 'list')
+    // console.log(categoryList, 'list')
     useEffect(() => {
         dispatch(getCategory())
     }, [])
@@ -43,6 +43,7 @@ function BlogsPost() {
     // ============================image----------------------------------
 
     const handleChange = (e) => {
+        console.log(e.target.files,'files')
         if (e.target.files.length) {
             setImage({
                 preview: URL.createObjectURL(e.target.files[0]),
@@ -50,7 +51,7 @@ function BlogsPost() {
             });
         }
     };
-    console.log(image, "rawraw")
+    // console.log(image, "rawraw")
     // ==================================================
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -71,9 +72,10 @@ function BlogsPost() {
         }
 
         else {
-
+            
 
             dispatch(createBlogAction(formData))
+        
 
         }
 
@@ -87,9 +89,9 @@ function BlogsPost() {
 
     // *****************************************************Module auth**************************************************
     const Role = JSON.parse(sessionStorage.getItem('user'))
-    console.log(Role.role)
+    // console.log(Role.role)
     const isModuleAuth = Role?.role.some(data => data == 'BlogPost')
-    console.log(isModuleAuth, 'isModuleAuth  isModuleAuthisModuleAuthisModuleAuthisModuleAuth')
+    // console.log(isModuleAuth, 'isModuleAuth  isModuleAuthisModuleAuthisModuleAuthisModuleAuth')
 
     // **************************************************************
 
@@ -140,23 +142,24 @@ function BlogsPost() {
 
 
                                                             <select id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                                value={category}
-                                                                onChange={(e) => setCategory(e.target.value)}>
-                                                                <option disabled selected>Choose a Category</option>
-                                                                {categoryList.loading ? <><LoaderN /></> : <>
-                                                                    {
-                                                                        categoryList.result.map((data, index) => {
-                                                                            return <>
 
-                                                                                <option key={index} value={data.categoryName}>{data.categoryName}</option>
+                                                             value={category}
+                                                             onChange={(e)=>setCategory(e.target.value)}>
+                                                                     <option value=""> Select Category</option>
+                                                                {
+                                                                    categoryList?.result.map((data,index)=>{
+                                                                     
+                                                                        return <>
+                                                                        
+                                                                        <option key={index} value={data.categoryName}>{data.categoryName}</option>
+                                                                        
+                                                                        </>
+                                                                    })
+                                                                }
+                                                                
+                                                                                                                   
 
-                                                                            </>
-                                                                        })
-                                                                    }
-
-
-                                                                </>}
-
+                                                               
                                                             </select>
 
                                                         </div>

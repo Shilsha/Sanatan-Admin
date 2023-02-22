@@ -38,6 +38,7 @@
     "redux": "^4.2.0",
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.4.2",
+    "rich-text-editor": "^7.1.6",
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
