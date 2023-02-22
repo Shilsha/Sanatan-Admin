@@ -12,7 +12,7 @@ import RichTextEditor from '../../Editor/RichTextEditor'
 import { useNavigate } from 'react-router-dom'
 import DesignLogin from '../../../Assets/images/DesignLogin.png'
 import { createBlogAction } from '../../../Redux/Fetures/Reducers/CreateBlogSlice'
-import {getCategory} from '../../../Redux/Fetures/Reducers/CategorySlice'
+import { getCategory } from '../../../Redux/Fetures/Reducers/CategorySlice'
 function BlogsPost() {
     const [editorText, setEditorText] = useState('')
     const [image, setImage] = useState({ preview: "", raw: "" });
@@ -97,6 +97,7 @@ function BlogsPost() {
 
         return (
             <>
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
                 <ToastContainer />
                 <div className='   w-[100%] h-[100vh] flex flex-col-2 gap-4 bgGradient '>
                     <Sidebar />
@@ -137,25 +138,25 @@ function BlogsPost() {
                                                                 onChange={(e)=>setCategory(e.target.value)}/> */}
 
 
-                                                         
+
                                                             <select id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                             value={category}
-                                                             onChange={(e)=>setCategory(e.target.value)}>
+                                                                value={category}
+                                                                onChange={(e) => setCategory(e.target.value)}>
                                                                 <option disabled selected>Choose a Category</option>
-                                                                {categoryList.loading?<><LoaderN/></>:<>
-                                                                {
-                                                                    categoryList.result.map((data,index)=>{
-                                                                        return <>
-                                                                        
-                                                                        <option key={index} value={data.categoryName}>{data.categoryName}</option>
-                                                                        
-                                                                        </>
-                                                                    })
-                                                                }
-                                                                
-                                                                
+                                                                {categoryList.loading ? <><LoaderN /></> : <>
+                                                                    {
+                                                                        categoryList.result.map((data, index) => {
+                                                                            return <>
+
+                                                                                <option key={index} value={data.categoryName}>{data.categoryName}</option>
+
+                                                                            </>
+                                                                        })
+                                                                    }
+
+
                                                                 </>}
-                                                               
+
                                                             </select>
 
                                                         </div>
@@ -165,6 +166,7 @@ function BlogsPost() {
                                                     <div class="flex items-center justify-center  border-t dark:border-gray-600 ">
 
                                                         < div className='w-full min-h-[350px] bg-white px-4'>
+                                                            
                                                             <RichTextEditor sendData={sendData} />
 
                                                         </div>
@@ -173,9 +175,16 @@ function BlogsPost() {
                                                     <div className='p-5 flex  items-center  '>
                                                         <div>
                                                             <label for="logo" class="block mb-2 mt-4 font-bold">Upload image..</label>
-                                                            <input class="w-full cursor-pointer" type="file" onChange={handleChange} />
+                                                            {/* <input class="w-full cursor-pointer"  accept="image/*" type="file" onChange={handleChange} /> */}
+                                                            <input
+                                                                alt="image"
+                                                                type="file"
+                                                                name="image"
+                                                                className="form-control"
+                                                                onChange={handleChange}
+                                                                accept="image/*"
+                                                            />
                                                         </div>
-
 
                                                         <div className=' flex justify-center items-center  w-[50%] mx-auto '>
 

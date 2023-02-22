@@ -50,11 +50,11 @@ function BlogReject() {
                                 </div>
                             </div>
                             <div>
-                                <button type="button" class="inline-flex items-center text-white bg-gradient-to-r
-                                 from-orange-500  to-yellow-400 hover:bg-gradient-to-bl font-medium rounded-lg text-lg px-4 py-1 text-center mr-40 mb-2">
+                                <h1 type="button" class="inline-flex items-center text-white bg-gradient-to-r
+                                 from-orange-500  to-yellow-400  font-medium rounded-lg text-lg px-4 py-1 text-center mr-40 mb-2">
 
                                     Blog Reject
-                                </button>
+                                </h1>
 
                             </div>
 
