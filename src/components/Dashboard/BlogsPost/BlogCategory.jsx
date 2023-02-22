@@ -68,10 +68,10 @@ function BlogCategory() {
                     <Navbar />
                     <div className=' my-4 pr-4 '>
                         <div className='text-center'>
-                            <button type="button" class="inline-flex items-center text-white bg-gradient-to-r 
-                                from-orange-500  to-yellow-400 hover:bg-gradient-to-bl font-medium rounded-lg text-lg px-3 py-1 text-center  mb-2">
+                            <h1 type="button" class="inline-flex items-center text-white bg-gradient-to-r 
+                                from-orange-500  to-yellow-400  font-medium rounded-lg text-lg px-3 py-1 text-center  mb-2">
                                 Blog Category
-                            </button>
+                            </h1>
                         </div>
 
                         <div className='grid grid-cols-4 gap-4  justify-around my-10 '>
