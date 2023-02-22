@@ -32,7 +32,7 @@ const blogs = createSlice({
                 state.result = action.payload.data.data
                 toast.success('Your blog is successfully uploaded')
                 setTimeout(() => {
-                    // window.location.reload();
+                    window.location.reload();
                 }, 1000);
         },
         [createBlogAction.rejected]: (state, action) => {
