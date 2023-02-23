@@ -310,7 +310,9 @@ function AdminUserList() {
     // ===========================================================================================
     // console.log(errors,'errors')
     const LoginAdmin = JSON.parse(sessionStorage.getItem('user'))
-    // console.log(LoginAdmin.adminId, 'login id')
+    console.log(LoginAdmin.role, 'roles')
+    const isAuth=LoginAdmin?.role.some(data=>data=="Users")
+    console.log(isAuth,'auth')
     // console.log(types,'typesssssssssssssssssssssssssssssssssss')
 
     // =========================================================================
@@ -332,7 +334,7 @@ function AdminUserList() {
         }))
     }
 
-
+if(isAuth){
     return (
 
         <>
@@ -693,6 +695,9 @@ function AdminUserList() {
 
         </>
     )
+}
+
+    
 }
 
 export default AdminUserList

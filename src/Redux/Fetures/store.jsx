@@ -31,6 +31,7 @@ import category from './Reducers/CategorySlice'
 import BlogHistory from "./Reducers/BlogHistorySlice";
 import blogReview from './Reducers/BlogReviewSlice'
 import blogReject from './Reducers/BlogRejectSlice'
+import adminProfile from './Reducers/AdminProfileSlice'
  export default configureStore({
     reducer: {
         thoughtOfDay: getThoughtOfDay,
@@ -67,6 +68,7 @@ import blogReject from './Reducers/BlogRejectSlice'
        BlogsHistory:BlogHistory,
        blogReview:blogReview,
        blogReject:blogReject,
+       adminProfile:adminProfile,
     
 
 

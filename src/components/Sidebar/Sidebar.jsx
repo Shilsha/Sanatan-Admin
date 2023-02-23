@@ -301,7 +301,7 @@ function Sidebar() {
 
 
 <nav className='-mt-4'>
-		<ul class="mcd-menu">
+		<ul class="mcd-menu xxl:text-lg">
 			<li className=''>
 				<NavLink to='/dashboard'>
                 <CgMenuGridR className='iconss ' size={25} />
@@ -310,7 +310,8 @@ function Sidebar() {
                     </NavLink> 
 			</li>
             <li>
-            <NavLink to='/adminlists'>
+                {UserListModuleAuth || isSuperAdmin?<>
+                    <NavLink to='/adminlists'>
                 <MdOutlineGroupAdd className=' ' size={25} />
 					<strong>User  Management</strong>
 					
@@ -318,11 +319,22 @@ function Sidebar() {
 				<ul>
 					<li>
                         <a onClick={addStaff} className='cursor-pointer'>Add user</a></li>	
-					<li>
+					    
+                        
+                        <li>
                         <NavLink   to='/adminlists'>User List</NavLink>
                         </li>
 				
 				</ul>
+                </>:<>
+                
+                
+                <a  onClick={unAutherizedHndle} >
+          <MdOutlineGroupAdd className=' ' size={25} />
+					<strong>User Management</strong>
+          </a>
+                </>}
+           
 			</li>
 
             <li>
