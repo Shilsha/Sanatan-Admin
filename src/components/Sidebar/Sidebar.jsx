@@ -228,7 +228,7 @@ function Sidebar() {
 
         <>
             <ToastContainer />
-            <div className='  flex flex-col justify-between py-5 items-center shadow-xl navbar_bg    -ml-4 px-6  '>
+            <div className='  flex flex-col justify-between py-5 items-center shadow-xl navbar_bg border    -ml-4 px-6  '>
 
                 <div className=''>
                     <Link to='/dashboard'>
