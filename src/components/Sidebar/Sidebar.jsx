@@ -10,14 +10,17 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Navigate, NavLink, useNavigate } from 'react-router-dom'
 import { RiShieldUserLine } from 'react-icons/ri'
 import { HiClipboardDocumentList } from 'react-icons/hi2'
-import { BsQuestionOctagonFill,BsClipboardData } from 'react-icons/bs'
+import { BsQuestionOctagonFill, BsClipboardData } from 'react-icons/bs'
 import { BiHide, BiShow } from 'react-icons/bi'
-import {SiBloglovin} from 'react-icons/si'
-import {VscBroadcast} from 'react-icons/vsc'
+import { SiBloglovin } from 'react-icons/si'
+import { VscBroadcast } from 'react-icons/vsc'
 import { addAdmin } from '../../Redux/Fetures/Reducers/AddAdminSlice'
 import { toast, ToastContainer } from 'react-toastify'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import moment from 'moment/moment';
 
 const customStyles = {
     content: {
@@ -45,6 +48,8 @@ function Sidebar() {
 
 
     })
+    const [gender, setGender] = useState("Male")
+    const [date, setDate] = useState(new Date())
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
@@ -166,16 +171,22 @@ function Sidebar() {
         if (resError) {
             errors.Email = resError
         }
+        if(!formData.phoneNumber){
+            errors.phoneNumber = 'Role is required!'
+        }
+        if(formData.phoneNumber.length!==10){
+            errors.phoneNumber = 'Invalid number!' 
+        }
         return errors
     }
 
 
     // =================api calll======================
-    const apiCall = async () => {
+    const apiCall = async (data) => {
 
         let OPTIONS = {
             url: `${import.meta.env.VITE_BASE_URL}/api/addAdmin`,
-            data: formData,
+            data: data,
             method: "POST",
             headers: {
                 'Accept': 'application/json'
@@ -190,7 +201,7 @@ function Sidebar() {
                 // alert('ok')
                 console.log(res, 'res')
                 toast.success(res.data.status.message)
-                console.log(formData,'eeee form data')
+                console.log(formData, 'eeee form data')
                 setForm('')
                 // setRole([])
             })
@@ -206,10 +217,10 @@ function Sidebar() {
         if (Object.keys(errors).length === 0 && isSubmitting) {
 
             // dispatch(addAdmin(formData))
-            // console.log(formData, 'form')
+            // console.log({...formData,dateOfBirth:moment(date).format('DD-MM-YYYY')}, 'form')
             // setResError('')
             // console.log(resError,'errors')
-            apiCall()
+            apiCall({...formData,dateOfBirth:moment(date).format('DD-MM-YYYY'),gender:gender})
             // setIsOpen(false)
 
 
@@ -218,8 +229,8 @@ function Sidebar() {
     }, [errors]);
 
     useEffect(() => {
-      console.log(resError.length,'lenghth')
-      
+        console.log(resError.length, 'lenghth')
+
         if (resError.length > 0) {
             // setIsOpen(false)
         }
@@ -235,7 +246,7 @@ function Sidebar() {
                         <img src={side1} alt="logo" className='w-32' />
                     </Link>
                 </div>
-{/* 
+                {/* 
                 <div className='flex flex-col justify-between items-center -mt-16 gap-6  '>
                     <NavLink to='/dashboard'  >
                         <CgMenuGridR className='text-white iconsColor p-1 rounded cursor-pointer' size={35} />
@@ -297,141 +308,141 @@ function Sidebar() {
 
                 </div> */}
 
-{/* *************************************************************************************** */}
+                {/* *************************************************************************************** */}
 
 
-<nav className='-mt-4'>
-		<ul class="mcd-menu xxl:text-lg">
-			<li className=''>
-				<NavLink to='/dashboard'>
-                <CgMenuGridR className='iconss ' size={25} />
-					<strong>Dashboard</strong>
-					
-                    </NavLink> 
-			</li>
-            <li>
-                {UserListModuleAuth || isSuperAdmin?<>
-                    <NavLink to='/adminlists'>
-                <MdOutlineGroupAdd className=' ' size={25} />
-					<strong>User  Management</strong>
-					
-                    </NavLink> 
-				<ul>
-					<li>
-                        <a onClick={addStaff} className='cursor-pointer'>Add user</a></li>	
-					    
-                        
-                        <li>
-                        <NavLink   to='/adminlists'>User List</NavLink>
+                <nav className='-mt-4'>
+                    <ul class="mcd-menu xxl:text-lg">
+                        <li className=''>
+                            <NavLink to='/dashboard'>
+                                <CgMenuGridR className='iconss ' size={25} />
+                                <strong>Dashboard</strong>
+
+                            </NavLink>
                         </li>
-				
-				</ul>
-                </>:<>
-                
-                
-                <a  onClick={unAutherizedHndle} >
-          <MdOutlineGroupAdd className=' ' size={25} />
-					<strong>User Management</strong>
-          </a>
-                </>}
-           
-			</li>
+                        <li>
+                            {UserListModuleAuth || isSuperAdmin ? <>
+                                <NavLink to='/adminlists'>
+                                    <MdOutlineGroupAdd className=' ' size={25} />
+                                    <strong>User  Management</strong>
 
-            <li>
-            {customerModuleAuth || isSuperAdmin ? <>
-            
-                <NavLink to='/users'>
-                <HiClipboardDocumentList className=' ' size={25} />
-					<strong>Customer Management</strong>
-					
-                    </NavLink> 
-            </>:<>
-          <a  onClick={unAutherizedHndle} >
-          <HiClipboardDocumentList className=' ' size={25} />
-					<strong>Customer Management</strong>
-          </a>
-            </>}
-				
-			</li>
-         
-            <li>
+                                </NavLink>
+                                <ul>
+                                    <li>
+                                        <a onClick={addStaff} className='cursor-pointer'>Add user</a></li>
 
-            {QueriesListModuleAuth || isSuperAdmin ? <>
-            
-                <NavLink to='/queries'>
-                <BsQuestionOctagonFill className=' ' size={25} />
-					<strong>Query Management</strong>
-					
-                    </NavLink> 
-            
-            </>:<>
-            <a onClick={unAutherizedHndle}>
-            <BsQuestionOctagonFill className=' ' size={25} />
-					<strong>Query Management</strong>
-					
-               
-            </a>
-            </>}
-				
-			</li>
-            <li>
-                {LogstModuleAuth || isSuperAdmin?<>
-                    <NavLink to='/logs'>
-                <BsClipboardData className=' ' size={25} />
-					<strong>log Management</strong>
-					
-                    </NavLink> 
-                </>:<>
-                
-                <a onClick={unAutherizedHndle}>
-                <BsClipboardData className=' ' size={25} />
-					<strong>log Management</strong>
-					
-                </a>
-                </>}
-				
-			</li>
-            <li>
-                {BroadcastModuleAuth || isSuperAdmin?<>
-                
-                    <NavLink to='/broadcast'>
-                <VscBroadcast className=' ' size={25} />
-					<strong>Broadcast Management</strong>
-					
-                    </NavLink> 
-                </>:<>
-                <a onClick={unAutherizedHndle}>
-                <VscBroadcast className=' ' size={25} />
-					<strong>Broadcast Management</strong>              
-                </a>
-                </>}
-				
-			</li>
-            <li>
-                {BlogsPosttModuleAuth || isSuperAdmin?<>
-                	<NavLink to='/blog'>
-                <SiBloglovin className=' ' size={25} />
-					<strong>Blog Management</strong>
-					
-                    </NavLink> 
-                </>:<>
-                <a onClick={unAutherizedHndle}>
-                <SiBloglovin className=' ' size={25} />
-					<strong>Blog Management</strong>
-                </a>
-                </>}
-			
-			</li>
-			
-			
-			
-			
-			
-		
-		</ul>
-	</nav>
 
-{/* *************************************************************************************** */}
+                                    <li>
+                                        <NavLink to='/adminlists'>User List</NavLink>
+                                    </li>
+
+                                </ul>
+                            </> : <>
+
+
+                                <a onClick={unAutherizedHndle} >
+                                    <MdOutlineGroupAdd className=' ' size={25} />
+                                    <strong>User Management</strong>
+                                </a>
+                            </>}
+
+                        </li>
+
+                        <li>
+                            {customerModuleAuth || isSuperAdmin ? <>
+
+                                <NavLink to='/users'>
+                                    <HiClipboardDocumentList className=' ' size={25} />
+                                    <strong>Customer Management</strong>
+
+                                </NavLink>
+                            </> : <>
+                                <a onClick={unAutherizedHndle} >
+                                    <HiClipboardDocumentList className=' ' size={25} />
+                                    <strong>Customer Management</strong>
+                                </a>
+                            </>}
+
+                        </li>
+
+                        <li>
+
+                            {QueriesListModuleAuth || isSuperAdmin ? <>
+
+                                <NavLink to='/queries'>
+                                    <BsQuestionOctagonFill className=' ' size={25} />
+                                    <strong>Query Management</strong>
+
+                                </NavLink>
+
+                            </> : <>
+                                <a onClick={unAutherizedHndle}>
+                                    <BsQuestionOctagonFill className=' ' size={25} />
+                                    <strong>Query Management</strong>
+
+
+                                </a>
+                            </>}
+
+                        </li>
+                        <li>
+                            {LogstModuleAuth || isSuperAdmin ? <>
+                                <NavLink to='/logs'>
+                                    <BsClipboardData className=' ' size={25} />
+                                    <strong>log Management</strong>
+
+                                </NavLink>
+                            </> : <>
+
+                                <a onClick={unAutherizedHndle}>
+                                    <BsClipboardData className=' ' size={25} />
+                                    <strong>log Management</strong>
+
+                                </a>
+                            </>}
+
+                        </li>
+                        <li>
+                            {BroadcastModuleAuth || isSuperAdmin ? <>
+
+                                <NavLink to='/broadcast'>
+                                    <VscBroadcast className=' ' size={25} />
+                                    <strong>Broadcast Management</strong>
+
+                                </NavLink>
+                            </> : <>
+                                <a onClick={unAutherizedHndle}>
+                                    <VscBroadcast className=' ' size={25} />
+                                    <strong>Broadcast Management</strong>
+                                </a>
+                            </>}
+
+                        </li>
+                        <li>
+                            {BlogsPosttModuleAuth || isSuperAdmin ? <>
+                                <NavLink to='/blog'>
+                                    <SiBloglovin className=' ' size={25} />
+                                    <strong>Blog Management</strong>
+
+                                </NavLink>
+                            </> : <>
+                                <a onClick={unAutherizedHndle}>
+                                    <SiBloglovin className=' ' size={25} />
+                                    <strong>Blog Management</strong>
+                                </a>
+                            </>}
+
+                        </li>
+
+
+
+
+
+
+                    </ul>
+                </nav>
+
+                {/* *************************************************************************************** */}
 
                 <div className=' justify-center   rounded-full'>
                     <TbLogout className='text-white  p-1 hover:bg-red-800 iconsColor rounded-lg hover:text-white  cursor-pointer'
@@ -451,18 +462,78 @@ function Sidebar() {
 
                 >
 
-                    <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 relative z-50" onSubmit={HandleOnSubmit}>
-                        <AiOutlineClose onClick={closeModal} className="relative top-0 left-[100%] cursor-pointer" size={25} />
-                        <h1 className='text-center font-sans  mb-4 text-4xl font-bold text-orange-500'>Add User </h1>
+                    <form class="bg-white shadow-md rounded px-8 pt-2 pb-8 " onSubmit={HandleOnSubmit}>
+                        <AiOutlineClose onClick={closeModal} className="relative top-0 left-[100%] cursor-pointer shadow-md" size={25} />
+                        <h1 className='text-center font-sans  mb-4 text-2xl font-bold text-orange-500'>Add User </h1>
+                        <div class="grid md:grid-cols-2 md:gap-6">
+
+                            <div class="mb-4">
+                                <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+                                    First Name
+                                </label>
+                                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="adminName" type="text" placeholder="First Name" required name='adminName' value={form.adminName} onChange={handleChangeInput}
+                                />
+                            </div>
+                            <div class="mb-4">
+                                <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+                                    Last Name
+                                </label>
+                                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="adminName" type="text" placeholder="Last Name" required name='lastName' value={form.lastName} onChange={handleChangeInput}
+                                />
+                            </div>
+
+                        </div>
+
+                        <div class="grid md:grid-cols-2 md:gap-6">
+
+                            <div class="mb-4">
+                                <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+                                    Phone Number
+                                </label>
+                                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="adminName" type="number" placeholder="Phone Number" required name='phoneNumber' value={form.phoneNumber} onChange={handleChangeInput}
+                                />
+                               
+                                  {errors.phoneNumber && (<p className='text-red-500 text-sm pt-1'>{errors.phoneNumber}</p>)}
+                            </div>
+                            <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+                                    Date of Birth
+                                </label>
 
 
+                                <DatePicker className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" selected={date} onChange={(date) => setDate(date)} dateFormat="dd/MM/yyyy" />
+
+
+                            </div>
+
+                        </div>
+
+                        <div className='mb-4'>
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+                                Gender
+                            </label>
+                            <div className='inline-flex pt-1'>
+                                <div>
+                                    <input type="radio" value='Female' checked={gender == 'Female'} onChange={(e) => setGender(e.target.value)} />
+                                    <label className=''> Female</label>
+                                </div>
+                                <div className='ml-4'>
+                                    <input type="radio" value='Male' checked={gender == 'Male'} onChange={(e) => setGender(e.target.value)} />
+                                    <label className=''> Male</label>
+                                </div>
+                            </div>
+                        </div>
                         <div class="mb-4">
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
-                                Admin Name
+                                Address
                             </label>
-                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="adminName" type="text" placeholder="Admin Name" required name='adminName' value={form.adminName} onChange={handleChangeInput}
+                            <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="adminName" type="text" placeholder="Address...." required name='address' value={form.address} onChange={handleChangeInput}
                             />
                         </div>
+
+
+
+
                         <div class="mb-4">
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
                                 Admin Email

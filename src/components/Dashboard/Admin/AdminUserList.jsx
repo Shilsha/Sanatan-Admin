@@ -509,7 +509,7 @@ if(isAuth){
 
                         </div>
 
-                        <nav aria-label="Page navigation example  " className='text-center relative z-10  '>
+                        <nav aria-label="Page navigation example  " className='text-center   '>
                             <ul class="inline-flex justify-center items-center ">
                                 <li>
                                     <button class={`px-3 inline-flex justify-center  items-center cursor-pointer py-2 ml-0 leading-tight text-white font-bold bg-red-800 disabled:opacity-50  rounded-lg mx-4 hover:bg-red-700  dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white`} disabled={buttonPre} onClick={prev} >
