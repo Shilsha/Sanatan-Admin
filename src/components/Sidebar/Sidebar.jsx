@@ -141,7 +141,7 @@ function Sidebar() {
     const BlogsPosttModuleAuth = isModuleAuth?.role.some(data => data == 'BlogPost')
     // console.log(userModuleAuth, 'userModuleAuth auth')
     const unAutherizedHndle = () => {
-        toast.error('You are not authrized for this module')
+        toast.error('You are not authorized for this module')
     }
     //   *****************************************Module access***********************************************************
 
