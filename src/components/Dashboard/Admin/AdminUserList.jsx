@@ -339,7 +339,7 @@ if(isAuth){
 
         <>
             <ToastContainer />
-            <div className='  w-[100%] h-[100vh] flex flex-col-12 gap-4 bgGradient '>
+            <div className='  w-[100%]  min-h-screen flex flex-col-12 gap-4 bgGradient '>
 
                 <Sidebar />
                 <div className='   w-full  ' >

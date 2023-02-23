@@ -44,7 +44,7 @@ function SingleViewHistory() {
 
     return (
         <>
-            <div className='   w-[100%] h-[100vh] flex flex-col-2 gap-4  '>
+            <div className='   w-[100%]  min-h-screen flex flex-col-2 gap-4  '>
                 <Sidebar />
 
                 <div className=' w-[100%]'>

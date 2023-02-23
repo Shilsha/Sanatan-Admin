@@ -184,7 +184,7 @@ if(isModuleAuth){
     return (
         <>
             <ToastContainer />
-            <div className='  bgGradient w-[100%] h-[100vh] flex flex-col-2 gap-4'>
+            <div className='  bgGradient w-[100%]  min-h-screen flex flex-col-2 gap-4'>
                 <Sidebar />
                 <div className='  w-full ' >
                     <Navbar />
