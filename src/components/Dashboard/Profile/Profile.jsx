@@ -56,6 +56,11 @@ function Profile() {
 
     const updateProfile = () => {
         setIsOpen(true)
+
+        setName(profile?.result?.adminName)
+        setlastName(profile?.result?.lastName)
+        setPhone(profile?.result?.phoneNumber)
+        setAddress(profile?.result?.address)
     }
 
     // ======================update=========================
