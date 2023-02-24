@@ -578,10 +578,10 @@ function Sidebar() {
                         </div>
 
                         {/* ================================================================================================= */}
-                        <label class="block text-gray-700 text-sm font-bold my-2" for="username">
+                        {/* <label class="block text-gray-700 text-sm font-bold my-2" for="username">
                             Password
-                        </label>
-                        <div class="relative flex w-full flex-wrap items-stretch mb-3">
+                        </label> */}
+                        {/* <div class="relative flex w-full flex-wrap items-stretch mb-3">
 
                             <input class="px-3 py-2 placeholder-slate-500 text-slate-600 relative 
                              rounded  border-0 shadow outline-none  w-full pr-10"
@@ -597,10 +597,10 @@ function Sidebar() {
 
 
                             </span>
-                        </div>
+                        </div> */}
 
 
-                        <div class="flex items-center justify-center">
+                        <div class="flex items-center justify-center pt-5">
 
 
                             <button class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-1 shadow-xl  px-5 rounded focus:outline-none focus:shadow-outline" type="submit">
