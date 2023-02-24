@@ -66,7 +66,7 @@ function BlogsPost() {
 
         if (file.size > maxSize) {
             // console.log('please upload only 400kb image !')
-            setErros('please upload only 400kb image !')
+            setErros('Uploaded image size exceeds 400kb, Upload small size image !')
 
         }
         else {

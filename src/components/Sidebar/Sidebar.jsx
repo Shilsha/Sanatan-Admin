@@ -204,6 +204,7 @@ function Sidebar() {
                 console.log(formData, 'eeee form data')
                 setForm('')
                 // setRole([])
+                window.location.reload();
             })
             .catch(err => {
                 // console.log(err.response.data.status.message, 'err')
