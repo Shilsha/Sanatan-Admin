@@ -36,26 +36,32 @@ function BlogsPost() {
     const sendData = (data) => {
 
         setEditorText(data)
-        console.log(data, 'child')
+        console.log(data, 'child data')
 
     }
 
     // ============================image----------------------------------
 
     const handleChange = (e) => {
-        console.log(e.target.files,'files')
-        if (e.target.files.length) {
+        console.log(e.target.files, 'files')
+        const file = e.target.files[0];
+        if (!file.type.startsWith('image/')) {
+            // alert('Please select an image file.');
+
+        }
+        else if (e.target.files.length) {
             setImage({
                 preview: URL.createObjectURL(e.target.files[0]),
                 raw: e.target.files[0],
             });
         }
     };
-    // console.log(image, "rawraw")
+
+
     // ==================================================
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(editorText, 'text')
+
         const data = {
             title: title,
             content: editorText,
@@ -68,14 +74,14 @@ function BlogsPost() {
 
 
         if (!image.raw) {
-            toast.warning('Fields are required!')
+            toast.warning('Fields are required! or Invalid file type. Only image files are allowed')
         }
 
         else {
-            
+
 
             dispatch(createBlogAction(formData))
-        
+
 
         }
 
@@ -99,7 +105,7 @@ function BlogsPost() {
 
         return (
             <>
-            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+                <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
                 <ToastContainer />
                 <div className='   w-[100%] min-h-screen flex flex-col-2 gap-4 bgGradient '>
                     <Sidebar />
@@ -143,23 +149,23 @@ function BlogsPost() {
 
                                                             <select id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
 
-                                                             value={category}
-                                                             onChange={(e)=>setCategory(e.target.value)}>
-                                                                     <option value=""> Select Category</option>
+                                                                value={category}
+                                                                onChange={(e) => setCategory(e.target.value)}>
+                                                                <option value=""> Select Category</option>
                                                                 {
-                                                                    categoryList?.result.map((data,index)=>{
-                                                                     
+                                                                    categoryList?.result.map((data, index) => {
+
                                                                         return <>
-                                                                        
-                                                                        <option key={index} value={data.categoryName}>{data.categoryName}</option>
-                                                                        
+
+                                                                            <option key={index} value={data.categoryName}>{data.categoryName}</option>
+
                                                                         </>
                                                                     })
                                                                 }
-                                                                
-                                                                                                                   
 
-                                                               
+
+
+
                                                             </select>
 
                                                         </div>
@@ -169,7 +175,7 @@ function BlogsPost() {
                                                     <div class="flex items-center justify-center  border-t dark:border-gray-600 ">
 
                                                         < div className='w-full min-h-[350px] bg-white px-4'>
-                                                            
+
                                                             <RichTextEditor sendData={sendData} />
 
                                                         </div>
