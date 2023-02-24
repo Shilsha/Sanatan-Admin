@@ -79,13 +79,17 @@ function BlogsPost() {
 
         }
 
+
+       
+
+
         return errors
 
     };
 
 
 
-    // ==================================================
+   
 
 
     function validate() {
@@ -123,15 +127,12 @@ function BlogsPost() {
         if (Object.keys(newError).length == 0 && errors.length == 0) {
             console.log('done')
 
-            const data = {
-                title: title,
-                content: editorText,
-                categoryName: category,
-                articleType: "OPEN"
-            }
-            const formData = new FormData();
-            formData.append('article', JSON.stringify(data))
-            formData.append('file', image.raw)
+             const formData = new FormData();
+        formData.append('title', title )
+        formData.append('content', editorText )
+        formData.append('categoryName', category )
+        formData.append('articleType', "OPEN" )
+        formData.append('file', image.raw)
             dispatch(createBlogAction(formData))
         }
 
