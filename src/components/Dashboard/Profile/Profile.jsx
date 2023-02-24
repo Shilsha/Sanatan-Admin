@@ -56,9 +56,6 @@ function Profile() {
 
     const updateProfile = () => {
         setIsOpen(true)
-
-        setName(profile?.result?.adminName)
-        setlastName(profile?.result?.lastName)
         setPhone(profile?.result?.phoneNumber)
         setAddress(profile?.result?.address)
     }
@@ -69,20 +66,16 @@ function Profile() {
         e.preventDefault()
         const form = {
             adminId: id?.adminId,
-            adminName: name,
-            lastName: lastName,
             address: address,
             phoneNumber: phone,
-            gender: gender,
             dateOfBirth: dob,
+            gender:profile?.result?.gender,
+            lastName:profile?.result?.gender,
             adminStatus: true,
 
         }
         dispactch(updateAdminProfile(form))
         closeModal()
-
-        setName('')
-        setlastName('')
         setPhone('')
         setAddress('')
     }
@@ -95,7 +88,7 @@ function Profile() {
                     <Navbar />
                     <div className=' mx-auto   my-4'>
 
-                        <div className=' w-[40%]  mx-auto'>
+                        <div className=' w-[80%]  mx-auto'>
 
                             <div class=" blurrTable p-5 mt-4 shadow rounded ">
                                 <div class="flex items-center space-x-2 font-semibold text-gray-900 leading-8">
@@ -110,38 +103,38 @@ function Profile() {
                                 
                                 <div class="text-gray-700 bg-gray-100 rounded p-2 ">
                                     <div class="grid md:grid-cols-1 ">
-                                        <div class="grid grid-cols-2">
+                                        <div class="grid grid-cols-3 ">
                                             <div class="px-4 py-2 font-semibold">First Name</div>
-                                            <div class="px-4 py-2">{profile?.result?.adminName}</div>
+                                            <div class="px-4 col-span-2 py-2">{profile?.result?.adminName}</div>
                                         </div>
-                                        <div class="grid grid-cols-2">
+                                        <div class="grid grid-cols-3">
                                             <div class="px-4 py-2 font-semibold">Last Name</div>
-                                            <div class="px-4 py-2">{profile?.result?.lastName ? profile?.result?.lastName : '--'}</div>
+                                            <div class="px-4 col-span-2 py-2">{profile?.result?.lastName ? profile?.result?.lastName : '--'}</div>
                                         </div>
-                                        <div class="grid grid-cols-2">
+                                        <div class="grid grid-cols-3">
                                             <div class="px-4 py-2 font-semibold">Gender</div>
-                                            <div class="px-4 py-2">{profile?.result?.gender ? profile?.result?.gender : '--'}</div>
+                                            <div class="px-4 col-span-2 py-2">{profile?.result?.gender ? profile?.result?.gender : '--'}</div>
                                         </div>
-                                        <div class="grid grid-cols-2">
+                                        <div class="grid grid-cols-3">
                                             <div class="px-4 py-2 font-semibold">Phone No</div>
-                                            <div class="px-4 py-2">{profile?.result?.phoneNumber ? profile?.result?.phoneNumber : '--'}</div>
+                                            <div class="px-4 col-span-2 py-2">{profile?.result?.phoneNumber ? profile?.result?.phoneNumber : '--'}</div>
                                         </div>
-                                        <div class="grid grid-cols-2">
+                                        <div class="grid grid-cols-3">
                                             <div class="px-4 py-2 font-semibold"> Address</div>
-                                            <div class="px-4 py-2">{profile?.result?.address ? profile?.result?.address : '--'}</div>
+                                            <div class="px-4 col-span-2 py-2">{profile?.result?.address ? profile?.result?.address : '--'}</div>
                                         </div>
 
-                                        <div class="grid grid-cols-2">
+                                        <div class="grid grid-cols-3">
                                             <div class="px-4 py-2 font-semibold">Email</div>
-                                            <div class="px-4 py-2">
+                                            <div class="px-4 col-span-2 py-2">
                                                 <a class="text-blue-800" href="mailto:jane@example.com">{profile?.result?.email ? profile?.result?.email : '--'}</a>
                                             </div>
                                         </div>
-                                        <div class="grid grid-cols-2">
+                                        <div class="grid grid-cols-3">
                                             <div class="px-4 py-2 font-semibold">Date Of Birth</div>
-                                            <div class="px-4 py-2">{profile?.result?.dateOfBirth ? profile?.result?.dateOfBirth : '--'}</div>
+                                            <div class="px-4 col-span-2 py-2">{profile?.result?.dateOfBirth ? profile?.result?.dateOfBirth : '--'}</div>
                                         </div>
-                                        <div class="grid grid-cols-2 ">
+                                        <div class="grid grid-cols-3 ">
                                             <div class="px-4 py-2 font-semibold">Role</div>
                                             <div class="px-4 py-2">
                                                 {profile?.result?.role?.map((data, index) => {
@@ -196,16 +189,7 @@ function Profile() {
                 <h1 className='text-center text-xl font-medium  mb-8 text-orange-500'>Update Profile</h1>
                 <form onSubmit={handleUpdate}>
 
-                    <div class="grid md:grid-cols-2 md:gap-6">
-                        <div class="relative z-0 w-full mb-6 group">
-                            <input type="text" name="floating_first_name" id="floating_first_name" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required value={name} onChange={(e) => setName(e.target.value)} />
-                            <label for="floating_first_name" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">First name</label>
-                        </div>
-                        <div class="relative z-0 w-full mb-6 group">
-                            <input type="text" name="floating_last_name" id="floating_last_name" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required value={lastName} onChange={(e) => setlastName(e.target.value)} />
-                            <label for="floating_last_name" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Last name</label>
-                        </div>
-                    </div>
+               
                     <div class="grid md:grid-cols-2 md:gap-6">
                         <div class="relative z-0 w-full mb-6 group">
                             <input type="tel" pattern="[1-9]{1}[0-9]{9}" name="floating_phone" id="floating_phone" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required value={phone} onChange={(e) => setPhone(e.target.value)} />
@@ -220,18 +204,7 @@ function Profile() {
                     {/*  */}
 
                     <div class="grid md:grid-cols-2 md:gap-6">
-                        <div className='flex justify-start items-start '>
-                            <div class="  ">
-                                <input type="radio" value="male"
-                                    checked={gender == 'male'} onClick={(e) => setGender(e.target.value)} />
-                                <label for="male" className='ml-2'>Male</label>
-                            </div>
-                            <div className=' ml-4'>
-                                <input type="radio" value="female"
-                                    checked={gender == 'female'} onClick={(e) => setGender(e.target.value)} />
-                                <label for="female " className='ml-2'>Female</label>
-                            </div>
-                        </div>
+                        
                         <div class="relative z-0 w-full mb-6 group">
                             <input type="date" name="floating_company" id="floating_company" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " dateFormat='dd/mm/YYYY' required value={dob} onChange={(e) => setDob(e.target.value)} />
                             <label for="floating_company" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Date Of Birth</label>
