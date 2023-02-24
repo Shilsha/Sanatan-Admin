@@ -13,12 +13,14 @@ import { useNavigate } from 'react-router-dom'
 import DesignLogin from '../../../Assets/images/DesignLogin.png'
 import { createBlogAction } from '../../../Redux/Fetures/Reducers/CreateBlogSlice'
 import { getCategory } from '../../../Redux/Fetures/Reducers/CategorySlice'
+import { async } from 'q'
 function BlogsPost() {
     const [editorText, setEditorText] = useState('')
     const [image, setImage] = useState({ preview: "", raw: "" });
     const [title, setTitle] = useState('')
     const [category, setCategory] = useState('')
-
+    const [errors, setErros] = useState([])
+    const [newError, setNewError] = useState([])
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
@@ -42,56 +44,100 @@ function BlogsPost() {
 
     // ============================image----------------------------------
 
-    const handleChange = (e) => {
-        console.log(e.target.files, 'files')
-        const file = e.target.files[0];
-        if (!file.type.startsWith('image/')) {
-            // alert('Please select an image file.');
+
+    const handleChange = async (e) => {
+        const file = e.target.files[0]
+        console.log(file.size, 'file size')
+
+
+        const maxSize = 400000;
+        setImage({
+            preview: URL.createObjectURL(e.target.files[0]),
+            raw: e.target.files[0],
+        });
+
+
+
+        if (!file.name.match(/\.(jpg|jpeg|png)$/)) {
+            console.log('invalid image !');
+            setErros('invalid image !');
+            return errors
+        }
+
+        if (file.size > maxSize) {
+            // console.log('please upload only 400kb image !')
+            setErros('Uploaded image size exceeds 400kb, Upload small size image !')
 
         }
-        else if (e.target.files.length) {
-            setImage({
-                preview: URL.createObjectURL(e.target.files[0]),
-                raw: e.target.files[0],
-            });
+        else {
+            if (file.size < maxSize) {
+                console.log('kam hia')
+                setErros('')
+
+            }
+
+
         }
+
+
+       
+
+
+        return errors
+
     };
 
 
-    // ==================================================
-    const handleSubmit = (e) => {
-        e.preventDefault()
 
-        const data = {
-            title: title,
-            content: editorText,
-            categoryName: category,
-            articleType: "OPEN"
+   
+
+
+    function validate() {
+        let newError = {}
+
+        if (!title) {
+
+            newError.title = 'Title is required'
         }
-        const formData = new FormData();
-        formData.append('article', JSON.stringify(data))
-        formData.append('file', image.raw)
+        if (!category) {
 
+            newError.category = 'Category is required'
+        }
 
         if (!image.raw) {
-            toast.warning('Fields are required! or Invalid file type. Only image files are allowed')
+            newError.img = 'Image is required'
         }
 
-        else {
-
-
-            dispatch(createBlogAction(formData))
-
-
-        }
-
-
-
-
+        return newError
 
 
     }
-    // console.log(category,title,'value')
+    console.log(newError, 'newError')
+    console.log(category, 'category')
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        setNewError(validate())
+
+    }
+
+
+    useEffect(() => {
+
+        console.log(Object.keys(newError).length, 'newError len')
+        if (Object.keys(newError).length == 0 && errors.length == 0) {
+            console.log('done')
+
+             const formData = new FormData();
+        formData.append('title', title )
+        formData.append('content', editorText )
+        formData.append('categoryName', category )
+        formData.append('articleType', "OPEN" )
+        formData.append('file', image.raw)
+            dispatch(createBlogAction(formData))
+        }
+
+    }, [newError])
+
 
     // *****************************************************Module auth**************************************************
     const Role = JSON.parse(sessionStorage.getItem('user'))
@@ -135,6 +181,7 @@ function BlogsPost() {
                                                             <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Title"
                                                                 value={title}
                                                                 onChange={(e) => setTitle(e.target.value)} />
+                                                            {newError.title && (<p className='text-red-500 text-sm pt-1'>{newError.title}</p>)}
                                                         </div>
 
                                                         <div class="col w-full ">
@@ -167,6 +214,7 @@ function BlogsPost() {
 
 
                                                             </select>
+                                                            {newError.category && (<p className='text-red-500 text-sm pt-1'>{newError.category}</p>)}
 
                                                         </div>
 
@@ -193,6 +241,11 @@ function BlogsPost() {
                                                                 onChange={handleChange}
                                                                 accept="image/*"
                                                             />
+                                                            {errors.length>0?<>  {errors && (<p className='text-red-500 text-sm pt-1'>{errors}</p>)}</>:<>
+                                                                
+                                                            {newError.img && (<p className='text-red-500 text-sm pt-1'>{newError.img}</p>)}
+                                                            </>}
+                                                      
                                                         </div>
 
                                                         <div className=' flex justify-center items-center  w-[50%] mx-auto '>
