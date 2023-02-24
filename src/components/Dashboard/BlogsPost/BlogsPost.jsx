@@ -13,12 +13,13 @@ import { useNavigate } from 'react-router-dom'
 import DesignLogin from '../../../Assets/images/DesignLogin.png'
 import { createBlogAction } from '../../../Redux/Fetures/Reducers/CreateBlogSlice'
 import { getCategory } from '../../../Redux/Fetures/Reducers/CategorySlice'
+import { async } from 'q'
 function BlogsPost() {
     const [editorText, setEditorText] = useState('')
     const [image, setImage] = useState({ preview: "", raw: "" });
     const [title, setTitle] = useState('')
     const [category, setCategory] = useState('')
-
+    const [errors, setErros] = useState([])
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
@@ -41,20 +42,32 @@ function BlogsPost() {
     }
 
     // ============================image----------------------------------
+    function validation() {
+        let errors = {}
 
-    const handleChange = (e) => {
-        console.log(e.target.files, 'files')
-        const file = e.target.files[0];
-        if (!file.type.startsWith('image/')) {
+        const maxSize = 400000;
+        console.log(image.size, 'size ')
+
+        if (!image.type.startsWith('image/')) {
             // alert('Please select an image file.');
 
         }
-        else if (e.target.files.length) {
+        if (image.size > maxSize) {
+            console.log('please upload only 400kb image !')
+            errors.img = 'please upload only 400kb image !'
+        }
+        return errors
+    }
+
+    const handleChange = async (e) => {
+        if (e.target.files.length) {
             setImage({
                 preview: URL.createObjectURL(e.target.files[0]),
                 raw: e.target.files[0],
             });
+            validation()
         }
+
     };
 
 
@@ -193,6 +206,7 @@ function BlogsPost() {
                                                                 onChange={handleChange}
                                                                 accept="image/*"
                                                             />
+                                                            {errors.img && (<p className='text-red-500 text-sm pt-1'>{errors.img}</p>)}
                                                         </div>
 
                                                         <div className=' flex justify-center items-center  w-[50%] mx-auto '>
