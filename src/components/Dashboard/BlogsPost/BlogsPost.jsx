@@ -69,7 +69,10 @@ function BlogsPost() {
             articleType: "OPEN"
         }
         const formData = new FormData();
-        formData.append('article', JSON.stringify(data))
+        formData.append('title', title )
+        formData.append('content', editorText )
+        formData.append('categoryName', category )
+        formData.append('articleType', "OPEN" )
         formData.append('file', image.raw)
 
 
