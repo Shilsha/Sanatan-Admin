@@ -6,13 +6,15 @@ import Loader from '../../Loader/Loader';
 import Navbar from '../../Navbar/Navbar';
 import Sidebar from '../../Sidebar/Sidebar';
 import { singleBlogHistoryView ,deleteBlogHistoryView} from '../../../Redux/Fetures/Reducers/BlogHistorySlice'
+import {updateBlog} from '../../../Redux/Fetures/Reducers/CreateBlogSlice'
+import { Link } from 'react-router-dom';
 function SingleViewHistory() {
 
     const { id } = useParams();
     const dispatch = useDispatch()
 
     const BlogHistory = useSelector((state) => state.BlogsHistory)
-    console.log(BlogHistory, 'get single user BlogHistoryparent article')
+    console.log(BlogHistory.resultSingleView, 'get single user BlogHistoryparent article')
 
     useEffect(() => {
 
@@ -60,6 +62,15 @@ function SingleViewHistory() {
                                 <div className=' my-4     '>
                                     <div className='flex flex-col px-6'>
 
+                                      <Link to='/blogsPost'> 
+                                      <button class="bg-transparent w-fully  hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded-full"
+                                        
+                                         
+                                        onClick={()=>dispatch(updateBlog(BlogHistory?.resultSingleView))}
+                                        >
+                                          Update Blog
+                                       </button>
+                                      </Link>
                                         <button class="bg-transparent my-4 hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded-full" onClick={() => deleteBlog(BlogHistory?.resultSingleView.articleId)}>
                                             Delete Blog
                                         </button>
