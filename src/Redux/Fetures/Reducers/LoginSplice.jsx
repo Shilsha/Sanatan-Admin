@@ -18,6 +18,7 @@ export const getLogin = createAsyncThunk('LOGIN/GET_LOGIN',
             .then(res => {
                 console.log(res.data.data, 'this is res login')
                 sessionStorage.setItem("user", JSON.stringify(res.data.data))
+                sessionStorage.setItem("adminId", JSON.stringify(res.data.data.adminId))
 
 
                 return res

@@ -9,8 +9,8 @@ import DesignLogin from '../../../Assets/images/DesignLogin.png'
 import { createBlogAction } from '../../../Redux/Fetures/Reducers/CreateBlogSlice'
 import { getCategory } from '../../../Redux/Fetures/Reducers/CategorySlice'
 
-
-function BlogsPost() {
+import TextEditor from '../../Editor/TextEditor'
+function UpdateBlog() {
     const [editorText, setEditorText] = useState('')
     const [image, setImage] = useState({ preview: "", raw: "" });
     const [title, setTitle] = useState('')
@@ -22,12 +22,11 @@ function BlogsPost() {
     const blogsdata = useSelector(state => state.blog)
     console.log(blogsdata.result, 'come data form state')
     const categoryList = useSelector((state) => state.category)
-    var adminId=sessionStorage.getItem("adminId")
-    console.log(adminId,"adminId")
-    
+    // console.log(categoryList, 'list')
     useEffect(() => {
         dispatch(getCategory())
     }, [])
+
     // ================================================callback data=====================================
     const sendData = (data) => {
         setEditorText(data)
@@ -50,6 +49,7 @@ function BlogsPost() {
         if (file.size > maxSize) {
             // console.log('please upload only 400kb image !')
             setErros('Uploaded image size exceeds 400kb, Upload small size image !')
+
         }
         else {
             if (file.size < maxSize) {
@@ -72,32 +72,35 @@ function BlogsPost() {
         }
         return newError
     }
-      const handleSubmit = (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault()
         setNewError(validate())
     }
     useEffect(() => {
-        console.log(Object.keys(newError).length, 'newError len')
         if (Object.keys(newError).length == 0 && errors.length == 0) {
-            console.log('done')
             const formData = new FormData();
             formData.append('title', title)
             formData.append('content', editorText)
             formData.append('categoryName', category)
             formData.append('articleType', "OPEN")
             formData.append('file', image.raw)
-            formData.append('adminId', adminId)
-            dispatch(createBlogAction(formData))
+            // dispatch(createBlogAction(formData))
         }
+
     }, [newError])
+
     // *****************************************************Module auth**************************************************
     const Role = JSON.parse(sessionStorage.getItem('user'))
     // console.log(Role.role)
     const isModuleAuth = Role?.role.some(data => data == 'BlogPost')
     // console.log(isModuleAuth, 'isModuleAuth  isModuleAuthisModuleAuthisModuleAuthisModuleAuth')
+
     // **************************************************************
+
+
     // ==========================blogs update=========================
     useEffect(() => {
+
         if (blogsdata?.isUpdate) {
             console.log(blogsdata?.result?.title, 'run2')
             setTitle(blogsdata?.result?.title)
@@ -136,43 +139,26 @@ function BlogsPost() {
                                                             <label class="block text-gray-700 font-bold mb-2" for="username">
                                                                 Category
                                                             </label>
-                                                            {/* <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Category" 
-                                                                 value={category}
-                                                                onChange={(e)=>setCategory(e.target.value)}/> */}
                                                             <select id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-
                                                                 value={category}
                                                                 onChange={(e) => setCategory(e.target.value)}>
                                                                 <option value=""> Select Category</option>
                                                                 {
                                                                     categoryList?.result.map((data, index) => {
-
                                                                         return <>
-
                                                                             <option key={index} value={data.categoryName}>{data.categoryName}</option>
-
                                                                         </>
                                                                     })
                                                                 }
-
-
-
-
                                                             </select>
                                                             {newError.category && (<p className='text-red-500 text-sm pt-1'>{newError.category}</p>)}
-
                                                         </div>
-
-
                                                     </div>
                                                     <div class="flex items-center justify-center  border-t dark:border-gray-600 ">
-
                                                         < div className='w-full min-h-[350px] bg-white px-4'>
-
-                                                            <RichTextEditor updatedata={blogsdata?.result?.content} sendData={sendData} />
-
+                                                            {/* <RichTextEditor updatedata={blogsdata?.result?.content} sendData={sendData} /> */}
+                                                            <TextEditor sendData={sendData}/>
                                                         </div>
-
                                                     </div>
                                                     <div className='p-5 flex  items-center  '>
                                                         <div>
@@ -190,45 +176,29 @@ function BlogsPost() {
 
                                                                 {newError.img && (<p className='text-red-500 text-sm pt-1'>{newError.img}</p>)}
                                                             </>}
-
                                                         </div>
-
                                                         <div className=' flex justify-center items-center  w-[50%] mx-auto '>
-
                                                             {image.preview ? <img src={image.preview} alt="pic" style={{ height: 100, width: 100 }} /> : ''}
                                                         </div>
-
                                                     </div>
-
                                                     <div className='w-full text-center pb-2 '>
                                                         <button class="bg-orange-500 hover:bg-orange-600
                                                   text-white font-medium py-1 shadow-xl  px-5 text-lg rounded-full focus:outline-none
                                                    focus:shadow-outline" type="submit">
-                                                            Post blog
+                                                            Update blog
                                                         </button>
                                                     </div>
                                                 </div>
-
                                             </div>
-
-
                                         </form>
-
                                     </div>
                                 </div>
-
-
-
                             </div>
-
-
-                           
                         </div>
                     </div>
                     <div className='absolute bottom-0   right-0  -z-10  '>
                         <img src={DesignLogin} alt='empty' className='w-full'></img>
                     </div>
-
                 </div>
             </>
         )
@@ -236,4 +206,4 @@ function BlogsPost() {
 
 }
 
-export default BlogsPost
+export default UpdateBlog

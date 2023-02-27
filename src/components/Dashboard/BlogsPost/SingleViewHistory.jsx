@@ -62,7 +62,7 @@ function SingleViewHistory() {
                                 <div className=' my-4     '>
                                     <div className='flex flex-col px-6'>
 
-                                      <Link to='/blogsPost'> 
+                                      <Link to='/UpdateBlog'> 
                                       <button class="bg-transparent w-fully  hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded-full"
                                         
                                          
@@ -76,6 +76,9 @@ function SingleViewHistory() {
                                         </button>
                                         <div className='flex'>
                                             <p className='text-red-800 font-bold '>Blog Id :</p>  <p className=' px-2'>{BlogHistory?.resultSingleView.articleId}</p>
+                                        </div>
+                                        <div className='flex'>
+                                            <p className='text-red-800 font-bold '>Blog Author :</p>  <p className=' px-2'>{BlogHistory?.resultSingleView.author}</p>
                                         </div>
                                         <div className='flex'>
                                             <p className='text-red-800 font-bold '>View Count :</p>  <p className=' px-2'>{BlogHistory?.resultSingleView.viewCount}</p>
