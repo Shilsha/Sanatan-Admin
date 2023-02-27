@@ -24,8 +24,8 @@ function BlogsPost() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
-    const blogdata = useSelector(state => state.blog)
-    // console.log(blogdata, 'come data form state')
+    const blogsdata = useSelector(state => state.blog)
+    console.log(blogsdata.result, 'come data form state')
 
     const categoryList = useSelector((state) => state.category)
     // console.log(categoryList, 'list')
@@ -80,7 +80,7 @@ function BlogsPost() {
         }
 
 
-       
+
 
 
         return errors
@@ -89,7 +89,7 @@ function BlogsPost() {
 
 
 
-   
+
 
 
     function validate() {
@@ -112,8 +112,8 @@ function BlogsPost() {
 
 
     }
-    console.log(newError, 'newError')
-    console.log(category, 'category')
+    // console.log(newError, 'newError')
+    // console.log(category, 'category')
     const handleSubmit = (e) => {
         e.preventDefault()
         setNewError(validate())
@@ -127,12 +127,12 @@ function BlogsPost() {
         if (Object.keys(newError).length == 0 && errors.length == 0) {
             console.log('done')
 
-             const formData = new FormData();
-        formData.append('title', title )
-        formData.append('content', editorText )
-        formData.append('categoryName', category )
-        formData.append('articleType', "OPEN" )
-        formData.append('file', image.raw)
+            const formData = new FormData();
+            formData.append('title', title)
+            formData.append('content', editorText)
+            formData.append('categoryName', category)
+            formData.append('articleType', "OPEN")
+            formData.append('file', image.raw)
             dispatch(createBlogAction(formData))
         }
 
@@ -146,6 +146,19 @@ function BlogsPost() {
     // console.log(isModuleAuth, 'isModuleAuth  isModuleAuthisModuleAuthisModuleAuthisModuleAuth')
 
     // **************************************************************
+
+
+    // ==========================blogs update=========================
+    useEffect(() => {
+     
+        if(blogsdata?.isUpdate){
+            console.log(blogsdata?.result?.title,'run2')
+            setTitle(blogsdata?.result?.title)
+            setCategory(blogsdata?.result?.categoryName)
+        }
+        console.log(category,'blogsdata?.result?.title')
+
+    }, [blogsdata?.result])
 
     if (isModuleAuth) {
 
@@ -224,7 +237,7 @@ function BlogsPost() {
 
                                                         < div className='w-full min-h-[350px] bg-white px-4'>
 
-                                                            <RichTextEditor sendData={sendData} />
+                                                            <RichTextEditor updatedata={blogsdata?.result?.content} sendData={sendData} />
 
                                                         </div>
 
@@ -241,11 +254,11 @@ function BlogsPost() {
                                                                 onChange={handleChange}
                                                                 accept="image/*"
                                                             />
-                                                            {errors.length>0?<>  {errors && (<p className='text-red-500 text-sm pt-1'>{errors}</p>)}</>:<>
-                                                                
-                                                            {newError.img && (<p className='text-red-500 text-sm pt-1'>{newError.img}</p>)}
+                                                            {errors.length > 0 ? <>  {errors && (<p className='text-red-500 text-sm pt-1'>{errors}</p>)}</> : <>
+
+                                                                {newError.img && (<p className='text-red-500 text-sm pt-1'>{newError.img}</p>)}
                                                             </>}
-                                                      
+
                                                         </div>
 
                                                         <div className=' flex justify-center items-center  w-[50%] mx-auto '>

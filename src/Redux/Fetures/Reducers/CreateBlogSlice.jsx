@@ -15,12 +15,28 @@ export const createBlogAction = createAsyncThunk('BLOG/CREATE_BLOG',
             .then(res => res)
     })
 
+
+    // =====================update blog =========================================
+
 const blogs = createSlice({
     name: 'BLOG',
     initialState: {
         loading: false,
         result: [],
+        isUpdate:false,
         error: null
+    },
+
+    reducers:{
+        updateBlog:(state,action)=>{
+            console.log(action,'update action')
+            state.loading=false,
+            state.isUpdate=true,
+            state.result=action.payload
+
+
+        }
+
     },
     extraReducers: {
         [createBlogAction.pending]: (state, action) => {
@@ -42,4 +58,6 @@ const blogs = createSlice({
     }
 })
 
+
+export const {updateBlog}=blogs.actions
 export default blogs.reducer;
