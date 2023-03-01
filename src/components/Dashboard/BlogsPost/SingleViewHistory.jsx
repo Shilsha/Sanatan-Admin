@@ -5,17 +5,20 @@ import { useParams } from "react-router-dom";
 import Loader from '../../Loader/Loader';
 import Navbar from '../../Navbar/Navbar';
 import Sidebar from '../../Sidebar/Sidebar';
-import { singleBlogHistoryView ,deleteBlogHistoryView} from '../../../Redux/Fetures/Reducers/BlogHistorySlice'
-import {updateBlog} from '../../../Redux/Fetures/Reducers/CreateBlogSlice'
-import { Link } from 'react-router-dom';
-function SingleViewHistory() {
+import { singleBlogHistoryView, deleteBlogHistoryView } from '../../../Redux/Fetures/Reducers/BlogHistorySlice'
+import { updateBlog } from '../../../Redux/Fetures/Reducers/CreateBlogSlice'
+import { Link, useNavigate } from 'react-router-dom';
 
+function SingleViewHistory() {
+    const navigate = useNavigate();
     const { id } = useParams();
     const dispatch = useDispatch()
 
     const BlogHistory = useSelector((state) => state.BlogsHistory)
-    console.log(BlogHistory.resultSingleView, 'get single user BlogHistoryparent article')
-
+    sessionStorage.setItem("blog",JSON.stringify(BlogHistory?.resultSingleView.content) )
+    var loggedAdminId = sessionStorage.getItem("adminId")
+    var authorId = BlogHistory?.resultSingleView.adminId
+    
     useEffect(() => {
 
         dispatch(singleBlogHistoryView(id))
@@ -51,6 +54,11 @@ function SingleViewHistory() {
 
                 <div className=' w-[100%]'>
                     <Navbar />
+                    {/* <i className="fa fa-arrow-left" onClick={() => navigate(-1)} aria-hidden="true"></i> */}
+                    <button class="bg-transparent my-4 hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded-full" onClick={() => navigate(-1)}>
+                        Back
+                    </button>
+
                     <h1 className='text text-center font-bold text-2xl text-red-800 py-8'> Blog Details</h1>
                     <div className=' my-4 mx-auto mr-4    shadow-xl  rounded-lg py-4  px-4 bg-blend-screen' >
 
@@ -61,16 +69,16 @@ function SingleViewHistory() {
                                 <img className='rounded-md w-full' src={BlogHistory?.resultSingleView.imageUrl} alt={BlogHistory?.resultSingleView.imageName} />
                                 <div className=' my-4     '>
                                     <div className='flex flex-col px-6'>
+                                        {loggedAdminId == authorId ?
+                                            <Link to='/UpdateBlog'>
+                                                <button class="bg-transparent my-4  hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded-full"
 
-                                      <Link to='/UpdateBlog'> 
-                                      <button class="bg-transparent w-fully  hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded-full"
-                                        
-                                         
-                                        onClick={()=>dispatch(updateBlog(BlogHistory?.resultSingleView))}
-                                        >
-                                          Update Blog
-                                       </button>
-                                      </Link>
+
+                                                    onClick={() => dispatch(updateBlog(BlogHistory?.resultSingleView))}
+                                                >
+                                                    Update Blog
+                                                </button>
+                                            </Link> : ""}
                                         <button class="bg-transparent my-4 hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded-full" onClick={() => deleteBlog(BlogHistory?.resultSingleView.articleId)}>
                                             Delete Blog
                                         </button>
@@ -96,7 +104,7 @@ function SingleViewHistory() {
 
 
                                     <h1 className='text-xl font-bold  text-red-800'>Title : <span className='text-lg'>{BlogHistory?.resultSingleView.title}</span></h1>
-                                    <h1 className='py-2 text-gray-700'
+                                    <h1 className='py-2 text-gray-700 text-justify'
                                         dangerouslySetInnerHTML={{
                                             __html: BlogHistory?.resultSingleView.content,
                                         }}

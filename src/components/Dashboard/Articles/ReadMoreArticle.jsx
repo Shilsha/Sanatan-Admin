@@ -5,10 +5,10 @@ import { useParams } from "react-router-dom";
 import Loader from '../../Loader/Loader';
 import Navbar from '../../Navbar/Navbar';
 import Sidebar from '../../Sidebar/Sidebar';
-
+import { Link, useNavigate } from 'react-router-dom';
 import { getSingleArticle, getPublishArticle ,blogRejectSingle} from '../../../Redux/Fetures/Reducers/GetSingleArticleSlice'
 function ReadMoreArticle() {
-
+    const navigate = useNavigate();
     const { id } = useParams();
     const dispatch = useDispatch()
 
@@ -60,6 +60,9 @@ function ReadMoreArticle() {
 
                 <div className=' w-[100%]'>
                     <Navbar />
+                    <button class="bg-transparent my-4 hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded-full" onClick={() => navigate(-1)}>
+                        Back
+                    </button>
                     <h1 className='text text-center font-bold text-2xl text-red-800 py-6'> Blog Details</h1>
                     <div className='  mx-auto mr-4    shadow-xl  rounded-lg py-4  px-4 bg-blend-screen  blogDetailsRead' >
 

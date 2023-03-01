@@ -6,7 +6,7 @@ import { ToastContainer } from 'react-toastify'
 import RichTextEditor from '../../Editor/RichTextEditor'
 import { useNavigate } from 'react-router-dom'
 import DesignLogin from '../../../Assets/images/DesignLogin.png'
-import { createBlogAction } from '../../../Redux/Fetures/Reducers/CreateBlogSlice'
+// import { UpdateBlogAction } from '../../../Redux/Fetures/Reducers/UpdateBlogSlice'
 import { getCategory } from '../../../Redux/Fetures/Reducers/CategorySlice'
 
 import TextEditor from '../../Editor/TextEditor'
@@ -22,15 +22,21 @@ function UpdateBlog() {
     const blogsdata = useSelector(state => state.blog)
     console.log(blogsdata.result, 'come data form state')
     const categoryList = useSelector((state) => state.category)
-    // console.log(categoryList, 'list')
+    var blogToUpdate = sessionStorage.getItem("blog")
+    const [string, setString] = useState(
+        blogToUpdate
+    );
+
+
     useEffect(() => {
         dispatch(getCategory())
     }, [])
 
     // ================================================callback data=====================================
-    const sendData = (data) => {
-        setEditorText(data)
-        console.log(data, 'child data')
+
+    const sendData = (EditedData) => {
+        setEditorText(EditedData)
+        // console.log(EditedData,'data come from ')
     }
     // ============================image----------------------------------
     const handleChange = async (e) => {
@@ -108,6 +114,9 @@ function UpdateBlog() {
         }
         console.log(category, 'blogsdata?.result?.title')
     }, [blogsdata?.result])
+    // ==================callback=========================
+
+
     if (isModuleAuth) {
         return (
             <>
@@ -118,6 +127,9 @@ function UpdateBlog() {
                     <div className=' w-full '>
                         <Navbar />
                         <div className=' my-4 pr-4   '>
+                            <button class="bg-transparent my-4 hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded-full" onClick={() => navigate(-1)}>
+                                Back
+                            </button>
                             <div className=' col-span-4  rounded-lg  relative '>
                                 <div className="min-h-[300px] ">
                                     <div className=' '>
@@ -156,8 +168,8 @@ function UpdateBlog() {
                                                     </div>
                                                     <div class="flex items-center justify-center  border-t dark:border-gray-600 ">
                                                         < div className='w-full min-h-[350px] bg-white px-4'>
-                                                            {/* <RichTextEditor updatedata={blogsdata?.result?.content} sendData={sendData} /> */}
-                                                            <TextEditor sendData={sendData}/>
+
+                                                            <TextEditor initialValue={blogToUpdate} sendData={sendData} />
                                                         </div>
                                                     </div>
                                                     <div className='p-5 flex  items-center  '>

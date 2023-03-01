@@ -8,8 +8,9 @@ import { getBlogHistory } from '../../../Redux/Fetures/Reducers/BlogHistorySlice
 import Loader from '../../Loader/Loader'
 import { BsSearch } from 'react-icons/bs'
 import { BiShow } from 'react-icons/bi'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 function BlogHistory() {
+    const navigate = useNavigate();
     const [type, setType] = useState('PUBLISH')
     const [FilterSearch, setFilterSearch] = useState('')
     const History = useSelector((state) => state.BlogsHistory)
@@ -36,6 +37,9 @@ function BlogHistory() {
                     <Navbar />
                     <div className=' my-4 pr-4 '>
                         {/*================ */}
+                        <button class="bg-transparent my-4 hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded-full" onClick={() => navigate(-1)}>
+                        Back
+                    </button>
                         <div className='flex justify-between items-center my-2'>
                             <div className=' w-[400px]   '>
                                 <div class=" relative w-full  text-gray-600 ">

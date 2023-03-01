@@ -115,6 +115,9 @@ function BlogsPost() {
                     <div className=' w-full '>
                         <Navbar />
                         <div className=' my-4 pr-4   '>
+                        <button class="bg-transparent my-4 hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded-full" onClick={() => navigate(-1)}>
+                                Back
+                            </button>
                             <div className=' col-span-4  rounded-lg  relative '>
                                 <div className="min-h-[300px] ">
                                     <div className=' '>

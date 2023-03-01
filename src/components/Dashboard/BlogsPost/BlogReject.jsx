@@ -8,9 +8,10 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getBlogRejectAction } from '../../../Redux/Fetures/Reducers/BlogRejectSlice'
 import Loader from '../../../components/Loader/Loader'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom';
 
 function BlogReject() {
+    const navigate = useNavigate();
     const [FilterSearch, setFilterSearch] = useState('')
     const dispatch = useDispatch()
     const blogReject = useSelector(state => state.blogReject)
@@ -35,7 +36,9 @@ function BlogReject() {
                 <div className=' w-full  '>
                     <Navbar />
                     <div className=' my-4 pr-4 '>
-
+                    <button class="bg-transparent my-4 hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded-full" onClick={() => navigate(-1)}>
+                        Back
+                    </button>
                         {/*================ */}
                         <div className='flex justify-between items-center my-2'>
                             <div className=' w-[400px]   '>

@@ -4,9 +4,9 @@ import Navbar from '../../Navbar/Navbar'
 import Sidebar from '../../Sidebar/Sidebar'
 import { BsSearch } from 'react-icons/bs'
 import DesignLogin from '../../../Assets/images/DesignLogin.png'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom';
 function BlogReview() {
-
+    const navigate = useNavigate();
   
     return (
         <>
@@ -17,7 +17,9 @@ function BlogReview() {
                 <div className=' w-full  '>
                     <Navbar />
                     <div className=' my-4 pr-4 '>
-
+                    <button class="bg-transparent my-4 hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded-full" onClick={() => navigate(-1)}>
+                        Back
+                    </button>
                         <div className='text-center '>
                             <h5  class="inline-flex items-center text-white bg-gradient-to-r 
                                 from-orange-500  to-yellow-400  font-medium rounded-lg text-lg px-3 py-1 text-center  mb-2">

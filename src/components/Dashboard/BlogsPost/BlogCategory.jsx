@@ -6,9 +6,9 @@ import Navbar from '../../Navbar/Navbar'
 import Sidebar from '../../Sidebar/Sidebar'
 import { getCategory, addCategory, deleteCategory, editCategory } from '../../../Redux/Fetures/Reducers/CategorySlice'
 import Loader from '../../Loader/Loader'
-
+import { Link, useNavigate } from 'react-router-dom';
 function BlogCategory() {
-
+    const navigate = useNavigate();
     const [cate, setCategory] = useState('')
     const [action, setAction] = useState(false)
     const [ids, setIds] = useState('')
@@ -66,6 +66,9 @@ function BlogCategory() {
 
                 <div className=' w-full  '>
                     <Navbar />
+                    <button class="bg-transparent my-4 hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded-full" onClick={() => navigate(-1)}>
+                        Back
+                    </button>
                     <div className=' my-4 pr-4 '>
                         <div className='text-center'>
                             <h1 type="button" class="inline-flex items-center text-white bg-gradient-to-r 

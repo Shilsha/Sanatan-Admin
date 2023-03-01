@@ -8,8 +8,9 @@ import Loader from '../../../components/Loader/Loader'
 import { BsSearch } from 'react-icons/bs'
 import { BiShow } from 'react-icons/bi'
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 function BlogReview2() {
+    const navigate = useNavigate();
     const [FilterSearch, setFilterSearch] = useState('')
     const dispactch = useDispatch()
     const dataReview = useSelector(state => state.blogReview)
@@ -40,6 +41,9 @@ function BlogReview2() {
                 <div className=' w-full  '>
                     <Navbar />
                     <div className=' my-4 pr-4 '>
+                    <button class="bg-transparent my-4 hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded-full" onClick={() => navigate(-1)}>
+                        Back
+                    </button>
                         <div className='text-center ml-30'>
 
 
