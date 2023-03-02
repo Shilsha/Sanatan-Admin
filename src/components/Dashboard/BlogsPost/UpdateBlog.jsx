@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useParams } from "react-router-dom";
 import Navbar from '../../Navbar/Navbar'
 import Sidebar from '../../Sidebar/Sidebar'
 import { useDispatch, useSelector } from 'react-redux'
@@ -8,12 +9,14 @@ import { useNavigate } from 'react-router-dom'
 import DesignLogin from '../../../Assets/images/DesignLogin.png'
 // import { UpdateBlogAction } from '../../../Redux/Fetures/Reducers/UpdateBlogSlice'
 import { getCategory } from '../../../Redux/Fetures/Reducers/CategorySlice'
-
 import TextEditor from '../../Editor/TextEditor'
+import { singleBlogHistoryView } from '../../../Redux/Fetures/Reducers/BlogHistorySlice'
+import { editBlogAction } from '../../../Redux/Fetures/Reducers/EditBlogSlice'
 function UpdateBlog() {
     const [editorText, setEditorText] = useState('')
     const [image, setImage] = useState({ preview: "", raw: "" });
     const [title, setTitle] = useState('')
+    const [subject, setSubject] = useState('')
     const [category, setCategory] = useState('')
     const [errors, setErros] = useState([])
     const [newError, setNewError] = useState([])
@@ -26,17 +29,22 @@ function UpdateBlog() {
     const [string, setString] = useState(
         blogToUpdate
     );
-
-
-    useEffect(() => {
+            useEffect(() => {
         dispatch(getCategory())
     }, [])
-
+    
+        // --------------------------------------------Blog from history----------------------
+    const { id } = useParams();
+  
+    useEffect(() => {
+        dispatch(singleBlogHistoryView(id))
+    }, [])
+    const BlogContent = useSelector((state) => state.BlogsHistory?.resultSingleView)
     // ================================================callback data=====================================
 
     const sendData = (EditedData) => {
         setEditorText(EditedData)
-        // console.log(EditedData,'data come from ')
+        console.log(EditedData,'data come from text editor')
     }
     // ============================image----------------------------------
     const handleChange = async (e) => {
@@ -55,7 +63,6 @@ function UpdateBlog() {
         if (file.size > maxSize) {
             // console.log('please upload only 400kb image !')
             setErros('Uploaded image size exceeds 400kb, Upload small size image !')
-
         }
         else {
             if (file.size < maxSize) {
@@ -70,6 +77,9 @@ function UpdateBlog() {
         if (!title) {
             newError.title = 'Title is required'
         }
+        if (!subject) {
+            newError.subject = 'Subject is required'
+        }
         if (!category) {
             newError.category = 'Category is required'
         }
@@ -81,16 +91,23 @@ function UpdateBlog() {
     const handleSubmit = (e) => {
         e.preventDefault()
         setNewError(validate())
+        setTimeout(() => {
+            navigate("/blog")
+           
+       }, 10);
     }
     useEffect(() => {
         if (Object.keys(newError).length == 0 && errors.length == 0) {
             const formData = new FormData();
             formData.append('title', title)
+            formData.append('articleId', BlogContent?.articleId)
             formData.append('content', editorText)
             formData.append('categoryName', category)
             formData.append('articleType', "OPEN")
             formData.append('file', image.raw)
-            // dispatch(createBlogAction(formData))
+            dispatch(editBlogAction(formData))
+           
+            console.log(title,BlogContent?.articleId,editorText,category,"appended data")
         }
 
     }, [newError])
@@ -165,11 +182,25 @@ function UpdateBlog() {
                                                             </select>
                                                             {newError.category && (<p className='text-red-500 text-sm pt-1'>{newError.category}</p>)}
                                                         </div>
+                                                        <div className='flex justify-around items-center  gap-6 pb-4 mx-auto'>
+                                                        <div class="col w-full">
+                                                            <label class="block text-gray-700 font-bold mb-2" for="username">
+                                                                Subject
+                                                            </label>
+                                                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Title"
+                                                                value={subject}
+                                                                onChange={(e) => setSubject(e.target.value)} />
+                                                            {newError.subject && (<p className='text-red-500 text-sm pt-1'>{newError.subject}</p>)}
+                                                        </div>
+
+
+
+                                                    </div>
                                                     </div>
                                                     <div class="flex items-center justify-center  border-t dark:border-gray-600 ">
                                                         < div className='w-full min-h-[350px] bg-white px-4'>
 
-                                                            <TextEditor initialValue={blogToUpdate} sendData={sendData} />
+                                                            <TextEditor initialValue={BlogContent?.content} sendData={sendData} />
                                                         </div>
                                                     </div>
                                                     <div className='p-5 flex  items-center  '>
@@ -183,6 +214,7 @@ function UpdateBlog() {
                                                                 className="form-control"
                                                                 onChange={handleChange}
                                                                 accept="image/*"
+                                                                initialValue={BlogContent?.imageUrl}
                                                             />
                                                             {errors.length > 0 ? <>  {errors && (<p className='text-red-500 text-sm pt-1'>{errors}</p>)}</> : <>
 

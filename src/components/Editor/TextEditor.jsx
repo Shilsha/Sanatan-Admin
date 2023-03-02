@@ -1,37 +1,42 @@
 import React, { useEffect, useState } from 'react';
-import { ContentState, convertToRaw, convertFromRaw, convertFromHTML } from 'draft-js';
+import { ContentState, convertToRaw, convertFromRaw, convertFromHTML, EditorState } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import htmlToDraft from 'html-to-draftjs';
+import draftToHtml from 'draftjs-to-html';
 function TextEditor({ initialValue, sendData }) {
-    
-    // const _contentState = ContentState.createFromText(initialValue);
-    
-    
-    const contentBlocks = convertFromHTML(initialValue);
-    
-    const sampleEditorContent = ContentState.createFromBlockArray(contentBlocks);
-    const raw = convertToRaw(sampleEditorContent);  
-    const [contentState, setContentState] = useState(raw); 
-    const hello = (a) => {
-        console.log(JSON.stringify(a),"Hello")
-        setContentState(a)
-        // console.log(a.blocks[0].text, 'html')
-        // sendData(a.blocks[0].text)
+
+    const htmlToDraftBlocks = (html) => {
+        const blocksFromHtml = htmlToDraft(html);
+        const { contentBlocks, entityMap } = blocksFromHtml;
+        const contentState = ContentState.createFromBlockArray(contentBlocks, entityMap);
+        const editorState = EditorState.createWithContent(contentState);
+        return editorState;
     }
+    
+    const [editorState, setEditorState] = useState(htmlToDraftBlocks(initialValue === null || initialValue === undefined ?"":initialValue))
+
+   
+
+    const onEditorStateChange = (editorState) => {
+        setEditorState(editorState)
+        sendData(draftToHtml(convertToRaw(editorState?.getCurrentContent())))
+    };
+
+    // console.log("===editorstate====", draftToHtml(convertToRaw(editorState?.getCurrentContent())));
+
     return (
         <div className="App">
             <Editor
                 toolbar={{
-                    options: ['inline', 'blockType', 'list', 'textAlign', 'history'],
+                    options: ['inline', 'blockType', 'list','fontSize', 'fontFamily', 'textAlign', 'history'],
                 }}
-                defaultContentState={contentState}
-                // onEditorStateChange={hello}
-                onContentStateChange={hello}
+                // defaultContentState={editorState}
+                editorState={editorState}
                 wrapperClassName="wrapper-class"
                 editorClassName="editor-class"
                 toolbarClassName="toolbar-class"
-
+                onEditorStateChange={onEditorStateChange}
             />
         </div>
     )

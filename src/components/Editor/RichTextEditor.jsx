@@ -39,8 +39,8 @@ const RichTextEditor = ({ sendData, updatedata }) => {
 
             <Editor
                 toolbar={{
-                    options: ['inline', 'blockType', 'list', 'textAlign', 'history'],
-
+                    options: ['inline', 'blockType', 'colorPicker', 'fontSize', 'fontFamily', 'list', 'textAlign', 'history',]
+                    
                 }}
                 toolbarClassName="toolbarClassName"
                 wrapperClassName="wrapperClassName"

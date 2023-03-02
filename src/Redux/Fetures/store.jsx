@@ -25,6 +25,7 @@ import adminHits from './Reducers/HitsReducers/AdminSlice'
 import zodiacSignHits from './Reducers/HitsReducers/ZodiacSlice'
 import locationHits from './Reducers/HitsReducers/Location'
 import blogs from './Reducers/CreateBlogSlice'
+import blogsEdit from './Reducers/EditBlogSlice'
 import exportData from './Reducers/DownloadSlice'
 import addAdmins from './Reducers/AddAdminSlice'
 import category from './Reducers/CategorySlice'
@@ -62,6 +63,7 @@ import adminProfile from './Reducers/AdminProfileSlice'
        zodiacSignHit:zodiacSignHits,
        locationHit:locationHits,
        blog:blogs,
+       blogsEdit:blogsEdit,
        export:exportData,
        addAdmin:addAdmins,
        category:category,

@@ -46,7 +46,7 @@ function Routing() {
           <Route exact path="/blogsPost"  element={<PrivateRoutes Component={BlogsPost}/>}> </Route>
           <Route exact path="/blog"  element={<PrivateRoutes Component={BlogReview}/>}> </Route>
           <Route exact path="/blogCategory"  element={<PrivateRoutes Component={BlogCategory}/>}> </Route>
-          <Route exact path="/updateBlog"  element={<PrivateRoutes Component={UpdateBlog}/>}> </Route>
+          <Route exact path="/updateBlog/:id"  element={<PrivateRoutes Component={UpdateBlog}/>}> </Route>
           <Route exact path="/blogHistory"  element={<PrivateRoutes Component={BlogHistory}/>}> </Route>
           <Route exact path="/blogReview"  element={<PrivateRoutes Component={BlogReview2}/>}> </Route>
           <Route exact path="/blogReject"  element={<PrivateRoutes Component={BlogReject}/>}> </Route>

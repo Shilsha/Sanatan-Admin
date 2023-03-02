@@ -13,37 +13,20 @@ function SingleViewHistory() {
     const navigate = useNavigate();
     const { id } = useParams();
     const dispatch = useDispatch()
-
     const BlogHistory = useSelector((state) => state.BlogsHistory)
-    sessionStorage.setItem("blog",JSON.stringify(BlogHistory?.resultSingleView.content) )
+    const BlogContent = useSelector((state) => state.BlogsHistory)
+    sessionStorage.setItem("blog", JSON.stringify(BlogHistory?.resultSingleView.content))
     var loggedAdminId = sessionStorage.getItem("adminId")
     var authorId = BlogHistory?.resultSingleView.adminId
-    
+    var superAdminId=86;
+
     useEffect(() => {
-
         dispatch(singleBlogHistoryView(id))
-
     }, [])
 
-    // ==============publish blog=========================
-    // const publishBlog = (datas) => {
-    //     console.log(datas, 'this is id')
-    //     const data = {
-    //         articleId: datas.id,
-    //         articleType: 'PUBLISH',
-    //         title: datas.title,
-    //         content: datas.content,
-    //         file: ''
-
-    //     }
-
-    //     dispatch(singleBlogHistoryView(data))
-
-
-    // }
+   
 
     const deleteBlog = (ids) => {
-
         dispatch(deleteBlogHistoryView(ids))
     }
 
@@ -69,19 +52,20 @@ function SingleViewHistory() {
                                 <img className='rounded-md w-full' src={BlogHistory?.resultSingleView.imageUrl} alt={BlogHistory?.resultSingleView.imageName} />
                                 <div className=' my-4     '>
                                     <div className='flex flex-col px-6'>
-                                        {loggedAdminId == authorId ?
-                                            <Link to='/UpdateBlog'>
-                                                <button class="bg-transparent my-4  hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded-full"
-
-
+                                        {(loggedAdminId == authorId)||(loggedAdminId == superAdminId)?
+                                       
+                                            <Link  to={`/updateBlog/${BlogHistory?.resultSingleView.articleId}`}>
+                                                <button class="bg-transparent my-4 w-96  hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded-full"
                                                     onClick={() => dispatch(updateBlog(BlogHistory?.resultSingleView))}
                                                 >
                                                     Update Blog
                                                 </button>
                                             </Link> : ""}
-                                        <button class="bg-transparent my-4 hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded-full" onClick={() => deleteBlog(BlogHistory?.resultSingleView.articleId)}>
-                                            Delete Blog
-                                        </button>
+                                        {(loggedAdminId == authorId)||(loggedAdminId == superAdminId) ?
+                                            <button class="bg-transparent my-4 w-96 hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded-full" onClick={() => deleteBlog(BlogHistory?.resultSingleView.articleId)}>
+                                                Delete Blog
+                                            </button> : ""}
+
                                         <div className='flex'>
                                             <p className='text-red-800 font-bold '>Blog Id :</p>  <p className=' px-2'>{BlogHistory?.resultSingleView.articleId}</p>
                                         </div>

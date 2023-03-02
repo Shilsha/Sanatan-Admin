@@ -14,46 +14,39 @@ function BlogsPost() {
     const [editorText, setEditorText] = useState('')
     const [image, setImage] = useState({ preview: "", raw: "" });
     const [title, setTitle] = useState('')
+    const [subject, setSubject] = useState(" ")
     const [category, setCategory] = useState('')
     const [errors, setErros] = useState([])
     const [newError, setNewError] = useState([])
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const blogsdata = useSelector(state => state.blog)
-    console.log(blogsdata.result, 'come data form state')
     const categoryList = useSelector((state) => state.category)
-    var adminId=sessionStorage.getItem("adminId")
-    console.log(adminId,"adminId")
-    
+    var adminId = sessionStorage.getItem("adminId")
     useEffect(() => {
         dispatch(getCategory())
     }, [])
     // ================================================callback data=====================================
     const sendData = (data) => {
         setEditorText(data)
-        console.log(data, 'child data')
     }
     // ============================image----------------------------------
     const handleChange = async (e) => {
         const file = e.target.files[0]
-        console.log(file.size, 'file size')
         const maxSize = 400000;
         setImage({
             preview: URL.createObjectURL(e.target.files[0]),
             raw: e.target.files[0],
         });
         if (!file.name.match(/\.(jpg|jpeg|png)$/)) {
-            console.log('invalid image !');
             setErros('invalid image !');
             return errors
         }
         if (file.size > maxSize) {
-            // console.log('please upload only 400kb image !')
             setErros('Uploaded image size exceeds 400kb, Upload small size image !')
         }
         else {
             if (file.size < maxSize) {
-                console.log('kam hia')
                 setErros('')
             }
         }
@@ -64,6 +57,9 @@ function BlogsPost() {
         if (!title) {
             newError.title = 'Title is required'
         }
+        if (!subject) {
+            newError.subject = 'Subject is required'
+        }
         if (!category) {
             newError.category = 'Category is required'
         }
@@ -72,16 +68,15 @@ function BlogsPost() {
         }
         return newError
     }
-      const handleSubmit = (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault()
         setNewError(validate())
     }
     useEffect(() => {
-        console.log(Object.keys(newError).length, 'newError len')
         if (Object.keys(newError).length == 0 && errors.length == 0) {
-            console.log('done')
             const formData = new FormData();
             formData.append('title', title)
+            formData.append('subject', subject)
             formData.append('content', editorText)
             formData.append('categoryName', category)
             formData.append('articleType', "OPEN")
@@ -92,18 +87,15 @@ function BlogsPost() {
     }, [newError])
     // *****************************************************Module auth**************************************************
     const Role = JSON.parse(sessionStorage.getItem('user'))
-    // console.log(Role.role)
     const isModuleAuth = Role?.role.some(data => data == 'BlogPost')
-    // console.log(isModuleAuth, 'isModuleAuth  isModuleAuthisModuleAuthisModuleAuthisModuleAuth')
     // **************************************************************
     // ==========================blogs update=========================
     useEffect(() => {
         if (blogsdata?.isUpdate) {
-            console.log(blogsdata?.result?.title, 'run2')
             setTitle(blogsdata?.result?.title)
             setCategory(blogsdata?.result?.categoryName)
         }
-        console.log(category, 'blogsdata?.result?.title')
+
     }, [blogsdata?.result])
     if (isModuleAuth) {
         return (
@@ -115,7 +107,7 @@ function BlogsPost() {
                     <div className=' w-full '>
                         <Navbar />
                         <div className=' my-4 pr-4   '>
-                        <button class="bg-transparent my-4 hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded-full" onClick={() => navigate(-1)}>
+                            <button class="bg-transparent my-4 hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded-full" onClick={() => navigate(-1)}>
                                 Back
                             </button>
                             <div className=' col-span-4  rounded-lg  relative '>
@@ -165,6 +157,20 @@ function BlogsPost() {
                                                             {newError.category && (<p className='text-red-500 text-sm pt-1'>{newError.category}</p>)}
 
                                                         </div>
+
+
+                                                    </div>
+                                                    <div className='flex justify-around items-center  gap-6 pb-4 mx-auto'>
+                                                        <div class="col w-full">
+                                                            <label class="block text-gray-700 font-bold mb-2" for="username">
+                                                                Subject
+                                                            </label>
+                                                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Subject"
+                                                                value={subject}
+                                                                onChange={(e) => setSubject(e.target.value)} />
+                                                            {newError.subject && (<p className='text-red-500 text-sm pt-1'>{newError.subject}</p>)}
+                                                        </div>
+
 
 
                                                     </div>
@@ -225,7 +231,7 @@ function BlogsPost() {
                             </div>
 
 
-                           
+
                         </div>
                     </div>
                     <div className='absolute bottom-0   right-0  -z-10  '>

@@ -3,10 +3,7 @@ import axios from 'axios'
 import { toast } from "react-toastify";
 export const createBlogAction = createAsyncThunk('BLOG/CREATE_BLOG',
     async (data) => {
-        console.log(data,'form')
-      
-         let OPTIONS = {
-
+                      let OPTIONS = {
             method: "POST",
             data:data
 
@@ -29,7 +26,7 @@ const blogs = createSlice({
 
     reducers:{
         updateBlog:(state,action)=>{
-            console.log(action,'update action')
+           
             state.loading=false,
             state.isUpdate=true,
             state.result=action.payload
@@ -43,7 +40,7 @@ const blogs = createSlice({
             state.loading = true;
         },
         [createBlogAction.fulfilled]: (state, action) => {
-            // console.log(action.payload,'payload')
+          
             state.loading = false
                 state.result = action.payload.data.data
                 toast.success('Your blog is successfully uploaded')
