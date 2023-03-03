@@ -21,7 +21,7 @@ async (data) => {
 
 export const getDateRangeHitsMatchMaking = createAsyncThunk('HITS_DATE_RANGE_MATCH-MAKING/GET_HITS_DATE_RANGE_MATCH_MAKING',
     async (data) => {
-        console.log(data, 'this is action date')
+        
         let OPTIONS = {
             url: `${import.meta.env.VITE_BASE_URL}/api/Hits?createdAt=${data.startDate}&endDate=${data.endDate}&module=${data.module}`,
             method: "GET",

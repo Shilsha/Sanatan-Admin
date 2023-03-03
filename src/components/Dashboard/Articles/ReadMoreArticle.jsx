@@ -13,7 +13,7 @@ function ReadMoreArticle() {
     const dispatch = useDispatch()
 
     const GetSingle = useSelector((state) => state.getArticle)
-    console.log(GetSingle, 'get single user parent article')
+    
 
     useEffect(() => {
         dispatch(getSingleArticle(id))
@@ -22,7 +22,7 @@ function ReadMoreArticle() {
 
     // ==============publish blog=========================
     const publishBlog = (datas) => {
-        console.log(datas, 'this is id')
+        
         const data = {
             articleId: datas.id,
             articleType: 'PUBLISH',
@@ -40,7 +40,7 @@ function ReadMoreArticle() {
 
     // ========================reject==================
     const rejectBlog=(datas)=>{
-        console.log(datas,'this is reject')
+        
         const data = {
             articleId: datas.id,
             articleType: 'REJECTED',

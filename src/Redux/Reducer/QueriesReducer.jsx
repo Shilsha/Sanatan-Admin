@@ -27,7 +27,7 @@ const initialState = {
 
 };
 export const getAllQueriesReducer = (state = initialState, action) => {
-    // console.log(action, 'from get all')
+    // 
     switch (action.type) {
         // =============================get all queries=====================================
         case GET_ALL_QUERIES_REQUEST:
@@ -58,9 +58,9 @@ export const getAllQueriesReducer = (state = initialState, action) => {
                 loading: action.payload,
             };
         case UPDATE_QUERIES_SUCCESS:
-            console.log(state.result, 'this is query update state ')
-            console.log(action.result.data, 'update reducer action data query')
-            console.log(action, 'action full')
+            
+            
+            
             return {
                 ...state,
                 loading: action.payload,
@@ -70,7 +70,7 @@ export const getAllQueriesReducer = (state = initialState, action) => {
                 
             };
         case UPDATE_QUERIES_FAILURE:
-            console.log('fail')
+            
             return {
                 ...state,
                 msg: action.msg,
@@ -85,7 +85,7 @@ export const getAllQueriesReducer = (state = initialState, action) => {
                 ...state,
             };
         case DELETE_SINGLE_QUERY_SUCCESS:
-            // console.log(state.result.data, 'this is query delete stat 
+            // 
             return {
                 ...state,
                 result2: state.result.data.filter((datas) => {
@@ -93,7 +93,7 @@ export const getAllQueriesReducer = (state = initialState, action) => {
                 }),
             };
         case DELETE_SINGLE_QUERY_FAILURE:
-            console.log('fali')
+            
             return {
                 ...state,
                 msg: action.msg,
@@ -110,7 +110,7 @@ export const getAllQueriesReducer = (state = initialState, action) => {
                 ...state,
             };
         case GET_SINGLE_QUERY_SUCCESS:
-            // console.log(state,'single reducer state')
+            // 
             return {
                 ...state,
                 singleQuery: action.result,

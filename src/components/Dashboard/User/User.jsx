@@ -88,7 +88,7 @@ function User() {
     // ===================change user type====================
     const setUserType = (type) => {
         setTypes(type)
-        console.log(types, '22')
+        
         const data = {
             page: page,
             type: type
@@ -98,7 +98,7 @@ function User() {
 
     }
     // useEffect(() => {
-    // //    console.log(userData?.result.data,'next comment')
+    // //    
     //     userData?.result.data.length != 0 ? setButtonNext(false) : setButtonNext(true)
     // }, [userData])
 
@@ -132,7 +132,7 @@ function User() {
 
     }
 
-    console.log(types, 'types')
+    
 
 
     // ===================================model Open and Close==========================
@@ -168,14 +168,14 @@ function User() {
             type: types
         }
 
-        console.log(page, 'length')
+        
         if (page > 0) {
-            console.log('bada hia')
+            
             setButtonPre(false)
 
 
         } else {
-            console.log('chhoota hai')
+            
             setButtonPre(true)
         }
 
@@ -186,14 +186,14 @@ function User() {
 
 
 
-    console.log(userData?.result?.length, 'thi si si lenght')
+    
     useEffect(() => {
         if (userData?.result.length < 11) {
-            console.log('chhota')
+            
             setButtonNext(true)
 
         } else {
-            console.log('bada')
+            
             setButtonNext(false)
         }
 
@@ -228,7 +228,7 @@ function User() {
     const fileExtension = ".xlsx";
 
     const exportToCSV = (apiData) => {
-        console.log(apiData.result, 'called')
+        
         const ws = XLSX.utils.json_to_sheet(apiData);
         const wb = { Sheets: { data: ws }, SheetNames: ["data"] };
         const excelBuffer = XLSX.write(wb, { bookType: "xlsx", type: "array" });
@@ -238,9 +238,9 @@ function User() {
 
    // *****************************************************Module auth*******************************************
    const Role = JSON.parse(sessionStorage.getItem('user'))
-   console.log(Role.role)
+   
    const isModuleAuth = Role?.role.some(data => data == 'Customers')
-   console.log(isModuleAuth, 'isModuleAuth  isModuleAuthisModuleAuthisModuleAuthisModuleAuth')
+   
 
    // **************************************************************
 if(isModuleAuth){

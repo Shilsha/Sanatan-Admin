@@ -14,7 +14,7 @@ function GetArticelLike({ ParentFunc, id, ParentFunc2, likes ,comments}) {
     const [box1,setBox1]=useState(false)
     const [box2,setBox2]=useState(false)
     ParentFunc = () => {
-        console.log('like')
+        
 
         dispatch(getArticleLike(id))
         setBox1(!box1)
@@ -22,16 +22,16 @@ function GetArticelLike({ ParentFunc, id, ParentFunc2, likes ,comments}) {
     }
 
     ParentFunc2 = () => {
-        console.log('commets')
+        
         dispatch(getArticleComment(id))
         setBox2(!box2)
         setShow1(!show1)  
     }
     const getAllLike = useSelector((state) => state.articlesLike)
     const getAllComment = useSelector((state) => state.articlesComment)
-    console.log(getAllLike.result, 'like data')
-    console.log(getAllComment.result, 'comment data')
-    console.log(likes, 'likes')
+    
+    
+    
     return (
         <>
 

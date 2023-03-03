@@ -18,7 +18,7 @@ export const getHitsLocation = createAsyncThunk('HITS_LOCATION/GET_HITS_LOCATION
 
 export const getDateRangeHitsLocation = createAsyncThunk('HITS_DATE_RANGE_LOCATION/GET_HITS_DATE_RANGE_LOCATION',
     async (data) => {
-        console.log(data, 'this is action date')
+        
         let OPTIONS = {
             url: `${import.meta.env.VITE_BASE_URL}/api/Hits?createdAt=${data.startDate}&endDate=${data.endDate}&module=${data.module}`,
             method: "GET",

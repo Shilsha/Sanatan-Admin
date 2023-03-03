@@ -30,7 +30,7 @@ export const GetUserReducer = (state = initialState, action) => {
         loading: action.payload,
       };
     case GET_USER_SUCCESS:
-      // console.log(state, 'state get user')
+      // 
       return {
         ...state,
 
@@ -55,7 +55,7 @@ export const GetUserReducer = (state = initialState, action) => {
 
 
 export const UpdateSingleUserReducer = (state = initialState, action) => {
-  // console.log(state ,'update single user in reduxer')
+  // 
   switch (action.type) {
 
     case UPDATE_SINGLE_USER_REQUEST:
@@ -95,9 +95,9 @@ export const DeleteSingleUserReducer = (state = initialState, action) => {
       };
     case DELETE_SINGLE_USER_SUCCESS:
       alert("delete successs reducer")
-      console.log(state, 'this delete is state')
-      console.log(action, 'delete action reducer')
-      console.log(action.payload,'action name')
+      
+      
+      
 
       return {
 
@@ -108,7 +108,7 @@ export const DeleteSingleUserReducer = (state = initialState, action) => {
       };
     case DELETE_SINGLE_USER_FAILURE:
 
-      console.log(action, 'delete reducer fail')
+      
       return {
         ...state,
         msg: action.msg,

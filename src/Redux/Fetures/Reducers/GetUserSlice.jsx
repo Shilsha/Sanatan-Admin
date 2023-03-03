@@ -59,7 +59,7 @@ export const getUser = createAsyncThunk('USER/GET_ALL_USER',
             state.loading = true;
         },
         [deleteUser.fulfilled]: (state, action) => {
-            // console.log(action.payload.data.data.userId,'action')
+            // 
             // toast.success('User deleted successfully')
             state.loading = false,
                 state.result =state.result.filter((data)=>data.userId!==action.payload.data.data.userId)

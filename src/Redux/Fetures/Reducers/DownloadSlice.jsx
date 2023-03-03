@@ -41,7 +41,7 @@ const exportData = createSlice({
             state.loading = true;
         },
         [exportDataAction.fulfilled]: (state, action) => {
-            // console.log(action.payload.data.data,'payload')
+            // 
             state.loading = false
             state.result = action.payload.data.data
 

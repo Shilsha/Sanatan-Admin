@@ -23,7 +23,7 @@ function TextEditor({ initialValue, sendData }) {
         sendData(draftToHtml(convertToRaw(editorState?.getCurrentContent())))
     };
 
-    // console.log("===editorstate====", draftToHtml(convertToRaw(editorState?.getCurrentContent())));
+    // 
 
     return (
         <div className="App">

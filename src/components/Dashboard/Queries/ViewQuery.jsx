@@ -38,10 +38,10 @@ function ViewQuery() {
     const { id } = useParams()
 
     const singleQuery = useSelector((state) => state.getQuery)
-    console.log(singleQuery.loading,'res')
+    
 
     const AdminId = JSON.parse(sessionStorage.getItem('user'))   
-    console.log(AdminId.adminId,'login user')
+    
     const dispatch = useDispatch()
   
     useEffect(() => {

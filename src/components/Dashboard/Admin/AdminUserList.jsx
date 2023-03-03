@@ -56,7 +56,7 @@ function AdminUserList() {
 
     const allAdminList = useSelector((state) => state.adminList)
     const allAdminList2 = useSelector((state) => state.addAdmin)
-    // console.log(allAdminList2.result, 'get all admin list')
+    // 
 
 
     useEffect(() => {
@@ -84,7 +84,7 @@ function AdminUserList() {
     ]);
 
     const openModel = (data,roless) => {
-        // console.log(data)
+        // 
         if (data.action == 'Delete') {
             setIsOpen(true)
             setAction(data.action)
@@ -98,8 +98,8 @@ function AdminUserList() {
                 setAction(data.action)
                 setAdminId(data.Id)
                 setAdminStat(data.AdminStatus)
-                console.log(permission, 'permis')
-                console.log(roless, 'this is roles')
+                
+                
 
 
                 for (let i = 0; i <roless.length; i++) {
@@ -107,7 +107,7 @@ function AdminUserList() {
                   
                     const indexes=permission.findIndex(data=>data.name==roless[i])
                     // const indexes=permission.findIndex(data=>data.name==arr[i])
-                    // console.log(data.roles,'/roooo')
+                    // 
                      pushh(indexes)
 
                 }
@@ -116,9 +116,9 @@ function AdminUserList() {
                   
                     const add = { isChecked: true }
                     permission[i] = { ...permission[i], ...add }
-                    // console.log(permission, 'new')
+                    // 
                     setPermission(permission)
-                    console.log(permission)
+                    
                 }
 
 
@@ -138,7 +138,7 @@ function AdminUserList() {
 
 
     }
-    // console.log(action, 'this is action')
+    // 
 
     // ==========================================update admin =====================
     const handleUpdateAdmin = () => {
@@ -185,14 +185,14 @@ function AdminUserList() {
             type: types
         }
 
-        console.log(page, 'length')
+        
         if (page > 0) {
-            // console.log('bada hia')
+            // 
             setButtonPre(false)
 
 
         } else {
-            // console.log('chhoota hai')
+            // 
             setButtonPre(true)
         }
 
@@ -202,13 +202,13 @@ function AdminUserList() {
 
 
     useEffect(() => {
-        console.log(allAdminList.result.length, 'length')
+        
         if (allAdminList.result.length < 10) {
-            // console.log('chhota')
+            // 
             setButtonNext(true)
 
         } else {
-            // console.log('bada')
+            // 
             setButtonNext(false)
         }
 
@@ -218,7 +218,7 @@ function AdminUserList() {
     // ==========================admin type==========================
     const setAdminType = (type) => {
         setTypes(type)
-        // console.log(type, '22')
+        // 
 
         const data = {
             page: page,
@@ -242,7 +242,7 @@ function AdminUserList() {
 
     const handleChangePer = (e) => {
         const { name, checked } = e.target;
-        console.log(checked, name, 'this is e ')
+        
         if (name === "allSelect") {
             let tempUser = permission.map((user) => {
                 return { ...user, isChecked: checked };
@@ -255,11 +255,11 @@ function AdminUserList() {
             setRole(tempUser2.map(data => data.name))
         } else {
             let tempUser = permission.map((user) => user.name === name ? { ...user, isChecked: checked } : user);
-            console.log(tempUser, 'tempuser')
+            
             setPermission(tempUser);
 
             const tempUser2 = tempUser.filter(item => item.isChecked === true)
-            console.log(tempUser2, '222222')
+            
             setRole(tempUser2.map(data => data.name))
         }
     };
@@ -290,14 +290,14 @@ function AdminUserList() {
 
 
     useEffect(() => {
-        console.log(errors, 'errroes')
+        
         if (Object.keys(errors).length === 0 && isSubmitting) {
             const data = {
                 adminId: adminId,
                 adminStatus: adminStat,
                 role: role
             }
-            console.log(data, 'assign rolessssssssssss')
+            
 
 
             dispatch(updateRole(data))
@@ -308,12 +308,12 @@ function AdminUserList() {
         }
     }, [errors]);
     // ===========================================================================================
-    // console.log(errors,'errors')
+    // 
     const LoginAdmin = JSON.parse(sessionStorage.getItem('user'))
-    console.log(LoginAdmin.role, 'roles')
+    
     const isAuth=LoginAdmin?.role.some(data=>data=="Users")
-    console.log(isAuth,'auth')
-    // console.log(types,'typesssssssssssssssssssssssssssssssssss')
+    
+    // 
 
     // =========================================================================
     const handleResetPass = (id) => {
@@ -415,7 +415,7 @@ if(isAuth){
                                             {
                                                 // allAdminList?.result.map((data) => {
                                                 (allAdminList?.result.filter((user) => user.email?.toLowerCase().includes(FilterSearch)))?.map((data, index) => {
-                                                    // console.log(data.role, 'this is role')
+                                                    // 
                                                     return (
                                                         <>
                                                             <tr key={index} className={` text-gray-500 `}>
@@ -431,7 +431,7 @@ if(isAuth){
                                                                             <span className='tooltip-on-hover'>View  </span>
                                                                             <div className="tooltip absolute z-100 bg-gray-50 shadow rounded-lg p-3 ml-10 text-sm mt-20 ">
                                                                                 {data.role?.map((data, index) => {
-                                                                                    // console.log(data, 'role data')
+                                                                                    // 
                                                                                     return <>
                                                                                         <ul key={index} className='text-start space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400 '>
                                                                                             <li className='p-1 font-bold' >{data}</li>

@@ -17,18 +17,18 @@ const RichTextEditor = ({ sendData, updatedata }) => {
         setEditorState(state);
         let currentContentAsHTML = convertToHTML(state.getCurrentContent());
         sendData(currentContentAsHTML)
-        console.log(        currentContentAsHTML       )
+        
 
 
     };
 
-    console.log(editorState,'editorState')
+    
    
     // useEffect(() => {
     //     alert("run")
     //     if(updatedata?.length>0){
     //         // setEditorState(updatedata)
-    //         console.log(updatedata, 'updatedatahmm')
+    //         
     //     }
 
     // }, [updatedata])

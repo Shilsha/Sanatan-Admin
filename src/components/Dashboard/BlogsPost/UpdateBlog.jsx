@@ -16,26 +16,26 @@ function UpdateBlog() {
     const [editorText, setEditorText] = useState('')
     const [image, setImage] = useState({ preview: "", raw: "" });
     const [title, setTitle] = useState('')
-    const [subject, setSubject] = useState('')
+    const blogsdata = useSelector(state => state.blog)
+    const [subject, setSubject] = useState(blogsdata?.result?.subject)
     const [category, setCategory] = useState('')
     const [errors, setErros] = useState([])
     const [newError, setNewError] = useState([])
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const blogsdata = useSelector(state => state.blog)
-    console.log(blogsdata.result, 'come data form state')
+
     const categoryList = useSelector((state) => state.category)
     var blogToUpdate = sessionStorage.getItem("blog")
     const [string, setString] = useState(
         blogToUpdate
     );
-            useEffect(() => {
+    useEffect(() => {
         dispatch(getCategory())
     }, [])
-    
-        // --------------------------------------------Blog from history----------------------
+
+    // --------------------------------------------Blog from history----------------------
     const { id } = useParams();
-  
+
     useEffect(() => {
         dispatch(singleBlogHistoryView(id))
     }, [])
@@ -44,29 +44,29 @@ function UpdateBlog() {
 
     const sendData = (EditedData) => {
         setEditorText(EditedData)
-        console.log(EditedData,'data come from text editor')
+
     }
     // ============================image----------------------------------
     const handleChange = async (e) => {
         const file = e.target.files[0]
-        console.log(file.size, 'file size')
+
         const maxSize = 400000;
         setImage({
             preview: URL.createObjectURL(e.target.files[0]),
             raw: e.target.files[0],
         });
         if (!file.name.match(/\.(jpg|jpeg|png)$/)) {
-            console.log('invalid image !');
+
             setErros('invalid image !');
             return errors
         }
         if (file.size > maxSize) {
-            // console.log('please upload only 400kb image !')
+            // 
             setErros('Uploaded image size exceeds 400kb, Upload small size image !')
         }
         else {
             if (file.size < maxSize) {
-                console.log('kam hia')
+
                 setErros('')
             }
         }
@@ -93,30 +93,31 @@ function UpdateBlog() {
         setNewError(validate())
         setTimeout(() => {
             navigate("/blog")
-           
-       }, 10);
+
+        }, 10);
     }
     useEffect(() => {
         if (Object.keys(newError).length == 0 && errors.length == 0) {
             const formData = new FormData();
             formData.append('title', title)
+            formData.append('subject', subject)
             formData.append('articleId', BlogContent?.articleId)
             formData.append('content', editorText)
             formData.append('categoryName', category)
             formData.append('articleType', "OPEN")
             formData.append('file', image.raw)
             dispatch(editBlogAction(formData))
-           
-            console.log(title,BlogContent?.articleId,editorText,category,"appended data")
+
+
         }
 
     }, [newError])
 
     // *****************************************************Module auth**************************************************
     const Role = JSON.parse(sessionStorage.getItem('user'))
-    // console.log(Role.role)
+    // 
     const isModuleAuth = Role?.role.some(data => data == 'BlogPost')
-    // console.log(isModuleAuth, 'isModuleAuth  isModuleAuthisModuleAuthisModuleAuthisModuleAuth')
+    // 
 
     // **************************************************************
 
@@ -125,11 +126,11 @@ function UpdateBlog() {
     useEffect(() => {
 
         if (blogsdata?.isUpdate) {
-            console.log(blogsdata?.result?.title, 'run2')
+
             setTitle(blogsdata?.result?.title)
             setCategory(blogsdata?.result?.categoryName)
         }
-        console.log(category, 'blogsdata?.result?.title')
+
     }, [blogsdata?.result])
     // ==================callback=========================
 
@@ -182,12 +183,13 @@ function UpdateBlog() {
                                                             </select>
                                                             {newError.category && (<p className='text-red-500 text-sm pt-1'>{newError.category}</p>)}
                                                         </div>
-                                                        <div className='flex justify-around items-center  gap-6 pb-4 mx-auto'>
+                                                    </div>
+                                                    <div className='flex justify-around items-center  gap-6 pb-4 mx-auto'>
                                                         <div class="col w-full">
                                                             <label class="block text-gray-700 font-bold mb-2" for="username">
                                                                 Subject
                                                             </label>
-                                                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Title"
+                                                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Subject"
                                                                 value={subject}
                                                                 onChange={(e) => setSubject(e.target.value)} />
                                                             {newError.subject && (<p className='text-red-500 text-sm pt-1'>{newError.subject}</p>)}
@@ -195,7 +197,6 @@ function UpdateBlog() {
 
 
 
-                                                    </div>
                                                     </div>
                                                     <div class="flex items-center justify-center  border-t dark:border-gray-600 ">
                                                         < div className='w-full min-h-[350px] bg-white px-4'>

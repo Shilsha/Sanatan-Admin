@@ -15,12 +15,19 @@ function BlogReject() {
     const [FilterSearch, setFilterSearch] = useState('')
     const dispatch = useDispatch()
     const blogReject = useSelector(state => state.blogReject)
-    console.log(blogReject, 'rejected')
+    
     useEffect(() => {
         dispatch(getBlogRejectAction())
     }, [])
 
     const truncateString = (str, num) => {
+        if (str?.length > num) {
+            return str.slice(0, num) + '...';
+        } else {
+            return str;
+        }
+    };
+    const truncateTitle = (str, num) => {
         if (str?.length > num) {
             return str.slice(0, num) + '...';
         } else {
@@ -97,8 +104,15 @@ function BlogReject() {
                                                 <td class=" py-3 pl-2 ">{data.articleId}</td>
                                                 <td class="  ">{data.title}</td>
                                                 <td class="  ">
-                                                
-                                                {truncateString(data.content,50)}</td>
+                                                <h1 className='py-2 text-gray-700'
+                                                               dangerouslySetInnerHTML={{
+                                                                   __html:  truncateTitle(data.subject, 50),
+                                                               }}
+
+                                                           >
+
+                                                           </h1>
+                                               </td>
                                                 <td class="  ">{data.createdDate}</td>
                                                 <td class="  ">{data.createdTime}</td>
                                                 <td class="  ">{data.articleType}</td>

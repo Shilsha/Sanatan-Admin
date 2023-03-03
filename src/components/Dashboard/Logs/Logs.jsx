@@ -28,7 +28,7 @@ function Logs() {
     const logs = useSelector((state) => state.log)
     const apiData = useSelector(state => state.export)
     const [clean, setclean] = useState('')
-    console.log(apiData.loading, 'thi apiData loading is logS')
+    
     useEffect(() => {
         const data = {
             date: moment(date).format('YYYY-MM-DD'),
@@ -42,7 +42,7 @@ function Logs() {
 
     const dateFilter = (dates) => {
         setDate(dates)
-        console.log(dates, 'dates')
+        
 
     }
 
@@ -83,14 +83,14 @@ function Logs() {
             page: page
         }
         dispatch(getLogs(data))
-        console.log(page, 'length')
+        
         if (page > 0) {
-            console.log('bada hia')
+            
             setButtonPre(false)
 
 
         } else {
-            console.log('chhoota hai')
+            
             setButtonPre(true)
         }
 
@@ -103,11 +103,11 @@ function Logs() {
 
     useEffect(() => {
         if (logs.result.length < 19) {
-            // console.log('chhota')
+            // 
             setButtonNext(true)
 
         } else {
-            // console.log('bada')
+            // 
             setButtonNext(false)
         }
 
@@ -133,7 +133,7 @@ function Logs() {
             }
             dispatch(getDateRangeLogs(data))
 
-            // console.log('range')
+            // 
 
         } else {
             const data = {
@@ -142,7 +142,7 @@ function Logs() {
                 page: page,
             }
             dispatch(getLogs(data))
-            console.log('single')
+            
         }
     }
 
@@ -152,7 +152,7 @@ function Logs() {
         setclean(CleanData)
         const start = startDate == null ? moment(date).format('YYYY-MM-DD') : moment(startDate).format('YYYY-MM-DD')
         const end = endDate == null ? moment(date).format('YYYY-MM-DD') : moment(endDate).format('YYYY-MM-DD')
-        // console.log(start, end, 'hmm')
+        // 
         const data = {
             dateStart: start,
             dateEnd: end,
@@ -192,14 +192,14 @@ function Logs() {
         FileSaver.saveAs(data, fileName + fileExtension);
     };
 
-    console.log(dateType, 'date type')
+    
 
 
          // *****************************************************Module auth*******************************************
    const Role = JSON.parse(sessionStorage.getItem('user'))
-   console.log(Role.role)
+   
    const isModuleAuth = Role?.role.some(data => data == 'Logs')
-   console.log(isModuleAuth, 'isModuleAuth  isModuleAuthisModuleAuthisModuleAuthisModuleAuth')
+   
 
    // **************************************************************
    if(isModuleAuth){

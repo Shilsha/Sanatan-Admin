@@ -49,7 +49,7 @@ function Articles() {
 
 
     const getArticle = useSelector((state) => state.article)
-    console.log(getArticle.result.length, 'res')
+    
 
      
 
@@ -69,7 +69,7 @@ function Articles() {
 
     const selectArticleType = (Type) => {
         setTypes(Type)
-        console.log(Type, 'type')
+        
         const data = {
             page: page,
             type: Type,
@@ -138,7 +138,7 @@ function Articles() {
     }
 
     const HanldeReject = (id, userId, modelName) => {
-        console.log(id, userId, modelName, 'hmmm')
+        
         setPublishArticleId(id)
         setUserId(userId)
         setModelStatus(modelName)
@@ -154,7 +154,7 @@ function Articles() {
                 articleStatus: publishText
 
             }
-            console.log(data)
+            
             dispatch(PublishArticleMessage(data))
             setIsOpen(false);
             setPublishText('')
@@ -197,14 +197,14 @@ function Articles() {
             type: types,
         }
 
-        console.log(page, 'length')
+        
         if (page > 0) {
-            console.log('bada hia')
+            
             setButtonPre(false)
 
 
         } else {
-            console.log('chhoota hai')
+            
             setButtonPre(true)
         }
 
@@ -214,20 +214,20 @@ function Articles() {
 
     useEffect(() => {
         if (getArticle.result.length < 16) {
-            // console.log('chhota')
+            // 
             setButtonNext(true)
 
         } else {
-            // console.log('bada')
+            // 
             setButtonNext(false)
         }
 
     }, [getArticle.result])
    // *****************************************************Module auth*******************************************
    const Role = JSON.parse(sessionStorage.getItem('user'))
-   console.log(Role.role)
+   
    const isModuleAuth = Role?.role.some(data => data == 'Articles')
-   console.log(isModuleAuth, 'isModuleAuth  isModuleAuthisModuleAuthisModuleAuthisModuleAuth')
+   
 
    // **************************************************************
 

@@ -63,11 +63,11 @@ const singleQuery = createSlice({
            
             state.loading = false,
                 state.result =action.payload.data.data
-                console.log(state.result,'after update')
-                console.log(action.payload.data.data,'this is action ')
+                
+                
         },
         [updateQueriesAction.rejected]: (state, action) => {
-            console.log('error')
+            
             state.loading = false,
                 state.error = action
         }

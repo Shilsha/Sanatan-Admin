@@ -62,9 +62,9 @@ function Dashboard() {
     const { loading, result, error } = useSelector((state) => state.thoughtOfDay)
     const panchangData = useSelector((state) => state.panchang)
     const broadcastStatus = useSelector((state) => state.broadcast)
-    // console.log(broadcastStatus, 'this is broadcast ')
+    // 
     const broadCast = broadcastStatus.result.filter(data => data.announcementStatus == true)
-    // console.log(broadCast.length, 'this is braod case repeted')
+    // 
 
     const role = JSON.parse(sessionStorage.getItem('user'))
 
@@ -149,24 +149,24 @@ function Dashboard() {
             thoughtOfTheDay: thoughtText
 
         }
-        console.log(data, 'thought of day is ')
+        
         // dispatch(updateThoughtOfDay(data))
         dispatch(updateThoughtAction(data))
         setIsOpen(false);
     }
-    // console.log(value, 'on change calender')
+    // 
 
     useEffect(() => {
         dispatch(panchangeAction(requestOptions1))
     }, [value])
-    console.log(value, 'this is value')
+    
 
 
     // ************************************************************Role based Module accces*******************************************************************
     const isModuleAuth = JSON.parse(sessionStorage.getItem('user'))
 
     const isSuperAdmin = isModuleAuth?.role.some(data => data == 'SuperAdmin')
-    console.log(isSuperAdmin, 'super  role')
+    
 
     const userModuleAuth = isModuleAuth?.role.some(data => data == 'Users')
     const articlesModuleAuth = isModuleAuth?.role.some(data => data == 'Articles')
@@ -176,7 +176,7 @@ function Dashboard() {
     const LogstModuleAuth = isModuleAuth?.role.some(data => data == 'Logs')
     const BroadcastModuleAuth = isModuleAuth?.role.some(data => data == 'Broadcast')
     const BlogsPosttModuleAuth = isModuleAuth?.role.some(data => data == 'BlogPost')
-    // console.log(userModuleAuth, 'userModuleAuth auth')
+    // 
     const unAutherizedHndle = () => {
         toast.error('You are not authrized for this module')
     }
@@ -438,7 +438,7 @@ function Dashboard() {
                                             <div className=''>
                                             {BlogsPosttModuleAuth || isSuperAdmin ? <>
                                                     <Link to='/blog'>
-                                                        <h1 className=' py-3 leading-6 text-2xl text-center font-medium  text-gray-500 '>Blog Management</h1>
+                                                        <h1 className=' py-3 leading-6  hover:text-orange-600  text-2xl text-center font-medium  text-gray-500 '>Blog Management</h1>
                                                     </Link>
                                                 </> : <>
                                                     <h1 onClick={unAutherizedHndle} className=' cursor-pointer py-3 leading-6 text-2xl text-center font-medium  text-red-500/60 '>Blog Management</h1>

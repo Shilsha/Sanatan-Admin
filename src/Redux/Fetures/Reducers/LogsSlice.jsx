@@ -3,7 +3,7 @@ import axios from 'axios'
 
 export const getLogs = createAsyncThunk('LOGS/GET_LOGS',
     async (data) => {
-        console.log(data,'is this slice riht')
+        
         let OPTIONS = {
             // url: `${import.meta.env.VITE_BASE_URL}/article/filter?category=All&keyword=&articleType=NEW&page=0&size=20`,
             url:`${import.meta.env.VITE_BASE_URL}/api/getlogs?module=${data.module}&createdAt=${data.date}&page=${data.page}&size=60`,
@@ -19,7 +19,7 @@ export const getLogs = createAsyncThunk('LOGS/GET_LOGS',
     })
 export const getDateRangeLogs = createAsyncThunk('LOGS_DATE_RANGE/GET_LOGS_DATE_RANGE',
     async (data) => {
-        console.log(data,'is this slice riht')
+        
         let OPTIONS = {
             // url: `${import.meta.env.VITE_BASE_URL}/article/filter?category=All&keyword=&articleType=NEW&page=0&size=20`,
             // url:`${import.meta.env.VITE_BASE_URL}/api/getlogsOnFilter?createdAt=${data.dateStart}&module=${data.module}&endDate=${data.dateEnd}&page=${data.page}&size=50`,

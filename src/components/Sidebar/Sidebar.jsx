@@ -54,7 +54,7 @@ function Sidebar() {
     const navigate = useNavigate()
 
     const AddRes = useSelector((state) => state.addAdmin)
-    // console.log(AddRes, 'adminMsg')
+    // 
     // =======================================add staff model===========================
 
     function closeModal() {
@@ -68,7 +68,7 @@ function Sidebar() {
     const handleChangeInput = (e) => {
         const { name, value } = e.target;
         setForm({ ...form, [name]: value })
-        // console.log(form,'form')
+        // 
 
 
     }
@@ -134,7 +134,7 @@ function Sidebar() {
     const isModuleAuth = JSON.parse(sessionStorage.getItem('user'))
 
     const isSuperAdmin = isModuleAuth?.role.some(data => data == 'SuperAdmin')
-    // console.log(isSuperAdmin, 'super  role')
+    // 
 
     const customerModuleAuth = isModuleAuth?.role.some(data => data == 'Customers')
     const articlesModuleAuth = isModuleAuth?.role.some(data => data == 'Articles')
@@ -144,7 +144,7 @@ function Sidebar() {
     const LogstModuleAuth = isModuleAuth?.role.some(data => data == 'Logs')
     const BroadcastModuleAuth = isModuleAuth?.role.some(data => data == 'Broadcast')
     const BlogsPosttModuleAuth = isModuleAuth?.role.some(data => data == 'BlogPost')
-    // console.log(userModuleAuth, 'userModuleAuth auth')
+    // 
     const unAutherizedHndle = () => {
         toast.error('You are not authorized for this module')
     }
@@ -156,7 +156,7 @@ function Sidebar() {
     const [resError, setResError] = useState('')
     const [errors, setErrors] = useState([])
 
-    // console.log(formData, 'form data')
+    // 
     const validate = () => {
 
         let errors = {}
@@ -193,34 +193,34 @@ function Sidebar() {
             },
         };
         setResError('')
-        console.log(resError, 'errors')
+        
         return await axios(OPTIONS)
             .then(res => {
                 setResError('')
                 setIsOpen(false)
                 // alert('ok')
-                console.log(res, 'res')
+                
                 toast.success(res.data.status.message)
-                console.log(formData, 'eeee form data')
+                
                 setForm('')
                 // setRole([])
                 window.location.reload();
             })
             .catch(err => {
-                // console.log(err.response.data.status.message, 'err')
+                // 
                 setResError(err.response.data.status.message)
             }
             )
 
     }
     useEffect(() => {
-        console.log(errors, 'errroes')
+        
         if (Object.keys(errors).length === 0 && isSubmitting) {
 
             // dispatch(addAdmin(formData))
-            // console.log({...formData,dateOfBirth:moment(date).format('DD-MM-YYYY')}, 'form')
+            // 
             // setResError('')
-            // console.log(resError,'errors')
+            // 
             apiCall({...formData,dateOfBirth:moment(date).format('DD-MM-YYYY'),gender:gender})
             // setIsOpen(false)
 
@@ -230,7 +230,7 @@ function Sidebar() {
     }, [errors]);
 
     useEffect(() => {
-        console.log(resError.length, 'lenghth')
+        
 
         if (resError.length > 0) {
             // setIsOpen(false)

@@ -30,7 +30,7 @@ const articlesComments = createSlice({
             state.loading = true;
         },
         [getArticleComment.fulfilled]: (state, action) => {
-            console.log(action.payload,'action')
+            
             state.loading = false,
                 state.result = action.payload.data.data
         },

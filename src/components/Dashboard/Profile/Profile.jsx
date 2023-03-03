@@ -43,8 +43,8 @@ function Profile() {
     const dispactch = useDispatch()
     const profile = useSelector(state => state.adminProfile)
     const id = JSON.parse(sessionStorage.getItem('user'))
-    // console.log(id,'this is id')
-    console.log(profile)
+    // 
+    
     useEffect(() => {
         dispactch(getAdminProfile(id?.adminId))
     }, [])
@@ -138,7 +138,7 @@ function Profile() {
                                             <div class="px-4 py-2 font-semibold">Role</div>
                                             <div class="px-4 py-2">
                                                 {profile?.result?.role?.map((data, index) => {
-                                                    // console.log(data, 'role data')
+                                                    // 
                                                     return <>
                                                         <ul key={index} className='text-start space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400 '>
                                                             <li className=' font-bold' >{data}</li>

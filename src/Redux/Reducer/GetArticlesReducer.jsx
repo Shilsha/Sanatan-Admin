@@ -60,15 +60,15 @@ export const GetArticlesReducer = (state = initialState, action) => {
           loading: action.payload,
         };
       case PUBLISH_MESSAGE_SUCCESS:
-        console.log(state ,'this is state publish')
-        console.log(action,'this is action publish')
+        
+        
         return {
           ...state,
           loading: action.payload,
           result2: state.result.data.filter((data)=>data.articleId!==action.result.data.articleId)
         };
       case PUBLISH_MESSAGE_FAILURE:
-        console.log('fail publish action')
+        
         return {
           ...state,
           msg: action.msg,
@@ -86,8 +86,8 @@ export const GetArticlesReducer = (state = initialState, action) => {
       };
     case REJECT_ARTICLE_SUCCESS:
     
-      console.log(state.result.data, 'this is query reject state')
-      console.log(action.result.data, 'action query reject action type')
+      
+      
     
       return {
         ...state,
@@ -95,7 +95,7 @@ export const GetArticlesReducer = (state = initialState, action) => {
         result2: state.result.data.filter((data)=>data.articleId!==action.result.data.articleId)
       };
     case REJECT_ARTICLE_FAILURE:
-      console.log('fali')
+      
       return {
         ...state,
         msg: action.msg,
@@ -189,8 +189,8 @@ export const UpdateArticleTypeReducer = (state = initialState, action) => {
 //       };
 //     case REJECT_ARTICLE_SUCCESS:
 //       alert('run')
-//       console.log(state.result.data, 'this is query reject state')
-//       console.log(action.result, 'action query reject action type')
+//       
+//       
     
 //       return {
 //         ...state,
@@ -199,7 +199,7 @@ export const UpdateArticleTypeReducer = (state = initialState, action) => {
 //         // result: state.result.data.filter((id)=>id!==action.id),
 //       };
 //     case REJECT_ARTICLE_FAILURE:
-//       console.log('fali')
+//       
 //       return {
 //         ...state,
 //         msg: action.msg,

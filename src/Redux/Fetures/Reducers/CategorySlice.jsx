@@ -53,7 +53,7 @@ export const deleteCategory = createAsyncThunk('DELETE_CATEGORY/DELETE_CATEGORY'
 export const editCategory = createAsyncThunk('EDIT_CATEGORY/EDIT_CATEGORY',
 
     async (data) => {
-        console.log(data,'form')
+        
         let OPTIONS = {
             url: `${import.meta.env.VITE_BASE_URL}/article/updateCategory`,
             method: "PUT",
@@ -106,14 +106,14 @@ const category = createSlice({
             state.loading = true;
         },
         [deleteCategory.fulfilled]: (state, action) => {
-            console.log(action.payload.data.data, 'success')
+            
             state.loading = false,
                 state.result = state.result.filter(data => data.categoryId !== action.payload.data.data.categoryId),
                 state.error = null
 
         },
         [deleteCategory.rejected]: (state, action) => {
-            console.log(action, 'fail')
+            
             state.loading = false,
                 state.error = action
         },
@@ -123,15 +123,15 @@ const category = createSlice({
             state.loading = true;
         },
         [editCategory.fulfilled]: (state, action) => {
-            console.log(action.payload.data.data, 'success')
+            
             state.loading = false,
                 state.result = state.result.map((data)=>data.categoryId==action.payload.data.data.categoryId?action.payload.data.data:data),
-               console.log( state.result,'after')
+               
                 state.error = null
 
         },
         [editCategory.rejected]: (state, action) => {
-            console.log(action, ' edit fail')
+            
             state.loading = false,
                 state.error = action
         },

@@ -4,7 +4,7 @@
 
 // export const getHitsPanchang = createAsyncThunk('HITS_PANCHANG/GET_HITS_PANCHANG',
 //     async (data) => {     
-//         console.log(data,'this is action date') 
+//         
 //         let OPTIONS = {
 //             // url: `${import.meta.env.VITE_BASE_URL}/api/getHits?module=festivalModule&createdAt&page=0&size=20`,
 //             url: `https://62be-2405-201-4041-c01c-20fb-c0da-32bc-a7e6.in.ngrok.io/api/getHits?module=PanchangModule&createdAt=${data}`,

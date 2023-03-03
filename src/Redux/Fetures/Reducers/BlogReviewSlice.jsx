@@ -28,7 +28,7 @@ const blogReview = createSlice({
             state.loading = true;
         },
         [getBlogReviewAction.fulfilled]: (state, action) => {
-            // console.log(action.payload,'payload')
+            // 
             state.loading = false,
                 state.result = action.payload.data.data,
                 state.error = null

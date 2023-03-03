@@ -32,7 +32,7 @@ export const getAllAdminReducer = (state = initialState, action) => {
         ...state,
       };
     case GET_ALL_ADMIN_SUCCESS:
-      // console.log(state.result.data, 'from get all')
+      // 
      
       return {
         ...state,
@@ -56,8 +56,8 @@ export const getAllAdminReducer = (state = initialState, action) => {
         loading: action.payload,
       };
     case ADD_ADMIN_SUCCESS:
-      console.log(state.result.data,"all state ")
-      console.log(action.result.data, 'this is state action admin user')
+      
+      
       return {
         ...state,
         result2: state.result.data.map((item)=>{
@@ -65,7 +65,7 @@ export const getAllAdminReducer = (state = initialState, action) => {
         })
       };
     case ADD_ADMIN_FAILURE:
-      console.log(state, 'failed admin user')
+      
       toast.warning("Please enter password like a test@123")
 
       return {
@@ -84,8 +84,8 @@ export const getAllAdminReducer = (state = initialState, action) => {
       };
     case DELETE_SINGLE_ADMIN_SUCCESS:
     
-      console.log(state.result.data, 'this delete is state')
-      console.log(action.result.data.adminId, 'delete action reducer')
+      
+      
           return {
 
         ...state,
@@ -93,8 +93,8 @@ export const getAllAdminReducer = (state = initialState, action) => {
 
       };
     case DELETE_SINGLE_ADMIN_FAILURE:
-      console.log('delete')
-      console.log(action,'delete fail action')
+      
+      
       return {
         ...state,
         msg: action.msg,

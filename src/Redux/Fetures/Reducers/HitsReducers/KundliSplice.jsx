@@ -18,7 +18,7 @@ export const getHitsKundali = createAsyncThunk('HITS_KUNDLI/GET_HITS_KUNDLI',
     })
  export const getDateRangeHitsKundali = createAsyncThunk('HITS_DATE_RANGE_KUNDLI/GET_HITS_DATE_RANGE_KUNDALI',
     async (data) => {     
-        console.log(data,'this is action date') 
+        
         let OPTIONS = {
             url:`${import.meta.env.VITE_BASE_URL}/api/Hits?createdAt=${data.startDate}&endDate=${data.endDate}&module=${data.module}`,
             method: "GET",

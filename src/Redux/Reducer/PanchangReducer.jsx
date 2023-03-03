@@ -15,7 +15,7 @@ const intialState = {
   };
 
   const PanchangReducer  = (state = intialState, action) => {
-    // console.log(action,'reducer actions')
+    // 
     switch (action.type) {
       
       case PANCHNAG_REQUEST:

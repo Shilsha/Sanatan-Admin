@@ -14,7 +14,7 @@ function BlogHistory() {
     const [type, setType] = useState('PUBLISH')
     const [FilterSearch, setFilterSearch] = useState('')
     const History = useSelector((state) => state.BlogsHistory)
-    console.log(History, 'history')
+    
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(getBlogHistory(type))
@@ -109,7 +109,7 @@ function BlogHistory() {
 
                                                            <h1 className='py-2 text-gray-700'
                                                                dangerouslySetInnerHTML={{
-                                                                   __html:  truncateTitle(data.content, 50),
+                                                                   __html:  truncateTitle(data.subject, 50),
                                                                }}
 
                                                            >

@@ -18,7 +18,7 @@ async (data) => {
 
 export const getDateRangeHitsZodiacSign = createAsyncThunk('HITS_DATE_RANGE_ZODIAC_SIGN/GET_HITS_DATE_RANGE_ZODIAC_SIGN',
 async (data) => {     
-    console.log(data,'this is action date') 
+    
     let OPTIONS = {
         url:`${import.meta.env.VITE_BASE_URL}/api/Hits?createdAt=${data.startDate}&endDate=${data.endDate}&module=${data.module}`,
         method: "GET",

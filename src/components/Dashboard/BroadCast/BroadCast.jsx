@@ -18,7 +18,7 @@ function BroadCast() {
     const [msg, setMsg] = useState('')
     const broadCast = useSelector((state) => state.broadcast)
 
-    console.log(broadCast, 'broadcast') 
+    
 
     useEffect(() => {
         dispatch(getBroadCastAction())
@@ -48,7 +48,7 @@ function BroadCast() {
             const data = {
                 announcementOfTheDay: msg
             }
-            console.log('add')
+            
             dispatch(addBroadcastAction(data))
             setMsg('')
             setId('')
@@ -63,8 +63,8 @@ function BroadCast() {
                 date: date,
                 announcementStatus: true
             }
-            console.log(data, 'update data')
-            console.log('update')
+            
+            
             dispatch(updateBroadcastAction(data))
             setMsg('')
             setId('')
@@ -91,7 +91,7 @@ function BroadCast() {
     }
 
     const editHandle = (data) => {
-        console.log(data.data.Msg, 'form')
+        
         setMsg(data.data.Msg)
         setId(data.data.Id)
         setDate(data.data.Date)
@@ -99,14 +99,14 @@ function BroadCast() {
 
     // ========================delete broadcast msg=================
     const deleteBroadcast = (id) => {
-        console.log(id, 'del')
+        
         dispatch(deleteBroadcastAction(id))
     }
         // *****************************************************Module auth*******************************************
         const Role = JSON.parse(sessionStorage.getItem('user'))
-        console.log(Role.role)
+        
         const isModuleAuth = Role?.role.some(data => data == 'Broadcast')
-        console.log(isModuleAuth, 'isModuleAuth  isModuleAuthisModuleAuthisModuleAuthisModuleAuth')
+        
      
         // **************************************************************
 

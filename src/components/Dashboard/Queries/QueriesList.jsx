@@ -46,7 +46,7 @@ function QueriesList() {
     const dispatch = useDispatch()
 
     const allQueries = useSelector((state) => state.query)
-    console.log(allQueries.result, 'query')
+    
 
     useEffect(() => {
         const data = {
@@ -78,7 +78,7 @@ function QueriesList() {
 
         e.preventDefault()
         const form = { contactId: id, status, comment: comments, }
-        console.log(form, 'form')
+        
         dispatch(updateQueries(form))
         setIsOpen(false);
 
@@ -120,7 +120,7 @@ function QueriesList() {
             type: types,
             FilterSearch: FilterSearch
         }
-        console.log(data, 'this is data')
+        
         dispatch(getAllQueriesAction(data))
     }
 
@@ -145,12 +145,12 @@ function QueriesList() {
         }
 
         if (page > 0) {
-            console.log('bada hia')
+            
             setButtonPre(false)
 
 
         } else {
-            console.log('chhoota hai')
+            
             setButtonPre(true)
         }
 
@@ -163,11 +163,11 @@ function QueriesList() {
 
     useEffect(() => {
         if (allQueries.result.numberOfElements < 16) {
-            // console.log('chhota')
+            // 
             setButtonNext(true)
 
         } else {
-            // console.log('bada')
+            // 
             setButtonNext(false)
         }
 
@@ -175,9 +175,9 @@ function QueriesList() {
     
    // *****************************************************Module auth*******************************************
    const Role = JSON.parse(sessionStorage.getItem('user'))
-   console.log(Role.role)
+   
    const isModuleAuth = Role?.role.some(data => data == 'Queries')
-   console.log(isModuleAuth, 'isModuleAuth  isModuleAuthisModuleAuthisModuleAuthisModuleAuth')
+   
 
    // **************************************************************
 if(isModuleAuth){

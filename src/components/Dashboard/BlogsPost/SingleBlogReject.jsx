@@ -14,7 +14,7 @@ function SingleBlogReject() {
     const dispatch = useDispatch()
 
     const BlogHistory = useSelector((state) => state.BlogsHistory)
-    console.log(BlogHistory, 'get single user BlogHistoryparent article')
+    
 
     useEffect(() => {
 
@@ -24,7 +24,7 @@ function SingleBlogReject() {
 
     // ==============publish blog=========================
     // const publishBlog = (datas) => {
-    //     console.log(datas, 'this is id')
+    //     
     //     const data = {
     //         articleId: datas.id,
     //         articleType: 'PUBLISH',

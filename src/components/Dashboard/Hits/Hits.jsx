@@ -96,7 +96,7 @@ function Hits() {
     const hitLocation = useSelector((state) => state.locationHit)
 
 
-    console.log(hitLocation, 'this hitLocation  horo is hits')
+    
 
 
     useEffect(() => {
@@ -126,7 +126,7 @@ function Hits() {
         if (dateTypesPan == 'SingleDate') {
             const data = moment(date).format('YYYY-MM-DD')
             dispatch(getHitsPanchang(data))
-            console.log(moment(date).format('YYYY-MM-DD'), 'single date')
+            
 
         } else {
             const data = {
@@ -135,7 +135,7 @@ function Hits() {
                 module: "PanchangModule"
             }
             dispatch(getDateRangeHitsPanchang(data))
-            // console.log(moment(startDate).format('YYYY-MM-DD'), moment(endDate).format('YYYY-MM-DD'), 'date range')
+            // 
         }
 
     }
@@ -154,7 +154,7 @@ function Hits() {
                 module: "festivalModule"
             }
             dispatch(getDateRangeHitsFestival(data))
-            // console.log(moment(startDate).format('YYYY-MM-DD'), moment(endDate).format('YYYY-MM-DD'), 'date range')
+            // 
         }
 
     }
@@ -173,7 +173,7 @@ function Hits() {
                 module: "KundaliModule"
             }
             dispatch(getDateRangeHitsKundali(data))
-            // console.log(moment(startDate).format('YYYY-MM-DD'), moment(endDate).format('YYYY-MM-DD'), 'date range')
+            // 
         }
 
     }
@@ -192,7 +192,7 @@ function Hits() {
                 module: "HoroscopeModule"
             }
             dispatch(getDateRangeHitsHoro(data))
-            // console.log(moment(startDate).format('YYYY-MM-DD'), moment(endDate).format('YYYY-MM-DD'), 'date range')
+            // 
         }
 
     }
@@ -211,7 +211,7 @@ function Hits() {
                 module: "ContactModule"
             }
             dispatch(getDateRangeHitsContact(data))
-            // console.log(moment(startDate).format('YYYY-MM-DD'), moment(endDate).format('YYYY-MM-DD'), 'date range')
+            // 
         }
 
     }
@@ -267,7 +267,7 @@ function Hits() {
                 module: "LoginModule"
             }
             dispatch(getDateRangeHitsLogin(data))
-            // console.log(moment(startDate).format('YYYY-MM-DD'), moment(endDate).format('YYYY-MM-DD'), 'date range')
+            // 
         }
 
     }
@@ -330,9 +330,9 @@ function Hits() {
 
      // *****************************************************Module auth*******************************************
    const Role = JSON.parse(sessionStorage.getItem('user'))
-   console.log(Role.role)
+   
    const isModuleAuth = Role?.role.some(data => data == 'Hits')
-   console.log(isModuleAuth, 'isModuleAuth  isModuleAuthisModuleAuthisModuleAuthisModuleAuth')
+   
 
    // **************************************************************
 

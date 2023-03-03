@@ -32,7 +32,7 @@ function NextPrev() {
 };
 
 const  tempUser2=permission.filter(item=>item.isChecked===true)
-  console.log(tempUser2.map(data=>data.name),'new data')
+  
 
   return (
     <div className=" my-4 ml-16 flex justify-between items-center gap-4 w-full " >

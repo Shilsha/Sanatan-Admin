@@ -16,15 +16,15 @@ export const addAdmin = createAsyncThunk('ADD_ADMIN/ADD_ADMIN',
         return axios(OPTIONS)
             // .then(unwrapResult)
             .then((res) => {
-                // console.log('res')
+                // 
                 return res
 
             })
             .catch(err => {
 
-                // console.log({ err }, 'err')
+                // 
                 const realErr = { err }
-                // console.log(unwrapResult(realErr),'real error')
+                // 
                 return rejectWithValue((realErr))
             })
 
@@ -90,7 +90,7 @@ const addAdmins = createSlice({
 
     reducers: {
         setEdit: (state, action) => {
-            console.log(action, 'epmty action')
+            
             state.loading = false,
             state.result = action.payload.result
 
@@ -103,16 +103,16 @@ const addAdmins = createSlice({
             state.loading = true;
         },
         [addAdmin.fulfilled]: (state, action) => {
-            console.log(action, 'this is action ')
-            console.log(state, 'this is state')
+            
+            
             state.loading = false,
                 state.result = action.payload.data.data
-            // console.log(action.payload.data.status.message,'err')
+            // 
             // toast.success(action.payload.data.status.message)
 
         },
         [addAdmin.rejected]: (state, action) => {
-            console.log(action, 'action error')
+            
             state.loading = false,
                 state.error = action,
                 toast.warning("Please enter strong password like a test@123")
@@ -122,7 +122,7 @@ const addAdmins = createSlice({
             state.loading = true;
         },
         [updateRole.fulfilled]: (state, action) => {
-            console.log(action, 'action')
+            
 
             state.loading = false,
                 state.updateRoles = action.payload.data.data
@@ -143,7 +143,7 @@ const addAdmins = createSlice({
             state.loading = true;
         },
         [resetAdminPass.fulfilled]: (state, action) => {
-            console.log(action, 'action')
+            
 
             state.loading = false,
                 state.result = action.payload.data.data

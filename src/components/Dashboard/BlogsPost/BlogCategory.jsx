@@ -15,7 +15,7 @@ function BlogCategory() {
     const dispatch = useDispatch()
 
     const categoryList = useSelector((state) => state.category)
-    console.log(categoryList, 'list')
+    
     useEffect(() => {
         dispatch(getCategory())
     }, [])
@@ -23,7 +23,7 @@ function BlogCategory() {
     const handleSubmit = (e) => {
         e.preventDefault()
         if (action) {
-            console.log('edit')
+            
             const data = {
                 categoryId: ids,
                 categoryName:cate
@@ -44,9 +44,9 @@ function BlogCategory() {
     }
 
     const CateDelete = (id) => {
-        console.log(id, 'delete id')
+        
         dispatch(deleteCategory(id))
-        console.log('hmh')
+        
     }
 
     const CateEdit = (id, CateName) => {

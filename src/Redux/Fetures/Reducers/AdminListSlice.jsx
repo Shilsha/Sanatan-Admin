@@ -92,7 +92,7 @@ const adminLists = createSlice({
         //     state.loading = false,
         //         // [state.result.push(action.payload.data.data)]
                 
-        //         console.log(action.payload.data.status.message,'err')
+        //         
         //         toast.success(action.payload.data.status.message)
         // },
         // [addAdmin.rejected]: (state, action) => {

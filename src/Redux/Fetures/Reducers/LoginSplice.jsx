@@ -16,7 +16,7 @@ export const getLogin = createAsyncThunk('LOGIN/GET_LOGIN',
         };
         return axios(OPTIONS)
             .then(res => {
-                console.log(res.data.data, 'this is res login')
+                
                 sessionStorage.setItem("user", JSON.stringify(res.data.data))
                 sessionStorage.setItem("adminId", JSON.stringify(res.data.data.adminId))
 
@@ -45,7 +45,7 @@ export const forgetPassword = createAsyncThunk('FORGET/FORGET_PASSWORD',
                 return res
             })
             .catch((err)=>{
-                console.log(err.response.data.status)
+                
                 toast.error(err.response.data.status.message)
                 return rejectWithValue(err.response.data)
             } )
@@ -111,7 +111,7 @@ const logins = createSlice({
 
             state.loading = false,
                 state.result = action.payload.data.data
-                // console.log(action.payload.data.data,'hmhmh')
+                // 
             if (!action.payload.data.data.isPasswordReset) {
                 toast.success("Login Successful")
                 setTimeout(() => {
@@ -133,7 +133,7 @@ const logins = createSlice({
         },
         [getLogin.rejected]: (state, action) => {
             toast.error("Login failed")
-            // console.log(action,'this is erroe login ')
+            // 
             state.loading = false,
                 state.error = action
         },
@@ -143,7 +143,7 @@ const logins = createSlice({
             state.loading = true;
         },
         [forgetPassword.fulfilled]: (state, action) => {
-            console.log(action.payload.data.data, 'FOREGT PASS')
+            
 
             state.loading = false,
                 state.result = action.payload.data.data
@@ -151,7 +151,7 @@ const logins = createSlice({
 
         },
         [forgetPassword.rejected]: (state, action) => {
-            // console.log(action ,'this is error otp')
+            // 
             state.loading = false,
 
                 state.error = action
@@ -163,7 +163,7 @@ const logins = createSlice({
             state.loading = true;
         },
         [verifyOtp.fulfilled]: (state, action) => {
-            // console.log(action.payload.data.data, 'verify otp')
+            // 
 
             state.loading = false,
             state.result = action.payload.data.data
@@ -195,7 +195,7 @@ const logins = createSlice({
 
         },
         [resetPassword.rejected]: (state, action) => {
-            console.log('error when reset passsword')
+            
 
             state.loading = false,
 

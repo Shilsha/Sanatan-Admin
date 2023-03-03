@@ -15,7 +15,7 @@ function BlogReview2() {
     const dispactch = useDispatch()
     const dataReview = useSelector(state => state.blogReview)
     const [type, setType] = useState('OPEN')
-    console.log(dataReview.result)
+    
     useEffect(() => {
         dispactch(getBlogReviewAction(type))
     }, [])

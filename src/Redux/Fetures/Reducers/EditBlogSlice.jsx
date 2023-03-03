@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 
 export const editBlogAction = createAsyncThunk('BLOG/CREATE_BLOG',
     async (data) => {
-        console.log(data,'form')
+        
       
          let OPTIONS = {
 
@@ -31,7 +31,7 @@ const blogsEdit = createSlice({
 
     reducers:{
         editBlog:(state,action)=>{
-            console.log(action,'update action')
+            
             state.loading=false,
             state.isUpdate=true,
             state.result=action.payload
@@ -45,7 +45,7 @@ const blogsEdit = createSlice({
             state.loading = true;
         },
         [editBlogAction.fulfilled]: (state, action) => {
-            // console.log(action.payload,'payload')
+            // 
             state.loading = false
                 state.result = action.payload.data.data
                 toast.success('Your blog is successfully updated')

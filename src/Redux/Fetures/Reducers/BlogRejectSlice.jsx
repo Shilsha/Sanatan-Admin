@@ -47,7 +47,7 @@ const blogReject = createSlice({
             state.loading = true;
         },
         [getBlogRejectAction.fulfilled]: (state, action) => {
-            // console.log(action.payload,'payload')
+            // 
             state.loading = false,
                 state.result = action.payload.data.data,
                 state.error = null

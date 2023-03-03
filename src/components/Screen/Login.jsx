@@ -52,7 +52,7 @@ function Login() {
         const data = {
             email, password
         }
-        console.log(data)
+        
         // dispatch(AdminLogin(data))
         dispatch(getLogin(data))
         setTimeout(() => {
@@ -71,24 +71,24 @@ function Login() {
     // ''''''''''''''''''''''''''modal =============================
 
     function closeModal() {
-        console.log('modal is open')
+        
         setIsOpen(false);
     }
     function openModal() {
-        console.log('modal is open')
+        
         setIsOpen(true);
     }
 
     // ============================= otp function =========================
     const forgetOTp = useSelector(state => state.login)
-    console.log(forgetOTp, 'otp')
+    
 
     const isVerefied = useSelector(state => state.login)
-    console.log(isVerefied.verefied, 'is verefied')
+    
     const [OTP, setOTP] = useState("");
     const [pass, setPass] = useState('')
     const [confirmPass, setConfirmPass] = useState('')
-    console.log(OTP, 'OTP')
+    
 
     const forgetPasswordHandle = (e) => {
         e.preventDefault()
@@ -103,13 +103,13 @@ function Login() {
             'email': forgetOTp.result.email,
             otp: OTP,
         }
-        console.log(OTP.length, 'll')
+        
         if (OTP.length !== 6) {
             toast.warning("Please enter 6 digit Otp")
         }
         else {
-            console.log('succss')
-            console.log(data)
+            
+            
             dispatch(verifyOtp(data))
             // setResPass(true)
 
@@ -123,13 +123,13 @@ function Login() {
         if (forgetOTp?.result?.isOtpVerified) {
             setResPass(true)
         }
-        console.log(forgetOTp?.result.adminId, 'lenght')
+        
         if (forgetOTp?.result?.adminId) {
             setForgetDiv(false)
         }
 
         if (forgetOTp.result?.isPasswordReset) {
-            console.log('this is temparary password')
+            
             setIsOpen(true);
             setResPass(true)
            
@@ -138,8 +138,8 @@ function Login() {
 
     }, [forgetOTp.result])
 
-    console.log(forgetOTp?.result, 'here')
-    console.log(adminName, adminId, adminStatus, 'all')
+    
+    
     const handleCreatePassword = (e) => {
         e.preventDefault()
         const data = {
@@ -149,9 +149,9 @@ function Login() {
             password: pass,
             isPasswordReset:false,
         }
-        console.log(pass, confirmPass, 'passoword')
+        
         if (pass == confirmPass) {
-            console.log(data, 'data reset')
+            
 
             dispatch(resetPassword(data))
         } else {
@@ -340,7 +340,7 @@ function Login() {
 
                                                     }}
                                                     autoFocus OTPLength={6} otpType="number" disabled={false} secure />
-                                                {/* <ResendOTP onResendClick={() => console.log("Resend clicked")}
+                                                {/* <ResendOTP onResendClick={() => 
                                                     style={{ justifyContent: 'space-evenly', padding: '10px  38px ' }}
                                                 /> */}
 

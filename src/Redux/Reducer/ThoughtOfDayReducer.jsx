@@ -22,11 +22,11 @@ export const thoughtOfDayReducer=(state=initialState,action)=>{
             }
 
             case UPDATE_THOUGHT_OF_DAY:
-                // console.log(state.result.data.thoughtId,'state update')
-                // console.log(action.result.data.thoughtId,'action update')
+                // 
+                // 
                 const aa=state.result.data.thoughtId == action.result.data.thoughtId ? action.result.data : state.result.data
-                console.log(aa,'aa')
-                console.log(action.result.data,'data')
+                
+                
                
                 return {
                 

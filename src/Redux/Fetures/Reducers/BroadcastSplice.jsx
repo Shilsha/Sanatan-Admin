@@ -31,7 +31,7 @@ export const addBroadcastAction = createAsyncThunk('BROADCAST_OF_DAY/ADD_BROADCA
         return await axios(OPTIONS)
             .then(res => res)
             .catch(err => {
-                // console.log(err.response.data.status.message,'errororooroor')
+                // 
                 toast.warning(err.response.data.status.message)
                 return rejectWithValue(err.response.data.status.message)
             })
@@ -56,10 +56,10 @@ export const updateBroadcastAction = createAsyncThunk('UPDATE_BROADCAST_OF_DAY/U
             .catch(err => {
                 toast.warning(err.response.data.status.message)
 
-                // console.log(rejectWithValue(err),'error from rec=ject with value redu')
-                console.log(err, 'error from redu')
+                // 
+                
                 const reaerr = err
-                console.log(reaerr, 'what is')
+                
                 return thunkApi.rejectWithValue(err.response.data.status.message)
             })
     })
@@ -107,8 +107,8 @@ const getBroadCastOfDay = createSlice({
             state.loading = true;
         },
         [updateBroadcastAction.fulfilled]: (state, action) => {
-            console.log(state.result, 'stae')
-            console.log(action.payload.data.data, 'action')
+            
+            
             state.loading = false,
                 // state.result = state.result.map((data)=>data.announcementId==action.payload.data.data.announcementId?{...data,action.payload.data.data}:data)
                 state.result = [...state.result.filter(d => d.announcementId !== action.payload.data.data.announcementId), action.payload.data.data,];
@@ -125,7 +125,7 @@ const getBroadCastOfDay = createSlice({
         },
         [addBroadcastAction.fulfilled]: (state, action) => {
             // toast.success('Added successfully')
-            console.log(action.payload.data.status, 'action add')
+            
             // toast.warning( action.payload.data.status.message)
             if (action.payload.data.status.message == 'Success') {
                 toast.success(action.payload.data.status.message)
@@ -136,8 +136,8 @@ const getBroadCastOfDay = createSlice({
             [state.result.push(action.payload.data.data)]
         },
         [addBroadcastAction.rejected]: (state, action) => {
-            console.log('error')
-            console.log(action, 'thid is action error')
+            
+            
             state.loading = false,
                 state.error = action
         },
