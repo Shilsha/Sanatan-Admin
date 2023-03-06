@@ -14,10 +14,10 @@ import { singleBlogHistoryView } from '../../../Redux/Fetures/Reducers/BlogHisto
 import { editBlogAction } from '../../../Redux/Fetures/Reducers/EditBlogSlice'
 function UpdateBlog() {
     const [editorText, setEditorText] = useState('')
-    const [image, setImage] = useState({ preview: "", raw: "" });
-    const [title, setTitle] = useState('')
     const blogsdata = useSelector(state => state.blog)
-    const [subject, setSubject] = useState(blogsdata?.result?.subject)
+    const [image, setImage] = useState({ preview:"", raw: "" });
+    const [title, setTitle] = useState('')
+    const [subject, setSubject] = useState("")
     const [category, setCategory] = useState('')
     const [errors, setErros] = useState([])
     const [newError, setNewError] = useState([])
@@ -29,17 +29,21 @@ function UpdateBlog() {
     const [string, setString] = useState(
         blogToUpdate
     );
+    const BlogContent = useSelector((state) => state.BlogsHistory?.resultSingleView)
     useEffect(() => {
+        setImage({ preview: blogsdata?.result?.imageUrl, raw: blogsdata?.result?.imageUrl })
+        setSubject(blogsdata?.result?.subject)
+        setTitle(blogsdata?.result?.title)
+        setEditorText(BlogContent?.content)
         dispatch(getCategory())
     }, [])
-
+console.log(image.raw,"image.raw")
     // --------------------------------------------Blog from history----------------------
     const { id } = useParams();
 
     useEffect(() => {
         dispatch(singleBlogHistoryView(id))
     }, [])
-    const BlogContent = useSelector((state) => state.BlogsHistory?.resultSingleView)
     // ================================================callback data=====================================
 
     const sendData = (EditedData) => {
@@ -91,10 +95,10 @@ function UpdateBlog() {
     const handleSubmit = (e) => {
         e.preventDefault()
         setNewError(validate())
-        setTimeout(() => {
-            navigate("/blog")
+        // setTimeout(() => {
+        //     navigate("/blog")
 
-        }, 10);
+        // }, 10);
     }
     useEffect(() => {
         if (Object.keys(newError).length == 0 && errors.length == 0) {
@@ -153,7 +157,7 @@ function UpdateBlog() {
                                     <div className=' '>
                                         <form onSubmit={handleSubmit}>
                                             <div class="w-[80%] h-[65F0px] blurrTable shadow-xl mx-auto  border border-gray-200 rounded-lg  dark:bg-gray-700 dark:border-gray-600 ">
-                                                <h1 className='text-center text-2xl   text-gray-500 font-medium  underline underline-offset-8 '>Create Blog</h1>
+                                                <h1 className='text-center text-2xl   text-gray-500 font-medium  underline underline-offset-8 '>Update Blog</h1>
                                                 <div className='w-[90%] mx-auto  pt-4 '>
                                                     <div className='flex justify-around items-center  gap-6 pb-4 mx-auto'>
                                                         <div class="col w-full">
