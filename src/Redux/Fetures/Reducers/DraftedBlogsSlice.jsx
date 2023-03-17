@@ -1,11 +1,12 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from 'axios'
 import { toast } from "react-toastify";
-export const getBlogHistory = createAsyncThunk('BLOG_HISTORY/GET_BLOG_HISTORY',
+export const getBlogDrafts = createAsyncThunk('BLOG_DRAFTS/GET_BLOG_DRAFTS',
 async (type) => {
 
     let OPTIONS = {
-        url: `${import.meta.env.VITE_BASE_URL}/article/get_blogs?category=All&categoryName=&keyword=&articleType=${type}&isDraftBlog=false&page=0&size=10`,
+        url: `${import.meta.env.VITE_BASE_URL}/article/get_drafted_list?isDraftBlog=true&page=0&size=10`,
+       
         method: "GET",                       
         headers: {
             'Accept': 'application/json'
@@ -14,7 +15,7 @@ async (type) => {
     return axios(OPTIONS)
         .then(res => res)
 })
-export const singleBlogHistoryView = createAsyncThunk('BLOG_HISTORY_VIEW/GET_BLOG_HISTORY_VIEW',
+export const singleBlogDraftView = createAsyncThunk('BLOG_DRAFTS_VIEW/GET_BLOG_DRAFTS_VIEW',
 async (id) => {
 
     let OPTIONS = {
@@ -27,7 +28,7 @@ async (id) => {
     return axios(OPTIONS)
         .then(res => res)
 })
-export const deleteBlogHistoryView = createAsyncThunk('BLOG_HISTORY_VIEW_DELETE/DELETE_BLOG_HISTORY_VIEW',
+export const deleteBlogDraftView = createAsyncThunk('BLOG_DRAFTS_VIEW_DELETE/DELETE_BLOG_DRAFTS_VIEW',
 async (id) => {
 
     let OPTIONS = {
@@ -42,58 +43,58 @@ async (id) => {
 })
 
 
-const BlogHistory = createSlice({
-    name: 'BLOG_HISTORY',
+const BlogDraft = createSlice({
+    name: 'BLOG_DRAFTS',
     initialState: {
         loading: false,
         result: [],
-        resultSingleView: [],
+        resultDraftSingleView: [],
         error: null
     },
     extraReducers: {
-        [getBlogHistory.pending]: (state, action) => {
+        [getBlogDrafts.pending]: (state, action) => {
             state.loading = true;
         },
-        [getBlogHistory.fulfilled]: (state, action) => {
+        [getBlogDrafts.fulfilled]: (state, action) => {
 
             state.loading = false
             state.result = action.payload.data.data
             state.error = null
         },
-        [getBlogHistory.rejected]: (state, action) => {
+        [getBlogDrafts.rejected]: (state, action) => {
             state.loading = false,
                 state.error = action
         },
 
         // ====================single history view=\=======================
-        [singleBlogHistoryView.pending]: (state, action) => {
+        [singleBlogDraftView.pending]: (state, action) => {
             state.loading = true;
         },
-        [singleBlogHistoryView.fulfilled]: (state, action) => {
+        [singleBlogDraftView.fulfilled]: (state, action) => {
 
             state.loading = false
-            state.resultSingleView = action.payload.data.data
+            state.resultDraftSingleView = action.payload.data.data
             state.error = null
         },
-        [singleBlogHistoryView.rejected]: (state, action) => {
+        [singleBlogDraftView.rejected]: (state, action) => {
             state.loading = false,
                 state.error = action
         },
         // ====================single history DELETE view=\=======================
-        [deleteBlogHistoryView.pending]: (state, action) => {
+        [deleteBlogDraftView.pending]: (state, action) => {
             state.loading = true;
         },
-        [deleteBlogHistoryView.fulfilled]: (state, action) => {
+        [deleteBlogDraftView.fulfilled]: (state, action) => {
 
             state.loading = false
-            state.resultSingleView = action.payload.data.data
-            toast.success('Blog successful deleted')
+            state.resultDraftSingleView = action.payload.data.data
+            toast.success('Blog successfully deleted')
             setTimeout(() => {
-                window.location.href='/blogHistory'
+                window.location.href='/blogDrafted'
             }, 1000);
             state.error = null
         },
-        [deleteBlogHistoryView.rejected]: (state, action) => {
+        [deleteBlogDraftView.rejected]: (state, action) => {
             state.loading = false,
                 state.error = action
         },
@@ -102,4 +103,4 @@ const BlogHistory = createSlice({
     }
 })
 
-export default BlogHistory.reducer;
+export default BlogDraft.reducer;

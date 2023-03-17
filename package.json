@@ -24,6 +24,7 @@
     "react-calendar": "^4.0.0",
     "react-chartjs-2": "^5.0.1",
     "react-circle-progress-bar": "^0.1.4",
+    "react-color": "^2.19.3",
     "react-copy-to-clipboard": "^5.1.0",
     "react-datepicker": "^4.8.0",
     "react-dom": "^18.2.0",

@@ -85,6 +85,7 @@ function BlogReject() {
                                         <td class="py-3 pl-2 ">ID</td>
                                         <td class="  ">Title</td>
                                         <td class="  ">Content</td>
+                                        <td class="  ">Author</td>
                                         <td class="  ">Create Date</td>
                                         <td class="  ">Create Time</td>
                                         <td class="  ">Type</td>
@@ -106,13 +107,14 @@ function BlogReject() {
                                                 <td class="  ">
                                                 <h1 className='py-2 text-gray-700'
                                                                dangerouslySetInnerHTML={{
-                                                                   __html:  truncateTitle(data.subject, 50),
+                                                                   __html:  truncateTitle(data.content, 50),
                                                                }}
 
                                                            >
 
                                                            </h1>
                                                </td>
+                                                <td class="  ">{data.author}</td>
                                                 <td class="  ">{data.createdDate}</td>
                                                 <td class="  ">{data.createdTime}</td>
                                                 <td class="  ">{data.articleType}</td>

@@ -26,7 +26,7 @@ const blogs = createSlice({
 
     reducers:{
         updateBlog:(state,action)=>{
-           
+           console.log(action.payload,'payload')
             state.loading=false,
             state.isUpdate=true,
             state.result=action.payload
@@ -43,9 +43,10 @@ const blogs = createSlice({
           
             state.loading = false
                 state.result = action.payload.data.data
-                toast.success('Your blog is successfully uploaded')
+               
+                toast.success('Your blog is Posted')
                 setTimeout(() => {
-                    window.location.reload();
+                    window.location.href='/blog'
                 }, 1000);
         },
         [createBlogAction.rejected]: (state, action) => {

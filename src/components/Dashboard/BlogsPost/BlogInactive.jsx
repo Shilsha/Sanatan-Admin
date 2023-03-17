@@ -9,12 +9,12 @@ import Loader from '../../Loader/Loader'
 import { BsSearch } from 'react-icons/bs'
 import { BiShow } from 'react-icons/bi'
 import { Link, useNavigate } from 'react-router-dom'
-function BlogHistory() {
+function BlogInactive() {
     const navigate = useNavigate();
     const [type, setType] = useState('PUBLISH')
     const [FilterSearch, setFilterSearch] = useState('')
     const History = useSelector((state) => state.BlogsHistory)
-    
+
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(getBlogHistory(type))
@@ -56,7 +56,7 @@ function BlogHistory() {
                                 <h1 type="button" class="inline-flex items-center text-white bg-gradient-to-r
                                  from-orange-500  to-yellow-400  font-medium rounded-lg text-lg px-4 py-1 text-center mr-40 mb-2">
 
-                                    Blog history
+                                    Inactive Blogs
                                 </h1>
 
                             </div>
@@ -97,9 +97,10 @@ function BlogHistory() {
                                         {History.loading ? <Loader /> : <>
 
                                        
-                                    {(History.result.filter((data=>data.title?.toLowerCase().includes(FilterSearch))||(data=>data.author?.toLowerCase().includes(FilterSearch))))?.map((data, index) => {
+                                    {(History.result.filter(data=>data.title?.toLowerCase().includes(FilterSearch)))?.map((data, index) => {
                                             {/* {History.result.map((data, index) => { */}
                                                 return <>
+                                                
                                                     <tr key={index} className={` text-gray-500 text-start`}>
                                                         <td class=" py-3 pl-2 ">{data.articleId}</td>
                                                         <td class="  "> <td class=" ">
@@ -155,4 +156,4 @@ function BlogHistory() {
     )
 }
 
-export default BlogHistory
+export default BlogInactive

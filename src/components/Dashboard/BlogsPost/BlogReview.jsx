@@ -7,7 +7,7 @@ import DesignLogin from '../../../Assets/images/DesignLogin.png'
 import { Link, useNavigate } from 'react-router-dom';
 function BlogReview() {
     const navigate = useNavigate();
-  
+
     return (
         <>
             <ToastContainer />
@@ -17,11 +17,11 @@ function BlogReview() {
                 <div className=' w-full  '>
                     <Navbar />
                     <div className=' my-4 pr-4 '>
-                    <button class="bg-transparent my-4 hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded-full" onClick={() => navigate(-1)}>
-                        Back
-                    </button>
+                        <button class="bg-transparent my-4 hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded-full" onClick={() => navigate(-1)}>
+                            Back
+                        </button>
                         <div className='text-center '>
-                            <h5  class="inline-flex items-center text-white bg-gradient-to-r 
+                            <h5 class="inline-flex items-center text-white bg-gradient-to-r 
                                 from-orange-500  to-yellow-400  font-medium rounded-lg text-lg px-3 py-1 text-center  mb-2">
                                 Blog Management
                             </h5>
@@ -67,6 +67,24 @@ function BlogReview() {
                                         <h1 class=" cursor-pointer uppercase font-medium
                                hover:scale-110 duration-500    ">
                                             Blog  Reject
+                                        </h1>
+                                    </Link>
+                                </div>
+                                <div className='rounded-lg bg-gray-50/20 blurr   grid place-content-center   shadow     h-[175px] ' >
+                                    <Link to='/blogDrafted'>
+
+                                        <h1 class=" cursor-pointer uppercase font-medium
+                               hover:scale-110 duration-500    ">
+                                            Drafts
+                                        </h1>
+                                    </Link>
+                                </div>
+                                <div className='rounded-lg bg-gray-50/20 blurr   grid place-content-center   shadow     h-[175px] ' >
+                                    <Link to='/blogInactive'>
+
+                                        <h1 class=" cursor-pointer uppercase font-medium
+                               hover:scale-110 duration-500    ">
+                                            Inactive Blogs
                                         </h1>
                                     </Link>
                                 </div>

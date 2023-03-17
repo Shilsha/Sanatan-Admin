@@ -89,6 +89,7 @@ function BlogReview2() {
                                             <td class=" px-2 py-3  ">ID</td>
                                             <td class="  ">Title</td>
                                             <td class=" ">Content</td>
+                                            <td class=" ">Author</td>
                                             <td class=" ">Create Date</td>
                                             <td class=" ">Create Time</td>
                                             <td class=" ">Type</td>
@@ -123,6 +124,7 @@ function BlogReview2() {
 
                                                             </h1>
                                                         </td>
+                                                        <td class=" ">{data.author}</td>
                                                         <td class=" ">{data.createdDate}</td>
                                                         <td class=" ">{data.createdTime}</td>
                                                         <td class=" ">{data.articleType}</td>

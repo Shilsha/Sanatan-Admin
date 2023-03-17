@@ -24,6 +24,9 @@ import SingleViewHistory from './components/Dashboard/BlogsPost/SingleViewHistor
 import BlogReject from './components/Dashboard/BlogsPost/BlogReject';
 import SingleBlogReject from './components/Dashboard/BlogsPost/SingleBlogReject';
 import UpdateBlog from './components/Dashboard/BlogsPost/UpdateBlog';
+import DraftedBlogs from './components/Dashboard/BlogsPost/DraftedBlogs';
+import SingleDraftView from './components/Dashboard/BlogsPost/SingleDraftView';
+import BlogInactive from './components/Dashboard/BlogsPost/BlogInactive';
 function Routing() {
   return (
     <div> 
@@ -48,11 +51,14 @@ function Routing() {
           <Route exact path="/blogCategory"  element={<PrivateRoutes Component={BlogCategory}/>}> </Route>
           <Route exact path="/updateBlog/:id"  element={<PrivateRoutes Component={UpdateBlog}/>}> </Route>
           <Route exact path="/blogHistory"  element={<PrivateRoutes Component={BlogHistory}/>}> </Route>
+          <Route exact path="/blogInactive"  element={<PrivateRoutes Component={BlogInactive}/>}> </Route>
           <Route exact path="/blogReview"  element={<PrivateRoutes Component={BlogReview2}/>}> </Route>
+          <Route exact path="/blogDrafted"  element={<PrivateRoutes Component={DraftedBlogs}/>}> </Route>
           <Route exact path="/blogReject"  element={<PrivateRoutes Component={BlogReject}/>}> </Route>
           <Route exact path="/blogReject/:id"  element={<PrivateRoutes Component={SingleBlogReject}/>}> </Route>
         <Route exact path="/blogReview/:id"  element={<PrivateRoutes Component={ReadMoreArticle}/>}> </Route> 
         <Route exact path="/blogHistory/:id"  element={<PrivateRoutes Component={SingleViewHistory}/>}> </Route> 
+        <Route exact path="/blogDrafted/:id"  element={<PrivateRoutes Component={SingleDraftView}/>}> </Route> 
         </Routes>
       </Router>
 

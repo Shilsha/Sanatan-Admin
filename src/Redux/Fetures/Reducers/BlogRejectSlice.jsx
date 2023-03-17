@@ -6,7 +6,7 @@ export const getBlogRejectAction = createAsyncThunk('GET_BLOGS_REJECT/GET_BLOGS_
     async () => {
 
         let OPTIONS = {
-            url: `${import.meta.env.VITE_BASE_URL}/api/getRejectedArticlesList?articleType=REJECTED&page=0&size=10`,
+            url: `${import.meta.env.VITE_BASE_URL}/api/getRejectedArticlesList?articleType=REJECTED&page=0&size=10&category=All&keyword=&isDraftBlog=false`,
             method: "GET",                       
             headers: {
                 'Accept': 'application/json'
@@ -16,8 +16,20 @@ export const getBlogRejectAction = createAsyncThunk('GET_BLOGS_REJECT/GET_BLOGS_
             .then(res => res)
     })
 
+// ---------------------------------Single rejected blog------------------------------
+export const singleBlogRejectView = createAsyncThunk('BLOG_REJECTED_VIEW/GET_BLOG_REJECTED_VIEW',
+async (id) => {
 
-
+    let OPTIONS = {
+        url: `${import.meta.env.VITE_BASE_URL}/article/get_articleById?articleId=${id}&userId`,
+        method: "GET",                       
+        headers: {
+            'Accept': 'application/json'
+        },
+    };
+    return axios(OPTIONS)
+        .then(res => res)
+})
     // ==========================delete blog=======================
 
     export const deleteBlogRejectView = createAsyncThunk('BLOG_REJECT_VIEW_DELETE/DELETE_BLOG_REJECT_VIEW',
@@ -40,6 +52,7 @@ const blogReject = createSlice({
     initialState: {
         loading: false,
         result: [],
+        resultSingleView: [],
         error: null
     },
     extraReducers: {
@@ -56,6 +69,20 @@ const blogReject = createSlice({
             state.loading = false,
                 state.error = action
         },
+         // ====================single reject view=\=======================
+         [singleBlogRejectView.pending]: (state, action) => {
+            state.loading = true;
+        },
+        [singleBlogRejectView.fulfilled]: (state, action) => {
+
+            state.loading = false
+            state.resultSingleView = action.payload.data.data
+            state.error = null
+        },
+        [singleBlogRejectView.rejected]: (state, action) => {
+            state.loading = false,
+                state.error = action
+        },
         // ====================single history DELETE view=\=======================
         [deleteBlogRejectView.pending]: (state, action) => {
             state.loading = true;
@@ -66,7 +93,7 @@ const blogReject = createSlice({
             state.resultSingleView = action.payload.data.data
             toast.success('Blog successful deleted')
             setTimeout(() => {
-                // window.location.href='/blogReject'
+                window.location.href='/blogReject'
             }, 1000);
             state.error = null
         },

@@ -7,15 +7,33 @@ import { ToastContainer } from 'react-toastify'
 import RichTextEditor from '../../Editor/RichTextEditor'
 import { useNavigate } from 'react-router-dom'
 import DesignLogin from '../../../Assets/images/DesignLogin.png'
-// import { UpdateBlogAction } from '../../../Redux/Fetures/Reducers/UpdateBlogSlice'
 import { getCategory } from '../../../Redux/Fetures/Reducers/CategorySlice'
 import TextEditor from '../../Editor/TextEditor'
 import { singleBlogHistoryView } from '../../../Redux/Fetures/Reducers/BlogHistorySlice'
+import { getSingleArticle } from '../../../Redux/Fetures/Reducers/GetSingleArticleSlice'
 import { editBlogAction } from '../../../Redux/Fetures/Reducers/EditBlogSlice'
+import Loader from '../../Loader/Loader';
+import Modal from 'react-modal';
+import { AiOutlineWarning } from 'react-icons/ai'
+const customStyles = {
+    content: {
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        marginRight: '-50%',
+        transform: 'translate(-50%, -50%)',
+        width: '40%',
+        height: 'auto',
+        background: "white",
+        position: 'relative',
+        border: 'none',
+    },
+};
 function UpdateBlog() {
-    const [editorText, setEditorText] = useState('')
     const blogsdata = useSelector(state => state.blog)
-    const [image, setImage] = useState({ preview:"", raw: "" });
+    const [editorText, setEditorText] = useState("")
+    const [image, setImage] = useState({ preview: "", raw: "" });
     const [title, setTitle] = useState('')
     const [subject, setSubject] = useState("")
     const [category, setCategory] = useState('')
@@ -23,54 +41,56 @@ function UpdateBlog() {
     const [newError, setNewError] = useState([])
     const navigate = useNavigate()
     const dispatch = useDispatch()
-
-    const categoryList = useSelector((state) => state.category)
-    var blogToUpdate = sessionStorage.getItem("blog")
-    const [string, setString] = useState(
-        blogToUpdate
-    );
-    const BlogContent = useSelector((state) => state.BlogsHistory?.resultSingleView)
-    useEffect(() => {
-        setImage({ preview: blogsdata?.result?.imageUrl, raw: blogsdata?.result?.imageUrl })
-        setSubject(blogsdata?.result?.subject)
-        setTitle(blogsdata?.result?.title)
-        setEditorText(BlogContent?.content)
-        dispatch(getCategory())
-    }, [])
-console.log(image.raw,"image.raw")
-    // --------------------------------------------Blog from history----------------------
+    const [modalIsOpen, setIsOpen] = React.useState(false);
     const { id } = useParams();
-
+    // --------------------------------------------Blog from history----------------------
+    const categoryList = useSelector((state) => state.category)
     useEffect(() => {
-        dispatch(singleBlogHistoryView(id))
+        //  dispatch(singleBlogHistoryView(id))
+        dispatch(getSingleArticle(id))
     }, [])
+    const GetSingle = useSelector((state) => state.getArticle)
     // ================================================callback data=====================================
-
+    const sendSubject = (data) => {
+        setSubject(data)
+    }
     const sendData = (EditedData) => {
         setEditorText(EditedData)
-
     }
-    // ============================image----------------------------------
+    useEffect(() => {
+        setImage({ preview: GetSingle?.result?.imageUrl, raw: GetSingle?.result?.imageUrl })
+        setSubject(GetSingle?.result?.subject)
+        setTitle(GetSingle?.result?.title)
+        setEditorText(GetSingle?.content)
+        dispatch(getCategory())
+    }, [])
+    console.log(editorText,"editorText")
+    console.log(subject,"subject")
+// ================================================Subject callback data=====================================
+
+
+    // const BlogContent = useSelector((state) => state.BlogsHistory?.resultSingleView)
+
+
+   
+       // ============================image----------------------------------
     const handleChange = async (e) => {
         const file = e.target.files[0]
-
         const maxSize = 400000;
         setImage({
             preview: URL.createObjectURL(e.target.files[0]),
             raw: e.target.files[0],
         });
         if (!file.name.match(/\.(jpg|jpeg|png)$/)) {
-
             setErros('invalid image !');
             return errors
         }
         if (file.size > maxSize) {
-            // 
+            
             setErros('Uploaded image size exceeds 400kb, Upload small size image !')
         }
         else {
             if (file.size < maxSize) {
-
                 setErros('')
             }
         }
@@ -95,56 +115,59 @@ console.log(image.raw,"image.raw")
     const handleSubmit = (e) => {
         e.preventDefault()
         setNewError(validate())
-        // setTimeout(() => {
-        //     navigate("/blog")
-
-        // }, 10);
+        setIsOpen(true);
     }
     useEffect(() => {
         if (Object.keys(newError).length == 0 && errors.length == 0) {
             const formData = new FormData();
             formData.append('title', title)
             formData.append('subject', subject)
-            formData.append('articleId', BlogContent?.articleId)
+            formData.append('articleId', GetSingle?.result?.articleId)
             formData.append('content', editorText)
             formData.append('categoryName', category)
             formData.append('articleType', "OPEN")
             formData.append('file', image.raw)
-            dispatch(editBlogAction(formData))
-
-
+            formData.append('isDraftBlog', false)
         }
-
     }, [newError])
 
     // *****************************************************Module auth**************************************************
     const Role = JSON.parse(sessionStorage.getItem('user'))
-    // 
-    const isModuleAuth = Role?.role.some(data => data == 'BlogPost')
-    // 
-
-    // **************************************************************
-
-
+        const isModuleAuth = Role?.role.some(data => data == 'BlogPost')
+     // **************************************************************
+    const dispatchData = (e) => {
+        const formData = new FormData();
+        formData.append('title', title)
+        formData.append('subject', subject)
+        formData.append('articleId', GetSingle?.result?.articleId)
+        formData.append('content', editorText)
+        formData.append('categoryName', category)
+        formData.append('articleType', "OPEN")
+        formData.append('file', image.raw)
+        formData.append('isDraftBlog', false)
+        dispatch(editBlogAction(formData))
+        // setIsOpen(true);
+    }
+    function closeModal() {
+        setIsOpen(false);
+    }
     // ==========================blogs update=========================
-    useEffect(() => {
+    // useEffect(() => {
 
-        if (blogsdata?.isUpdate) {
+    //     if (blogsdata?.isUpdate) {
 
-            setTitle(blogsdata?.result?.title)
-            setCategory(blogsdata?.result?.categoryName)
-        }
+    //         setTitle(blogsdata?.result?.title)
+    //         setCategory(blogsdata?.result?.categoryName)
+    //     }
 
-    }, [blogsdata?.result])
+    // }, [blogsdata?.result])
     // ==================callback=========================
-
-
     if (isModuleAuth) {
         return (
             <>
                 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
                 <ToastContainer />
-                <div className='   w-[100%] min-h-screen flex flex-col-2 gap-4 bgGradient '>
+                               <div className='   w-[100%] min-h-screen flex flex-col-2 gap-4 bgGradient '>
                     <Sidebar />
                     <div className=' w-full '>
                         <Navbar />
@@ -176,7 +199,7 @@ console.log(image.raw,"image.raw")
                                                             <select id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                                 value={category}
                                                                 onChange={(e) => setCategory(e.target.value)}>
-                                                                <option value=""> Select Category</option>
+                                                                <option selected> {GetSingle?.result?.categoryName}</option>
                                                                 {
                                                                     categoryList?.result.map((data, index) => {
                                                                         return <>
@@ -188,7 +211,7 @@ console.log(image.raw,"image.raw")
                                                             {newError.category && (<p className='text-red-500 text-sm pt-1'>{newError.category}</p>)}
                                                         </div>
                                                     </div>
-                                                    <div className='flex justify-around items-center  gap-6 pb-4 mx-auto'>
+                                                    {/* <div className='flex justify-around items-center  gap-6 pb-4 mx-auto'>
                                                         <div class="col w-full">
                                                             <label class="block text-gray-700 font-bold mb-2" for="username">
                                                                 Subject
@@ -198,14 +221,21 @@ console.log(image.raw,"image.raw")
                                                                 onChange={(e) => setSubject(e.target.value)} />
                                                             {newError.subject && (<p className='text-red-500 text-sm pt-1'>{newError.subject}</p>)}
                                                         </div>
-
-
-
+                                                    </div> */}
+                                                    <label class="block text-gray-700 font-bold mb-2" for="username">
+                                                        Subject
+                                                    </label>
+                                                    <div class="flex items-center justify-center  border-t dark:border-gray-600 ">
+                                                        < div className='w-full min-h-[150px] bg-white px-4'>
+                                                            <TextEditor initialValue={GetSingle?.result?.subject} sendData={sendSubject} />
+                                                        </div>
                                                     </div>
+                                                    <label class="block text-gray-700 font-bold mb-2" for="username">
+                                                        Blog Content
+                                                    </label>
                                                     <div class="flex items-center justify-center  border-t dark:border-gray-600 ">
                                                         < div className='w-full min-h-[350px] bg-white px-4'>
-
-                                                            <TextEditor initialValue={BlogContent?.content} sendData={sendData} />
+                                                            <TextEditor initialValue={GetSingle?.result?.content} sendData={sendData} />
                                                         </div>
                                                     </div>
                                                     <div className='p-5 flex  items-center  '>
@@ -219,10 +249,9 @@ console.log(image.raw,"image.raw")
                                                                 className="form-control"
                                                                 onChange={handleChange}
                                                                 accept="image/*"
-                                                                initialValue={BlogContent?.imageUrl}
+                                                                initialValue={GetSingle?.result?.imageUrl}
                                                             />
                                                             {errors.length > 0 ? <>  {errors && (<p className='text-red-500 text-sm pt-1'>{errors}</p>)}</> : <>
-
                                                                 {newError.img && (<p className='text-red-500 text-sm pt-1'>{newError.img}</p>)}
                                                             </>}
                                                         </div>
@@ -249,6 +278,38 @@ console.log(image.raw,"image.raw")
                         <img src={DesignLogin} alt='empty' className='w-full'></img>
                     </div>
                 </div>
+                {/* </> : <Loader />} */}
+                <Modal
+                    isOpen={modalIsOpen}
+                    // onAfterOpen={afterOpenModal}
+                    onRequestClose={closeModal}
+                    style={customStyles}
+                    contentLabel="Example Modal"
+                    className=" "
+                >
+                    <>
+                        <div class="shadow-xl pt-4   bg-[rgb(254 214 172)] rounded-lg md:max-w-md md:mx-auto p-4 fixed inset-x-0 bottom-0 z-50 mb-4 mx-4 md:relative">
+                            <div class="md:flex items-center">
+                                <div class="rounded-full border border-red-900 flex items-center justify-center w-16 h-16 flex-shrink-0 mx-auto">
+                                    <AiOutlineWarning size={40} fill='#8E2E0F' />
+                                </div>
+                                <div class="mt-4 md:mt-0 md:ml-6 text-center md:text-left">
+                                    <p class="font-bold text-red-800">Post Blog</p>
+                                    <p class="text-sm text-gray-700 mt-1">Are you sure want to post blog.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="text-center md:text-right mt-4 md:flex md:justify-end">
+                                <button class="block w-full md:inline-block md:w-auto px-5 py-3 md:py-2
+                                 bg-red-200 text-red-700 rounded-lg font-semibold text-sm md:ml-2 md:order-2
+                                  hover:bg-red-400 hover:text-white" onClick={dispatchData}>Yes</button>
+                                <button class="block w-full md:inline-block md:w-auto px-5 py-3 md:py-2
+                                 bg-gray-200 rounded-lg font-semibold text-sm mt-4
+                                  md:mt-0 md:order-1 hover:bg-slate-500 hover:text-white" onClick={closeModal}>No</button>
+                            </div>
+                        </div>
+                    </>
+                </Modal>
             </>
         )
     }

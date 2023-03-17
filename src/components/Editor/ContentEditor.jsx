@@ -4,7 +4,7 @@ import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import htmlToDraft from 'html-to-draftjs';
 import draftToHtml from 'draftjs-to-html';
-function TextEditor({ initialValue, sendData }) {
+function ContentEditor({ initialValue, sendData }) {
 
     const htmlToDraftBlocks = (html) => {
         const blocksFromHtml = htmlToDraft(html);
@@ -38,5 +38,5 @@ function TextEditor({ initialValue, sendData }) {
     )
 }
 
-export default TextEditor;
+export default ContentEditor;
 

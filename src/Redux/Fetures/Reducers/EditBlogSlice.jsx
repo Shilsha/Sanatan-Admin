@@ -3,7 +3,7 @@ import axios from 'axios'
 import { toast } from "react-toastify";
 import { useNavigate } from 'react-router-dom'
 
-export const editBlogAction = createAsyncThunk('BLOG/CREATE_BLOG',
+export const editBlogAction = createAsyncThunk('EDITBLOG/EDIT_BLOG',
     async (data) => {
         
       
@@ -48,9 +48,10 @@ const blogsEdit = createSlice({
             // 
             state.loading = false
                 state.result = action.payload.data.data
+                
                 toast.success('Your blog is successfully updated')
                 // setTimeout(() => {
-                //     window.location.reload();
+                //     window.location.href='/blog'
                 // }, 1000);
 
         },

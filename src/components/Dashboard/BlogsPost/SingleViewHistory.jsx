@@ -8,6 +8,7 @@ import Sidebar from '../../Sidebar/Sidebar';
 import { singleBlogHistoryView, deleteBlogHistoryView } from '../../../Redux/Fetures/Reducers/BlogHistorySlice'
 import { updateBlog } from '../../../Redux/Fetures/Reducers/CreateBlogSlice'
 import { Link, useNavigate } from 'react-router-dom';
+import { getSingleArticle, getPublishArticle, blogRejectSingle } from '../../../Redux/Fetures/Reducers/GetSingleArticleSlice'
 
 function SingleViewHistory() {
     const navigate = useNavigate();
@@ -18,13 +19,16 @@ function SingleViewHistory() {
     sessionStorage.setItem("blog", JSON.stringify(BlogHistory?.resultSingleView.content))
     var loggedAdminId = sessionStorage.getItem("adminId")
     var authorId = BlogHistory?.resultSingleView.adminId
-    var superAdminId=86;
+    var superAdminId = 86;
 
     useEffect(() => {
         dispatch(singleBlogHistoryView(id))
     }, [])
 
-   
+    useEffect(() => {
+        dispatch(getSingleArticle(id))
+
+    }, [])
 
     const deleteBlog = (ids) => {
         dispatch(deleteBlogHistoryView(ids))
@@ -52,16 +56,16 @@ function SingleViewHistory() {
                                 <img className='rounded-md w-full' src={BlogHistory?.resultSingleView.imageUrl} alt={BlogHistory?.resultSingleView.imageName} />
                                 <div className=' my-4     '>
                                     <div className='flex flex-col px-6'>
-                                        {(loggedAdminId == authorId)||(loggedAdminId == superAdminId)?
-                                       
-                                            <Link  to={`/updateBlog/${BlogHistory?.resultSingleView.articleId}`}>
+                                        {(loggedAdminId == authorId) || (loggedAdminId == superAdminId) ?
+
+                                            <Link to={`/updateBlog/${id}`}>
                                                 <button class="bg-transparent my-4 w-96  hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded-full"
-                                                    onClick={() => dispatch(updateBlog(BlogHistory?.resultSingleView))}
+                                                    onClick={() => dispatch(getSingleArticle(id))}
                                                 >
                                                     Update Blog
                                                 </button>
                                             </Link> : ""}
-                                        {(loggedAdminId == authorId)||(loggedAdminId == superAdminId) ?
+                                        {(loggedAdminId == authorId) || (loggedAdminId == superAdminId) ?
                                             <button class="bg-transparent my-4 w-96 hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded-full" onClick={() => deleteBlog(BlogHistory?.resultSingleView.articleId)}>
                                                 Delete Blog
                                             </button> : ""}
@@ -87,7 +91,7 @@ function SingleViewHistory() {
 
 
 
-                                    <h1 className='text-xl font-bold  text-red-800'>Title : <span className='text-lg'>{BlogHistory?.resultSingleView.title}</span></h1>
+                                    {/* <h1 className='text-xl font-bold  text-red-800'>Title : <span className='text-lg'>{BlogHistory?.resultSingleView.title}</span></h1>
                                     <h1 className='py-2 text-gray-700 text-justify'
                                         dangerouslySetInnerHTML={{
                                             __html: BlogHistory?.resultSingleView.content,
@@ -95,9 +99,21 @@ function SingleViewHistory() {
 
                                     >
 
+                                    </h1> */}
+
+                                    <h1 className='text-xl font-bold  text-red-800'>Title : <span className='text-lg'>{BlogHistory?.resultSingleView.title}</span></h1>
+                                    <h2 className='text-xl font-bold  text-red-800'>Subject : </h2>
+                                    <span className='text-lg' dangerouslySetInnerHTML={{
+                                        __html: BlogHistory?.resultSingleView.subject,
+                                    }}>
+                                    </span>
+                                    <h2 className='text-xl font-bold  text-red-800'>Content : </h2>
+                                    <h1 className='py-2 text-gray-700'
+                                        dangerouslySetInnerHTML={{
+                                            __html: BlogHistory?.resultSingleView.content,
+                                        }}
+                                    >
                                     </h1>
-
-
 
 
 

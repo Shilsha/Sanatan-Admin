@@ -5,19 +5,21 @@ import { ToastContainer } from 'react-toastify'
 import Navbar from '../../Navbar/Navbar'
 import Sidebar from '../../Sidebar/Sidebar'
 import { getBlogHistory } from '../../../Redux/Fetures/Reducers/BlogHistorySlice'
+import { getBlogDrafts } from '../../../Redux/Fetures/Reducers/DraftedBlogsSlice'
 import Loader from '../../Loader/Loader'
 import { BsSearch } from 'react-icons/bs'
 import { BiShow } from 'react-icons/bi'
 import { Link, useNavigate } from 'react-router-dom'
-function BlogHistory() {
+function DraftedBlogs() {
     const navigate = useNavigate();
     const [type, setType] = useState('PUBLISH')
     const [FilterSearch, setFilterSearch] = useState('')
-    const History = useSelector((state) => state.BlogsHistory)
+    const History = useSelector((state) => state.BlogDraft)
     
     const dispatch = useDispatch()
     useEffect(() => {
-        dispatch(getBlogHistory(type))
+        // dispatch(getBlogHistory(type))
+        dispatch(getBlogDrafts())
     }, [])
 
     const truncateTitle = (str, num) => {
@@ -56,7 +58,7 @@ function BlogHistory() {
                                 <h1 type="button" class="inline-flex items-center text-white bg-gradient-to-r
                                  from-orange-500  to-yellow-400  font-medium rounded-lg text-lg px-4 py-1 text-center mr-40 mb-2">
 
-                                    Blog history
+                                    Drafts
                                 </h1>
 
                             </div>
@@ -81,7 +83,7 @@ function BlogHistory() {
                                             <td class="py-3 pl-2 ">ID</td>
                                             <td class="   ">Title</td>
                                             <td class="  ">Content</td>
-                                            <td class="  ">Author</td>
+                                            <td class="   ">Author</td>
                                             <td class="  ">Create Date</td>
                                             <td class="  ">Create Time</td>
                                             <td class="  ">Type</td>
@@ -97,7 +99,7 @@ function BlogHistory() {
                                         {History.loading ? <Loader /> : <>
 
                                        
-                                    {(History.result.filter((data=>data.title?.toLowerCase().includes(FilterSearch))||(data=>data.author?.toLowerCase().includes(FilterSearch))))?.map((data, index) => {
+                                    {(History.result.filter(data=>data.title?.toLowerCase().includes(FilterSearch)))?.map((data, index) => {
                                             {/* {History.result.map((data, index) => { */}
                                                 return <>
                                                     <tr key={index} className={` text-gray-500 text-start`}>
@@ -124,7 +126,7 @@ function BlogHistory() {
                                                         <td class="  ">{data.modifiedDate}</td>
                                                         <td class="  ">{data.modifiedTime}</td>
                                                         <td>
-                                                            <Link to={`/blogHistory/${data.articleId}`}>
+                                                            <Link to={`/blogDrafted/${data.articleId}`}>
                                                                 <BiShow className='hover:text-xl text-lg hover:text-blue-400 duration-300' />
                                                             </Link>
                                                         </td>
@@ -155,4 +157,4 @@ function BlogHistory() {
     )
 }
 
-export default BlogHistory
+export default DraftedBlogs
