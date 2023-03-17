@@ -207,15 +207,15 @@ function BlogsPost() {
                                                                 <label class="block text-gray-700 font-bold mb-2" for="username">
                                                                     Defined Title
                                                                 </label>
-                                                                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Title"
+                                                                {/* <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Title"
                                                                 value={title}
-                                                                onChange={(e) => setTitle(e.target.value)} />
+                                                                onChange={(e) => setTitle(e.target.value)} /> */}
                                                                 <FestivalSearch parentCallback={callbackFunction} />
                                                                 {newError.title && (<p className='text-red-500 text-sm pt-1'>{newError.title}</p>)}
 
                                                             </div>
                                                             : ""}
-                                                        
+                                                        {title1 == "other" ?
                                                             <div class="col w-full">
                                                                 <label class="block text-gray-700 font-bold mb-2" for="username">
                                                                     Other Title
@@ -223,9 +223,9 @@ function BlogsPost() {
                                                                 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Other Title"
                                                                     value={title}
                                                                     onChange={(e) => setTitle(e.target.value)} />
-                                                                
+                                                                {/* <FestivalSearch parentCallback={callbackFunction} /> */}
                                                                 {newError.title && (<p className='text-red-500 text-sm pt-1'>{newError.title}</p>)}
-                                                            </div> 
+                                                            </div> : ""}
                                                         <div class="col w-full ">
                                                             <label class="block text-gray-700 font-bold mb-2" for="username">
                                                                 Category
