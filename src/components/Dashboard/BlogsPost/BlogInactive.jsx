@@ -5,6 +5,7 @@ import { ToastContainer } from 'react-toastify'
 import Navbar from '../../Navbar/Navbar'
 import Sidebar from '../../Sidebar/Sidebar'
 import { getBlogHistory } from '../../../Redux/Fetures/Reducers/BlogHistorySlice'
+import { getBlogInactive } from '../../../Redux/Fetures/Reducers/BlogInactiveSlice'
 import Loader from '../../Loader/Loader'
 import { BsSearch } from 'react-icons/bs'
 import { BiShow } from 'react-icons/bi'
@@ -13,11 +14,11 @@ function BlogInactive() {
     const navigate = useNavigate();
     const [type, setType] = useState('PUBLISH')
     const [FilterSearch, setFilterSearch] = useState('')
-    const History = useSelector((state) => state.BlogsHistory)
+    const History = useSelector((state) => state.BlogInactive)
 
     const dispatch = useDispatch()
     useEffect(() => {
-        dispatch(getBlogHistory(type))
+        dispatch(getBlogInactive(type))
     }, [])
 
     const truncateTitle = (str, num) => {
@@ -125,7 +126,7 @@ function BlogInactive() {
                                                         <td class="  ">{data.modifiedDate}</td>
                                                         <td class="  ">{data.modifiedTime}</td>
                                                         <td>
-                                                            <Link to={`/blogHistory/${data.articleId}`}>
+                                                            <Link to={`/blogInactive/${data.articleId}`}>
                                                                 <BiShow className='hover:text-xl text-lg hover:text-blue-400 duration-300' />
                                                             </Link>
                                                         </td>

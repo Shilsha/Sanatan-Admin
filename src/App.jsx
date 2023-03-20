@@ -26,6 +26,7 @@ import SingleBlogReject from './components/Dashboard/BlogsPost/SingleBlogReject'
 import UpdateBlog from './components/Dashboard/BlogsPost/UpdateBlog';
 import DraftedBlogs from './components/Dashboard/BlogsPost/DraftedBlogs';
 import SingleDraftView from './components/Dashboard/BlogsPost/SingleDraftView';
+import SingleInactiveView from './components/Dashboard/BlogsPost/SingleInactiveView';
 import BlogInactive from './components/Dashboard/BlogsPost/BlogInactive';
 function Routing() {
   return (
@@ -59,6 +60,7 @@ function Routing() {
         <Route exact path="/blogReview/:id"  element={<PrivateRoutes Component={ReadMoreArticle}/>}> </Route> 
         <Route exact path="/blogHistory/:id"  element={<PrivateRoutes Component={SingleViewHistory}/>}> </Route> 
         <Route exact path="/blogDrafted/:id"  element={<PrivateRoutes Component={SingleDraftView}/>}> </Route> 
+        <Route exact path="/blogInactive/:id"  element={<PrivateRoutes Component={SingleInactiveView}/>}> </Route> 
         </Routes>
       </Router>
 

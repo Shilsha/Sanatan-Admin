@@ -35,7 +35,7 @@ function BlogsPost() {
     const [subject, setSubject] = useState(" ")
     const [category, setCategory] = useState('')
     const [modalIsOpen, setIsOpen] = React.useState(false);
-    const [title1, settitle1] = React.useState("");
+    const [language, setLanguage] = React.useState("");
     const [errors, setErros] = useState([])
     const [newError, setNewError] = useState([])
     const navigate = useNavigate()
@@ -49,7 +49,7 @@ function BlogsPost() {
     // ----------------------Festival title Callback----------------------
     const callbackFunction = (festivalName) => {
         if ((festivalName)) {
-            setTitle(festivalName)
+            setFestival(festivalName)
         }
     }
     console.log(title,"title")
@@ -115,6 +115,12 @@ function BlogsPost() {
             formData.append('articleType', "OPEN")
             formData.append('file', image.raw)
             formData.append('adminId', adminId)
+            formData.append('festivalName', festival)
+            if(language == "true"){
+                formData.append('festivalStatus', true)
+            }else if(language=="false"){
+                formData.append('festivalStatus', false)
+            }
             formData.append('isDraftBlog', false)
             setIsOpen(true);
         }
@@ -130,6 +136,12 @@ function BlogsPost() {
             formData.append('articleType', "OPEN")
             formData.append('file', image.raw)
             formData.append('adminId', adminId)
+            formData.append('festivalName', festival)
+            if(language == "true"){
+                formData.append('festivalStatus', true)
+            }else if(language=="false"){
+                formData.append('festivalStatus', false)
+            }
             formData.append('isDraftBlog', true)
             dispatch(createBlogAction(formData))
         }
@@ -147,6 +159,12 @@ function BlogsPost() {
         formData.append('file', image.raw)
         formData.append('adminId', adminId)
         formData.append('isDraftBlog', false)
+        formData.append('festivalName', festival)
+        if(language == "true"){
+            formData.append('festivalStatus', true)
+        }else if(language=="false"){
+            formData.append('festivalStatus', false)
+        }
         dispatch(createBlogAction(formData))
         // setIsOpen(true);
 
@@ -166,6 +184,7 @@ function BlogsPost() {
             setCategory(blogsdata?.result?.categoryName)
         }
     }, [blogsdata?.result])
+    console.log(festival , language, "test")
     if (isModuleAuth) {
         return (
             <>
@@ -189,23 +208,23 @@ function BlogsPost() {
                                                     <div className='flex justify-around items-center  gap-6 pb-4 mx-auto'>
                                                         <div class="col w-full ">
                                                             <label class="block text-gray-700 font-bold mb-2" for="username">
-                                                                Select Title Type
+                                                                Select Language
                                                             </label>
                                                             {/* <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Category" 
                                                                  value={category}
                                                                 onChange={(e)=>setCategory(e.target.value)}/> */}
                                                             <select id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                                onChange={(e) => settitle1(e.target.value)}>
-                                                                <option value="">Title</option>
-                                                                <option value="defined">Defined Title</option>
-                                                                <option value="other">Other Titles</option>
+                                                                onChange={(e) => setLanguage(e.target.value)}>
+                                                                <option >Select</option>
+                                                                <option value="true">English</option>
+                                                                <option value="false">Hindi</option>
                                                             </select>
-                                                            {newError.title && (<p className='text-red-500 text-sm pt-1'>{newError.title}</p>)}
+                                                          
                                                         </div>
-                                                        {title1 == "defined" ?
+                                                        {language == "true" ?
                                                             <div class="col w-full">
                                                                 <label class="block text-gray-700 font-bold mb-2" for="username">
-                                                                    Defined Title
+                                                                    Festival Name (Select)
                                                                 </label>
                                                                 {/* <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Title"
                                                                 value={title}
@@ -215,17 +234,27 @@ function BlogsPost() {
 
                                                             </div>
                                                             : ""}
-                                                        {title1 == "other" ?
+                                                        {language == "false" ?
                                                             <div class="col w-full">
                                                                 <label class="block text-gray-700 font-bold mb-2" for="username">
-                                                                    Other Title
+                                                                    Festival Name
                                                                 </label>
                                                                 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Other Title"
-                                                                    value={title}
-                                                                    onChange={(e) => setTitle(e.target.value)} />
+                                                                    value={festival}
+                                                                    onChange={(e) => setFestival(e.target.value)} />
                                                                 {/* <FestivalSearch parentCallback={callbackFunction} /> */}
                                                                 {newError.title && (<p className='text-red-500 text-sm pt-1'>{newError.title}</p>)}
                                                             </div> : ""}
+                                                            <div class="col w-full ">
+                                                            <label class="block text-gray-700 font-bold mb-2" for="username">
+                                                                Title
+                                                            </label>
+                                                           
+                                                             <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Title"
+                                                                value={title}
+                                                                onChange={(e) => setTitle(e.target.value)} />
+                                                            {newError.title && (<p className='text-red-500 text-sm pt-1'>{newError.title}</p>)}
+                                                        </div>
                                                         <div class="col w-full ">
                                                             <label class="block text-gray-700 font-bold mb-2" for="username">
                                                                 Category

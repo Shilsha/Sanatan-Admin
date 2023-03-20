@@ -58,7 +58,7 @@ function UpdateBlog() {
         setEditorText(EditedData)
     }
     useEffect(() => {
-        setImage({ preview: GetSingle?.result?.imageUrl, raw: GetSingle?.result?.imageUrl })
+        setImage({ preview: GetSingle?.result?.imageUrl, raw: GetSingle?.result?.imageName })
         setSubject(GetSingle?.result?.subject)
         setTitle(GetSingle?.result?.title)
         setEditorText(GetSingle?.content)
@@ -128,6 +128,7 @@ function UpdateBlog() {
             formData.append('articleType', "OPEN")
             formData.append('file', image.raw)
             formData.append('isDraftBlog', false)
+            formData.append('status', true)
         }
     }, [newError])
 
@@ -145,6 +146,7 @@ function UpdateBlog() {
         formData.append('articleType', "OPEN")
         formData.append('file', image.raw)
         formData.append('isDraftBlog', false)
+        formData.append('status', true)
         dispatch(editBlogAction(formData))
         // setIsOpen(true);
     }
@@ -249,7 +251,7 @@ function UpdateBlog() {
                                                                 className="form-control"
                                                                 onChange={handleChange}
                                                                 accept="image/*"
-                                                                initialValue={GetSingle?.result?.imageUrl}
+                                                                initialValue={GetSingle?.result?.imageName}
                                                             />
                                                             {errors.length > 0 ? <>  {errors && (<p className='text-red-500 text-sm pt-1'>{errors}</p>)}</> : <>
                                                                 {newError.img && (<p className='text-red-500 text-sm pt-1'>{newError.img}</p>)}

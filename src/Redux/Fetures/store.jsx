@@ -30,6 +30,7 @@ import exportData from './Reducers/DownloadSlice'
 import addAdmins from './Reducers/AddAdminSlice'
 import category from './Reducers/CategorySlice'
 import BlogHistory from "./Reducers/BlogHistorySlice";
+import BlogInactive from "./Reducers/BlogInactiveSlice";
 import BlogDraft from "./Reducers/DraftedBlogsSlice";
 import blogReview from './Reducers/BlogReviewSlice'
 import blogReject from './Reducers/BlogRejectSlice'
@@ -45,7 +46,7 @@ import adminProfile from './Reducers/AdminProfileSlice'
         user:users,
         adminList:adminLists,
         log:logs,
-      
+        BlogInactive:BlogInactive,
         login:logins,
         articlesLike:articlesLikes,
         articlesComment:articlesComments,

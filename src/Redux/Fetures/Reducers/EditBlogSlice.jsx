@@ -50,9 +50,9 @@ const blogsEdit = createSlice({
                 state.result = action.payload.data.data
                 
                 toast.success('Your blog is successfully updated')
-                // setTimeout(() => {
-                //     window.location.href='/blog'
-                // }, 1000);
+                setTimeout(() => {
+                    window.location.href='/blog'
+                }, 1000);
 
         },
         [editBlogAction.rejected]: (state, action) => {

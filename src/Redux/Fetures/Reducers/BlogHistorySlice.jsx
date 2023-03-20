@@ -2,10 +2,10 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from 'axios'
 import { toast } from "react-toastify";
 export const getBlogHistory = createAsyncThunk('BLOG_HISTORY/GET_BLOG_HISTORY',
-async (type) => {
+async (props) => {
 
     let OPTIONS = {
-        url: `${import.meta.env.VITE_BASE_URL}/article/get_blogs?category=All&categoryName=&keyword=&articleType=${type}&isDraftBlog=false&page=0&size=10`,
+        url: `${import.meta.env.VITE_BASE_URL}/article/get_blogs?category=All&categoryName=&keyword=&articleType=${props.type}&isDraftBlog=false&page=${props.page}&size=10`,
         method: "GET",                       
         headers: {
             'Accept': 'application/json'
