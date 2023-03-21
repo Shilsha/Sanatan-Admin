@@ -184,7 +184,7 @@ function BlogsPost() {
             setCategory(blogsdata?.result?.categoryName)
         }
     }, [blogsdata?.result])
-    console.log(festival , language, "test")
+  
     if (isModuleAuth) {
         return (
             <>
@@ -202,7 +202,7 @@ function BlogsPost() {
                                 <div className="min-h-[300px] ">
                                     <div className=' '>
                                         <form onSubmit={handleSubmit}>
-                                            <div class="w-[80%] h-[65F0px] blurrTable shadow-xl mx-auto  border border-gray-200 rounded-lg  dark:bg-gray-700 dark:border-gray-600 ">
+                                            <div class="docsScrollBar w-[80%] h-[65F0px] blurrTable shadow-xl mx-auto  border border-gray-200 rounded-lg  dark:bg-gray-700 dark:border-gray-600 ">
                                                 <h1 className='text-center text-2xl   text-gray-500 font-medium  underline underline-offset-8 '>Create Blog</h1>
                                                 <div className='w-[90%] mx-auto  pt-4 '>
                                                     <div className='flex justify-around items-center  gap-6 pb-4 mx-auto'>

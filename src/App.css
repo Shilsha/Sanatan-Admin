@@ -869,3 +869,19 @@ inputStyles {
   background: radial-gradient(circle at 10% 20%, rgb(255, 252, 214) 0%, rgba(255, 102, 102, 0.44) 90%);
   
 }
+.docsScrollBar {
+  max-height: 680px;
+  
+  overflow: auto;
+}
+
+.docsScrollBar {
+  -ms-overflow-style: none;
+ 
+  scrollbar-width: none;
+ 
+}
+
+.docsScrollBar::-webkit-scrollbar {
+  display: none;
+}

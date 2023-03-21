@@ -6,7 +6,7 @@ export const getBlogReviewAction = createAsyncThunk('GET_BLOGS_REVIEW/GET_BLOGS_
     async (type) => {
 
         let OPTIONS = {
-            url: `${import.meta.env.VITE_BASE_URL}/article/get_blogs?category=All&categoryName=&keyword=&articleType=${type}&isDraftBlog=false&page=0&size=10`,
+            url: `${import.meta.env.VITE_BASE_URL}/article/get_blogs?category=All&categoryName=&keyword=&articleType=${type}&isDraftBlog=false&status=true&page=0&size=10`,
             method: "GET",                       
             headers: {
                 'Accept': 'application/json'

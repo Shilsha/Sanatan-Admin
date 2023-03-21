@@ -64,8 +64,8 @@ function UpdateBlog() {
         setEditorText(GetSingle?.content)
         dispatch(getCategory())
     }, [])
-    console.log(editorText,"editorText")
-    console.log(subject,"subject")
+    // console.log(editorText,"editorText")
+    console.log(image.raw,"subject")
 // ================================================Subject callback data=====================================
 
 
@@ -181,7 +181,7 @@ function UpdateBlog() {
                                 <div className="min-h-[300px] ">
                                     <div className=' '>
                                         <form onSubmit={handleSubmit}>
-                                            <div class="w-[80%] h-[65F0px] blurrTable shadow-xl mx-auto  border border-gray-200 rounded-lg  dark:bg-gray-700 dark:border-gray-600 ">
+                                            <div class="docsScrollBar w-[80%] h-[65F0px] blurrTable shadow-xl mx-auto  border border-gray-200 rounded-lg  dark:bg-gray-700 dark:border-gray-600 ">
                                                 <h1 className='text-center text-2xl   text-gray-500 font-medium  underline underline-offset-8 '>Update Blog</h1>
                                                 <div className='w-[90%] mx-auto  pt-4 '>
                                                     <div className='flex justify-around items-center  gap-6 pb-4 mx-auto'>
@@ -251,7 +251,7 @@ function UpdateBlog() {
                                                                 className="form-control"
                                                                 onChange={handleChange}
                                                                 accept="image/*"
-                                                                initialValue={GetSingle?.result?.imageName}
+                                                                initialValue={image.raw}
                                                             />
                                                             {errors.length > 0 ? <>  {errors && (<p className='text-red-500 text-sm pt-1'>{errors}</p>)}</> : <>
                                                                 {newError.img && (<p className='text-red-500 text-sm pt-1'>{newError.img}</p>)}
