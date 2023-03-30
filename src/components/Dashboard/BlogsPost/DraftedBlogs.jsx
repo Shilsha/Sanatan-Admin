@@ -112,7 +112,7 @@ function DraftedBlogs() {
 
                                                            <h1 className='py-2 text-gray-700'
                                                                dangerouslySetInnerHTML={{
-                                                                   __html:  truncateTitle(data.content, 50),
+                                                                   __html:  truncateTitle(data.subject, 100),
                                                                }}
 
                                                            >
