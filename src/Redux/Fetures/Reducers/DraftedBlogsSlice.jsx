@@ -2,10 +2,10 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from 'axios'
 import { toast } from "react-toastify";
 export const getBlogDrafts = createAsyncThunk('BLOG_DRAFTS/GET_BLOG_DRAFTS',
-async (type) => {
+async (page) => {
 
     let OPTIONS = {
-        url: `${import.meta.env.VITE_BASE_URL}/article/get_drafted_list?isDraftBlog=true&page=0&size=10`,
+        url: `${import.meta.env.VITE_BASE_URL}/article/get_drafted_list?isDraftBlog=true&page=${page}&size=10`,
        
         method: "GET",                       
         headers: {
