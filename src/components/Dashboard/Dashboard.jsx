@@ -7,6 +7,7 @@ import { HiClipboardDocumentList } from 'react-icons/hi2'
 import { GiArcheryTarget } from 'react-icons/gi'
 import { BsFillQuestionSquareFill, BsCaretDownFill } from 'react-icons/bs'
 import { VscBroadcast } from 'react-icons/vsc'
+import { VscFeedback } from 'react-icons/vsc'
 import { AiOutlineClose } from 'react-icons/ai'
 import { RiShieldUserLine } from 'react-icons/ri'
 import { useDispatch, useSelector } from 'react-redux';
@@ -527,6 +528,27 @@ function Dashboard() {
                                                     </Link>
                                                 </> : <>
                                                     <h1 onClick={unAutherizedHndle} className=' py-3 cursor-pointer  text-xl leading-6 text-center font-medium   text-red-500/60 '>Broadcast <br /> Management</h1>
+
+                                                </>}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div className='rounded-lg bg-gray-50/20 blurr  shadow  px-2 h-[175px] ' >
+                                        <div className='  my-3'> 
+                                            <div className='flex  justify-around items-center  pr-5 py-2 '>
+                                                <VscFeedback className='text-orange-500  pt-2' size={40} />
+                                                {<h1 className='text-6xl font-medium text-gray-500    text-start '>{broadCast.length ? <>{broadCast.length}</> : <>0</>}</h1>}
+                                            </div>
+                                           
+                                            <div className=''>
+                                            {BroadcastModuleAuth || isSuperAdmin ? <>
+                                                <Link to='/broadcast'>
+                                                        <h1 className='py-3 cursor-pointer hover:text-orange-600 text-xl leading-6 text-center font-medium   text-gray-500 '>Feedback <br />  Management</h1>
+
+                                                    </Link>
+                                                </> : <>
+                                                    <h1 onClick={unAutherizedHndle} className=' py-3 cursor-pointer  text-xl leading-6 text-center font-medium   text-red-500/60 '>Feedback <br /> Management</h1>
 
                                                 </>}
                                             </div>

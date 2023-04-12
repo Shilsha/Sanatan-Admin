@@ -76,7 +76,7 @@ function UpdateBlog() {
        // ============================image----------------------------------
     const handleChange = async (e) => {
         const file = e.target.files[0]
-        const maxSize = 400000;
+        const maxSize = 2000000;
         setImage({
             preview: URL.createObjectURL(e.target.files[0]),
             raw: e.target.files[0],
@@ -87,7 +87,7 @@ function UpdateBlog() {
         }
         if (file.size > maxSize) {
             
-            setErros('Uploaded image size exceeds 400kb, Upload small size image !')
+            setErros('Uploaded image size exceeds 2MB, Upload small size image !')
         }
         else {
             if (file.size < maxSize) {
