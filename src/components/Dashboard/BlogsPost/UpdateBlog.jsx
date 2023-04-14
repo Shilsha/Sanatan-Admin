@@ -61,7 +61,7 @@ function UpdateBlog() {
         setImage({ preview: GetSingle?.result?.imageUrl, raw: GetSingle?.result?.imageName })
         setSubject(GetSingle?.result?.subject)
         setTitle(GetSingle?.result?.title)
-        setEditorText(GetSingle?.content)
+        setEditorText(GetSingle?.result?.content)
         dispatch(getCategory())
     }, [])
     // console.log(editorText,"editorText")

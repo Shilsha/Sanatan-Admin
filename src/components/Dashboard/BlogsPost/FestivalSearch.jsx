@@ -12,7 +12,7 @@ function FestivalSearch({ parentCallback }) {
     const onchangePlace = (e) => {
         setSea_place(e.target.value)
         const OPTIONS = {
-            url: `http://sanatanjyotibckend-env.eba-qmpfmurf.ap-south-1.elasticbeanstalk.com/api/searchUniqueFestival?festival=${e.target.value}&year=${2022}`,
+            url: `${import.meta.env.VITE_BASE_URL}/api/searchUniqueFestival?festival=${e.target.value}&year=${2022}`,
             method: "get",
             headers: {
                 "content-type": "application/json",
