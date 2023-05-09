@@ -17,12 +17,13 @@ function BlogHistory() {
     const History = useSelector((state) => state.BlogsHistory)
     const data = {
         type: type,
-        page: page
+        page: page,
+        keyword:FilterSearch
     }
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(getBlogHistory(data))
-    }, [page])
+    }, [page , FilterSearch])
     const nextPage = () => {
         setPage(page + 1)
     }
@@ -110,7 +111,7 @@ function BlogHistory() {
                                         {History.loading ? <Loader /> : <>
 
 
-                                            {(History.result.filter((data => data.title?.toLowerCase().includes(FilterSearch)) || (data => data.author?.toLowerCase().includes(FilterSearch))))?.map((data, index) => {
+                                            {History.result?.map((data, index) => {
                                                 {/* {History.result.map((data, index) => { */ }
                                                 return <>
                                                     <tr key={index} className={` text-gray-500 text-start`}>
