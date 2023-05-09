@@ -62,7 +62,7 @@ function User() {
     const userData = useSelector((state) => state.user)
     const apiData = useSelector(state => state.export)
 
-
+console.log("userData",userData)
 
 
     useEffect(() => {
@@ -329,13 +329,13 @@ if(isModuleAuth){
 
                                         <>
                                             {
-                                                (userData?.result.filter((user) => user.fullName?.toLowerCase().includes(FilterSearch)))?.map((data) => {
+                                                (userData?.result.filter((user) => user.firstName?.toLowerCase().includes(FilterSearch)))?.map((data) => {
                                                     // userData?.result.map((data) => {
                                                     return (
                                                         <>
                                                             <tr key={data.id} className="  text-gray-500 border-b-[3px]">
                                                                 <td class="py-3 px-2 ">{data.userId}</td>
-                                                                <td class="">{data.fullName}
+                                                                <td class="">{data.firstName}
                                                                 </td>
                                                                 <td class="">{data.email} </td>
                                                                 <td class="">{data.mobileNo == null ? '---' : data.mobileNo} </td>
