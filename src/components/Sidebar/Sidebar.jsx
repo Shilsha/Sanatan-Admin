@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import side1 from '../../../public/images/sanatandark.png'
+import side1 from '../../Assets/images/sanatandark.png'
 import { CgMenuGridR } from 'react-icons/cg'
 import { MdOutlineGroupAdd } from 'react-icons/md'
 import { TbLogout } from 'react-icons/tb'
