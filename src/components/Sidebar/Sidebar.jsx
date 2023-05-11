@@ -244,7 +244,8 @@ function Sidebar() {
 
                 <div className=''>
                     <Link to='/dashboard'>
-                        <img src={side1} alt="logo" className='w-32' />
+                        <img src='../../../public/images/sanatandark.png' alt="logo" className='w-32' />
+                        
                     </Link>
                 </div>
                 {/* 
