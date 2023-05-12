@@ -257,7 +257,7 @@ function ViewQuery() {
 
 
                 {/* <div className='absolute bottom-0      '>
-                    <img src={DesignLogin} alt='empty' className='w-[95%]'></img>
+                    <img src='/images/DesignLogin.png' alt='empty' className='w-[95%]'></img>
                 </div> */}
 
 

@@ -174,10 +174,10 @@ function Login() {
                 <div className="hidden md:block">
 
 
-                    <img className='inline ' src={Ellipse83} width="50%" alt="empty" />
+                    <img className='inline ' src='/images/Ellipse83.png' width="50%" alt="empty" />
                     <div className='flex flex-col  items-center relative -top-20'>
-                        <img className='' src={logo} width='40%' alt="empty" />
-                        <img className='' src={hindilogo} width='50%' alt='empty'></img>
+                        <img className='' src='/images/sanatandark.png' width='40%' alt="empty" />
+                        <img className='' src='/images/Sanatanhindi.png' width='50%' alt='empty'></img>
 
                     </div>
                 </div>
@@ -240,7 +240,7 @@ function Login() {
                     </div>
                 </div>
                 <div className='absolute -z-10  bottom-0 w-full'>
-                    <img src={DesignLogin} alt='empty' className='w-full'></img>
+                    <img src='/images/DesignLogin.png' alt='empty' className='w-full'></img>
                 </div>
 
 

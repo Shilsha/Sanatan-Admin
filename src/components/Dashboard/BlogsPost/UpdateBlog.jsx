@@ -278,7 +278,7 @@ function UpdateBlog() {
                         </div>
                     </div>
                     <div className='absolute bottom-0   right-0  -z-10  '>
-                        <img src={DesignLogin} alt='empty' className='w-full'></img>
+                        <img src='/images/DesignLogin.png' alt='empty' className='w-full'></img>
                     </div>
                 </div>
                 {/* </> : <Loader />} */}
