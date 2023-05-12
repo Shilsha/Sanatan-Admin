@@ -191,21 +191,14 @@ function Dashboard() {
                     <Navbar />
 
                     {/* ---------------------------------------------------------------- 1  row---------------------------------------------------------------------------*/}
-
                     <div className=" ScrollStyle  pr-4 ">
                         <div className=' rounded-lg mt-4  grid grid-cols-12 gap-4  '>
-
                             <div className=' text-[13px] col-span-3 rounded-lg bg-gray-50/20   p-2 flex justify-center shadow '>
-
-
                                 <Calendar onChange={onChange} value={value} />
-
                             </div>
                             <div className=' col-span-4 bg-gray-50/20   rounded-lg shadow  relative'>
-
                                 <div>
                                     <div className='flex justify-center items-center'>
-
                                         {/* <img src={side1} alt="logo" className='w-12' /> */}
                                         {/* <h2 className=' text-lg font-extrabold underline underline-offset-8 text-center  
                                   px-4 '>Thought Of The Day</h2> */}
