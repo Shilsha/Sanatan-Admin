@@ -26,7 +26,7 @@ const blogs = createSlice({
 
     reducers:{
         updateBlog:(state,action)=>{
-           console.log(action.payload,'payload')
+           
             state.loading=false,
             state.isUpdate=true,
             state.result=action.payload

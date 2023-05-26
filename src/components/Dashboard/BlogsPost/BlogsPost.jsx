@@ -52,7 +52,7 @@ function BlogsPost() {
             setFestival(festivalName)
         }
     }
-    console.log(title,"title")
+    
     // ================================================callback data=====================================
     const sendData = (data) => {
         setEditorText(data)

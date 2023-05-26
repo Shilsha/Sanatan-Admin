@@ -19,7 +19,7 @@ function SingleDraftView() {
         dispatch(singleBlogDraftView(id))
     }, [])
     // const BlogHistory = useSelector((state) => state.BlogDraft)
-    // console.log(BlogHistory, "BlogHistory")
+    // 
     // const BlogContent = useSelector((state) => state.BlogsHistory)
     // sessionStorage.setItem("blog", JSON.stringify(GetSingle?.result.content))
     // var loggedAdminId = sessionStorage.getItem("adminId")
@@ -29,7 +29,7 @@ function SingleDraftView() {
     var loggedAdminId = sessionStorage.getItem("adminId")
     var authorId = GetSingle?.result.adminId
     var superAdminId = 86;
-    console.log(authorId, "authorId")
+    
 
     useEffect(() => {
         dispatch(getSingleArticle(id))

@@ -10,7 +10,7 @@ const NewEditor = ({ sendData}) => {
             setEditorState(editorState);
             let currentContentAsHTML = draftToHtml(convertToRaw(editorState.getCurrentContent()));
             sendData(currentContentAsHTML)
-            console.log(currentContentAsHTML,"currentContentAsHTML")
+            
                 };
   return (
     <div>

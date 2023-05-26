@@ -6,13 +6,13 @@ function PrivateRoutes(props) {
     const naviagte = useNavigate()
     const { Component } = props
     const navigate = useNavigate()
-    console.log(props, 'props route')
-    // console.log(Component.name,'name')
+    
+    // 
     const isSign = JSON.parse(sessionStorage.getItem('user'))
 
-    console.log(isSign.role, 'roles')
+    
     const MouduleAuth = isSign.role.some((data) => data == 'Users')
-    console.log(MouduleAuth, 'filter')
+    
 
     
     if (!isSign) {
@@ -34,11 +34,11 @@ function PrivateRoutes(props) {
 
         }
         else {
-            console.log('this is other route')
+          
             if (MouduleAuth) {
                 return <>
 
-                    {console.log('this is user access route route')}
+                  
                     <Component />
 
 
@@ -46,8 +46,7 @@ function PrivateRoutes(props) {
 
             }
             else {
-                { console.log('this is user cannot access this  route route') }
-                // return redirect("/dashboard");
+             
                 return    <Component />
 
             }

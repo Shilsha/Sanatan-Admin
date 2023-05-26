@@ -62,7 +62,7 @@ function User() {
     const userData = useSelector((state) => state.user)
     const apiData = useSelector(state => state.export)
 
-console.log("userData",userData)
+
 
 
     useEffect(() => {

@@ -36,7 +36,7 @@ function SingleBlogReject() {
     var loggedAdminId = sessionStorage.getItem("adminId")
     var authorId = GetSingle?.result.adminId
     var superAdminId = 86;
-    console.log(authorId, "authorId")
+    
 
     useEffect(() => {
         dispatch(getSingleArticle(id))

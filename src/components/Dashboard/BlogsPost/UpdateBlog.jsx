@@ -68,7 +68,7 @@ function UpdateBlog() {
         setEditorText(GetSingle?.result?.content)
         dispatch(getCategory())
     }, [])
-    console.log(100)
+    
 
     // ============================image----------------------------------
     const handleChange = async (e) => {
