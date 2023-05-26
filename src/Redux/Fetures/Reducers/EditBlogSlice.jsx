@@ -51,7 +51,7 @@ const blogsEdit = createSlice({
                 
                 toast.success('Your blog is successfully updated')
                 setTimeout(() => {
-                    window.location.href='/blog'
+                    // window.location.href='/blog'
                 }, 1000);
 
         },

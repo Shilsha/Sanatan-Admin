@@ -39,6 +39,7 @@ function UpdateBlog() {
     const [category, setCategory] = useState('')
     const [errors, setErros] = useState([])
     const [newError, setNewError] = useState([])
+    const [bannerdata, setBannerData] = useState(false);
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const [modalIsOpen, setIsOpen] = React.useState(false);
@@ -46,10 +47,11 @@ function UpdateBlog() {
     // --------------------------------------------Blog from history----------------------
     const categoryList = useSelector((state) => state.category)
     useEffect(() => {
-        //  dispatch(singleBlogHistoryView(id))
+
         dispatch(getSingleArticle(id))
     }, [])
     const GetSingle = useSelector((state) => state.getArticle)
+
     // ================================================callback data=====================================
     const sendSubject = (data) => {
         setSubject(data)
@@ -59,22 +61,16 @@ function UpdateBlog() {
     }
     useEffect(() => {
         setImage({ preview: GetSingle?.result?.imageUrl, raw: GetSingle?.result?.imageName })
+
         setSubject(GetSingle?.result?.subject)
         setTitle(GetSingle?.result?.title)
         setCategory(GetSingle?.result?.categoryName)
         setEditorText(GetSingle?.result?.content)
         dispatch(getCategory())
     }, [])
-    // console.log(editorText,"editorText")
-    console.log(image.raw,"subject")
-// ================================================Subject callback data=====================================
+    console.log(100)
 
-
-    // const BlogContent = useSelector((state) => state.BlogsHistory?.resultSingleView)
-
-
-   
-       // ============================image----------------------------------
+    // ============================image----------------------------------
     const handleChange = async (e) => {
         const file = e.target.files[0]
         const maxSize = 2000000;
@@ -82,12 +78,13 @@ function UpdateBlog() {
             preview: URL.createObjectURL(e.target.files[0]),
             raw: e.target.files[0],
         });
+        setBannerData(true);
         if (!file.name.match(/\.(jpg|jpeg|png)$/)) {
             setErros('invalid image !');
             return errors
         }
         if (file.size > maxSize) {
-            
+
             setErros('Uploaded image size exceeds 2MB, Upload small size image !')
         }
         else {
@@ -135,42 +132,46 @@ function UpdateBlog() {
 
     // *****************************************************Module auth**************************************************
     const Role = JSON.parse(sessionStorage.getItem('user'))
-        const isModuleAuth = Role?.role.some(data => data == 'BlogPost')
-     // **************************************************************
+    const isModuleAuth = Role?.role.some(data => data == 'BlogPost')
+    // **************************************************************
     const dispatchData = (e) => {
-        const formData = new FormData();
-        formData.append('title', title)
-        formData.append('subject', subject)
-        formData.append('articleId', GetSingle?.result?.articleId)
-        formData.append('content', editorText)
-        formData.append('categoryName', category)
-        formData.append('articleType', "OPEN")
-        formData.append('file', image.raw)
-        formData.append('isDraftBlog', false)
-        formData.append('status', true)
-        dispatch(editBlogAction(formData))
+        if (bannerdata === true) {
+            const formData = new FormData();
+            formData.append('title', title)
+            formData.append('subject', subject)
+            formData.append('articleId', GetSingle?.result?.articleId)
+            formData.append('content', editorText)
+            formData.append('categoryName', category)
+            formData.append('articleType', "OPEN")
+            formData.append('file', image.raw)
+            formData.append('isDraftBlog', false)
+            formData.append('status', true)
+            dispatch(editBlogAction(formData))
+        } else {
+            const formData = new FormData();
+            formData.append('title', title)
+            formData.append('subject', subject)
+            formData.append('articleId', GetSingle?.result?.articleId)
+            formData.append('content', editorText)
+            formData.append('categoryName', category)
+            formData.append('articleType', "OPEN")
+            formData.append('isDraftBlog', false)
+            formData.append('status', true)
+            dispatch(editBlogAction(formData))
+        }
+
         // setIsOpen(true);
     }
     function closeModal() {
         setIsOpen(false);
     }
-    // ==========================blogs update=========================
-    // useEffect(() => {
 
-    //     if (blogsdata?.isUpdate) {
-
-    //         setTitle(blogsdata?.result?.title)
-    //         setCategory(blogsdata?.result?.categoryName)
-    //     }
-
-    // }, [blogsdata?.result])
-    // ==================callback=========================
     if (isModuleAuth) {
         return (
             <>
                 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
                 <ToastContainer />
-                               <div className='   w-[100%] min-h-screen flex flex-col-2 gap-4 bgGradient '>
+                <div className='   w-[100%] min-h-screen flex flex-col-2 gap-4 bgGradient '>
                     <Sidebar />
                     <div className=' w-full '>
                         <Navbar />
@@ -252,7 +253,7 @@ function UpdateBlog() {
                                                                 className="form-control"
                                                                 onChange={handleChange}
                                                                 accept="image/*"
-                                                                initialValue={image.raw}
+
                                                             />
                                                             {errors.length > 0 ? <>  {errors && (<p className='text-red-500 text-sm pt-1'>{errors}</p>)}</> : <>
                                                                 {newError.img && (<p className='text-red-500 text-sm pt-1'>{newError.img}</p>)}
