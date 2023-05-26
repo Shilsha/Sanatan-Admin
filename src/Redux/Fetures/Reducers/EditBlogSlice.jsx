@@ -50,15 +50,32 @@ const blogsEdit = createSlice({
             state.result = action.payload.data.data
             console.log(state.result.articleType)
             toast.success('Your blog is successfully updated')
-            if (state.result.articleType == "OPEN") { window.location.href = '/blogReview' }
-            else if (state.result.articleType == "PUBLISH") { window.location.href = '/blogHistory' }
-            else if (state.result.articleType == "REJECTED") { window.location.href = '/blogReject' }
-            else { window.location.href = '/blog' }
+            if (state.result.articleType == "OPEN") {
+                setTimeout(() => {
+                    window.location.href = '/blogReview'
+                }, 1000);
 
-            setTimeout(() => {
-                // window.location.href = '/blogReview'
-              
-            }, 1000);
+            }
+            else if (state.result.articleType == "PUBLISH") {
+                setTimeout(() => {
+                    window.location.href = '/blogHistory'
+                }, 1000);
+
+            }
+            else if (state.result.articleType == "REJECTED") {
+                setTimeout(() => {
+                    window.location.href = '/blogReject'
+                }, 1000);
+
+            }
+            else {
+                setTimeout(() => {
+                    window.location.href = '/blog'
+                }, 1000);
+
+            }
+
+
 
         },
         [editBlogAction.rejected]: (state, action) => {
