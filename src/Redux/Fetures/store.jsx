@@ -15,6 +15,7 @@ import articlesComments  from './Reducers/GetArticleCommentSlice'
 import getBroadCastOfDay from './Reducers/BroadcastSplice'
 import panchangHits from './Reducers/HitsReducers/PanchangSlice'
 import festivalsHits from './Reducers/HitsReducers/FestivalSlice'
+
 import articleHits from './Reducers/HitsReducers/ArticlessSlice'
 import contactHits from './Reducers/HitsReducers/HitsContact'
 import horoscopeHits from './Reducers/HitsReducers/Horoscope'
@@ -24,6 +25,7 @@ import kundliHits from './Reducers/HitsReducers/KundliSplice'
 import adminHits from './Reducers/HitsReducers/AdminSlice'
 import zodiacSignHits from './Reducers/HitsReducers/ZodiacSlice'
 import locationHits from './Reducers/HitsReducers/Location'
+import feedback from './Reducers/FeedbackSlice'
 import blogs from './Reducers/CreateBlogSlice'
 import blogsEdit from './Reducers/EditBlogSlice'
 import exportData from './Reducers/DownloadSlice'
@@ -51,8 +53,7 @@ import adminProfile from './Reducers/AdminProfileSlice'
         articlesLike:articlesLikes,
         articlesComment:articlesComments,
         broadcast:getBroadCastOfDay,
-
-
+        feedback:feedback,
        panchangHit:panchangHits,
        festivalsHit:festivalsHits,
        articleHit:articleHits,

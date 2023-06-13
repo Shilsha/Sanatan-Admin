@@ -12,6 +12,7 @@ import QueriesList from './components/Dashboard/Queries/QueriesList';
 import ViewQuery from './components/Dashboard/Queries/ViewQuery';
 import Logs from './components/Dashboard/Logs/Logs';
 import Hits from './components/Dashboard/Hits/Hits';
+import FeedbackList from './components/Dashboard/Feedbacks/FeedbackList';
 import PrivateRoutes from './components/Dashboard/PrivateRoutes/PrivateRoutes';
 import BroadCast from './components/Dashboard/BroadCast/BroadCast';
 import BlogsPost from './components/Dashboard/BlogsPost/BlogsPost';
@@ -46,6 +47,7 @@ function Routing() {
           <Route exact path="/queries/:id"  element={<PrivateRoutes Component={ViewQuery}/>}> </Route>
           <Route exact path="/logs"  element={<PrivateRoutes Component={Logs}/>}> </Route>
           <Route exact path="/hits"  element={<PrivateRoutes Component={Hits}/>}> </Route>
+          <Route exact path="/feedbacks"  element={<PrivateRoutes Component={FeedbackList}/>}> </Route>
           <Route exact path="/broadcast"  element={<PrivateRoutes Component={BroadCast}/>}> </Route>
           <Route exact path="/blogsPost"  element={<PrivateRoutes Component={BlogsPost}/>}> </Route>
           <Route exact path="/blog"  element={<PrivateRoutes Component={BlogReview}/>}> </Route>

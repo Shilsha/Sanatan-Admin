@@ -73,7 +73,7 @@ function UpdateBlog() {
     // ============================image----------------------------------
     const handleChange = async (e) => {
         const file = e.target.files[0]
-        const maxSize = 2000000;
+        const maxSize = 1000000;
         setImage({
             preview: URL.createObjectURL(e.target.files[0]),
             raw: e.target.files[0],

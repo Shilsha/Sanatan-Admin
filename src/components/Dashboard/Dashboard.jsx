@@ -60,9 +60,11 @@ function Dashboard() {
     const userData = useSelector((state) => state.user)
     const articleLen = useSelector((state) => state.article)
     const queryLen = useSelector((state) => state.query)
+    const allFeedBack = useSelector((state) => state.feedback)
     const { loading, result, error } = useSelector((state) => state.thoughtOfDay)
     const panchangData = useSelector((state) => state.panchang)
     const broadcastStatus = useSelector((state) => state.broadcast)
+    
     // 
     const broadCast = broadcastStatus.result.filter(data => data.announcementStatus == true)
     // 
@@ -531,12 +533,12 @@ function Dashboard() {
                                         <div className='  my-3'> 
                                             <div className='flex  justify-around items-center  pr-5 py-2 '>
                                                 <VscFeedback className='text-orange-500  pt-2' size={40} />
-                                                {<h1 className='text-6xl font-medium text-gray-500    text-start '>{broadCast.length ? <>{broadCast.length}</> : <>0</>}</h1>}
+                                                {<h1 className='text-6xl font-medium text-gray-500    text-start '>{allFeedBack.length ? <>{allFeedBack.length}</> : <>0</>}</h1>}
                                             </div>
                                            
                                             <div className=''>
                                             {BroadcastModuleAuth || isSuperAdmin ? <>
-                                                <Link to='/broadcast'>
+                                                <Link to='/feedbacks'>
                                                         <h1 className='py-3 cursor-pointer hover:text-orange-600 text-xl leading-6 text-center font-medium   text-gray-500 '>Feedback <br />  Management</h1>
 
                                                     </Link>

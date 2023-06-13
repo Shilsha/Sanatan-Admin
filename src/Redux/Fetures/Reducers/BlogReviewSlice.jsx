@@ -7,11 +7,11 @@ export const getBlogReviewAction = createAsyncThunk('GET_BLOGS_REVIEW/GET_BLOGS_
 
         let OPTIONS = {
             url: `${import.meta.env.VITE_BASE_URL}/article/get_blogs?category=All&categoryName=&keyword=&articleType=${props.type}&isDraftBlog=false&festivalStatus=&status=true&page=${props.page}&size=10`,
-            // url: `https://30cd-2405-201-4041-c01c-cc2e-32bd-682-8bc1.ngrok-free.app/article/get_blogs?category=All&categoryName=&keyword=&articleType=${props.type}&isDraftBlog=false&festivalStatus=&status=true&page=${props.page}&size=10`,
             method: "GET",                       
             headers: {
                 'Accept': 'application/json'
             },
+            
         };
         return axios(OPTIONS)
             .then(res => res)

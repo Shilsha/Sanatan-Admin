@@ -65,10 +65,10 @@ function SingleInactiveView() {
                                                     Update Inactive Blog
                                                 </button>
                                             </Link> : ""}
-                                        {(loggedAdminId == authorId) || (loggedAdminId == superAdminId) ?
+                                        {/* {(loggedAdminId == authorId) || (loggedAdminId == superAdminId) ?
                                             <button class="bg-transparent my-4 w-96 hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded-full" onClick={() => deleteBlog(GetSingle?.result.articleId)}>
                                                 Delete Blog
-                                            </button> : ""}
+                                            </button> : ""} */}
 
                                         <div className='flex'>
                                             <p className='text-red-800 font-bold '>Blog Id :</p>  <p className=' px-2'>{GetSingle?.result.articleId}</p>

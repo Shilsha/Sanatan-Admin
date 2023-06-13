@@ -18,7 +18,7 @@ export const getAllFeedbacksAction = createAsyncThunk('FEEDBACK/GET_ALL_FEEDBACK
 
 
     
-const Feedback = createSlice({
+const feedback = createSlice({
         name: 'FEEDBACK',
     initialState: {
         loading: false,
@@ -44,4 +44,4 @@ const Feedback = createSlice({
 
 })
 
-export default Feedback.reducer;
+export default feedback.reducer;
