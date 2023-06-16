@@ -7,7 +7,21 @@ import DesignLogin from '../../../Assets/images/DesignLogin.png'
 import { Link, useNavigate } from 'react-router-dom';
 function BlogReview() {
     const navigate = useNavigate();
-
+    const isModuleAuth = JSON.parse(sessionStorage.getItem('user'))
+    const isSuperAdmin = isModuleAuth?.role.some(data => data == 'SuperAdmin')
+    const userModuleAuth = isModuleAuth?.role.some(data => data == 'Users')
+    const articlesModuleAuth = isModuleAuth?.role.some(data => data == 'Articles')
+    const HitsModuleAuth = isModuleAuth?.role.some(data => data == 'Hits')
+    const CustomerListModuleAuth = isModuleAuth?.role.some(data => data == 'Customers')
+    const QueriesListModuleAuth = isModuleAuth?.role.some(data => data == 'Queries')
+    const LogstModuleAuth = isModuleAuth?.role.some(data => data == 'Logs')
+    const BroadcastModuleAuth = isModuleAuth?.role.some(data => data == 'Broadcast')
+    const BlogsPosttModuleAuth = isModuleAuth?.role.some(data => data == 'BlogPost')
+    const BlogsReviewModuleAuth = isModuleAuth?.role.some(data => data == 'BlogReview')
+    const BlogsCategoryModuleAuth = isModuleAuth?.role.some(data => data == 'BlogCategory')
+    const unAutherizedHndle = () => {
+        toast.error('You are not authrized for this module')
+    }
     return (
         <>
             <ToastContainer />
@@ -28,37 +42,56 @@ function BlogReview() {
 
                             <div className='grid grid-cols-5 gap-6 mt-10 '>
                                 <div className='rounded-lg bg-gray-50/20 blurr  grid place-content-center   shadow     h-[175px] ' >
-                                    <Link to='/blogsPost'>
-                                        <h1 class=" cursor-pointer uppercase font-medium
+                                    {BlogsPosttModuleAuth || isSuperAdmin ? <>
+                                        <Link to='/blogsPost'>
+                                            <h1 class=" cursor-pointer uppercase font-medium
                                  hover:scale-110 duration-500    ">
-                                            Blog  Post
-                                        </h1>
-                                    </Link>
+                                                Blog  Post
+                                            </h1>
+                                        </Link>
+                                    </> : <>
+                                        <h1 onClick={unAutherizedHndle} className=' py-3 cursor-pointer  text-xl leading-6 text-center font-medium   text-red-500/60 '> Blog  Post</h1>
+
+                                    </>}
+
                                 </div>
                                 <div className='rounded-lg bg-gray-50/20  blurr grid place-content-center   shadow     h-[175px] ' >
-                                    <Link to='/blogCategory'>
-                                        <h1 class=" cursor-pointer uppercase font-medium
+                                    {BlogsCategoryModuleAuth || isSuperAdmin ? <>
+                                        <Link to='/blogCategory'>
+                                            <h1 class=" cursor-pointer uppercase font-medium
                                hover:scale-110 duration-500    ">
-                                            Blog  Category
-                                        </h1>
+                                                Blog  Category
+                                            </h1>
 
-                                    </Link>
+                                        </Link>
+                                    </> : <>
+                                        <h1 onClick={unAutherizedHndle} className=' py-3 cursor-pointer  text-xl leading-6 text-center font-medium   text-red-500/60 '> Blog  Category</h1>
 
-                                </div><div className='rounded-lg bg-gray-50/20 blurr  grid place-content-center   shadow     h-[175px] ' >
-                                    <Link to='/blogReview'>
-                                        <h1 class=" cursor-pointer uppercase font-medium
+                                    </>}
+
+
+                                </div>
+                                <div className='rounded-lg bg-gray-50/20 blurr  grid place-content-center   shadow     h-[175px] ' >
+                                    {BlogsReviewModuleAuth || isSuperAdmin ? <>
+                                        <Link to='/blogReview'>
+                                            <h1 class=" cursor-pointer uppercase font-medium
                                hover:scale-110 duration-500    ">
-                                            Blog  Review
-                                        </h1>
-                                    </Link>
+                                                Blog  Review
+                                            </h1>
+                                        </Link>
+                                    </> : <>
+                                        <h1 onClick={unAutherizedHndle} className=' py-3 cursor-pointer  text-xl leading-6 text-center font-medium   text-red-500/60 '>Blog  Review</h1>
+
+                                    </>}
+
                                 </div><div className='rounded-lg bg-gray-50/20 blurr   grid place-content-center   shadow     h-[175px] ' >
                                     <Link to='/blogHistory'>
 
-                                        <h1 class=" cursor-pointer uppercase font-medium
-                               hover:scale-110 duration-500    ">
+                                        <h1 class=" cursor-pointer uppercase font-medium hover:scale-110 duration-500    ">
                                             Blog  History
                                         </h1>
                                     </Link>
+
                                 </div>
 
                                 <div className='rounded-lg bg-gray-50/20 blurr   grid place-content-center   shadow     h-[175px] ' >

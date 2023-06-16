@@ -18,12 +18,12 @@ function BlogHistory() {
     const data = {
         type: type,
         page: page,
-        keyword:FilterSearch
+        keyword: FilterSearch
     }
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(getBlogHistory(data))
-    }, [page , FilterSearch])
+    }, [page, FilterSearch])
     const nextPage = () => {
         setPage(page + 1)
     }
@@ -40,6 +40,7 @@ function BlogHistory() {
     const deleteBlog = (ids) => {
         dispatch(deleteBlogHistoryView(ids))
     }
+    const AdminId = JSON.parse(sessionStorage.getItem('adminId'))
     return (
         <>
             <ToastContainer />
@@ -110,52 +111,130 @@ function BlogHistory() {
                                     <tbody>
                                         {History.loading ? <Loader /> : <>
 
+                                            {AdminId == "86" ? <>
+                                                {History.result?.map((data, index) => {
+                                                    {/* {History.result.map((data, index) => { */ }
+                                                    return <>
+                                                       
+                                                            <tr key={index} className={` text-gray-500 text-start`}>
+                                                                <td class=" py-3 pl-2 ">{data.articleId}</td>
+                                                                <td class="  "> <td class=" ">
+                                                                    {truncateTitle(data.title, 30)}
+                                                                </td></td>
+                                                                <td class=" ">
+                                                                    <h1 className='py-2 text-gray-700'
+                                                                        dangerouslySetInnerHTML={{
+                                                                            __html: truncateTitle(data.subject, 100),
+                                                                        }}
+                                                                    >
+                                                                    </h1>
+                                                                </td>
+                                                                <td class="  ">{data.author}</td>
+                                                                <td class="  ">{data.createdDate}</td>
+                                                                <td class="  ">{data.createdTime}</td>
+                                                                <td class="  ">{data.articleType}</td>
+                                                                <td class="  ">{data.modifiedDate}</td>
+                                                                <td class="  ">{data.modifiedTime}</td>
+                                                                <td>
+                                                                    <label class="relative inline-flex items-center cursor-pointer">
+                                                                        <input type="checkbox" value="" class="sr-only peer" onClick={() => deleteBlog(data.articleId)} checked />
+                                                                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                                                                        <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300"></span>
+                                                                    </label>
+                                                                </td>
+                                                                <td>
+                                                                    <Link to={`/blogHistory/${data.articleId}`}>
+                                                                        <BiShow className='hover:text-xl text-lg hover:text-blue-400 duration-300' />
+                                                                    </Link>
+                                                                </td>
+                                                            </tr>
+                                                         
 
-                                            {History.result?.map((data, index) => {
-                                                {/* {History.result.map((data, index) => { */ }
+                                                    </>
+                                                })}</>
+                                                :
+                                                <>
+                                                    {History.result?.map((data, index) => {
+                                                        {/* {History.result.map((data, index) => { */ }
+                                                        return <>
+                                                            {data.adminId == AdminId ?
+                                                                <tr key={index} className={` text-gray-500 text-start`}>
+                                                                    <td class=" py-3 pl-2 ">{data.articleId}</td>
+                                                                    <td class="  "> <td class=" ">
+                                                                        {truncateTitle(data.title, 30)}
+                                                                    </td></td>
+                                                                    <td class=" ">
+                                                                        <h1 className='py-2 text-gray-700'
+                                                                            dangerouslySetInnerHTML={{
+                                                                                __html: truncateTitle(data.subject, 100),
+                                                                            }}
+                                                                        >
+                                                                        </h1>
+                                                                    </td>
+                                                                    <td class="  ">{data.author}</td>
+                                                                    <td class="  ">{data.createdDate}</td>
+                                                                    <td class="  ">{data.createdTime}</td>
+                                                                    <td class="  ">{data.articleType}</td>
+                                                                    <td class="  ">{data.modifiedDate}</td>
+                                                                    <td class="  ">{data.modifiedTime}</td>
+                                                                    <td>
+                                                                        <label class="relative inline-flex items-center cursor-pointer">
+                                                                            <input type="checkbox" value="" class="sr-only peer" onClick={() => deleteBlog(data.articleId)} checked />
+                                                                            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                                                                            <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300"></span>
+                                                                        </label>
+                                                                    </td>
+                                                                    <td>
+                                                                        <Link to={`/blogHistory/${data.articleId}`}>
+                                                                            <BiShow className='hover:text-xl text-lg hover:text-blue-400 duration-300' />
+                                                                        </Link>
+                                                                    </td>
+                                                                </tr>
+                                                                : ""}
+
+                                                        </>
+                                                    })}
+                                                </>}
+                                            {/* {History.result?.map((data, index) => {
+                                               
                                                 return <>
-                                                    <tr key={index} className={` text-gray-500 text-start`}>
-                                                        <td class=" py-3 pl-2 ">{data.articleId}</td>
-                                                        <td class="  "> <td class=" ">
-                                                            {truncateTitle(data.title, 30)}
-                                                        </td></td>
-                                                        <td class=" ">
-
-
-                                                            <h1 className='py-2 text-gray-700'
-                                                                dangerouslySetInnerHTML={{
-                                                                    __html: truncateTitle(data.subject, 100),
-                                                                }}
-
-                                                            >
-
-                                                            </h1>
-                                                        </td>
-                                                        <td class="  ">{data.author}</td>
-                                                        <td class="  ">{data.createdDate}</td>
-                                                        <td class="  ">{data.createdTime}</td>
-                                                        <td class="  ">{data.articleType}</td>
-                                                        <td class="  ">{data.modifiedDate}</td>
-                                                        <td class="  ">{data.modifiedTime}</td>
-                                                        {/* <td class="  "> <button class="bg-transparent my-4 w-12 hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded-full" onClick={() => deleteBlog(data.articleId)}>
-                                                            De
-                                                        </button></td> */}
-                                                        <td>
-                                                            <label class="relative inline-flex items-center cursor-pointer">
-                                                                <input type="checkbox" value="" class="sr-only peer"  onClick={() => deleteBlog(data.articleId)} checked />
-                                                                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
-                                                                <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300"></span>
-                                                            </label>
-                                                        </td>
-                                                        <td>
-                                                            <Link to={`/blogHistory/${data.articleId}`}>
-                                                                <BiShow className='hover:text-xl text-lg hover:text-blue-400 duration-300' />
-                                                            </Link>
-                                                        </td>
-                                                    </tr>
+                                                    {data.adminId == AdminId ?
+                                                        <tr key={index} className={` text-gray-500 text-start`}>
+                                                            <td class=" py-3 pl-2 ">{data.articleId}</td>
+                                                            <td class="  "> <td class=" ">
+                                                                {truncateTitle(data.title, 30)}
+                                                            </td></td>
+                                                            <td class=" ">
+                                                                <h1 className='py-2 text-gray-700'
+                                                                    dangerouslySetInnerHTML={{
+                                                                        __html: truncateTitle(data.subject, 100),
+                                                                    }}
+                                                                >
+                                                                </h1>
+                                                            </td>
+                                                            <td class="  ">{data.author}</td>
+                                                            <td class="  ">{data.createdDate}</td>
+                                                            <td class="  ">{data.createdTime}</td>
+                                                            <td class="  ">{data.articleType}</td>
+                                                            <td class="  ">{data.modifiedDate}</td>
+                                                            <td class="  ">{data.modifiedTime}</td>
+                                                            <td>
+                                                                <label class="relative inline-flex items-center cursor-pointer">
+                                                                    <input type="checkbox" value="" class="sr-only peer" onClick={() => deleteBlog(data.articleId)} checked />
+                                                                    <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                                                                    <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300"></span>
+                                                                </label>
+                                                            </td>
+                                                            <td>
+                                                                <Link to={`/blogHistory/${data.articleId}`}>
+                                                                    <BiShow className='hover:text-xl text-lg hover:text-blue-400 duration-300' />
+                                                                </Link>
+                                                            </td>
+                                                        </tr>
+                                                        : ""}
 
                                                 </>
-                                            })}
+                                            })} */}
 
                                         </>}
                                     </tbody>

@@ -15,7 +15,7 @@ function BlogReject() {
     const [FilterSearch, setFilterSearch] = useState('')
     const dispatch = useDispatch()
     const blogReject = useSelector(state => state.blogReject)
-    
+
     useEffect(() => {
         dispatch(getBlogRejectAction())
     }, [])
@@ -34,6 +34,7 @@ function BlogReject() {
             return str;
         }
     };
+    const AdminId = JSON.parse(sessionStorage.getItem('adminId'))
 
     return (
         <>
@@ -43,9 +44,9 @@ function BlogReject() {
                 <div className=' w-full  '>
                     <Navbar />
                     <div className=' my-4 pr-4 '>
-                    <button class="bg-transparent my-4 hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded-full" onClick={() => navigate(-1)}>
-                        Back
-                    </button>
+                        <button class="bg-transparent my-4 hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded-full" onClick={() => navigate(-1)}>
+                            Back
+                        </button>
                         {/*================ */}
                         <div className='flex justify-between items-center my-2'>
                             <div className=' w-[400px]   '>
@@ -97,38 +98,74 @@ function BlogReject() {
                                     </tr>
                                 </thead>
                                 {blogReject.loading ? <Loader /> : <>
+                                    {AdminId == "86" ? <>
 
-                                    {(blogReject.result.filter(data=>data.title?.toLowerCase().includes(FilterSearch)))?.map((data, index) => {
-                                    // {blogReject.result.map((data, index) => {
-                                        return <>
-                                            <tr key={index} className={` text-gray-500 text-start`}>
-                                                <td class=" py-3 pl-2 ">{data.articleId}</td>
-                                                <td class="  ">{data.title}</td>
-                                                <td class="  ">
-                                                <h1 className='py-2 text-gray-700'
-                                                               dangerouslySetInnerHTML={{
-                                                                   __html:  truncateTitle(data.subject, 100),
-                                                               }}
+                                        {(blogReject.result.filter(data => data.title?.toLowerCase().includes(FilterSearch)))?.map((data, index) => {
 
-                                                           >
+                                            return <>
+                                                <tr key={index} className={` text-gray-500 text-start`}>
+                                                    <td class=" py-3 pl-2 ">{data.articleId}</td>
+                                                    <td class="  ">{data.title}</td>
+                                                    <td class="  ">
+                                                        <h1 className='py-2 text-gray-700'
+                                                            dangerouslySetInnerHTML={{
+                                                                __html: truncateTitle(data.subject, 100),
+                                                            }}
 
-                                                           </h1>
-                                               </td>
-                                                <td class="  ">{data.author}</td>
-                                                <td class="  ">{data.createdDate}</td>
-                                                <td class="  ">{data.createdTime}</td>
-                                                <td class="  ">{data.articleType}</td>
-                                                <td class="  ">{data.modifiedDate}</td>
-                                                <td class="  ">{data.modifiedTime}</td>
-                                                <td>
-                                                    <Link to={`/blogReject/${data.articleId}`}>
-                                                        <BiShow className='hover:text-xl text-lg hover:text-blue-400 duration-300' />
-                                                    </Link>
-                                                </td>
-                                            </tr>
+                                                        >
 
-                                        </>
-                                    })}
+                                                        </h1>
+                                                    </td>
+                                                    <td class="  ">{data.author}</td>
+                                                    <td class="  ">{data.createdDate}</td>
+                                                    <td class="  ">{data.createdTime}</td>
+                                                    <td class="  ">{data.articleType}</td>
+                                                    <td class="  ">{data.modifiedDate}</td>
+                                                    <td class="  ">{data.modifiedTime}</td>
+                                                    <td>
+                                                        <Link to={`/blogReject/${data.articleId}`}>
+                                                            <BiShow className='hover:text-xl text-lg hover:text-blue-400 duration-300' />
+                                                        </Link>
+                                                    </td>
+                                                </tr>
+
+                                            </>
+                                        })}</> :
+                                        <>
+
+                                            {(blogReject.result.filter(data => data.title?.toLowerCase().includes(FilterSearch)))?.map((data, index) => {
+
+                                                return <>
+                                                 {data.adminId == AdminId ?
+                                                    <tr key={index} className={` text-gray-500 text-start`}>
+                                                        <td class=" py-3 pl-2 ">{data.articleId}</td>
+                                                        <td class="  ">{data.title}</td>
+                                                        <td class="  ">
+                                                            <h1 className='py-2 text-gray-700'
+                                                                dangerouslySetInnerHTML={{
+                                                                    __html: truncateTitle(data.subject, 100),
+                                                                }}
+
+                                                            >
+
+                                                            </h1>
+                                                        </td>
+                                                        <td class="  ">{data.author}</td>
+                                                        <td class="  ">{data.createdDate}</td>
+                                                        <td class="  ">{data.createdTime}</td>
+                                                        <td class="  ">{data.articleType}</td>
+                                                        <td class="  ">{data.modifiedDate}</td>
+                                                        <td class="  ">{data.modifiedTime}</td>
+                                                        <td>
+                                                            <Link to={`/blogReject/${data.articleId}`}>
+                                                                <BiShow className='hover:text-xl text-lg hover:text-blue-400 duration-300' />
+                                                            </Link>
+                                                        </td>
+                                                    </tr> :""}
+
+                                                </>
+                                            })}</>
+                                    }
 
                                 </>}
 

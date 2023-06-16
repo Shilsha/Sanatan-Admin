@@ -62,7 +62,7 @@ function User() {
     const userData = useSelector((state) => state.user)
     const apiData = useSelector(state => state.export)
 
-
+console.log(userData,"userData")
 
 
     useEffect(() => {
@@ -329,8 +329,8 @@ if(isModuleAuth){
 
                                         <>
                                             {
-                                                (userData?.result.filter((user) => user.firstName?.toLowerCase().includes(FilterSearch)))?.map((data) => {
-                                                    // userData?.result.map((data) => {
+                                                // (userData?.result.users.filter((user) => user.firstName?.toLowerCase().includes(FilterSearch)))?.map((data) => {
+                                                    userData?.result.users?.map((data) => {
                                                     return (
                                                         <>
                                                             <tr key={data.id} className="  text-gray-500 border-b-[3px]">
@@ -340,10 +340,12 @@ if(isModuleAuth){
                                                                 <td class="">{data.email} </td>
                                                                 <td class="">{data.mobileNo == null ? '---' : data.mobileNo} </td>
                                                                 <td class="">
-                                                                    {moment(data.createdDate).format("MM/DD/YYYY")}
+                                                                    {data.createdDate}
+                                                                    {/* {moment(data.createdDate).format("MM/DD/YYYY")} */}
                                                                 </td>
                                                                 <td class="">
-                                                                    {moment(data.modifiedDate).format("MM/DD/YYYY")}
+                                                                    {data.modifiedDate}
+                                                                    {/* {moment(data.modifiedDate).format("MM/DD/YYYY")} */}
                                                                 </td>
                                                                 <td class="py-2  pt-1  ">
                                                                     {JSON.stringify(data?.enabled)}
@@ -357,14 +359,12 @@ if(isModuleAuth){
                                                                         <button class="border-2 border-red-500 text-red-500 hover:bg-red-700
                                                                             py-1.5  hover:text-white font-bold  text-xs px-3   rounded-full"
                                                                             onClick={() => openModel(data.userId, 'Deactivate')}
-                                                                        // onClick={() => handleDeactivatedSingleUser(data.userId)}
                                                                         >
                                                                             Deactivate
                                                                         </button>
                                                                     </> : <>
                                                                         <button class="border-2 border-green-500 text-green-500 hover:bg-green-700
                                                                             py-1.5  hover:text-white font-bold  text-xs px-3   rounded-full"
-                                                                            // onClick={() => handleActivatedSingleUser(data.userId)}
                                                                             onClick={() => openModel(data.userId, 'Activate')}
                                                                         >
                                                                             Activate
