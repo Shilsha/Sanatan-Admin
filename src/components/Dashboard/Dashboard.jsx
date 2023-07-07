@@ -419,16 +419,16 @@ function Dashboard() {
                                                 {<h1 className='text-6xl font-medium text-gray-500    text-start '>{feedbackLen.totalElements}</h1>}
                                             </div>
                                             <div className=''>
-                                            <Link to='/feedbacks'>
+                                            {/* <Link to='/feedbacks'>
                                                         <h1 className='py-3 cursor-pointer hover:text-orange-600 text-xl leading-6 text-center font-medium   text-gray-500 '>Feedback <br />  Management</h1>
-                                                    </Link>
-                                                {/* {LogstModuleAuth || isSuperAdmin ? <>
-                                                    <Link to='/logs'>
+                                                    </Link> */}
+                                                {LogstModuleAuth || isSuperAdmin ? <>
+                                                    <Link to='/feedbacks'>
                                                         <h1 className='py-3 cursor-pointer hover:text-orange-600 text-xl leading-6 text-center font-medium   text-gray-500 '>Log <br />  Management</h1>
                                                     </Link>
                                                 </> : <>
                                                     <h1 onClick={unAutherizedHndle} className=' py-3 cursor-pointer  text-xl leading-6 text-center font-medium   text-red-500/60 '>Log <br /> Management</h1>
-                                                </>} */}
+                                                </>}
                                             </div>
                                         </div>
                                     </div>

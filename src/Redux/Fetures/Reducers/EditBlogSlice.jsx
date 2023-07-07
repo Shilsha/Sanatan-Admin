@@ -19,7 +19,20 @@ export const editBlogAction = createAsyncThunk('EDITBLOG/EDIT_BLOG',
 
 
 // =====================update blog =========================================
-
+const isModuleAuth = JSON.parse(sessionStorage.getItem('user'))
+const isSuperAdmin = isModuleAuth?.role.some(data => data == 'SuperAdmin')
+const userModuleAuth = isModuleAuth?.role.some(data => data == 'Users')
+const articlesModuleAuth = isModuleAuth?.role.some(data => data == 'Articles')
+const HitsModuleAuth = isModuleAuth?.role.some(data => data == 'Hits')
+const CustomerListModuleAuth = isModuleAuth?.role.some(data => data == 'Customers')
+const QueriesListModuleAuth = isModuleAuth?.role.some(data => data == 'Queries')
+const LogstModuleAuth = isModuleAuth?.role.some(data => data == 'Logs')
+const BroadcastModuleAuth = isModuleAuth?.role.some(data => data == 'Broadcast')
+const BlogsPosttModuleAuth = isModuleAuth?.role.some(data => data == 'BlogPost')
+const BlogsReviewModuleAuth = isModuleAuth?.role.some(data => data == 'BlogReview')
+const unAutherizedHndle = () => {
+    toast.error('You are not authrized for this module')
+}
 const blogsEdit = createSlice({
     name: 'EDITBLOG',
     initialState: {
@@ -51,9 +64,16 @@ const blogsEdit = createSlice({
             console.log(state.result.articleType)
             toast.success('Your blog is successfully updated')
             if (state.result.articleType == "OPEN") {
+               if (BlogsReviewModuleAuth || isSuperAdmin) {
                 setTimeout(() => {
                     window.location.href = '/blogReview'
                 }, 1000);
+               } else {
+                setTimeout(() => {
+                    window.location.href = '/blog'
+                }, 1000);
+               }
+               
 
             }
             else if (state.result.articleType == "PUBLISH") {
