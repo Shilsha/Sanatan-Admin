@@ -21,7 +21,6 @@ import axios from 'axios'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import moment from 'moment/moment';
-
 const customStyles = {
     content: {
         top: '50%',
@@ -30,33 +29,26 @@ const customStyles = {
         bottom: 'auto',
         marginRight: '-50%',
         transform: 'translate(-50%, -50%)',
-
         width: '40%',
         height: 'auto',
         position: 'relative',
         border: 'none'
-
     },
 };
-
 function Sidebar() {
-
     const [modalIsOpen, setIsOpen] = React.useState(false);
     const [role, setRole] = useState()
     const [passShow, setPassShow] = useState(false)
     const [form, setForm] = useState({
-
-
     })
     const [gender, setGender] = useState("Male")
+    const [designation, setDesignation] = useState("")
     const [date, setDate] = useState(new Date())
     const dispatch = useDispatch()
     const navigate = useNavigate()
-
     const AddRes = useSelector((state) => state.addAdmin)
     // 
     // =======================================add staff model===========================
-
     function closeModal() {
         setIsOpen(false);
     }
@@ -68,33 +60,31 @@ function Sidebar() {
     const handleChangeInput = (e) => {
         const { name, value } = e.target;
         setForm({ ...form, [name]: value })
-        // 
-
-
     }
-
-
     const HandleOnSubmit = (e) => {
         e.preventDefault()
         setResError('')
         setErrors(validate());
         setIsSubmitting(true);
-
-
-
     }
-
     const logout = () => {
         sessionStorage.removeItem('user')
         navigate('/')
-
     }
-
-
     const showPass = () => {
         setPassShow(!passShow)
     }
+    const optns = [
+        { value: "", label: "Select" },
+        { value: "Admin", label: "Admin" },
+        { value: "Representative", label: "Representative" },
+        { value: "Pandit", label: "Pandit Ji" },
 
+    ];
+    const handleChange = (event) => {
+        setDesignation(event.target.value);
+    };
+    // console.log(designation)
 
     // =============================== give permission =======================================
     const [permission, setPermission] = useState([
@@ -107,6 +97,9 @@ function Sidebar() {
         { name: "BlogPost" },
         { name: "BlogReview" },
         { name: "BlogCategory" },
+        { name: "Calls/Queries" },
+        { name: "Anushthan" },
+        { name: "Pandit Ji Call" },
     ]);
 
     const handleChangePer = (e) => {
@@ -130,12 +123,8 @@ function Sidebar() {
     };
 
     //   *****************************************Module access***********************************************************
-
     const isModuleAuth = JSON.parse(sessionStorage.getItem('user'))
-
     const isSuperAdmin = isModuleAuth?.role.some(data => data == 'SuperAdmin')
-    // 
-
     const customerModuleAuth = isModuleAuth?.role.some(data => data == 'Customers')
     const articlesModuleAuth = isModuleAuth?.role.some(data => data == 'Articles')
     const HitsModuleAuth = isModuleAuth?.role.some(data => data == 'Hits')
@@ -150,41 +139,34 @@ function Sidebar() {
     }
     //   *****************************************Module access***********************************************************
 
-
     // ===========================================form validation ===================================================
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [resError, setResError] = useState('')
     const [errors, setErrors] = useState([])
-
     // 
     const validate = () => {
-
         let errors = {}
         if (!formData.role) {
             errors.role = 'Role is required!'
         }
         if (!formData.role?.length > 0) {
             errors.role = 'Role is required!'
-
         }
-
         if (resError) {
             errors.Email = resError
         }
-        if(!formData.phoneNumber){
+        if (!formData.phoneNumber) {
             errors.phoneNumber = 'Role is required!'
         }
-        if(formData.phoneNumber.length!==10){
-            errors.phoneNumber = 'Invalid number!' 
+        if (formData.phoneNumber.length !== 10) {
+            errors.phoneNumber = 'Invalid number!'
         }
         return errors
     }
-
-
     // =================api calll======================
     const apiCall = async (data) => {
-
         let OPTIONS = {
+            // url: `https://0e56-2401-4900-1f39-1858-94c2-3e78-e9bb-85ea.ngrok-free.app/api/addAdmin`,
             url: `${import.meta.env.VITE_BASE_URL}/api/addAdmin`,
             data: data,
             method: "POST",
@@ -193,15 +175,12 @@ function Sidebar() {
             },
         };
         setResError('')
-        
         return await axios(OPTIONS)
             .then(res => {
                 setResError('')
                 setIsOpen(false)
                 // alert('ok')
-                
                 toast.success(res.data.status.message)
-                
                 setForm('')
                 // setRole([])
                 window.location.reload();
@@ -211,112 +190,36 @@ function Sidebar() {
                 setResError(err.response.data.status.message)
             }
             )
-
     }
     useEffect(() => {
-        
+
         if (Object.keys(errors).length === 0 && isSubmitting) {
-
-            // dispatch(addAdmin(formData))
-            // 
-            // setResError('')
-            // 
-            apiCall({...formData,dateOfBirth:moment(date).format('DD-MM-YYYY'),gender:gender})
-            // setIsOpen(false)
-
-
+            apiCall({ ...formData, dateOfBirth: moment(date).format('DD-MM-YYYY'), gender: gender , designation: designation})
 
         }
     }, [errors]);
-
     useEffect(() => {
-        
-
         if (resError.length > 0) {
             // setIsOpen(false)
         }
     }, [resError])
     return (
-
         <>
             <ToastContainer />
             <div className='  flex flex-col justify-between py-5 items-center shadow-xl navbar_bg border    -ml-4 px-6  '>
-
                 <div className=''>
                     <Link to='/dashboard'>
                         <img src='/images/sanatandark.png' alt="logo" className='w-32' />
-                        
                     </Link>
                 </div>
                 {/* 
-                <div className='flex flex-col justify-between items-center -mt-16 gap-6  '>
-                    <NavLink to='/dashboard'  >
-                        <CgMenuGridR className='text-white iconsColor p-1 rounded cursor-pointer' size={35} />
-                    </NavLink>
-                    <NavLink to='/dashboard'>
-                        <p className='text-center text-[16px] -mt-6  text-white'>Dashboard</p>
-                    </NavLink>
-                    <div class=" dropdown">
-                        <Link to='/adminlists'>
-                            <MdOutlineGroupAdd className=' cursor-pointer ml-7  text-white hover:text-white   rounded' size={35} />
-                        </Link>
-                        <p className='text-center  text-[16px]   leading-5 text-white'>User <br /> Management </p>
-                        <ul class="dropdown-menu absolute hidden z-10  rounded-lg  text-black bg-white shadow-xl ml-8">
-                            <li class="">
-                                <a class="  hover:text-white hover:rounded-lg  hover:bg-orange-600 py-2 
-                                  px-4 block whitespace-no-wrap cursor-pointer " onClick={addStaff} >Add User</a>
-                            </li>
-                            <Link to='/adminlists'>
-                                <li class=""><a class="  hover:text-white hover:rounded-lg hover:bg-orange-600 py-2 px-4 block
-                             whitespace-no-wrap cursor-pointer" >User  List</a></li>
-                            </Link>
-
-                        </ul>
-                    </div>
-
-                    {userModuleAuth || isSuperAdmin ? <>
-                        <NavLink to='/users'>
-                            <RiShieldUserLine className='text-white iconsColor  ' size={35} />
-                        </NavLink>
-                    </> : <>
-                        <RiShieldUserLine onClick={unAutherizedHndle} className='text-white iconsColor  ' size={35} />
-                    </>}
-                    <p className='text-center -mt-6 text-[16px]   leading-5 text-white'>Customer <br /> Management</p>
-
-                    {articlesModuleAuth || isSuperAdmin ? <>
-                        <NavLink to='/articles'>
-                            <HiClipboardDocumentList className=' text-white iconsColor' size={35} />
-                        </NavLink>
-                    </> : <>
-                        <HiClipboardDocumentList onClick={unAutherizedHndle} className=' text-white iconsColor' size={35} />
-                    </>}
-
-                    <p className='text-center -mt-6 text-[16px]   leading-5 text-white'>Article <br /> Management</p>
-
-
-                    {QueriesListModuleAuth || isSuperAdmin ? <>
-                        <NavLink to='/queries'>
-                            <BsQuestionOctagonFill className='text-white iconsColor ' size={30} />
-                        </NavLink>
-                    </> : <>
-
-                        <BsQuestionOctagonFill onClick={unAutherizedHndle} className='text-white iconsColor ' size={30} />
-
-                    </>}
-
-                    <p className='text-center -mt-6 text-[16px]   leading-5 text-white'>Query <br /> Management</p>
-
-
-
-                </div> */}
-
+                
                 {/* *************************************************************************************** */}
-
-
                 <nav className='-mt-4'>
                     <ul class="mcd-menu xxl:text-lg">
                         <li className=''>
                             <NavLink to='/dashboard'>
+                                
                                 <CgMenuGridR className='iconss ' size={25} />
                                 <strong>Dashboard</strong>
 
@@ -435,6 +338,36 @@ function Sidebar() {
                             </>}
 
                         </li>
+                        <li>
+                            {/* {isSuperAdmin ? <> */}
+                            <NavLink to='/RepresentativeHome'>
+                                <SiBloglovin className=' ' size={25} />
+                                <strong>Representative Management</strong>
+
+                            </NavLink>
+                            {/* </> : <>
+                                <a onClick={unAutherizedHndle}>
+                                    <SiBloglovin className=' ' size={25} />
+                                    <strong>Representative Management</strong>
+                                </a>
+                            </>} */}
+
+                        </li>
+                        <li>
+                            {/* {isSuperAdmin ? <> */}
+                            <NavLink to='/PanditJiHome'>
+                                <SiBloglovin className=' ' size={25} />
+                                <strong>Pandit Ji Management</strong>
+
+                            </NavLink>
+                            {/* </> : <>
+                                <a onClick={unAutherizedHndle}>
+                                    <SiBloglovin className=' ' size={25} />
+                                    <strong>Pandit Ji Management</strong>
+                                </a>
+                            </>} */}
+
+                        </li>
 
 
 
@@ -443,7 +376,6 @@ function Sidebar() {
 
                     </ul>
                 </nav>
-
                 {/* *************************************************************************************** */}
 
                 <div className=' justify-center   rounded-full'>
@@ -453,7 +385,6 @@ function Sidebar() {
 
 
                 </div>
-
                 <Modal
                     isOpen={modalIsOpen}
                     // onAfterOpen={afterOpenModal}
@@ -461,14 +392,11 @@ function Sidebar() {
                     style={customStyles}
                     contentLabel="Example Modal"
                     className=""
-
                 >
-
                     <form class="bg-white shadow-md rounded px-8 pt-2 pb-8 " onSubmit={HandleOnSubmit}>
                         <AiOutlineClose onClick={closeModal} className="relative top-0 left-[100%] cursor-pointer shadow-md" size={25} />
                         <h1 className='text-center font-sans  mb-4 text-2xl font-bold text-orange-500'>Add User </h1>
                         <div class="grid md:grid-cols-2 md:gap-6">
-
                             <div class="mb-4">
                                 <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
                                     First Name
@@ -483,59 +411,66 @@ function Sidebar() {
                                 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="adminName" type="text" placeholder="Last Name" required name='lastName' value={form.lastName} onChange={handleChangeInput}
                                 />
                             </div>
-
                         </div>
-
                         <div class="grid md:grid-cols-2 md:gap-6">
-
                             <div class="mb-4">
                                 <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
                                     Phone Number
                                 </label>
                                 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="adminName" type="number" placeholder="Phone Number" required name='phoneNumber' value={form.phoneNumber} onChange={handleChangeInput}
                                 />
-                               
-                                  {errors.phoneNumber && (<p className='text-red-500 text-sm pt-1'>{errors.phoneNumber}</p>)}
+                                {errors.phoneNumber && (<p className='text-red-500 text-sm pt-1'>{errors.phoneNumber}</p>)}
                             </div>
                             <div class="mb-4">
-                            <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+                                <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
                                     Date of Birth
                                 </label>
-
-
                                 <DatePicker className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" selected={date} onChange={(date) => setDate(date)} dateFormat="dd/MM/yyyy" />
-
-
-                            </div>
-
-                        </div>
-
-                        <div className='mb-4'>
-                            <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
-                                Gender
-                            </label>
-                            <div className='inline-flex pt-1'>
-                                <div>
-                                    <input type="radio" value='Female' checked={gender == 'Female'} onChange={(e) => setGender(e.target.value)} />
-                                    <label className=''> Female</label>
-                                </div>
-                                <div className='ml-4'>
-                                    <input type="radio" value='Male' checked={gender == 'Male'} onChange={(e) => setGender(e.target.value)} />
-                                    <label className=''> Male</label>
-                                </div>
                             </div>
                         </div>
+                        <div class="grid md:grid-cols-2 md:gap-6">
+                            <div className='mb-4'>
+                                <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+                                    Gender
+                                </label>
+                                <div className='inline-flex pt-1'>
+                                    <div>
+                                        <input type="radio" value='Female' checked={gender == 'Female'} onChange={(e) => setGender(e.target.value)} />
+                                        <label className=''> Female</label>
+                                    </div>
+                                    <div className='ml-4'>
+                                        <input type="radio" value='Male' checked={gender == 'Male'} onChange={(e) => setGender(e.target.value)} />
+                                        <label className=''> Male</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+                                    Designation
+                                </label>
+                                {/* <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="adminName" type="text" placeholder="" required name='address' value={form.designation} onChange={handleChangeInput}
+                            /> */}
+                                <select class="form-select shadow appearance-none border rounded w-full  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="validationDefault04" value={designation} onChange={handleChange} required>
+
+                                    {optns.map((option) => (
+                                        <option key={option.value} value={option.value}>
+                                            {option.label}
+                                        </option>
+                                    ))}
+
+
+                                </select>
+                            </div>
+                        </div>
+
+
                         <div class="mb-4">
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
                                 Address
                             </label>
-                            <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="adminName" type="text" placeholder="Address...." required name='address' value={form.address} onChange={handleChangeInput}
+                            <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="adminName" type="text" placeholder="" required name='address' value={form.address} onChange={handleChangeInput}
                             />
                         </div>
-
-
-
-
                         <div class="mb-4">
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
                                 Admin Email
@@ -544,12 +479,9 @@ function Sidebar() {
                             />
                             {resError && (<p className='text-red-500 text-sm pt-1'>{resError}</p>)}
                         </div>
-
-
                         {/* ================================================================================================= */}
                         <label for="countries" class="block mb-2 text-sm  text-gray-900 font-bold dark:text-white">Select Role</label>
                         <div className=" grid grid-cols-3 justify-between items-center  w-full   " >
-
 
                             {/* <div className="form-check">
                                 <input
@@ -561,8 +493,6 @@ function Sidebar() {
                                 />
                                 <label className="text-xs px-2">Super Admin</label>
                             </div> */}
-
-
                             {permission.map((user, index) => (
                                 <div className="form-check" key={index}>
                                     <input
@@ -580,42 +510,15 @@ function Sidebar() {
                         </div>
 
                         {/* ================================================================================================= */}
-                        {/* <label class="block text-gray-700 text-sm font-bold my-2" for="username">
-                            Password
-                        </label> */}
-                        {/* <div class="relative flex w-full flex-wrap items-stretch mb-3">
-
-                            <input class="px-3 py-2 placeholder-slate-500 text-slate-600 relative 
-                             rounded  border-0 shadow outline-none  w-full pr-10"
-                                type={!passShow ? `password` : 'text'}
-
-
-                                placeholder="Password"
-                                required name='password' value={form.password} onChange={handleChangeInput} />
-                            <span class="z-10 h-full leading-snug font-normal cursor-pointer  text-center text-slate-300 absolute bg-transparent rounded text-base items-center justify-center w-8 right-0 pr-3 py-3">
-
-                                {passShow ? <><BiShow className='text-gray-500' onClick={showPass} /></> : <>    <BiHide className='text-gray-500' onClick={showPass} /></>}
-
-
-
-                            </span>
-                        </div> */}
-
 
                         <div class="flex items-center justify-center pt-5">
-
-
                             <button class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-1 shadow-xl  px-5 rounded focus:outline-none focus:shadow-outline" type="submit">
                                 Submit
                             </button>
 
                         </div>
                     </form>
-
-
                 </Modal>
-
-
             </div>
         </>
     )

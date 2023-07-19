@@ -14,6 +14,7 @@ import { getAdminList, delelteAdmin, updateAdmin } from '../../../Redux/Fetures/
 import { updateRole, resetAdminPass, setEdit } from '../../../Redux/Fetures/Reducers/AddAdminSlice'
 import DesignLogin from '../../../Assets/images/DesignLogin.png'
 import { CopyToClipboard } from 'react-copy-to-clipboard';
+import { Link, } from 'react-router-dom';
 
 const customStyles = {
     content: {
@@ -390,8 +391,8 @@ if(isAuth){
                                 <thead className=''>
                                     <tr className='   '>
                                         <td class="bg-blue-100   pl-2 ">ID</td>
-                                        <td class="bg-blue-100    ">Admin Name</td>
-                                        <td class="bg-blue-100   py-3">Email</td>
+                                        <td class="bg-blue-100    py-3">Admin Name</td>
+                                        {/* <td class="bg-blue-100   py-3">Email</td> */}
                                         <td class="bg-blue-100 text-center  py-3">Role</td>
                                         {/* <td class="bg-blue-100   py-3">Password</td> */}
                                         {/* <td class="bg-blue-100   py-3">IsSuperAdmin</td> */}
@@ -419,17 +420,20 @@ if(isAuth){
                                                     return (
                                                         <>
                                                             <tr key={index} className={` text-gray-500 `}>
-                                                                <td class=" py-2 pl-2 ">{data.adminId}</td>
+                                                                <td class=" py-2  pl-2">{data.adminId}</td>
                                                                 <td class=" py-2 ">{data.adminName}</td>
-                                                                <td class=" py-2 ">{data.email}</td>
+                                                                {/* <td class=" py-2 ">{data.email}</td> */}
                                                                 <td class=" py-2 text-center">
                                                                     {data.isSuperAdmin ? <>
                                                                         SuperAdmin
                                                                     </> : <>
 
                                                                         <p className="tooltip-on-hover underline py-2 px-4 rounded-full hover:text-orange-500 inline-flex items-center">
-                                                                            <span className='tooltip-on-hover'>View  </span>
-                                                                            <div className="tooltip absolute z-100 bg-gray-50 shadow rounded-lg p-3 ml-10 text-sm mt-20 ">
+                                                                            {/* <span className='tooltip-on-hover'>View  </span> */}
+                                                                            <Link to={`${data.adminId}`}>
+                                                                            View
+                                                                        </Link>
+                                                                            {/* <div className="tooltip absolute z-100 bg-gray-50 shadow rounded-lg p-3 ml-10 text-sm mt-20 ">
                                                                                 {data.role?.map((data, index) => {
                                                                                     // 
                                                                                     return <>
@@ -440,7 +444,7 @@ if(isAuth){
                                                                                     </>
                                                                                 })}
 
-                                                                            </div>
+                                                                            </div> */}
                                                                         </p>
                                                                     </>}
                                                                 </td>

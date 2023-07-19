@@ -63,12 +63,12 @@ function Dashboard() {
     const articleLen = useSelector((state) => state.article)
     const queryLen = useSelector((state) => state.query)
     const feedbackLen = useSelector((state) => state.feedback.result)
-    console.log(feedbackLen,"feedbackLen")
+    console.log(feedbackLen, "feedbackLen")
     const allFeedBack = useSelector((state) => state.feedback)
     const { loading, result, error } = useSelector((state) => state.thoughtOfDay)
     const panchangData = useSelector((state) => state.panchang)
     const broadcastStatus = useSelector((state) => state.broadcast)
-    console.log(broadcastStatus.result.length,"broadcastStatus")
+    console.log(broadcastStatus.result.length, "broadcastStatus")
     const broadCast = broadcastStatus.result.filter(data => data.announcementStatus == true)
     const role = JSON.parse(sessionStorage.getItem('user'))
 
@@ -157,7 +157,7 @@ function Dashboard() {
             type: true
         }
         dispatch(getUser(data))
-        
+
 
     }, [])
     useEffect(() => {
@@ -166,7 +166,7 @@ function Dashboard() {
             type: 'NEW'
         }
         dispatch(getAllQueriesAction(data))
-        
+
 
     }, [])
     useEffect(() => {
@@ -175,10 +175,10 @@ function Dashboard() {
             type: 'NEW'
         }
         dispatch(getAllFeedbacksAction(data))
-        
+
 
     }, [])
-   
+
 
     // ************************************************************Role based Module accces*******************************************************************
     const isModuleAuth = JSON.parse(sessionStorage.getItem('user'))
@@ -419,7 +419,7 @@ function Dashboard() {
                                                 {<h1 className='text-6xl font-medium text-gray-500    text-start '>{feedbackLen.totalElements}</h1>}
                                             </div>
                                             <div className=''>
-                                            {/* <Link to='/feedbacks'>
+                                                {/* <Link to='/feedbacks'>
                                                         <h1 className='py-3 cursor-pointer hover:text-orange-600 text-xl leading-6 text-center font-medium   text-gray-500 '>Feedback <br />  Management</h1>
                                                     </Link> */}
                                                 {LogstModuleAuth || isSuperAdmin ? <>
@@ -466,6 +466,40 @@ function Dashboard() {
                                             </div>
                                         </div>
                                     </div> */}
+                                    <div className='rounded-lg bg-gray-50/20 blurr  shadow  px-2 h-[175px] ' >
+                                        <div className='  my-3'>
+                                            <div className='flex  justify-around items-center  pr-5 py-2 '>
+                                                <VscBroadcast className='text-orange-500  pt-2' size={40} />
+                                                {<h1 className='text-6xl font-medium text-gray-500    text-start '>{broadcastStatus.result.length ? <>{broadcastStatus.result.length}</> : <>0</>}</h1>}
+                                            </div>
+                                            <div className=''>
+                                                {/* {BroadcastModuleAuth || isSuperAdmin ? <> */}
+                                                    <Link to='/RepresentativeHome'>
+                                                        <h1 className='py-3 cursor-pointer hover:text-orange-600 text-xl leading-6 text-center font-medium   text-gray-500 '>Representative <br />  Management</h1>
+                                                    </Link>
+                                                {/* </> : <>
+                                                    <h1 onClick={unAutherizedHndle} className=' py-3 cursor-pointer  text-xl leading-6 text-center font-medium   text-red-500/60 '>Representative <br /> Management</h1>
+                                                </>} */}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className='rounded-lg bg-gray-50/20 blurr  shadow  px-2 h-[175px] ' >
+                                        <div className='  my-3'>
+                                            <div className='flex  justify-around items-center  pr-5 py-2 '>
+                                                <VscBroadcast className='text-orange-500  pt-2' size={40} />
+                                                {<h1 className='text-6xl font-medium text-gray-500    text-start '>{broadcastStatus.result.length ? <>{broadcastStatus.result.length}</> : <>0</>}</h1>}
+                                            </div>
+                                            <div className=''>
+                                                {/* {BroadcastModuleAuth || isSuperAdmin ? <> */}
+                                                    <Link to='/PanditJiHome'>
+                                                        <h1 className='py-3 cursor-pointer hover:text-orange-600 text-xl leading-6 text-center font-medium   text-gray-500 '>Pandit Ji <br />  Management</h1>
+                                                    </Link>
+                                                {/* </> : <>
+                                                    <h1 onClick={unAutherizedHndle} className=' py-3 cursor-pointer  text-xl leading-6 text-center font-medium   text-red-500/60 '>Pandit Ji <br /> Management</h1>
+                                                </>} */}
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
