@@ -194,7 +194,7 @@ function Sidebar() {
     useEffect(() => {
 
         if (Object.keys(errors).length === 0 && isSubmitting) {
-            apiCall({ ...formData, dateOfBirth: moment(date).format('DD-MM-YYYY'), gender: gender , designation: designation})
+            apiCall({ ...formData, dateOfBirth: moment(date).format('DD-MM-YYYY'), gender: gender, designation: designation })
 
         }
     }, [errors]);
@@ -206,7 +206,7 @@ function Sidebar() {
     return (
         <>
             <ToastContainer />
-            <div className='  flex flex-col justify-between py-5 items-center shadow-xl navbar_bg border    -ml-4 px-6  '>
+            <div className='  flex flex-col  py-5 items-center shadow-xl navbar_bg border    -ml-4 px-6 w-[235px]  '>
                 <div className=''>
                     <Link to='/dashboard'>
                         <img src='/images/sanatandark.png' alt="logo" className='w-32' />
@@ -215,21 +215,37 @@ function Sidebar() {
                 {/* 
                 
                 {/* *************************************************************************************** */}
-                <nav className='-mt-4'>
+                <nav className=''>
                     <ul class="mcd-menu xxl:text-lg">
                         <li className=''>
                             <NavLink to='/dashboard'>
-                                
-                                <CgMenuGridR className='iconss ' size={25} />
-                                <strong>Dashboard</strong>
+                                <div class="grid md:grid-cols-2">
+                                    <div class="">
+                                        <CgMenuGridR className='iconss ' size={25} />
+                                    </div>
+                                    <div class="">
+                                        <strong>Dashboard</strong>
+                                    </div>
+                                </div>
+                                {/* <CgMenuGridR className='iconss ' size={25} />
+                                <strong>Dashboard</strong> */}
 
                             </NavLink>
                         </li>
                         <li>
                             {UserListModuleAuth || isSuperAdmin ? <>
                                 <NavLink to='/adminlists'>
-                                    <MdOutlineGroupAdd className=' ' size={25} />
-                                    <strong>User  Management</strong>
+
+                                    <div class="grid md:grid-cols-2">
+                                        <div class="">
+                                            <MdOutlineGroupAdd className=' ' size={25} />
+                                        </div>
+                                        <div class="">
+                                            <strong>User  Management</strong>
+                                        </div>
+                                    </div>
+                                    {/* <MdOutlineGroupAdd className=' ' size={25} />
+                                    <strong>User  Management</strong> */}
 
                                 </NavLink>
                                 <ul>
@@ -246,8 +262,16 @@ function Sidebar() {
 
 
                                 <a onClick={unAutherizedHndle} >
-                                    <MdOutlineGroupAdd className=' ' size={25} />
-                                    <strong>User Management</strong>
+                                <div class="grid md:grid-cols-2">
+                                        <div class="">
+                                            <MdOutlineGroupAdd className=' ' size={25} />
+                                        </div>
+                                        <div class="">
+                                            <strong>User  Management</strong>
+                                        </div>
+                                    </div>
+                                    {/* <MdOutlineGroupAdd className=' ' size={25} />
+                                    <strong>User Management</strong> */}
                                 </a>
                             </>}
 
@@ -257,14 +281,30 @@ function Sidebar() {
                             {customerModuleAuth || isSuperAdmin ? <>
 
                                 <NavLink to='/users'>
-                                    <HiClipboardDocumentList className=' ' size={25} />
-                                    <strong>Customer Management</strong>
+                                <div class="grid md:grid-cols-2">
+                                        <div class="">
+                                        <HiClipboardDocumentList className=' ' size={25} />
+                                        </div>
+                                        <div class="">
+                                        <strong>Customer Management</strong>
+                                        </div>
+                                    </div>
+                                    {/* <HiClipboardDocumentList className=' ' size={25} />
+                                    <strong>Customer Management</strong> */}
 
                                 </NavLink>
                             </> : <>
                                 <a onClick={unAutherizedHndle} >
-                                    <HiClipboardDocumentList className=' ' size={25} />
-                                    <strong>Customer Management</strong>
+                                <div class="grid md:grid-cols-2">
+                                        <div class="">
+                                        <HiClipboardDocumentList className=' ' size={25} />
+                                        </div>
+                                        <div class="">
+                                        <strong>Customer Management</strong> 
+                                        </div>
+                                    </div>
+                                    {/* <HiClipboardDocumentList className=' ' size={25} />
+                                    <strong>Customer Management</strong> */}
                                 </a>
                             </>}
 
@@ -275,15 +315,31 @@ function Sidebar() {
                             {QueriesListModuleAuth || isSuperAdmin ? <>
 
                                 <NavLink to='/queries'>
-                                    <BsQuestionOctagonFill className=' ' size={25} />
-                                    <strong>Query Management</strong>
+                                <div class="grid md:grid-cols-2">
+                                        <div class="">
+                                        <BsQuestionOctagonFill className=' ' size={25} />
+                                        </div>
+                                        <div class="">
+                                        <strong>Query Management</strong>
+                                        </div>
+                                    </div>
+                                    {/* <BsQuestionOctagonFill className=' ' size={25} />
+                                    <strong>Query Management</strong> */}
 
                                 </NavLink>
 
                             </> : <>
                                 <a onClick={unAutherizedHndle}>
-                                    <BsQuestionOctagonFill className=' ' size={25} />
-                                    <strong>Query Management</strong>
+                                <div class="grid md:grid-cols-2">
+                                        <div class="">
+                                        <BsQuestionOctagonFill className=' ' size={25} />
+                                        </div>
+                                        <div class="">
+                                        <strong>Query Management</strong> 
+                                        </div>
+                                    </div>
+                                    {/* <BsQuestionOctagonFill className=' ' size={25} />
+                                    <strong>Query Management</strong> */}
 
 
                                 </a>
@@ -293,15 +349,31 @@ function Sidebar() {
                         <li>
                             {LogstModuleAuth || isSuperAdmin ? <>
                                 <NavLink to='/logs'>
-                                    <BsClipboardData className=' ' size={25} />
-                                    <strong>log Management</strong>
+                                <div class="grid md:grid-cols-2">
+                                        <div class="">
+                                        <BsClipboardData className=' ' size={25} />
+                                        </div>
+                                        <div class="">
+                                        <strong>log Management</strong>
+                                        </div>
+                                    </div>
+                                    {/* <BsClipboardData className=' ' size={25} />
+                                    <strong>log Management</strong> */}
 
                                 </NavLink>
                             </> : <>
 
                                 <a onClick={unAutherizedHndle}>
-                                    <BsClipboardData className=' ' size={25} />
-                                    <strong>log Management</strong>
+                                <div class="grid md:grid-cols-2">
+                                        <div class="">
+                                        <BsClipboardData className=' ' size={25} />
+                                        </div>
+                                        <div class="">
+                                        <strong>log Management</strong>
+                                        </div>
+                                    </div>
+                                    {/* <BsClipboardData className=' ' size={25} />
+                                    <strong>log Management</strong> */}
 
                                 </a>
                             </>}
@@ -311,14 +383,30 @@ function Sidebar() {
                             {BroadcastModuleAuth || isSuperAdmin ? <>
 
                                 <NavLink to='/broadcast'>
-                                    <VscBroadcast className=' ' size={25} />
-                                    <strong>Broadcast Management</strong>
+                                <div class="grid md:grid-cols-2">
+                                        <div class="">
+                                        <VscBroadcast className=' ' size={25} />
+                                        </div>
+                                        <div class="">
+                                        <strong>Broadcast Management</strong> 
+                                        </div>
+                                    </div>
+                                    {/* <VscBroadcast className=' ' size={25} />
+                                    <strong>Broadcast Management</strong> */}
 
                                 </NavLink>
                             </> : <>
                                 <a onClick={unAutherizedHndle}>
-                                    <VscBroadcast className=' ' size={25} />
-                                    <strong>Broadcast Management</strong>
+                                <div class="grid md:grid-cols-2">
+                                        <div class="">
+                                        <VscBroadcast className=' ' size={25} />
+                                        </div>
+                                        <div class="">
+                                        <strong>Broadcast Management</strong>
+                                        </div>
+                                    </div>
+                                    {/* <VscBroadcast className=' ' size={25} />
+                                    <strong>Broadcast Management</strong> */}
                                 </a>
                             </>}
 
@@ -326,14 +414,30 @@ function Sidebar() {
                         <li>
                             {BlogsPosttModuleAuth || isSuperAdmin ? <>
                                 <NavLink to='/blog'>
-                                    <SiBloglovin className=' ' size={25} />
-                                    <strong>Blog Management</strong>
+                                <div class="grid md:grid-cols-2">
+                                        <div class="">
+                                        <SiBloglovin className=' ' size={25} />
+                                        </div>
+                                        <div class="">
+                                        <strong>Blog Management</strong>
+                                        </div>
+                                    </div>
+                                    {/* <SiBloglovin className=' ' size={25} />
+                                    <strong>Blog Management</strong> */}
 
                                 </NavLink>
                             </> : <>
                                 <a onClick={unAutherizedHndle}>
-                                    <SiBloglovin className=' ' size={25} />
-                                    <strong>Blog Management</strong>
+                                <div class="grid md:grid-cols-2">
+                                        <div class="">
+                                        <SiBloglovin className=' ' size={25} />
+                                        </div>
+                                        <div class="">
+                                        <strong>Blog Management</strong>
+                                        </div>
+                                    </div>
+                                    {/* <SiBloglovin className=' ' size={25} />
+                                    <strong>Blog Management</strong> */}
                                 </a>
                             </>}
 
@@ -341,8 +445,16 @@ function Sidebar() {
                         <li>
                             {/* {isSuperAdmin ? <> */}
                             <NavLink to='/RepresentativeHome'>
-                                <SiBloglovin className=' ' size={25} />
-                                <strong>Representative Management</strong>
+                            <div class="grid md:grid-cols-2">
+                                        <div class="">
+                                        <SiBloglovin className=' ' size={25} />
+                                        </div>
+                                        <div class="">
+                                        <strong>Representative Management</strong> 
+                                        </div>
+                                    </div>
+                                {/* <SiBloglovin className=' ' size={25} />
+                                <strong>Representative Management</strong> */}
 
                             </NavLink>
                             {/* </> : <>
@@ -356,8 +468,16 @@ function Sidebar() {
                         <li>
                             {/* {isSuperAdmin ? <> */}
                             <NavLink to='/PanditJiHome'>
-                                <SiBloglovin className=' ' size={25} />
-                                <strong>Pandit Ji Management</strong>
+                            <div class="grid md:grid-cols-2">
+                                        <div class="">
+                                        <SiBloglovin className=' ' size={25} />
+                                        </div>
+                                        <div class="">
+                                        <strong>Pandit Ji Management</strong>
+                                        </div>
+                                    </div>
+                                {/* <SiBloglovin className=' ' size={25} />
+                                <strong>Pandit Ji Management</strong> */}
 
                             </NavLink>
                             {/* </> : <>
@@ -378,7 +498,7 @@ function Sidebar() {
                 </nav>
                 {/* *************************************************************************************** */}
 
-                <div className=' justify-center   rounded-full'>
+                <div className=' justify-center mt-5 rounded-full'>
                     <TbLogout className='text-white  p-1 hover:bg-red-800 iconsColor rounded-lg hover:text-white  cursor-pointer'
                         onClick={logout} size={35} />
                     <p className='text-center  text-[16px]   leading-5 text-white font-bold' >Logout</p>

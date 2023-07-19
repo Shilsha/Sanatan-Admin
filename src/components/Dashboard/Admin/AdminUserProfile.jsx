@@ -116,6 +116,10 @@ function AdminUserProfile() {
                                             <div class="px-4 col-span-2 py-2">{profile?.result?.lastName ? profile?.result?.lastName : '--'}</div>
                                         </div>
                                         <div class="grid grid-cols-3">
+                                            <div class="px-4 py-2 font-semibold">Designation</div>
+                                            <div class="px-4 col-span-2 py-2">{profile?.result?.designation ? profile?.result?.designation : '--'}</div>
+                                        </div>
+                                        <div class="grid grid-cols-3">
                                             <div class="px-4 py-2 font-semibold">Gender</div>
                                             <div class="px-4 col-span-2 py-2">{profile?.result?.gender ? profile?.result?.gender : '--'}</div>
                                         </div>
@@ -123,6 +127,7 @@ function AdminUserProfile() {
                                             <div class="px-4 py-2 font-semibold">Phone No</div>
                                             <div class="px-4 col-span-2 py-2">{profile?.result?.phoneNumber ? profile?.result?.phoneNumber : '--'}</div>
                                         </div>
+                                        
                                         <div class="grid grid-cols-3">
                                             <div class="px-4 py-2 font-semibold"> Address</div>
                                             <div class="px-4 col-span-2 py-2">{profile?.result?.address ? profile?.result?.address : '--'}</div>

@@ -392,6 +392,7 @@ if(isAuth){
                                     <tr className='   '>
                                         <td class="bg-blue-100   pl-2 ">ID</td>
                                         <td class="bg-blue-100    py-3">Admin Name</td>
+                                        <td class="bg-blue-100    py-3">Designation</td>
                                         {/* <td class="bg-blue-100   py-3">Email</td> */}
                                         <td class="bg-blue-100 text-center  py-3">Role</td>
                                         {/* <td class="bg-blue-100   py-3">Password</td> */}
@@ -422,6 +423,7 @@ if(isAuth){
                                                             <tr key={index} className={` text-gray-500 `}>
                                                                 <td class=" py-2  pl-2">{data.adminId}</td>
                                                                 <td class=" py-2 ">{data.adminName}</td>
+                                                                <td class=" py-2 ">{data.designation ? data.designation : null}</td>
                                                                 {/* <td class=" py-2 ">{data.email}</td> */}
                                                                 <td class=" py-2 text-center">
                                                                     {data.isSuperAdmin ? <>
