@@ -59,7 +59,9 @@ function BlogHistory() {
                                 <div class=" relative w-full  text-gray-600 ">
                                     <input class="border-2  w-full border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
                                         type="search" name="search" placeholder="Search..."
-                                        value={FilterSearch} onChange={(e) => setFilterSearch(e.target.value)}
+                                        value={FilterSearch} onChange={(e) =>{ 
+                                            setPage(0)
+                                            setFilterSearch(e.target.value);}}
                                     />
                                     <button type="submit" class="absolute right-0 top-2 mr-5">
                                         <BsSearch className='p-1 ' size={25} />

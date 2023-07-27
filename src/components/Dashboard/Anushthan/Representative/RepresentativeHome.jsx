@@ -56,6 +56,20 @@ const RepresentativeHome = () => {
                                     </>}
 
                                 </div>
+                                <div className='rounded-lg bg-gray-50/20 blurr  grid place-content-center   shadow     h-[175px] ' >
+                                    {BlogsPosttModuleAuth || isSuperAdmin ? <>
+                                        <Link to='/UserCallsQueries'>
+                                            <h1 class=" cursor-pointer uppercase font-medium
+                                 hover:scale-110 duration-500    ">
+                                                Interested Users
+                                            </h1>
+                                        </Link>
+                                    </> : <>
+                                        <h1 onClick={unAutherizedHndle} className=' py-3 cursor-pointer  text-xl leading-6 text-center font-medium   text-red-500/60 '> Blog  Post</h1>
+
+                                    </>}
+
+                                </div>
                                 <div className='rounded-lg bg-gray-50/20  blurr grid place-content-center   shadow     h-[175px] ' >
                                     {BlogsCategoryModuleAuth || isSuperAdmin ? <>
                                         <Link to='/ClientList'>
@@ -66,7 +80,7 @@ const RepresentativeHome = () => {
 
                                         </Link>
                                     </> : <>
-                                        <h1 onClick={unAutherizedHndle} className=' py-3 cursor-pointer  text-xl leading-6 text-center font-medium   text-red-500/60 '> Blog  Category</h1>
+                                        <h1 onClick={unAutherizedHndle} className=' py-3 cursor-pointer  text-xl leading-6 text-center font-medium   text-red-500/60 '>Client List</h1>
 
                                     </>}
 
@@ -81,15 +95,15 @@ const RepresentativeHome = () => {
                                             </h1>
                                         </Link>
                                     </> : <>
-                                        <h1 onClick={unAutherizedHndle} className=' py-3 cursor-pointer  text-xl leading-6 text-center font-medium   text-red-500/60 '>Blog  Review</h1>
+                                        <h1 onClick={unAutherizedHndle} className=' py-3 cursor-pointer  text-xl leading-6 text-center font-medium   text-red-500/60 '> Anushthan Running Status</h1>
 
                                     </>}
 
                                 </div>
-                               
 
-                                
-                               
+
+
+
                             </div>
 
                         </div>

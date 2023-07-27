@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useEffect } from 'react'
 import { BsThreeDotsVertical } from 'react-icons/bs';
+
 import { useDispatch, useSelector } from 'react-redux'
 import { ToastContainer } from 'react-toastify'
 import Navbar from '../../../Navbar/Navbar'
@@ -9,31 +10,9 @@ import { getBlogHistory, deleteBlogHistoryView } from '../../../../Redux/Fetures
 import Loader from '../../../Loader/Loader'
 import { BsSearch } from 'react-icons/bs'
 import { BiShow } from 'react-icons/bi'
-import { Link, useNavigate, NavLink } from 'react-router-dom'
-import Modal from 'react-modal';
-import { AiOutlineClose } from 'react-icons/ai'
-import AnushthanAllocate from './AnushthanAllocate'
-
-const customStyles = {
-    content: {
-        top: '50%',
-        left: '50%',
-        right: 'auto',
-        bottom: 'auto',
-        marginRight: '-50%',
-        transform: 'translate(-50%, -50%)',
-
-        width: '40%',
-        height: 'auto',
-        position: 'relative',
-        border: 'none'
-
-    },
-};
-
-function AnushthanRunningtatus() {
+import { Link, useNavigate } from 'react-router-dom'
+function PaymentsList() {
     const navigate = useNavigate();
-    const [modalIsOpen, setIsOpen] = React.useState(false);
     const [type, setType] = useState('PUBLISH')
     const [page, setPage] = useState(0)
     const [FilterSearch, setFilterSearch] = useState('')
@@ -64,28 +43,19 @@ function AnushthanRunningtatus() {
         dispatch(deleteBlogHistoryView(ids))
     }
     const AdminId = JSON.parse(sessionStorage.getItem('adminId'))
-
-
-    function closeModal() {
-        setIsOpen(false);
-    }
-    const viewProfile = () => {
-        alert("hello")
-        setIsOpen(true)
-    }
     return (
         <>
             <ToastContainer />
             <div className='   w-[100%]  min-h-screen flex flex-col-2 gap-4 bgGradient  '>
-                <Sidebar />
+                {/* <Sidebar /> */}
 
                 <div className=' w-full  '>
-                    <Navbar />
+                    {/* <Navbar /> */}
                     <div className=' my-4 pr-4 '>
                         {/*================ */}
-                        <button class="bg-transparent my-4 hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded-full" onClick={() => navigate(-1)}>
+                        {/* <button class="bg-transparent my-4 hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded-full" onClick={() => navigate(-1)}>
                             Back
-                        </button>
+                        </button> */}
                         <div className='flex justify-between items-center my-2'>
                             <div className=' w-[400px]   '>
                                 <div class=" relative w-full  text-gray-600 ">
@@ -99,11 +69,11 @@ function AnushthanRunningtatus() {
                                 </div>
                             </div>
                             <div>
-                                <h1 type="button" class="inline-flex items-center text-white bg-gradient-to-r
+                                {/* <h1 type="button" class="inline-flex items-center text-white bg-gradient-to-r
                                  from-orange-500  to-yellow-400  font-medium rounded-lg text-lg px-4 py-1 text-center mr-40 mb-2">
 
                                     Anushthan Running Status
-                                </h1>
+                                </h1> */}
 
                             </div>
 
@@ -125,16 +95,12 @@ function AnushthanRunningtatus() {
                                     <thead className=''>
                                         <tr className=' bg-blue-100  text-start '>
                                             <td class="py-3 pl-2 ">ID</td>
-                                            <td class="   ">Yajman Name</td>
-                                            <td class="  ">Contact No.</td>
-                                            <td class="  ">Anushthan Name</td>
-                                            <td class="  ">Start Date</td>
-                                            <td class="  ">End Time</td>
-                                            <td class="  ">Remaining Days</td>
-                                            <td class="  ">Allocated Pandit Ji</td>
+                                            <td class="   ">Date</td>
+                                            <td class="  ">Transaction ID</td>
+                                            <td class="  ">Transaction Description</td>
+                                            <td class="  ">Transaction Type</td>
                                             <td class="  ">Amount</td>
                                             <td class="  ">Status</td>
-                                            <td class="  ">Action</td>
 
 
 
@@ -150,39 +116,15 @@ function AnushthanRunningtatus() {
                                                     return <>
 
                                                         <tr key={index} className={` text-gray-500 text-start`}>
-                                                            <td class="py-3 pl-2 ">123</td>
-                                                            <td class="   ">Aman</td>
-                                                            <td class="  ">9910499956</td>
-                                                            <td class="  ">Rudra Abhishek</td>
-                                                            <td class="  ">17/07/2023</td>
-                                                            <td class="  ">27/07/2021</td>
-                                                            <td class="  ">2</td>
-                                                            <td class="  ">Ram Narayan</td>
-                                                            <td class="  ">51000</td>
-                                                            <td class="  ">Processing</td>
-                                                            {/* <td>
-                                                                <select onClick={(e) => viewProfile(e)}>
-                                                                    <option value=""></option>
-                                                                    <option value="Profile"  >View Profile</option>
-                                                                    <option value="Join Meet"><NavLink to='/queries'>
-                                                                        Visit Profile
-                                                                    </NavLink></option>
 
-                                                                </select>
-                                                            </td> */}
-                                                            {/* <td>
-                                                                <div class="dropdown">
-                                                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                        Dropdown button
-                                                                    </button>
-                                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                                        <a class="dropdown-item" href="#">Action</a>
-                                                                        <a class="dropdown-item" href="#">Another action</a>
-                                                                        <a class="dropdown-item" href="#">Something else here</a>
-                                                                    </div>
-                                                                </div>
-                                                            </td> */}
-<td>{<AnushthanAllocate />}</td>
+                                                            <td class="py-3 pl-2 ">123</td>
+                                                            <td class="   ">21/07/2023</td>
+                                                            <td class="  ">123456789</td>
+                                                            <td class="  ">Rudra Abhishek</td>
+                                                            <td class="  ">Credit Card</td>
+                                                            <td class="  ">51000</td>
+                                                            <td class="  ">Completed</td>
+
 
                                                         </tr>
 
@@ -196,25 +138,64 @@ function AnushthanRunningtatus() {
                                                         return <>
                                                             {data.adminId == AdminId ?
                                                                 <tr key={index} className={` text-gray-500 text-start`}>
-                                                                    <td class="py-3 pl-2 ">123</td>
-                                                                    <td class="   ">Aman</td>
-                                                                    <td class="  ">9910499956</td>
-                                                                    <td class="  ">Rudra Abhishek</td>
-                                                                    <td class="  ">17/07/2023</td>
-                                                                    <td class="  ">27/07/2021</td>
-                                                                    <td class="  ">2</td>
-                                                                    <td class="  ">Ram Narayan</td>
-                                                                    <td class="  ">51000</td>
-                                                                    <td class="  ">Processing</td>
-                                                                    <td><BsThreeDotsVertical /> </td>
-
+                                                                    <tr key={index} className={` text-gray-500 text-start`}>
+                                                                        <td class="py-3 pl-2 ">123</td>
+                                                                        <td class="   ">Aman</td>
+                                                                        <td class="  ">9910499956</td>
+                                                                        <td class="  ">Rudra Abhishek</td>
+                                                                        <td class="  ">17/07/2023</td>
+                                                                        <td class="  ">27/07/2021</td>
+                                                                        <td class="  ">Ram Narayan</td>
+                                                                        <td class="  ">51000</td>
+                                                                        <td class="  ">Processing</td>
+                                                                        <td><BsThreeDotsVertical /></td>
+                                                                    </tr>
                                                                 </tr>
                                                                 : ""}
 
                                                         </>
                                                     })}
                                                 </>}
+                                            {/* {History.result?.map((data, index) => {
+                                               
+                                                return <>
+                                                    {data.adminId == AdminId ?
+                                                        <tr key={index} className={` text-gray-500 text-start`}>
+                                                            <td class=" py-3 pl-2 ">{data.articleId}</td>
+                                                            <td class="  "> <td class=" ">
+                                                                {truncateTitle(data.title, 30)}
+                                                            </td></td>
+                                                            <td class=" ">
+                                                                <h1 className='py-2 text-gray-700'
+                                                                    dangerouslySetInnerHTML={{
+                                                                        __html: truncateTitle(data.subject, 100),
+                                                                    }}
+                                                                >
+                                                                </h1>
+                                                            </td>
+                                                            <td class="  ">{data.author}</td>
+                                                            <td class="  ">{data.createdDate}</td>
+                                                            <td class="  ">{data.createdTime}</td>
+                                                            <td class="  ">{data.articleType}</td>
+                                                            <td class="  ">{data.modifiedDate}</td>
+                                                            <td class="  ">{data.modifiedTime}</td>
+                                                            <td>
+                                                                <label class="relative inline-flex items-center cursor-pointer">
+                                                                    <input type="checkbox" value="" class="sr-only peer" onClick={() => deleteBlog(data.articleId)} checked />
+                                                                    <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                                                                    <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300"></span>
+                                                                </label>
+                                                            </td>
+                                                            <td>
+                                                                <Link to={`/blogHistory/${data.articleId}`}>
+                                                                    <BiShow className='hover:text-xl text-lg hover:text-blue-400 duration-300' />
+                                                                </Link>
+                                                            </td>
+                                                        </tr>
+                                                        : ""}
 
+                                                </>
+                                            })} */}
 
                                         </>}
                                     </tbody>
@@ -249,27 +230,7 @@ function AnushthanRunningtatus() {
                 </div>
             </div>
 
-            <Modal
-                isOpen={modalIsOpen}
-                // onAfterOpen={afterOpenModal}
-                onRequestClose={closeModal}
-                style={customStyles}
-                contentLabel="Example Modal"
-                className=""
 
-            >
-                <AiOutlineClose onClick={closeModal} className="relative top-0 left-[100%] cursor-pointer shadow-md" size={25} />
-                <div class="card" >
-
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div>
-
-
-            </Modal>
 
 
 
@@ -278,4 +239,4 @@ function AnushthanRunningtatus() {
     )
 }
 
-export default AnushthanRunningtatus
+export default PaymentsList

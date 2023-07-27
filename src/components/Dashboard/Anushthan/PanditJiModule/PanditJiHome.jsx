@@ -51,7 +51,7 @@ const PanditJiHome = () => {
                                             </h1>
                                         </Link>
                                     </> : <>
-                                        <h1 onClick={unAutherizedHndle} className=' py-3 cursor-pointer  text-xl leading-6 text-center font-medium   text-red-500/60 '> Blog  Post</h1>
+                                        <h1 onClick={unAutherizedHndle} className=' py-3 cursor-pointer  text-xl leading-6 text-center font-medium   text-red-500/60 '> User Meetings with Pandit Ji</h1>
 
                                     </>}
 
@@ -66,7 +66,7 @@ const PanditJiHome = () => {
                                             </h1>
                                         </Link>
                                     </> : <>
-                                        <h1 onClick={unAutherizedHndle} className=' py-3 cursor-pointer  text-xl leading-6 text-center font-medium   text-red-500/60 '>Blog  Review</h1>
+                                        <h1 onClick={unAutherizedHndle} className=' py-3 cursor-pointer  text-xl leading-6 text-center font-medium   text-red-500/60 '> Anushthan Running Status</h1>
 
                                     </>}
 

@@ -1,5 +1,9 @@
 import React, { useState } from 'react'
 import { BsThreeDotsVertical } from 'react-icons/bs';
+
+import { BiShowAlt } from 'react-icons/bi';
+import { FaUserEdit } from 'react-icons/fa';
+import { AiOutlineDelete } from 'react-icons/ai';
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { ToastContainer } from 'react-toastify'
@@ -10,10 +14,16 @@ import Loader from '../../../Loader/Loader'
 import { BsSearch } from 'react-icons/bs'
 import { BiShow } from 'react-icons/bi'
 import { Link, useNavigate } from 'react-router-dom'
+import AddInterestedCalls from './AddInterestedCalls'
+import AllocateRep from './AllocateRep'
+import axios from "axios";
+
+
 function UserCallsQueries() {
     const navigate = useNavigate();
     const [type, setType] = useState('PUBLISH')
     const [page, setPage] = useState(0)
+    const [queries, setQueries] = useState([])
     const [FilterSearch, setFilterSearch] = useState('')
     const History = useSelector((state) => state.BlogsHistory)
     const data = {
@@ -23,8 +33,25 @@ function UserCallsQueries() {
     }
     const dispatch = useDispatch()
     useEffect(() => {
-        dispatch(getBlogHistory(data))
-    }, [page, FilterSearch])
+        let OPTIONS = {
+
+            url: `https://ffc7-2401-4900-1f39-1858-5cf5-3ace-7f7e-c3b3.ngrok-free.app/api/getUserQueryList?userIdentity=AnushthanUser&enabled=true&anushthanMobileOtpVerified=true&search=${FilterSearch}`,
+            method: "get",
+            headers: {
+                "content-type": "application/json",
+            },
+        };
+        axios(OPTIONS)
+            .then((res) => {
+                // console.log(res.data)
+                setQueries(res?.data)
+            })
+    }, [FilterSearch])
+    console.log(queries)
+    // useEffect(() => {
+    //     dispatch(getBlogHistory(data))
+
+    // }, [page, FilterSearch])
     const nextPage = () => {
         setPage(page + 1)
     }
@@ -38,9 +65,9 @@ function UserCallsQueries() {
             return str;
         }
     };
-    const deleteBlog = (ids) => {
-        dispatch(deleteBlogHistoryView(ids))
-    }
+    // const deleteBlog = (ids) => {
+    //     dispatch(deleteBlogHistoryView(ids))
+    // }
     const AdminId = JSON.parse(sessionStorage.getItem('adminId'))
     return (
         <>
@@ -79,6 +106,9 @@ function UserCallsQueries() {
                             <div className='flex justify-center items-center '>
                                 <div className='text-green-500 mx-2 font-medium'>
                                     {/* {type === 'PUBLISH' ? 'PUBLISH' : 'OPEN'} */}
+                                    <button class="bg-orange-500 hover:bg-orange-600 text-white font-medium py-1 shadow-xl  px-5 text-lg rounded-full focus:outline-none focus:shadow-outline" type="submit">
+                                        {<AddInterestedCalls />}
+                                    </button>
                                 </div>
 
 
@@ -101,7 +131,7 @@ function UserCallsQueries() {
                                             <td class="  ">Contact No.</td>
                                             <td class="  ">User Message</td>
                                             <td class="  ">Query Status</td>
-                                            <td class="  ">Representative Reply</td>
+                                            {/* <td class="  ">Representative Reply</td> */}
                                             <td class="  ">Action</td>
 
 
@@ -113,30 +143,106 @@ function UserCallsQueries() {
                                         {History.loading ? <Loader /> : <>
 
                                             {AdminId == "86" ? <>
-                                                {History.result?.map((data, index) => {
+                                                {queries.data?.map((data, index) => {
                                                     {/* {History.result.map((data, index) => { */ }
                                                     return <>
 
                                                         <tr key={index} className={` text-gray-500 text-start`}>
-                                                            <td class="py-3 pl-2 ">1234</td>
-                                                            <td class="   ">21/04/2023</td>
-                                                            <td class="  ">2PM - 3PM </td>
-                                                            <td class="  ">Aman</td>
-                                                            <td class="  ">Male</td>
-                                                            <td class="  ">9910499956</td>
-                                                            <td class="  ">Message Hello</td>
-                                                            <td class="  ">Processing</td>
-                                                            <td class="  ">Hello</td>
-                                                            <td>
+                                                            <td class="py-3 pl-2 ">{data.userId}</td>
+                                                            <td class="   ">{data.createdDate}</td>
+                                                            <td class="  ">{data.preferredTiming}</td>
+                                                            <td class="  ">{data.firstName}</td>
+                                                            <td class="  ">{data.gender}</td>
+                                                            <td class="  ">+{data.contactNo}</td>
+                                                            <td class="  ">{data.message}</td>
+                                                            <td class="  ">{data.queryStatus}</td>
+                                                            {/* <td class="  ">Hello{data.}</td> */}
+                                                            {/* <td>
                                                                 <select name="cars" id="cars">
                                                                     <option value=""></option>
                                                                     <option value="Profie">View Profile</option>
                                                                     <option value="Join Meet">Edit</option>
-                                                                    
+                                                                    <option value="Join Meet"> {<AddClient />}</option>
+
                                                                 </select>
+                                                            </td> */}
+                                                            {/* <td>{<AllocateRep />}</td> */}
+                                                            <td>
+
+
+                                                                <div class="nav-item dropdown flexs relative z-100 ">
+                                                                    <button
+                                                                        class="block"
+                                                                        id="navbarScrollingDropdown"
+                                                                        role="button"
+                                                                        data-bs-toggle="dropdown"
+                                                                        aria-expanded="false"
+                                                                    >
+                                                                        <BsThreeDotsVertical
+
+                                                                        />
+                                                                    </button>
+                                                                    <ul
+                                                                        class="dropdown-menu dropdown-menu-right absolute z-50 right-0 hidden -mt-3 w-[208px] py-1 bg-white border rounded shadow-lg"
+                                                                        id="UlLI"
+                                                                        aria-labelledby="navbarScrollingDropdown"
+                                                                    >
+                                                                        <li>
+                                                                            <Link to='/ViewProfile'>
+                                                                                <BiShowAlt class="inline-block mr-2" />
+                                                                                View Profile
+                                                                            </Link>
+                                                                            {/* <a
+                                                                                class="block px-4 py-2 text-gray-800 hover:bg-gray-100"
+                                                                                href="/ViewProfile"
+                                                                            >
+                                                                                <BiShowAlt class="inline-block mr-2" />
+                                                                                View Profile
+                                                                            </a> */}
+                                                                        </li>
+                                                                        <li>
+                                                                            <div
+                                                                                class="block px-4 py-2 text-gray-800 hover:bg-gray-100"
+                                                                                href="#"
+                                                                            >
+                                                                                <FaUserEdit class="inline-block mr-2" />
+                                                                                {<AllocateRep />}
+                                                                            </div>
+                                                                        </li>
+                                                                        <li>
+                                                                            <div
+                                                                                class="block px-4 py-2 text-gray-800 hover:bg-gray-100"
+                                                                                href="#"
+                                                                            >
+                                                                                <FaUserEdit class="inline-block mr-2" />
+                                                                                {<AllocateRep />}
+                                                                            </div>
+                                                                        </li>
+                                                                        <li>
+                                                                            <div
+                                                                                class="block px-4 py-2 text-gray-800 hover:bg-gray-100"
+                                                                                href="#"
+                                                                            >
+                                                                                <FaUserEdit class="inline-block mr-2" />
+                                                                                <AddInterestedCalls />
+                                                                            </div>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a
+                                                                                class="block px-4 py-2 text-gray-800 hover:bg-gray-100"
+                                                                                href="#"
+                                                                            >
+                                                                                <AiOutlineDelete class="inline-block mr-2" />
+                                                                                Block/Unblock
+                                                                            </a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+
+
+
                                                             </td>
 
-                                                               
                                                         </tr>
 
 

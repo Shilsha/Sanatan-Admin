@@ -80,6 +80,9 @@ function ClientList() {
                             <div className='flex justify-center items-center '>
                                 <div className='text-green-500 mx-2 font-medium'>
                                     {/* {type === 'PUBLISH' ? 'PUBLISH' : 'OPEN'} */}
+                                    <button class="bg-orange-500 hover:bg-orange-600 text-white font-medium py-1 shadow-xl  px-5 text-lg rounded-full focus:outline-none focus:shadow-outline" type="submit">
+
+                                    </button>
                                 </div>
 
 
@@ -125,10 +128,10 @@ function ClientList() {
                                                             <td class="  ">Male</td>
                                                             <td class="  ">9910499956</td>
                                                             <td class="  ">Message</td>
-                                                            <td class="  ">Direst</td>
+                                                            <td class="  ">Direct</td>
                                                             <td class="  ">Family</td>
                                                             <td class="  ">In Progress</td>
-                                                            <td>
+                                                            {/* <td>
                                                                 <select name="cars" id="cars">
                                                                     <option value=""></option>
                                                                     <option value="Profie">View Profile</option>
@@ -136,6 +139,15 @@ function ClientList() {
                                                                     <option value="Join Meet">Add new client</option>
                                                                     
                                                                 </select>
+                                                            </td> */}
+                                                            <td >
+                                                                <Link to='/ClientProfile'>
+                                                                    <h1 class=" cursor-pointer uppercase font-medium
+                                 hover:scale-110 duration-500    ">
+                                                                        Client Profile
+                                                                    </h1>
+                                                                </Link>
+                                                                {/* <BsThreeDotsVertical />  */}
                                                             </td>
                                                         </tr>
 
@@ -149,16 +161,24 @@ function ClientList() {
                                                         return <>
                                                             {data.adminId == AdminId ?
                                                                 <tr key={index} className={` text-gray-500 text-start`}>
-                                                                     <td class="py-3 pl-2 ">ID</td>
-                                                            <td class="   ">17/07/2023</td>
-                                                            <td class="  ">Aman</td>
-                                                            <td class="  ">Male</td>
-                                                            <td class="  ">9910499956</td>
-                                                            <td class="  ">Message</td>
-                                                            <td class="  ">Direst</td>
-                                                            <td class="  ">Family</td>
-                                                            <td class="  ">In Progress</td>
-                                                            <td><BsThreeDotsVertical /> </td>
+                                                                    <td class="py-3 pl-2 ">ID</td>
+                                                                    <td class="   ">17/07/2023</td>
+                                                                    <td class="  ">Aman</td>
+                                                                    <td class="  ">Male</td>
+                                                                    <td class="  ">9910499956</td>
+                                                                    <td class="  ">Message</td>
+                                                                    <td class="  ">Direst</td>
+                                                                    <td class="  ">Family</td>
+                                                                    <td class="  ">In Progress</td>
+                                                                    <td >
+                                                                        <Link to='/ClientForm'>
+                                                                            <h1 class=" cursor-pointer uppercase font-medium
+                                 hover:scale-110 duration-500    ">
+                                                                                Client Profile
+                                                                            </h1>
+                                                                        </Link>
+                                                                        {/* <BsThreeDotsVertical />  */}
+                                                                        aaaaa9 </td>
                                                                 </tr>
                                                                 : ""}
 

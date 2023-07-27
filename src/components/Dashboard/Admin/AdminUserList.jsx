@@ -82,6 +82,9 @@ function AdminUserList() {
         { name: "BlogPost" },
         { name: "BlogReview" },
         { name: "BlogCategory" },
+        { name: "Calls/Queries" },
+        { name: "Anushthan" },
+        { name: "Pandit Ji Call" },
     ]);
 
     const openModel = (data,roless) => {
