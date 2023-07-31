@@ -2,10 +2,10 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from 'axios'
 import { toast } from "react-toastify";
 export const getBlogInactive = createAsyncThunk('BLOG_INACTIVE/GET_BLOG_INACTIVE',
-    async (type) => {
+    async (props) => {
 
         let OPTIONS = {
-            url: `${import.meta.env.VITE_BASE_URL}/article/get_deleted_Articles?status=false&page=0&size=10`,
+            url: `${import.meta.env.VITE_BASE_URL}/article/get_deleted_Articles?status=false&page=${props.page}&size=20`,
             method: "GET",
             headers: {
                 'Accept': 'application/json'

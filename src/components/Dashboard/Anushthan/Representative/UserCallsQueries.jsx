@@ -25,17 +25,17 @@ function UserCallsQueries() {
     const [page, setPage] = useState(0)
     const [queries, setQueries] = useState([])
     const [FilterSearch, setFilterSearch] = useState('')
+    const [repList, setRepList] = useState("")
     const History = useSelector((state) => state.BlogsHistory)
     const data = {
         type: type,
         page: page,
         keyword: FilterSearch
     }
-    const dispatch = useDispatch()
     useEffect(() => {
         let OPTIONS = {
 
-            url: `https://ffc7-2401-4900-1f39-1858-5cf5-3ace-7f7e-c3b3.ngrok-free.app/api/getUserQueryList?userIdentity=AnushthanUser&enabled=true&anushthanMobileOtpVerified=true&search=${FilterSearch}`,
+            url: `https://00e2-122-161-49-167.ngrok-free.app/api/getUserQueryList?userIdentity=AnushthanUser&enabled=true&anushthanMobileOtpVerified=true&search=${FilterSearch}`,
             method: "get",
             headers: {
                 "content-type": "application/json",
@@ -45,9 +45,29 @@ function UserCallsQueries() {
             .then((res) => {
                 // console.log(res.data)
                 setQueries(res?.data)
+                let OPTIONS1 = {
+
+                    url: `https://00e2-122-161-49-167.ngrok-free.app/api/get-representatives`,
+                    method: "get",
+                    headers: {
+                        "content-type": "application/json",
+                    },
+                };
+                axios(OPTIONS1)
+                    .then((res) => {
+                        setRepList(res?.data)
+                        console.log(repList)
+        
+                    })
             })
     }, [FilterSearch])
-    console.log(queries)
+
+
+
+    useEffect(() => {
+        
+    }, [])
+    // console.log(queries)
     // useEffect(() => {
     //     dispatch(getBlogHistory(data))
 
@@ -130,6 +150,7 @@ function UserCallsQueries() {
                                             <td class="  ">Gender</td>
                                             <td class="  ">Contact No.</td>
                                             <td class="  ">User Message</td>
+                                            <td class="  ">Representative Name</td>
                                             <td class="  ">Query Status</td>
                                             {/* <td class="  ">Representative Reply</td> */}
                                             <td class="  ">Action</td>
@@ -148,13 +169,14 @@ function UserCallsQueries() {
                                                     return <>
 
                                                         <tr key={index} className={` text-gray-500 text-start`}>
-                                                            <td class="py-3 pl-2 ">{data.userId}</td>
+                                                            <td class="py-3 pl-2 ">{data.queryId}</td>
                                                             <td class="   ">{data.createdDate}</td>
                                                             <td class="  ">{data.preferredTiming}</td>
                                                             <td class="  ">{data.firstName}</td>
                                                             <td class="  ">{data.gender}</td>
-                                                            <td class="  ">+{data.contactNo}</td>
+                                                            <td class="  ">+{data.mobileNo}</td>
                                                             <td class="  ">{data.message}</td>
+                                                            <td class="  ">{data.representativeName}</td>
                                                             <td class="  ">{data.queryStatus}</td>
                                                             {/* <td class="  ">Hello{data.}</td> */}
                                                             {/* <td>
@@ -188,7 +210,7 @@ function UserCallsQueries() {
                                                                         aria-labelledby="navbarScrollingDropdown"
                                                                     >
                                                                         <li>
-                                                                            <Link to='/ViewProfile'>
+                                                                            <Link to={`/UserCallsQueries/${data.queryId}`}>
                                                                                 <BiShowAlt class="inline-block mr-2" />
                                                                                 View Profile
                                                                             </Link>
@@ -201,11 +223,34 @@ function UserCallsQueries() {
                                                                             </a> */}
                                                                         </li>
                                                                         <li>
+
+
                                                                             <div
                                                                                 class="block px-4 py-2 text-gray-800 hover:bg-gray-100"
                                                                                 href="#"
                                                                             >
-                                                                                <FaUserEdit class="inline-block mr-2" />
+                                                                                {/* <FaUserEdit class="inline-block mr-2" /> */}
+                                                                                {<AllocateRep
+                                                                                    userId={data.userId}
+                                                                                    queryId={data.queryId}
+                                                                                    createdDate={data.createdDate}
+                                                                                    preferredTiming={data.preferredTiming}
+                                                                                    firstName={data.firstName}
+                                                                                    gender={data.gender}
+                                                                                    message={data.message}
+                                                                                    contactNo={data.mobileNo}
+                                                                                    repList={repList}
+
+
+                                                                                />}
+                                                                            </div>
+                                                                        </li>
+                                                                        <li>
+                                                                            <div
+                                                                                class="block px-4 py-2 text-gray-800 hover:bg-gray-100"
+                                                                                href="#"
+                                                                            >
+                                                                                {/* <FaUserEdit class="inline-block mr-2" /> */}
                                                                                 {<AllocateRep />}
                                                                             </div>
                                                                         </li>
@@ -214,16 +259,7 @@ function UserCallsQueries() {
                                                                                 class="block px-4 py-2 text-gray-800 hover:bg-gray-100"
                                                                                 href="#"
                                                                             >
-                                                                                <FaUserEdit class="inline-block mr-2" />
-                                                                                {<AllocateRep />}
-                                                                            </div>
-                                                                        </li>
-                                                                        <li>
-                                                                            <div
-                                                                                class="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-                                                                                href="#"
-                                                                            >
-                                                                                <FaUserEdit class="inline-block mr-2" />
+                                                                                {/* <FaUserEdit class="inline-block mr-2" /> */}
                                                                                 <AddInterestedCalls />
                                                                             </div>
                                                                         </li>
@@ -232,7 +268,7 @@ function UserCallsQueries() {
                                                                                 class="block px-4 py-2 text-gray-800 hover:bg-gray-100"
                                                                                 href="#"
                                                                             >
-                                                                                <AiOutlineDelete class="inline-block mr-2" />
+                                                                                {/* <AiOutlineDelete class="inline-block mr-2" /> */}
                                                                                 Block/Unblock
                                                                             </a>
                                                                         </li>

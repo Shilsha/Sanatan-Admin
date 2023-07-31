@@ -78,7 +78,7 @@ function Routing() {
           <Route exact path="/blogDrafted/:id" element={<PrivateRoutes Component={SingleDraftView} />}> </Route>
           <Route exact path="/blogInactive/:id" element={<PrivateRoutes Component={SingleInactiveView} />}> </Route>
           <Route exact path="/RepresentativeHome" element={<PrivateRoutes Component={RepresentativeHome} />}> </Route>
-          <Route exact path="/ViewProfile" element={<PrivateRoutes Component={ViewProfile} />}> </Route>
+          <Route exact path="/UserCallsQueries/:id" element={<PrivateRoutes Component={ViewProfile} />}> </Route>
           <Route exact path="/UserCallsQueries" element={<PrivateRoutes Component={UserCallsQueries} />}> </Route>
           <Route exact path="/ClientList" element={<PrivateRoutes Component={ClientList} />}> </Route>
           <Route exact path="/AnushthanRunningtatus" element={<PrivateRoutes Component={AnushthanRunningtatus} />}> </Route>

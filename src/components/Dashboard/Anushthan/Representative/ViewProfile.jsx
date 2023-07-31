@@ -1,9 +1,32 @@
-import React from 'react'
+import React, { useEffect,useState } from 'react'
 import Navbar from '../../../Navbar/Navbar'
 import Sidebar from '../../../Sidebar/Sidebar'
 import { ToastContainer } from 'react-toastify'
+import { useParams } from "react-router-dom";
+import axios from "axios";
+
 
 const ViewProfile = () => {
+    const { id } = useParams();
+    const [profileData, setProfileData] = useState("")
+
+    useEffect(() => {
+        let OPTIONS = {
+
+            url: `https://00e2-122-161-49-167.ngrok-free.app/api/getUserQueryById?queryId=${id}`,
+            method: "get",
+            headers: {
+                "content-type": "application/json",
+            },
+        };
+        axios(OPTIONS)
+            .then((res) => {
+                // console.log(res.data.data)
+                setProfileData(res?.data?.data)
+               
+                
+            })
+    }, [])
     return (
         <>
             <ToastContainer />
@@ -17,10 +40,18 @@ const ViewProfile = () => {
                             <div className="div border-r-2 border-black">
                                 <div class="grid md:grid-cols-2 md:gap-6 p-2">
                                     <div>
-                                        ID
+                                      Query  ID
                                     </div>
                                     <div>
-                                        123
+                                        {profileData.queryId}
+                                    </div>
+                                </div>
+                                <div class="grid md:grid-cols-2 md:gap-6 p-2">
+                                    <div>
+                                      User  ID
+                                    </div>
+                                    <div>
+                                    {profileData.userId}
                                     </div>
                                 </div>
                                 <div class="grid md:grid-cols-2 md:gap-6 p-2">
@@ -28,7 +59,7 @@ const ViewProfile = () => {
                                         Name
                                     </div>
                                     <div>
-                                        Aman
+                                    {profileData.firstName}
                                     </div>
                                 </div>
                                 <div class="grid md:grid-cols-2 md:gap-6 p-2">
@@ -36,7 +67,7 @@ const ViewProfile = () => {
                                         Gender
                                     </div>
                                     <div>
-                                        Male
+                                    {profileData.gender}
                                     </div>
                                 </div>
                                 <div class="grid md:grid-cols-2 md:gap-6 p-2">
@@ -44,7 +75,7 @@ const ViewProfile = () => {
                                         Contact No.
                                     </div>
                                     <div>
-                                        9910499956
+                                    {profileData.mobileNo}
                                     </div>
                                 </div>
                                 <div class="grid md:grid-cols-2 md:gap-6 p-2">
@@ -52,7 +83,7 @@ const ViewProfile = () => {
                                         Email Address
                                     </div>
                                     <div>
-                                        aman@gmail.com
+                                    {profileData.email}
                                     </div>
                                 </div>
                                 <div class="grid md:grid-cols-2 md:gap-6 p-2">
@@ -60,15 +91,15 @@ const ViewProfile = () => {
                                         User Message
                                     </div>
                                     <div>
-                                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Labore ab totam, quidem, dolores ipsam eos at molestiae deleniti corporis odio corrupti? Animi sapiente sint eveniet tenetur et modi. Nam illo possimus aut doloribus, assumenda quisquam officia ratione veniam necessitatibus culpa nobis, dolorem tempora molestiae maiores quas, impedit hic minus. Assumenda.
-                                    </div>
+                                    {profileData.message}                                 
+                                       </div>
                                 </div>
                                 <div class="grid md:grid-cols-2 md:gap-6 p-2">
                                     <div>
                                         Query Raise Date
                                     </div>
                                     <div>
-                                        25/07/2023
+                                    {profileData.createdDate}
                                     </div>
                                 </div>
                                 <div class="grid md:grid-cols-2 md:gap-6 p-2">
@@ -76,7 +107,7 @@ const ViewProfile = () => {
                                         Preferred Timing
                                     </div>
                                     <div>
-                                        2 PM - 2 PM
+                                    {profileData.preferredTiming}
                                     </div>
                                 </div>
                                 <div class="grid md:grid-cols-2 md:gap-6 p-2">
@@ -84,7 +115,7 @@ const ViewProfile = () => {
                                         Status
                                     </div>
                                     <div>
-                                        In Progress
+                                    {profileData.queryStatus}
                                     </div>
                                 </div>
                                 <div class="grid md:grid-cols-2 md:gap-6 p-2">
@@ -92,7 +123,7 @@ const ViewProfile = () => {
                                         Representative Name
                                     </div>
                                     <div>
-                                        Rahul
+                                    {profileData.representativeName}
                                     </div>
                                 </div>
                             </div>
