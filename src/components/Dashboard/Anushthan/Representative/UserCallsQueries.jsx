@@ -35,7 +35,7 @@ function UserCallsQueries() {
     useEffect(() => {
         let OPTIONS = {
 
-            url: `https://00e2-122-161-49-167.ngrok-free.app/api/getUserQueryList?userIdentity=AnushthanUser&enabled=true&anushthanMobileOtpVerified=true&search=${FilterSearch}`,
+            url: `${import.meta.env.VITE_BASE_URL}/api/getUserQueryList?userIdentity=AnushthanUser&enabled=true&anushthanMobileOtpVerified=true&search=${FilterSearch}`,
             method: "get",
             headers: {
                 "content-type": "application/json",
@@ -47,18 +47,18 @@ function UserCallsQueries() {
                 setQueries(res?.data)
                 let OPTIONS1 = {
 
-                    url: `https://00e2-122-161-49-167.ngrok-free.app/api/get-representatives`,
+                    url: `${import.meta.env.VITE_BASE_URL}/api/get-representatives`,
                     method: "get",
                     headers: {
                         "content-type": "application/json",
                     },
                 };
-                axios(OPTIONS1)
-                    .then((res) => {
-                        setRepList(res?.data)
-                        console.log(repList)
+                // axios(OPTIONS1)
+                //     .then((res) => {
+                //         setRepList(res?.data)
+                //         console.log(repList)
         
-                    })
+                //     })
             })
     }, [FilterSearch])
 

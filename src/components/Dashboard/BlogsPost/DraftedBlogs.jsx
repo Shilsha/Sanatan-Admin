@@ -13,17 +13,20 @@ import { Link, useNavigate } from 'react-router-dom'
 function DraftedBlogs() {
     const navigate = useNavigate();
     const [type, setType] = useState('PUBLISH')
+    
     const [FilterSearch, setFilterSearch] = useState('')
     const History = useSelector((state) => state.BlogDraft)
     const [page, setPage] = useState(0)
+    const data = {
+        
+        page: page,
+        keyword: FilterSearch
+    }
     const dispatch = useDispatch()
-    // useEffect(() => {
-
-    //     dispatch(getBlogDrafts())
-    // }, [])
+   
     useEffect(() => {
-        dispatch(getBlogDrafts(page))
-    }, [page])
+        dispatch(getBlogDrafts(data))
+    }, [page,FilterSearch])
     const nextPage = () => {
         setPage(page + 1)
     }
@@ -56,7 +59,9 @@ function DraftedBlogs() {
                                 <div class=" relative w-full  text-gray-600 ">
                                     <input class="border-2  w-full border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
                                         type="search" name="search" placeholder="Search..."
-                                        value={FilterSearch} onChange={(e) => setFilterSearch(e.target.value)}
+                                        value={FilterSearch} onChange={(e) =>{ 
+                                            setPage(0)
+                                            setFilterSearch(e.target.value);}}
                                     />
                                     <button type="submit" class="absolute right-0 top-2 mr-5">
                                         <BsSearch className='p-1 ' size={25} />

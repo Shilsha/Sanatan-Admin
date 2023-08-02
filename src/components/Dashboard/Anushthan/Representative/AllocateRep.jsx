@@ -57,7 +57,7 @@ const AllocateRep = (props) => {
     useEffect(() => {
         let OPTIONS = {
 
-            url: `https://00e2-122-161-49-167.ngrok-free.app/api/get-representatives`,
+            url: `${import.meta.env.VITE_BASE_URL}/api/get-representatives`,
             method: "get",
             headers: {
                 "content-type": "application/json",
@@ -77,7 +77,7 @@ const AllocateRep = (props) => {
         e.preventDefault()
         let OPTIONS = {
 
-            url: `https://00e2-122-161-49-167.ngrok-free.app/api/allocate-representative?userQueryID=${props.queryId}&representativeId=${rep}`,
+            url: `${import.meta.env.VITE_BASE_URL}/api/allocate-representative?userQueryID=${props.queryId}&representativeId=${rep}`,
             method: "Post",
             headers: {
                 "content-type": "application/json",

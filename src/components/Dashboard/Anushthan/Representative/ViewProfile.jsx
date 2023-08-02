@@ -13,7 +13,7 @@ const ViewProfile = () => {
     useEffect(() => {
         let OPTIONS = {
 
-            url: `https://00e2-122-161-49-167.ngrok-free.app/api/getUserQueryById?queryId=${id}`,
+            url: `${import.meta.env.VITE_BASE_URL}/api/getUserQueryById?queryId=${id}`,
             method: "get",
             headers: {
                 "content-type": "application/json",
