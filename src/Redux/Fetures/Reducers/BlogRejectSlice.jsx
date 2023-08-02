@@ -6,7 +6,7 @@ export const getBlogRejectAction = createAsyncThunk('GET_BLOGS_REJECT/GET_BLOGS_
     async (props) => {
 
         let OPTIONS = {
-            url: `${import.meta.env.VITE_BASE_URL}/api/getRejectedArticlesList?articleType=${props.type}&page=${props.page}&size=20&category=All&keyword=${props.keyword}&isDraftBlog=false`,
+            url: `${import.meta.env.VITE_BASE_URL}/article/getRejectedArticlesList?articleType=${props.type}&page=${props.page}&size=20&category=All&keyword=${props.keyword}&isDraftBlog=false`,
             method: "GET",                       
             headers: {
                 'Accept': 'application/json'
