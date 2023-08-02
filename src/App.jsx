@@ -45,6 +45,7 @@ import TalkToPanditJi from './components/Dashboard/Anushthan/Client/TalkToPandit
 import PaymentsList from './components/Dashboard/Anushthan/Client/PaymentsList';
 import CallNotes from './components/Dashboard/Anushthan/Client/CallNotes';
 import ViewProfile from './components/Dashboard/Anushthan/Representative/ViewProfile';
+import blogSearchAll from './components/Dashboard/BlogsPost/BlogsSearchAll';
 
 function Routing() {
   return (
@@ -68,6 +69,7 @@ function Routing() {
           <Route exact path="/blogCategory" element={<PrivateRoutes Component={BlogCategory} />}> </Route>
           <Route exact path="/updateBlog/:id" element={<PrivateRoutes Component={UpdateBlog} />}> </Route>
           <Route exact path="/blogHistory" element={<PrivateRoutes Component={BlogHistory} />}> </Route>
+          <Route exact path="/blogSearchAll" element={<PrivateRoutes Component={blogSearchAll} />}> </Route>
           <Route exact path="/blogInactive" element={<PrivateRoutes Component={BlogInactive} />}> </Route>
           <Route exact path="/blogReview" element={<PrivateRoutes Component={BlogReview2} />}> </Route>
           <Route exact path="/blogDrafted" element={<PrivateRoutes Component={DraftedBlogs} />}> </Route>

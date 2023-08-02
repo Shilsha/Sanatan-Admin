@@ -75,7 +75,7 @@ function BlogReview() {
                                     {BlogsReviewModuleAuth || isSuperAdmin ? <>
                                         <Link to='/blogReview'>
                                             <h1 class=" cursor-pointer uppercase font-medium
-                               hover:scale-110 duration-500    ">
+                                                  hover:scale-110 duration-500    ">
                                                 Blog  Review
                                             </h1>
                                         </Link>
@@ -84,7 +84,9 @@ function BlogReview() {
 
                                     </>}
 
-                                </div><div className='rounded-lg bg-gray-50/20 blurr   grid place-content-center   shadow     h-[175px] ' >
+                                </div>
+                                
+                                <div className='rounded-lg bg-gray-50/20 blurr   grid place-content-center   shadow     h-[175px] ' >
                                     <Link to='/blogHistory'>
 
                                         <h1 class=" cursor-pointer uppercase font-medium hover:scale-110 duration-500    ">
@@ -107,7 +109,7 @@ function BlogReview() {
                                     <Link to='/blogDrafted'>
 
                                         <h1 class=" cursor-pointer uppercase font-medium
-                               hover:scale-110 duration-500    ">
+                                              hover:scale-110 duration-500    ">
                                             Drafts
                                         </h1>
                                     </Link>
@@ -116,10 +118,24 @@ function BlogReview() {
                                     <Link to='/blogInactive'>
 
                                         <h1 class=" cursor-pointer uppercase font-medium
-                               hover:scale-110 duration-500    ">
+                                           hover:scale-110 duration-500    ">
                                             Inactive Blogs
                                         </h1>
                                     </Link>
+                                </div>
+                                <div className='rounded-lg bg-gray-50/20 blurr  grid place-content-center   shadow     h-[175px] ' >
+                                    {BlogsReviewModuleAuth || isSuperAdmin ? <>
+                                        <Link to='/blogSearchAll'>
+                                            <h1 class=" cursor-pointer uppercase font-medium
+                                                  hover:scale-110 duration-500    ">
+                                                Blogs Search
+                                            </h1>
+                                        </Link>
+                                    </> : <>
+                                        <h1 onClick={unAutherizedHndle} className=' py-3 cursor-pointer  text-xl leading-6 text-center font-medium   text-red-500/60 '>Blogs Search</h1>
+
+                                    </>}
+
                                 </div>
                             </div>
 
