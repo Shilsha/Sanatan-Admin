@@ -55,7 +55,8 @@ function ReadMoreArticle() {
         dispatch(blogRejectSingle(data))
 
     }
-
+    const isModuleAuth = JSON.parse(sessionStorage.getItem('user'))
+    const BlogsReviewModuleAuth = isModuleAuth?.role.some(data => data == 'BlogReview')
     return (
         <>
             <div className='   w-[100%]  min-h-screen flex flex-col-2 gap-4  '>
@@ -85,7 +86,7 @@ function ReadMoreArticle() {
                                             Publish Blog
                                         </button>
                                         {
-                                            (loggedAdminId == authorId) || (loggedAdminId == superAdminId) ?
+                                            (loggedAdminId == authorId) || (loggedAdminId == superAdminId) || (BlogsReviewModuleAuth)?
 
                                                 <Link to={`/updateBlog/${GetSingle?.result.articleId}`}>
                                                     <button class="bg-transparent my-4 w-full  hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded-full"
@@ -96,6 +97,7 @@ function ReadMoreArticle() {
                                                 </Link>
                                                 : ""
                                         }
+                                       
                                         <button class="bg-transparent my-4 hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded-full" onClick={() => rejectBlog({
                                             id: GetSingle?.result.articleId,
                                             title: GetSingle?.result.title,

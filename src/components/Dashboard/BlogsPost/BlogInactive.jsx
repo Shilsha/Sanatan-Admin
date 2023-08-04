@@ -39,6 +39,9 @@ function BlogInactive() {
         }
     };
     const AdminId = JSON.parse(sessionStorage.getItem('adminId'))
+    const isModuleAuth = JSON.parse(sessionStorage.getItem('user'))
+    const InactiveAuth = isModuleAuth?.role.some(data => data == 'Inactive')
+
     return (
         <>
             <ToastContainer />
@@ -97,7 +100,7 @@ function BlogInactive() {
                                     </thead>
                                     <tbody>
                                         {History.loading ? <Loader /> : <>
-                                            {AdminId == "86" ? <>
+                                            {AdminId == "86" || InactiveAuth ? <>
                                                 {(History.result.filter(data => data.title?.toLowerCase().includes(FilterSearch)))?.map((data, index) => {
                                                     {/* {History.result.map((data, index) => { */ }
                                                     return <>

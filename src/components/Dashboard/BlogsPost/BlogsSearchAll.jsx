@@ -128,7 +128,7 @@ function blogSearchAll() {
                                                                     <td class="  ">{data.author}</td>
                                                                     <td class="  ">{data.createdDate}</td>
                                                                     <td class="  ">{data.createdTime}</td>
-                                                                    <td class="  ">{data.articleType == OPEN ? "Review" : data.articleType == "PUBLISH" ? "History" : data.articleType == "REJECTED" ? "Reject" : ""}</td>
+                                                                    <td class="  ">{data.articleType == "OPEN" ? "Review" : data.articleType == "PUBLISH" ? "History" : data.articleType == "REJECTED" ? "Reject" : ""}</td>
                                                                     <td class="  ">{data.status == true ? "Active" : data.status == false ? "Inactive" : ""}</td>
                                                                 </tr>
                                                                 : ""}

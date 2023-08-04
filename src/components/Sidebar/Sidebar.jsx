@@ -29,7 +29,7 @@ const customStyles = {
         bottom: 'auto',
         marginRight: '-50%',
         transform: 'translate(-50%, -50%)',
-        width: '40%',
+        width: '60%',
         height: 'auto',
         position: 'relative',
         border: 'none'
@@ -79,6 +79,8 @@ function Sidebar() {
         { value: "Admin", label: "Admin" },
         { value: "Representative", label: "Representative" },
         { value: "Pandit", label: "Pandit Ji" },
+        { value: "ContentWriter", label: "Content Writer" },
+        { value: "SeniorContentWriter", label: "Senior Content Writer" },
 
     ];
     const handleChange = (event) => {
@@ -95,6 +97,10 @@ function Sidebar() {
         { name: "Logs" },
         { name: "Broadcast" },
         { name: "BlogPost" },
+        { name: "History" },
+        { name: "Reject" },
+        { name: "Inactive" },
+        { name: "Draft" },
         { name: "BlogReview" },
         { name: "BlogCategory" },
         { name: "Calls/Queries" },
@@ -443,14 +449,16 @@ function Sidebar() {
 
                         </li>
                         <li>
+                        
                             {/* {isSuperAdmin ? <> */}
-                            <NavLink to='/RepresentativeHome'>
+                            {/* <NavLink to='/RepresentativeHome'> */}
+                            <NavLink to='/AnushthanHome'>
                             <div class="grid md:grid-cols-2">
                                         <div class="">
                                         <SiBloglovin className=' ' size={25} />
                                         </div>
                                         <div class="">
-                                        <strong>Representative Management</strong> 
+                                        <strong>Anushthan Management</strong> 
                                         </div>
                                     </div>
                                 {/* <SiBloglovin className=' ' size={25} />
@@ -465,29 +473,7 @@ function Sidebar() {
                             </>} */}
 
                         </li>
-                        <li>
-                            {/* {isSuperAdmin ? <> */}
-                            <NavLink to='/PanditJiHome'>
-                            <div class="grid md:grid-cols-2">
-                                        <div class="">
-                                        <SiBloglovin className=' ' size={25} />
-                                        </div>
-                                        <div class="">
-                                        <strong>Pandit Ji Management</strong>
-                                        </div>
-                                    </div>
-                                {/* <SiBloglovin className=' ' size={25} />
-                                <strong>Pandit Ji Management</strong> */}
-
-                            </NavLink>
-                            {/* </> : <>
-                                <a onClick={unAutherizedHndle}>
-                                    <SiBloglovin className=' ' size={25} />
-                                    <strong>Pandit Ji Management</strong>
-                                </a>
-                            </>} */}
-
-                        </li>
+                       
 
 
 
@@ -517,14 +503,14 @@ function Sidebar() {
                         <AiOutlineClose onClick={closeModal} className="relative top-0 left-[100%] cursor-pointer shadow-md" size={25} />
                         <h1 className='text-center font-sans  mb-4 text-2xl font-bold text-orange-500'>Add User </h1>
                         <div class="grid md:grid-cols-2 md:gap-6">
-                            <div class="mb-4">
+                            <div class="">
                                 <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
                                     First Name
                                 </label>
                                 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="adminName" type="text" placeholder="First Name" required name='adminName' value={form.adminName} onChange={handleChangeInput}
                                 />
                             </div>
-                            <div class="mb-4">
+                            <div class="">
                                 <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
                                     Last Name
                                 </label>
@@ -533,7 +519,7 @@ function Sidebar() {
                             </div>
                         </div>
                         <div class="grid md:grid-cols-2 md:gap-6">
-                            <div class="mb-4">
+                            <div class="">
                                 <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
                                     Phone Number
                                 </label>
@@ -541,7 +527,7 @@ function Sidebar() {
                                 />
                                 {errors.phoneNumber && (<p className='text-red-500 text-sm pt-1'>{errors.phoneNumber}</p>)}
                             </div>
-                            <div class="mb-4">
+                            <div class="">
                                 <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
                                     Date of Birth
                                 </label>
@@ -549,7 +535,7 @@ function Sidebar() {
                             </div>
                         </div>
                         <div class="grid md:grid-cols-2 md:gap-6">
-                            <div className='mb-4'>
+                            <div className=''>
                                 <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
                                     Gender
                                 </label>
@@ -564,7 +550,7 @@ function Sidebar() {
                                     </div>
                                 </div>
                             </div>
-                            <div class="mb-4">
+                            <div class="">
                                 <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
                                     Designation
                                 </label>
@@ -584,14 +570,14 @@ function Sidebar() {
                         </div>
 
 
-                        <div class="mb-4">
+                        <div class="">
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
                                 Address
                             </label>
                             <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="adminName" type="text" placeholder="" required name='address' value={form.address} onChange={handleChangeInput}
                             />
                         </div>
-                        <div class="mb-4">
+                        <div class="">
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
                                 Admin Email
                             </label>

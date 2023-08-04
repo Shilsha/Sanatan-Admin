@@ -40,6 +40,8 @@ function BlogReject() {
         }
     };
     const AdminId = JSON.parse(sessionStorage.getItem('adminId'))
+    const isModuleAuth = JSON.parse(sessionStorage.getItem('user'))
+    const RejectAuth = isModuleAuth?.role.some(data => data == 'Reject')
 
     return (
         <>
@@ -105,7 +107,7 @@ function BlogReject() {
                                     </tr>
                                 </thead>
                                 {blogReject.loading ? <Loader /> : <>
-                                    {AdminId == "86" ? <>
+                                    {AdminId == "86" || RejectAuth ? <>
 
                                         {(blogReject.result.filter(data => data.title?.toLowerCase().includes(FilterSearch)))?.map((data, index) => {
 

@@ -381,6 +381,23 @@ function Dashboard() {
                                     <div className='rounded-lg bg-gray-50/20 blurr  shadow  px-2 h-[175px] ' >
                                         <div className='  my-3'>
                                             <div className='flex  justify-around items-center  pr-5 py-2 '>
+                                                <VscBroadcast className='text-orange-500  pt-2' size={40} />
+                                                {<h1 className='text-6xl font-medium text-gray-500    text-start '>{broadcastStatus.result.length ? <>{broadcastStatus.result.length}</> : <>0</>}</h1>}
+                                            </div>
+                                            <div className=''>
+                                                {/* {BroadcastModuleAuth || isSuperAdmin ? <> */}
+                                                <Link to='/AnushthanHome'>
+                                                    <h1 className='py-3 cursor-pointer hover:text-orange-600 text-xl leading-6 text-center font-medium   text-gray-500 '>Anushthan <br />  Management</h1>
+                                                </Link>
+                                                {/* </> : <>
+                                                    <h1 onClick={unAutherizedHndle} className=' py-3 cursor-pointer  text-xl leading-6 text-center font-medium   text-red-500/60 '>Representative <br /> Management</h1>
+                                                </>} */}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className='rounded-lg bg-gray-50/20 blurr  shadow  px-2 h-[175px] ' >
+                                        <div className='  my-3'>
+                                            <div className='flex  justify-around items-center  pr-5 py-2 '>
                                                 <GiArcheryTarget className='text-orange-500  pt-2' size={40} />
                                                 {<h1 className='text-6xl font-medium text-gray-500    text-start '>50</h1>}
                                             </div>
@@ -466,40 +483,8 @@ function Dashboard() {
                                             </div>
                                         </div>
                                     </div> */}
-                                    <div className='rounded-lg bg-gray-50/20 blurr  shadow  px-2 h-[175px] ' >
-                                        <div className='  my-3'>
-                                            <div className='flex  justify-around items-center  pr-5 py-2 '>
-                                                <VscBroadcast className='text-orange-500  pt-2' size={40} />
-                                                {<h1 className='text-6xl font-medium text-gray-500    text-start '>{broadcastStatus.result.length ? <>{broadcastStatus.result.length}</> : <>0</>}</h1>}
-                                            </div>
-                                            <div className=''>
-                                                {/* {BroadcastModuleAuth || isSuperAdmin ? <> */}
-                                                    <Link to='/RepresentativeHome'>
-                                                        <h1 className='py-3 cursor-pointer hover:text-orange-600 text-xl leading-6 text-center font-medium   text-gray-500 '>Representative <br />  Management</h1>
-                                                    </Link>
-                                                {/* </> : <>
-                                                    <h1 onClick={unAutherizedHndle} className=' py-3 cursor-pointer  text-xl leading-6 text-center font-medium   text-red-500/60 '>Representative <br /> Management</h1>
-                                                </>} */}
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className='rounded-lg bg-gray-50/20 blurr  shadow  px-2 h-[175px] ' >
-                                        <div className='  my-3'>
-                                            <div className='flex  justify-around items-center  pr-5 py-2 '>
-                                                <VscBroadcast className='text-orange-500  pt-2' size={40} />
-                                                {<h1 className='text-6xl font-medium text-gray-500    text-start '>{broadcastStatus.result.length ? <>{broadcastStatus.result.length}</> : <>0</>}</h1>}
-                                            </div>
-                                            <div className=''>
-                                                {/* {BroadcastModuleAuth || isSuperAdmin ? <> */}
-                                                    <Link to='/PanditJiHome'>
-                                                        <h1 className='py-3 cursor-pointer hover:text-orange-600 text-xl leading-6 text-center font-medium   text-gray-500 '>Pandit Ji <br />  Management</h1>
-                                                    </Link>
-                                                {/* </> : <>
-                                                    <h1 onClick={unAutherizedHndle} className=' py-3 cursor-pointer  text-xl leading-6 text-center font-medium   text-red-500/60 '>Pandit Ji <br /> Management</h1>
-                                                </>} */}
-                                            </div>
-                                        </div>
-                                    </div>
+                                    
+
                                 </div>
                             </div>
                         </div>

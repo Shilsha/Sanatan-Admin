@@ -41,6 +41,8 @@ function BlogHistory() {
         dispatch(deleteBlogHistoryView(ids))
     }
     const AdminId = JSON.parse(sessionStorage.getItem('adminId'))
+    const isModuleAuth = JSON.parse(sessionStorage.getItem('user'))
+    const HistoryAuth = isModuleAuth?.role.some(data => data == 'History')
     return (
         <>
             <ToastContainer />
@@ -113,7 +115,7 @@ function BlogHistory() {
                                     <tbody>
                                         {History.loading ? <Loader /> : <>
 
-                                            {AdminId == "86" ? <>
+                                            {AdminId == "86" || HistoryAuth ? <>
                                                 {History.result?.map((data, index) => {
                                                     {/* {History.result.map((data, index) => { */ }
                                                     return <>

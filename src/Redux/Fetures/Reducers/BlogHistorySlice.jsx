@@ -3,9 +3,9 @@ import axios from 'axios'
 import { toast } from "react-toastify";
 export const getBlogHistory = createAsyncThunk('BLOG_HISTORY/GET_BLOG_HISTORY',
 async (props) => {
-   
+    
     let OPTIONS = {
-        url: `${import.meta.env.VITE_BASE_URL}/article/get_blogs?category=All&categoryName=&keyword=${props.keyword}&articleType=${props.type}&isDraftBlog=false&festivalStatus=&status=true&page=${props.page}&size=20`,
+        url: `${import.meta.env.VITE_BASE_URL}/article/openAndPublishBlogs?title=${props.keyword}&articleType=PUBLISH&isDraftBlog=false&status=true&page=${props.page}&size=20`,
         method: "GET",                       
         headers: {
             'Accept': 'application/json'

@@ -41,6 +41,8 @@ function DraftedBlogs() {
         }
     };
     const AdminId = JSON.parse(sessionStorage.getItem('adminId'))
+    const isModuleAuth = JSON.parse(sessionStorage.getItem('user'))
+    const DraftAuth = isModuleAuth?.role.some(data => data == 'Draft')
  
     return (
         <>
@@ -101,7 +103,7 @@ function DraftedBlogs() {
                                     <tbody>
                                         {History.loading ? <Loader /> : <>
 
-                                            {AdminId == "86" ? <>
+                                            {AdminId == "86" || DraftAuth ? <>
                                                 {(History.result.filter(data => data.title?.toLowerCase().includes(FilterSearch)))?.map((data, index) => {
                                                     {/* {History.result.map((data, index) => { */ }
                                                     return <>

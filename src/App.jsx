@@ -46,6 +46,7 @@ import PaymentsList from './components/Dashboard/Anushthan/Client/PaymentsList';
 import CallNotes from './components/Dashboard/Anushthan/Client/CallNotes';
 import ViewProfile from './components/Dashboard/Anushthan/Representative/ViewProfile';
 import blogSearchAll from './components/Dashboard/BlogsPost/BlogsSearchAll';
+import AnushthanHome from './components/Dashboard/Anushthan/AnushthanHome';
 
 function Routing() {
   return (
@@ -79,6 +80,7 @@ function Routing() {
           <Route exact path="/blogHistory/:id" element={<PrivateRoutes Component={SingleViewHistory} />}> </Route>
           <Route exact path="/blogDrafted/:id" element={<PrivateRoutes Component={SingleDraftView} />}> </Route>
           <Route exact path="/blogInactive/:id" element={<PrivateRoutes Component={SingleInactiveView} />}> </Route>
+          <Route exact path="/AnushthanHome" element={<PrivateRoutes Component={AnushthanHome} />}> </Route>
           <Route exact path="/RepresentativeHome" element={<PrivateRoutes Component={RepresentativeHome} />}> </Route>
           <Route exact path="/UserCallsQueries/:id" element={<PrivateRoutes Component={ViewProfile} />}> </Route>
           <Route exact path="/UserCallsQueries" element={<PrivateRoutes Component={UserCallsQueries} />}> </Route>
