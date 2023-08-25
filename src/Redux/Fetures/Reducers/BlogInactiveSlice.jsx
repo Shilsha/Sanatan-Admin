@@ -3,9 +3,9 @@ import axios from 'axios'
 import { toast } from "react-toastify";
 export const getBlogInactive = createAsyncThunk('BLOG_INACTIVE/GET_BLOG_INACTIVE',
     async (props) => {
-
+       
         let OPTIONS = {
-            url: `${import.meta.env.VITE_BASE_URL}/article/get_deleted_Articles?status=false&page=${props.page}&size=20`,
+            url: `${import.meta.env.VITE_BASE_URL}/article/get_deleted_Articles?status=false&title=${props.keyword}&page=${props.page}&size=10`,
             method: "GET",
             headers: {
                 'Accept': 'application/json'

@@ -26,13 +26,10 @@ import { getAllArticleAction } from '../../Redux/Fetures/Reducers/ArticleSlice'
 import { getAllQueriesAction } from '../../Redux/Fetures/Reducers/QueriesSlice'
 import { getBroadCastAction } from '../../Redux/Fetures/Reducers/BroadcastSplice'
 import { getAllFeedbacksAction } from '../../Redux/Fetures/Reducers/FeedbackSlice'
-
 import DesignLogin from '../../Assets/images/DesignLogin.png'
 import Button from '../Screen/Button/Button';
 import LoaderN from '../Loader/LoaderN';
 import { toast } from 'react-toastify';
-
-
 const customStyles = {
     content: {
         top: '50%',
@@ -46,8 +43,6 @@ const customStyles = {
         background: "white",
         position: 'relative',
         border: 'none',
-
-
     },
 };
 function Dashboard() {
@@ -57,21 +52,16 @@ function Dashboard() {
     const userId = 620015;
     const apiKey = 'd4e435906f8bdaf9aa6bcfe9f7f6474d';
     const dispatch = useDispatch();
-
-
     const userData = useSelector((state) => state.user)
     const articleLen = useSelector((state) => state.article)
     const queryLen = useSelector((state) => state.query)
     const feedbackLen = useSelector((state) => state.feedback.result)
-    console.log(feedbackLen, "feedbackLen")
+
     const allFeedBack = useSelector((state) => state.feedback)
     const { loading, result, error } = useSelector((state) => state.thoughtOfDay)
     const panchangData = useSelector((state) => state.panchang)
     const broadcastStatus = useSelector((state) => state.broadcast)
-    console.log(broadcastStatus.result.length, "broadcastStatus")
     const broadCast = broadcastStatus.result.filter(data => data.announcementStatus == true)
-    const role = JSON.parse(sessionStorage.getItem('user'))
-
     const requestOptions1 = {
         method: 'POST',
         headers: {
@@ -81,7 +71,6 @@ function Dashboard() {
         },
         body: JSON.stringify(
             {
-
                 "day": moment(value).format('DD'),
                 "month": moment(value).format('M'),
                 "year": moment(value).format('yy'),
@@ -100,7 +89,6 @@ function Dashboard() {
             type: true
         }
         dispatch(getUser(data))
-
     }
     function getArticleLength() {
         const data = {
@@ -108,7 +96,6 @@ function Dashboard() {
             type: 'OPEN'
         }
         dispatch(getAllArticleAction(data))
-
     }
     function getQueryLength() {
         const data = {
@@ -116,9 +103,7 @@ function Dashboard() {
             type: 'NEW'
         }
         dispatch(getAllQueriesAction(data))
-
     }
-
     useEffect(() => {
         dispatch(getThoughtAction())
         dispatch(panchangeAction(requestOptions1))
@@ -139,7 +124,6 @@ function Dashboard() {
         const data = {
             thoughtId: 10,
             thoughtOfTheDay: thoughtText
-
         }
 
         // dispatch(updateThoughtOfDay(data))
@@ -157,8 +141,6 @@ function Dashboard() {
             type: true
         }
         dispatch(getUser(data))
-
-
     }, [])
     useEffect(() => {
         const data = {
@@ -166,8 +148,6 @@ function Dashboard() {
             type: 'NEW'
         }
         dispatch(getAllQueriesAction(data))
-
-
     }, [])
     useEffect(() => {
         const data = {
@@ -175,14 +155,13 @@ function Dashboard() {
             type: 'NEW'
         }
         dispatch(getAllFeedbacksAction(data))
-
-
     }, [])
-
-
     // ************************************************************Role based Module accces*******************************************************************
+    const role = JSON.parse(sessionStorage.getItem('user'))
+
     const isModuleAuth = JSON.parse(sessionStorage.getItem('user'))
-    const isSuperAdmin = isModuleAuth?.role.some(data => data == 'SuperAdmin')
+    const isSuperAdmin = role.isSuperAdmin
+    const isPseudoAdmin = isModuleAuth?.role.some(data => data == 'PseudoAdmin')
     const userModuleAuth = isModuleAuth?.role.some(data => data == 'Users')
     const articlesModuleAuth = isModuleAuth?.role.some(data => data == 'Articles')
     const HitsModuleAuth = isModuleAuth?.role.some(data => data == 'Hits')
@@ -192,8 +171,8 @@ function Dashboard() {
     const BroadcastModuleAuth = isModuleAuth?.role.some(data => data == 'Broadcast')
     const BlogsPosttModuleAuth = isModuleAuth?.role.some(data => data == 'BlogPost')
     // 
-    const unAutherizedHndle = () => {
-        toast.error('You are not authrized for this module')
+    const unAuthorizedHandle = () => {
+        toast.error('You are not authorized for this module')
     }
     // ********************************************************************************************************************
     return (
@@ -202,7 +181,6 @@ function Dashboard() {
                 <Sidebar />
                 <div className='   w-full ' >
                     <Navbar />
-
                     {/* ---------------------------------------------------------------- 1  row---------------------------------------------------------------------------*/}
                     <div className=" ScrollStyle  pr-4 ">
                         <div className=' rounded-lg mt-4  grid grid-cols-12 gap-4  '>
@@ -346,13 +324,13 @@ function Dashboard() {
                                                 {<h1 className='text-6xl font-medium text-gray-500    text-start '>{userData?.result?.totalElements}</h1>}
                                             </div>
                                             <div className=''>
-                                                {CustomerListModuleAuth || isSuperAdmin ? <>
+                                                {CustomerListModuleAuth || isSuperAdmin || isPseudoAdmin   ? <>
                                                     <Link to='/users'>
                                                         <h1 className='py-3 cursor-pointer hover:text-orange-600 text-xl leading-6 text-center font-medium   text-gray-500 '>Customer  Management</h1>
 
                                                     </Link>
                                                 </> : <>
-                                                    <h1 onClick={unAutherizedHndle} className=' py-3 cursor-pointer  text-xl leading-6 text-center font-medium   text-red-500/60 '>Customer Management</h1>
+                                                    <h1 onClick={unAuthorizedHandle} className=' py-3 cursor-pointer  text-xl leading-6 text-center font-medium   text-red-500/60 '>Customer Management</h1>
 
                                                 </>}
                                             </div>
@@ -367,12 +345,12 @@ function Dashboard() {
                                             </div>
 
                                             <div className=''>
-                                                {BlogsPosttModuleAuth || isSuperAdmin ? <>
+                                                {BlogsPosttModuleAuth || isSuperAdmin || isPseudoAdmin ? <>
                                                     <Link to='/blog'>
                                                         <h1 className=' py-3 leading-6  hover:text-orange-600  text-2xl text-center font-medium  text-gray-500 '>Blog Management</h1>
                                                     </Link>
                                                 </> : <>
-                                                    <h1 onClick={unAutherizedHndle} className=' cursor-pointer py-3 leading-6 text-2xl text-center font-medium  text-red-500/60 '>Blog Management</h1>
+                                                    <h1 onClick={unAuthorizedHandle} className=' cursor-pointer py-3 leading-6 text-2xl text-center font-medium  text-red-500/60 '>Blog Management</h1>
 
                                                 </>}
                                             </div>
@@ -385,12 +363,12 @@ function Dashboard() {
                                                 {<h1 className='text-6xl font-medium text-gray-500    text-start '>{broadcastStatus.result.length ? <>{broadcastStatus.result.length}</> : <>0</>}</h1>}
                                             </div>
                                             <div className=''>
-                                                {/* {BroadcastModuleAuth || isSuperAdmin ? <> */}
+                                                {/* {BroadcastModuleAuth || isSuperAdmin || isPseudoAdmin ? <> */}
                                                 <Link to='/AnushthanHome'>
                                                     <h1 className='py-3 cursor-pointer hover:text-orange-600 text-xl leading-6 text-center font-medium   text-gray-500 '>Anushthan <br />  Management</h1>
                                                 </Link>
                                                 {/* </> : <>
-                                                    <h1 onClick={unAutherizedHndle} className=' py-3 cursor-pointer  text-xl leading-6 text-center font-medium   text-red-500/60 '>Representative <br /> Management</h1>
+                                                    <h1 onClick={unAuthorizedHandle} className=' py-3 cursor-pointer  text-xl leading-6 text-center font-medium   text-red-500/60 '>Representative <br /> Management</h1>
                                                 </>} */}
                                             </div>
                                         </div>
@@ -402,12 +380,12 @@ function Dashboard() {
                                                 {<h1 className='text-6xl font-medium text-gray-500    text-start '>50</h1>}
                                             </div>
                                             <div className=''>
-                                                {HitsModuleAuth || isSuperAdmin ? <>
+                                                {HitsModuleAuth || isSuperAdmin || isPseudoAdmin ? <>
                                                     <Link to='/hits'>
                                                         <h1 className='py-3 cursor-pointer hover:text-orange-600 text-xl leading-6 text-center font-medium   text-gray-500 '>Hit <br />  Management</h1>
                                                     </Link>
                                                 </> : <>
-                                                    <h1 onClick={unAutherizedHndle} className=' py-3 cursor-pointer  text-xl leading-6 text-center font-medium   text-red-500/60 '>Hit <br /> Management</h1>
+                                                    <h1 onClick={unAuthorizedHandle} className=' py-3 cursor-pointer  text-xl leading-6 text-center font-medium   text-red-500/60 '>Hit <br /> Management</h1>
                                                 </>}
                                             </div>
                                         </div>
@@ -419,12 +397,12 @@ function Dashboard() {
                                                 {<h1 className='text-6xl font-medium text-gray-500    text-start '>{queryLen?.result?.totalElements}</h1>}
                                             </div>
                                             <div className=''>
-                                                {QueriesListModuleAuth || isSuperAdmin ? <>
+                                                {QueriesListModuleAuth || isSuperAdmin || isPseudoAdmin ? <>
                                                     <Link to='/queries'>
                                                         <h1 className='py-3 cursor-pointer hover:text-orange-600 text-xl leading-6 text-center font-medium   text-gray-500 '>Query <br />  Management</h1>
                                                     </Link>
                                                 </> : <>
-                                                    <h1 onClick={unAutherizedHndle} className=' py-3 cursor-pointer  text-xl leading-6 text-center font-medium   text-red-500/60 '>Query <br /> Management</h1>
+                                                    <h1 onClick={unAuthorizedHandle} className=' py-3 cursor-pointer  text-xl leading-6 text-center font-medium   text-red-500/60 '>Query <br /> Management</h1>
                                                 </>}
                                             </div>
                                         </div>
@@ -439,12 +417,12 @@ function Dashboard() {
                                                 {/* <Link to='/feedbacks'>
                                                         <h1 className='py-3 cursor-pointer hover:text-orange-600 text-xl leading-6 text-center font-medium   text-gray-500 '>Feedback <br />  Management</h1>
                                                     </Link> */}
-                                                {LogstModuleAuth || isSuperAdmin ? <>
+                                                {LogstModuleAuth || isSuperAdmin || isPseudoAdmin ? <>
                                                     <Link to='/feedbacks'>
                                                         <h1 className='py-3 cursor-pointer hover:text-orange-600 text-xl leading-6 text-center font-medium   text-gray-500 '>Log <br />  Management</h1>
                                                     </Link>
                                                 </> : <>
-                                                    <h1 onClick={unAutherizedHndle} className=' py-3 cursor-pointer  text-xl leading-6 text-center font-medium   text-red-500/60 '>Log <br /> Management</h1>
+                                                    <h1 onClick={unAuthorizedHandle} className=' py-3 cursor-pointer  text-xl leading-6 text-center font-medium   text-red-500/60 '>Log <br /> Management</h1>
                                                 </>}
                                             </div>
                                         </div>
@@ -456,12 +434,12 @@ function Dashboard() {
                                                 {<h1 className='text-6xl font-medium text-gray-500    text-start '>{broadcastStatus.result.length ? <>{broadcastStatus.result.length}</> : <>0</>}</h1>}
                                             </div>
                                             <div className=''>
-                                                {BroadcastModuleAuth || isSuperAdmin ? <>
+                                                {BroadcastModuleAuth || isSuperAdmin || isPseudoAdmin ? <>
                                                     <Link to='/broadcast'>
                                                         <h1 className='py-3 cursor-pointer hover:text-orange-600 text-xl leading-6 text-center font-medium   text-gray-500 '>Broadcast <br />  Management</h1>
                                                     </Link>
                                                 </> : <>
-                                                    <h1 onClick={unAutherizedHndle} className=' py-3 cursor-pointer  text-xl leading-6 text-center font-medium   text-red-500/60 '>Broadcast <br /> Management</h1>
+                                                    <h1 onClick={unAuthorizedHandle} className=' py-3 cursor-pointer  text-xl leading-6 text-center font-medium   text-red-500/60 '>Broadcast <br /> Management</h1>
                                                 </>}
                                             </div>
                                         </div>
@@ -473,12 +451,12 @@ function Dashboard() {
                                                 {<h1 className='text-6xl font-medium text-gray-500    text-start '>{allFeedBack.length ? <>{allFeedBack.length}</> : <>0</>}</h1>}
                                             </div>
                                             <div className=''>
-                                                {BroadcastModuleAuth || isSuperAdmin ? <>
+                                                {BroadcastModuleAuth || isSuperAdmin || isPseudoAdmin ? <>
                                                     <Link to='/feedbacks'>
                                                         <h1 className='py-3 cursor-pointer hover:text-orange-600 text-xl leading-6 text-center font-medium   text-gray-500 '>Feedback <br />  Management</h1>
                                                     </Link>
                                                 </> : <>
-                                                    <h1 onClick={unAutherizedHndle} className=' py-3 cursor-pointer  text-xl leading-6 text-center font-medium   text-red-500/60 '>Feedback <br /> Management</h1>
+                                                    <h1 onClick={unAuthorizedHandle} className=' py-3 cursor-pointer  text-xl leading-6 text-center font-medium   text-red-500/60 '>Feedback <br /> Management</h1>
                                                 </>}
                                             </div>
                                         </div>

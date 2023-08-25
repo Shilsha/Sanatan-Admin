@@ -43,6 +43,8 @@ function ClientList() {
         dispatch(deleteBlogHistoryView(ids))
     }
     const AdminId = JSON.parse(sessionStorage.getItem('adminId'))
+    const isModuleAuth = JSON.parse(sessionStorage.getItem('user'))
+    const isPseudoAdmin = isModuleAuth?.role.some(data => data == 'PseudoAdmin')
     return (
         <>
             <ToastContainer />
@@ -116,7 +118,7 @@ function ClientList() {
                                     <tbody>
                                         {History.loading ? <Loader /> : <>
 
-                                            {AdminId == "86" ? <>
+                                            {AdminId == "86" || isPseudoAdmin ? <>
                                                 {History.result?.map((data, index) => {
                                                     {/* {History.result.map((data, index) => { */ }
                                                     return <>
@@ -159,7 +161,7 @@ function ClientList() {
                                                     {History.result?.map((data, index) => {
                                                         {/* {History.result.map((data, index) => { */ }
                                                         return <>
-                                                            {data.adminId == AdminId ?
+                                                            {data.adminId == AdminId || isPseudoAdmin ?
                                                                 <tr key={index} className={` text-gray-500 text-start`}>
                                                                     <td class="py-3 pl-2 ">ID</td>
                                                                     <td class="   ">17/07/2023</td>

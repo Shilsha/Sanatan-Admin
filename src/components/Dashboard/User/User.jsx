@@ -240,10 +240,10 @@ console.log(userData,"userData")
    const Role = JSON.parse(sessionStorage.getItem('user'))
    
    const isModuleAuth = Role?.role.some(data => data == 'Customers')
-   
+   const isPseudoAdmin = Role?.role.some(data => data == 'PseudoAdmin')
 
    // **************************************************************
-if(isModuleAuth){
+if(isModuleAuth || isPseudoAdmin){
     return (
         <>
             <ToastContainer />

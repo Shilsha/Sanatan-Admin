@@ -42,6 +42,7 @@ function BlogReject() {
     const AdminId = JSON.parse(sessionStorage.getItem('adminId'))
     const isModuleAuth = JSON.parse(sessionStorage.getItem('user'))
     const RejectAuth = isModuleAuth?.role.some(data => data == 'Reject')
+    const isPseudoAdmin = isModuleAuth?.role.some(data => data == 'PseudoAdmin')
 
     return (
         <>
@@ -107,7 +108,7 @@ function BlogReject() {
                                     </tr>
                                 </thead>
                                 {blogReject.loading ? <Loader /> : <>
-                                    {AdminId == "86" || RejectAuth ? <>
+                                    {AdminId == "86" || RejectAuth || isPseudoAdmin ? <>
 
                                         {(blogReject.result.filter(data => data.title?.toLowerCase().includes(FilterSearch)))?.map((data, index) => {
 
@@ -145,7 +146,7 @@ function BlogReject() {
                                             {(blogReject.result.filter(data => data.title?.toLowerCase().includes(FilterSearch)))?.map((data, index) => {
 
                                                 return <>
-                                                 {data.adminId == AdminId ?
+                                                 {data.adminId == AdminId  || isPseudoAdmin?
                                                     <tr key={index} className={` text-gray-500 text-start`}>
                                                         <td class=" py-3 pl-2 ">{data.articleId}</td>
                                                         <td class="  ">{data.title}</td>

@@ -38,6 +38,11 @@ import BlogDraft from "./Reducers/DraftedBlogsSlice";
 import blogReview from './Reducers/BlogReviewSlice'
 import blogReject from './Reducers/BlogRejectSlice'
 import adminProfile from './Reducers/AdminProfileSlice'
+import AnushthanQuery from './Reducers/Anushthan Reducers/Queries/UserQueriesSlice'
+import QueryById from './Reducers/Anushthan Reducers/Queries/GetQueryByIDSlice'
+import UpdateAnushthanQuery from './Reducers/Anushthan Reducers/Queries/UpdateUserQuerySlice'
+import InterestedUsers from './Reducers/Anushthan Reducers/InterstedUsers/InterestedUsersSlice'
+import AllRepresentative from './Reducers/Anushthan Reducers/Representative/RepresentativeListSlice'
  export default configureStore({
     reducer: {
         thoughtOfDay: getThoughtOfDay,
@@ -76,7 +81,12 @@ import adminProfile from './Reducers/AdminProfileSlice'
        blogReview:blogReview,
        blogReject:blogReject,
        adminProfile:adminProfile,
-       AllBlogs:AllBlogs
+       AllBlogs:AllBlogs,
+       AnushthanQuery:AnushthanQuery,
+       InterestedUsers:InterestedUsers,
+       UpdateAnushthanQuery:UpdateAnushthanQuery,
+       QueryById:QueryById,
+       AllRepresentative:AllRepresentative
     
 
 

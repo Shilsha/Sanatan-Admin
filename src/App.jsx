@@ -32,6 +32,7 @@ import SingleInactiveView from './components/Dashboard/BlogsPost/SingleInactiveV
 import BlogInactive from './components/Dashboard/BlogsPost/BlogInactive';
 import RepresentativeHome from './components/Dashboard/Anushthan/Representative/RepresentativeHome';
 import UserCallsQueries from './components/Dashboard/Anushthan/Representative/UserCallsQueries';
+import InterstedCallsList from './components/Dashboard/Anushthan/Representative/InterstedCallsList';
 import ClientList from './components/Dashboard/Anushthan/Representative/ClientList';
 import AnushthanRunningtatus from './components/Dashboard/Anushthan/Representative/AnushthanRunningStatus';
 import PanditJiHome from './components/Dashboard/Anushthan/PanditJiModule/PanditJiHome';
@@ -47,6 +48,11 @@ import CallNotes from './components/Dashboard/Anushthan/Client/CallNotes';
 import ViewProfile from './components/Dashboard/Anushthan/Representative/ViewProfile';
 import blogSearchAll from './components/Dashboard/BlogsPost/BlogsSearchAll';
 import AnushthanHome from './components/Dashboard/Anushthan/AnushthanHome';
+import AddAnushthan from './components/Dashboard/Anushthan/AddAnushthan';
+import SingleAnushthanView from './components/Dashboard/Anushthan/SingleAnushthanView';
+import UpdateAnushthan from './components/Dashboard/Anushthan/UpdateAnushthan';
+import Test from './components/Test';
+
 
 function Routing() {
   return (
@@ -54,6 +60,8 @@ function Routing() {
       <Router>
         <Routes>
           <Route exact path="/" element={<Login />} />
+          <Route exact path="/test" element={<Test/>} />
+
           <Route exact path="/dashboard" element={<PrivateRoutes Component={Dashboard} />}> </Route>
           <Route exact path="/users" element={<PrivateRoutes Component={User} />}> </Route>
           <Route exact path="/dashboard/profile" element={<PrivateRoutes Component={Profile} />}> </Route>
@@ -84,8 +92,12 @@ function Routing() {
           <Route exact path="/RepresentativeHome" element={<PrivateRoutes Component={RepresentativeHome} />}> </Route>
           <Route exact path="/UserCallsQueries/:id" element={<PrivateRoutes Component={ViewProfile} />}> </Route>
           <Route exact path="/UserCallsQueries" element={<PrivateRoutes Component={UserCallsQueries} />}> </Route>
+          <Route exact path="/interstedCallsList" element={<PrivateRoutes Component={InterstedCallsList} />}> </Route>
           <Route exact path="/ClientList" element={<PrivateRoutes Component={ClientList} />}> </Route>
           <Route exact path="/AnushthanRunningtatus" element={<PrivateRoutes Component={AnushthanRunningtatus} />}> </Route>
+          <Route exact path="/addAnushthan" element={<PrivateRoutes Component={AddAnushthan} />}> </Route>
+          <Route exact path="/addAnushthan/:id" element={<PrivateRoutes Component={SingleAnushthanView} />}> </Route>
+          <Route exact path="/updateAnushthan/:id" element={<PrivateRoutes Component={UpdateAnushthan} />}> </Route>
           <Route exact path="/PanditJiHome" element={<PrivateRoutes Component={PanditJiHome} />}> </Route>
           <Route exact path="/UserMeetingLinks" element={<PrivateRoutes Component={UserMeetingLinks} />}> </Route>
           <Route exact path="/PanditAnushthanRunningStatus" element={<PrivateRoutes Component={PanditAnushthanRunningStatus} />}> </Route>

@@ -4,8 +4,6 @@ import { toast } from 'react-toastify';
 
 export const getLogin = createAsyncThunk('LOGIN/GET_LOGIN',
     async (data) => {
-
-
         let OPTIONS = {
             url: `${import.meta.env.VITE_BASE_URL}/api/loginAdmin`,
             method: "POST",
@@ -16,19 +14,13 @@ export const getLogin = createAsyncThunk('LOGIN/GET_LOGIN',
         };
         return axios(OPTIONS)
             .then(res => {
-                
                 sessionStorage.setItem("user", JSON.stringify(res.data.data))
                 sessionStorage.setItem("adminId", JSON.stringify(res.data.data.adminId))
-
-
                 return res
             })
     })
-
 export const forgetPassword = createAsyncThunk('FORGET/FORGET_PASSWORD',
     async (data) => {
-
-
         let OPTIONS = {
             url: `${import.meta.env.VITE_BASE_URL}/api/send_email_to_Admin`,
             method: "POST",
@@ -44,17 +36,14 @@ export const forgetPassword = createAsyncThunk('FORGET/FORGET_PASSWORD',
 
                 return res
             })
-            .catch((err)=>{
-                
+            .catch((err) => {
+
                 toast.error(err.response.data.status.message)
                 return rejectWithValue(err.response.data)
-            } )
+            })
     })
-
 export const verifyOtp = createAsyncThunk('VERIFY/VERIFY_OTP',
     async (data) => {
-
-
         let OPTIONS = {
             url: `${import.meta.env.VITE_BASE_URL}/api/resetCode/verify`,
             method: "POST",
@@ -69,11 +58,8 @@ export const verifyOtp = createAsyncThunk('VERIFY/VERIFY_OTP',
                 return res
             })
     })
-
 export const resetPassword = createAsyncThunk('RESET/RESET_PASSWORD',
     async (data) => {
-
-
         let OPTIONS = {
             url: `${import.meta.env.VITE_BASE_URL}/api/update_Admin`,
             method: "PUT",
@@ -84,14 +70,9 @@ export const resetPassword = createAsyncThunk('RESET/RESET_PASSWORD',
         };
         return axios(OPTIONS)
             .then(res => {
-
                 return res
             })
     })
-
-
-
-
 const logins = createSlice({
     name: 'Login',
     initialState: {
@@ -100,7 +81,6 @@ const logins = createSlice({
         verefied: [],
         error: null
     },
-
     extraReducers: {
         // ==============GET REQUEST=============
         [getLogin.pending]: (state, action) => {
@@ -111,25 +91,18 @@ const logins = createSlice({
 
             state.loading = false,
                 state.result = action.payload.data.data
-                // 
+            // 
             if (!action.payload.data.data.isPasswordReset) {
                 toast.success("Login Successful")
                 setTimeout(() => {
                     window.location.href = "/dashboard"
-
                 }, 2000)
             } else {
-
-                if(action.payload.data.data.isPasswordReset){
-
-                }else{
+                if (action.payload.data.data.isPasswordReset) {
+                } else {
                     toast.error("Login failed")
                 }
-              
-
             }
-
-
         },
         [getLogin.rejected]: (state, action) => {
             toast.error("Login failed")
@@ -143,12 +116,9 @@ const logins = createSlice({
             state.loading = true;
         },
         [forgetPassword.fulfilled]: (state, action) => {
-            
-
             state.loading = false,
                 state.result = action.payload.data.data
             state.error = null
-
         },
         [forgetPassword.rejected]: (state, action) => {
             // 
@@ -166,7 +136,7 @@ const logins = createSlice({
             // 
 
             state.loading = false,
-            state.result = action.payload.data.data
+                state.result = action.payload.data.data
             state.verefied = action.payload.data.data
             state.error = null
 
@@ -195,16 +165,10 @@ const logins = createSlice({
 
         },
         [resetPassword.rejected]: (state, action) => {
-            
-
             state.loading = false,
-
                 state.error = action
         },
-
     }
 
 })
-
-
 export default logins.reducer;

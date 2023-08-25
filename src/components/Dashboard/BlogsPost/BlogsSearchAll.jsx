@@ -25,6 +25,8 @@ function blogSearchAll() {
         }
     };
     const AdminId = JSON.parse(sessionStorage.getItem('adminId'))
+    const isModuleAuth = JSON.parse(sessionStorage.getItem('user'))
+    const isPseudoAdmin = isModuleAuth?.role.some(data => data == 'PseudoAdmin')
     return (
         <>
             <ToastContainer />
@@ -43,7 +45,7 @@ function blogSearchAll() {
                                     <input class="border-2  w-full border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
                                         type="search" name="search" placeholder="Search..."
                                         value={FilterSearch} onChange={(e) => {
-                                           
+
                                             setFilterSearch(e.target.value);
                                         }}
                                     />
@@ -82,7 +84,7 @@ function blogSearchAll() {
                                     </thead>
                                     <tbody>
                                         {History.loading ? <Loader /> : <>
-                                            {AdminId == "86" ? <>
+                                            {AdminId == "86" || isPseudoAdmin ? <>
                                                 {AllBlogs.result?.map((data, index) => {
                                                     return <>
                                                         <tr key={index} className={` text-gray-500 text-start`}>
@@ -111,7 +113,7 @@ function blogSearchAll() {
                                                     {AllBlogs.result?.map((data, index) => {
                                                         {/* {History.result.map((data, index) => { */ }
                                                         return <>
-                                                            {data.adminId == AdminId ?
+                                                            {(data.adminId == AdminId) || isPseudoAdmin ?
                                                                 <tr key={index} className={` text-gray-500 text-start`}>
                                                                     <td class=" py-3 pl-2 ">{data.articleId}</td>
                                                                     <td class="  "> <td class=" ">

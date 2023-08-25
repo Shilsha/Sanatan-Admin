@@ -1,32 +1,32 @@
 import React, { useState } from 'react'
+import axios from "axios";
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { ToastContainer } from 'react-toastify'
 import Navbar from '../../Navbar/Navbar'
 import Sidebar from '../../Sidebar/Sidebar'
-import { getBlogHistory } from '../../../Redux/Fetures/Reducers/BlogHistorySlice'
-import { getBlogDrafts } from '../../../Redux/Fetures/Reducers/DraftedBlogsSlice'
+import { getBlogHistory, deleteBlogHistoryView } from '../../../Redux/Fetures/Reducers/BlogHistorySlice'
 import Loader from '../../Loader/Loader'
 import { BsSearch } from 'react-icons/bs'
 import { BiShow } from 'react-icons/bi'
 import { Link, useNavigate } from 'react-router-dom'
-function DraftedBlogs() {
+import AddAnuModal from './AddAnuModal';
+function AddAnushthan() {
     const navigate = useNavigate();
+    const [anushthanData, setAnushthanData] = useState([])
     const [type, setType] = useState('PUBLISH')
-    
-    const [FilterSearch, setFilterSearch] = useState('')
-    const History = useSelector((state) => state.BlogDraft)
     const [page, setPage] = useState(0)
+    const [FilterSearch, setFilterSearch] = useState('')
+    const History = useSelector((state) => state.BlogsHistory)
     const data = {
-        
+        type: type,
         page: page,
         keyword: FilterSearch
     }
     const dispatch = useDispatch()
-   
     useEffect(() => {
-        dispatch(getBlogDrafts(data))
-    }, [page,FilterSearch])
+        // dispatch(getBlogHistory(data))
+    }, [page, FilterSearch])
     const nextPage = () => {
         setPage(page + 1)
     }
@@ -40,17 +40,35 @@ function DraftedBlogs() {
             return str;
         }
     };
+    const deleteBlog = (ids) => {
+        // dispatch(deleteBlogHistoryView(ids))
+    }
     const AdminId = JSON.parse(sessionStorage.getItem('adminId'))
     const isModuleAuth = JSON.parse(sessionStorage.getItem('user'))
-    const DraftAuth = isModuleAuth?.role.some(data => data == 'Draft')
-    const isPseudoAdmin = isModuleAuth?.role.some(data => data == 'PseudoAdmin')
+    const HistoryAuth = isModuleAuth?.role.some(data => data == 'History')
 
- 
+    useEffect(() => {
+        let OPTIONS = {
+            // url: `/article/get_Blogs_on_title?title=${viewBlog?.singleViewBlog?.title}&page=0&size=10&articleType=PUBLISH&status=true&isDraftBlog=false&festivalStatus=${language}`,
+            url: `https://737d-2401-4900-1c5c-16c0-28f0-420f-30f2-eb01.ngrok-free.app/api/getAnushthans?language=`,
+            method: "get",
+            headers: {
+                "content-type": "application/json",
+            },
+        };
+        axios(OPTIONS)
+            .then((res) => {
+                // console.log(res)
+                setAnushthanData(res?.data)
+            })
+    }, [])
+    const isPseudoAdmin = isModuleAuth?.role.some(data => data == 'PseudoAdmin')
     return (
         <>
             <ToastContainer />
             <div className='   w-[100%]  min-h-screen flex flex-col-2 gap-4 bgGradient  '>
                 <Sidebar />
+
                 <div className=' w-full  '>
                     <Navbar />
                     <div className=' my-4 pr-4 '>
@@ -75,102 +93,81 @@ function DraftedBlogs() {
                             <div>
                                 <h1 type="button" class="inline-flex items-center text-white bg-gradient-to-r
                                  from-orange-500  to-yellow-400  font-medium rounded-lg text-lg px-4 py-1 text-center mr-40 mb-2">
-                                    Drafts
+                                    Anushthan List
                                 </h1>
+
                             </div>
+
                             <div className='flex justify-center items-center '>
-                                <div className='text-green-500 mx-2 font-medium'>
-                                    {type === 'PUBLISH' ? 'PUBLISH' : 'OPEN'}
-                                </div>
+                            <button class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-1 shadow-xl  px-5 rounded focus:outline-none focus:shadow-outline" >
+                            {<AddAnuModal/>}
+                                </button>
+                           
+                                {/* <div className='text-green-500 mx-2 font-medium'>
+                                    
+                                </div> */}
+
+
                             </div>
                         </div>
                         {/*================ */}
                         <div className='text-center ml-30'>
+
+
+
                             <div className="tableWrap mb-2   ">
                                 <table class="shadow-lg tables  w-full rounded-xl blurrTable ">
                                     <thead className=''>
                                         <tr className=' bg-blue-100  text-start '>
-                                            <td class="py-3 pl-2 ">ID</td>
-                                            <td class="   ">Title</td>
-                                            <td class="  ">Content</td>
-                                            <td class="   ">Author</td>
-                                            <td class="  ">Create Date</td>
-                                            <td class="  ">Create Time</td>
-                                            <td class="  ">Type</td>
-                                            <td class="  ">Modified Date</td>
-                                            <td class="  ">Modified Time</td>
+                                            <td class="py-3 pl-2 ">Admin ID</td>
+                                            <td class="   ">Anushthan Name</td>
+                                            <td class="   ">Content</td>
+                                            <td class="  ">Price</td>
+                                            <td class="  ">Days</td>
                                             <td class="  ">View</td>
+                                            
+
                                         </tr>
                                     </thead>
+
                                     <tbody>
-                                        {History.loading ? <Loader /> : <>
+                                        {anushthanData.loading ? <Loader /> : <>
 
-                                            {AdminId == "86" || DraftAuth || isPseudoAdmin ? <>
-                                                {(History.result.filter(data => data.title?.toLowerCase().includes(FilterSearch)))?.map((data, index) => {
+                                            {AdminId == "86" || HistoryAuth || isPseudoAdmin ? <>
+                                                {anushthanData.data?.map((data, index) => {
                                                     {/* {History.result.map((data, index) => { */ }
                                                     return <>
-                                                        <tr key={index} className={` text-gray-500 text-start`}>
-                                                            <td class=" py-3 pl-2 ">{data.articleId}</td>
-                                                            <td class="  "> <td class=" ">
-                                                                {truncateTitle(data.title, 30)}
-                                                            </td></td>
-                                                            <td class=" ">
-                                                                <h1 className='py-2 text-gray-700'
-                                                                    dangerouslySetInnerHTML={{
-                                                                        __html: truncateTitle(data.subject, 100),
-                                                                    }}
-                                                                >
-                                                                </h1>
-                                                            </td>
-                                                            <td class="  ">{data.author}</td>
-                                                            <td class="  ">{data.createdDate}</td>
-                                                            <td class="  ">{data.createdTime}</td>
-                                                            <td class="  ">{data.articleType}</td>
-                                                            <td class="  ">{data.modifiedDate}</td>
-                                                            <td class="  ">{data.modifiedTime}</td>
-                                                            <td>
-                                                                <Link to={`/blogDrafted/${data.articleId}`}>
-                                                                    <BiShow className='hover:text-xl text-lg hover:text-blue-400 duration-300' />
-                                                                </Link>
-                                                            </td>
-                                                        </tr>
-                                                    </>
-                                                })}
-                                            </> : <>
-                                                {(History.result.filter(data => data.title?.toLowerCase().includes(FilterSearch)))?.map((data, index) => {
-                                                    {/* {History.result.map((data, index) => { */ }
-                                                    return <>
-
-                                                        {data.adminId == AdminId || isPseudoAdmin?
+                                                       
                                                             <tr key={index} className={` text-gray-500 text-start`}>
-                                                                <td class=" py-3 pl-2 ">{data.articleId}</td>
+                                                                <td class=" py-3 pl-2 ">{data.adminId}</td>
                                                                 <td class="  "> <td class=" ">
-                                                                    {truncateTitle(data.title, 30)}
+                                                                    {truncateTitle(data.anushthanName, 30)}
                                                                 </td></td>
                                                                 <td class=" ">
                                                                     <h1 className='py-2 text-gray-700'
                                                                         dangerouslySetInnerHTML={{
-                                                                            __html: truncateTitle(data.subject, 100),
+                                                                            __html: truncateTitle(data.content, 50),
                                                                         }}
                                                                     >
                                                                     </h1>
                                                                 </td>
-                                                                <td class="  ">{data.author}</td>
-                                                                <td class="  ">{data.createdDate}</td>
-                                                                <td class="  ">{data.createdTime}</td>
-                                                                <td class="  ">{data.articleType}</td>
-                                                                <td class="  ">{data.modifiedDate}</td>
-                                                                <td class="  ">{data.modifiedTime}</td>
+                                                                <td class="  ">{data.price}</td>
+                                                                <td class="  ">{data.days}</td>
                                                                 <td>
-                                                                    <Link to={`/blogDrafted/${data.articleId}`}>
+                                                                    <Link to={`/addAnushthan/${data.anushthanId}`}>
                                                                         <BiShow className='hover:text-xl text-lg hover:text-blue-400 duration-300' />
                                                                     </Link>
                                                                 </td>
-                                                            </tr> : ""}
-                                                    </>
-                                                })}
+                                                                
+                                                            </tr>
+                                                         
 
-                                            </>}
+                                                    </>
+                                                })}</>
+                                                :
+                                                ""}
+                                           
+
                                         </>}
                                     </tbody>
                                 </table>
@@ -213,4 +210,4 @@ function DraftedBlogs() {
     )
 }
 
-export default DraftedBlogs
+export default AddAnushthan

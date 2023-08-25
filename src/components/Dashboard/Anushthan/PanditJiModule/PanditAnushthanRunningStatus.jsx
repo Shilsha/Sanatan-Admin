@@ -43,6 +43,8 @@ function PanditAnushthanRunningStatus() {
         dispatch(deleteBlogHistoryView(ids))
     }
     const AdminId = JSON.parse(sessionStorage.getItem('adminId'))
+    const isModuleAuth = JSON.parse(sessionStorage.getItem('user'))
+    const isPseudoAdmin = isModuleAuth?.role.some(data => data == 'PseudoAdmin')
     return (
         <>
             <ToastContainer />
@@ -112,7 +114,7 @@ function PanditAnushthanRunningStatus() {
                                     <tbody>
                                         {History.loading ? <Loader /> : <>
 
-                                            {AdminId == "86" ? <>
+                                            {AdminId == "86" || isPseudoAdmin ? <>
                                                 {History.result?.map((data, index) => {
                                                     {/* {History.result.map((data, index) => { */ }
                                                     return <>
@@ -149,7 +151,7 @@ function PanditAnushthanRunningStatus() {
                                                     {History.result?.map((data, index) => {
                                                         {/* {History.result.map((data, index) => { */ }
                                                         return <>
-                                                            {data.adminId == AdminId ?
+                                                            {data.adminId == AdminId || isPseudoAdmin ?
                                                                 <tr key={index} className={` text-gray-500 text-start`}>
                                                                     <tr key={index} className={` text-gray-500 text-start`}>
                                                                         <td class="py-3 pl-2 ">123</td>

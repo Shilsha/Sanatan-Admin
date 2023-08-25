@@ -33,7 +33,9 @@ function SingleInactiveView() {
     const deleteBlog = (ids) => {
         dispatch(deleteBlogDraftView(ids))
     }
-
+    const isModuleAuth = JSON.parse(sessionStorage.getItem('user'))
+    const isPseudoAdmin = isModuleAuth?.role.some(data => data == 'PseudoAdmin')
+    const Inactive = isModuleAuth?.role.some(data => data == 'Inactive')
     return (
         <>
             <div className='   w-[100%]  min-h-screen flex flex-col-2 gap-4  '>
@@ -56,7 +58,7 @@ function SingleInactiveView() {
                                 <img className='rounded-md w-full' src={GetSingle?.result.imageUrl} alt={GetSingle?.result.imageName} />
                                 <div className=' my-4     '>
                                     <div className='flex flex-col px-6'>
-                                        {(loggedAdminId == authorId) || (loggedAdminId == superAdminId) ?
+                                        {(loggedAdminId == authorId) || (loggedAdminId == superAdminId) || isPseudoAdmin || Inactive ?
 
                                             <Link to={`/updateBlog/${id}`}>
                                                 <button class="bg-transparent my-4 w-96  hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded-full"
@@ -88,9 +90,6 @@ function SingleInactiveView() {
                             <div className='col-span-2 px-6 relative'>
 
                                 {GetSingle.loading ? <><Loader /></> : <>
-
-
-
                                     {/* <h1 className='text-xl font-bold  text-red-800'>Title : <span className='text-lg'>{GetSingle?.result.title}</span></h1>
                                     <h1 className='py-2 text-gray-700 text-justify'
                                         dangerouslySetInnerHTML={{

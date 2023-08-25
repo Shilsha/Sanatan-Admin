@@ -14,7 +14,6 @@ import { useEffect } from 'react';
 import { BiHide, BiShow } from 'react-icons/bi'
 import { AiOutlineClose } from 'react-icons/ai'
 import Loader from '../../components/Loader/Loader'
-
 const customStyles = {
     content: {
         top: '50%',
@@ -31,9 +30,7 @@ const customStyles = {
 
     },
 };
-
 function Login() {
-
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const dispatch = useDispatch();
@@ -45,15 +42,12 @@ function Login() {
     const [adminStatus, setAdminStatus] = useState('')
     const [passShow, setPassShow] = useState(false)
     const [buttonDi, setButtonDi] = useState(false)
-
     const AdminLoginFunction = (e) => {
         e.preventDefault()
         setButtonDi(true)
         const data = {
             email, password
         }
-        
-        // dispatch(AdminLogin(data))
         dispatch(getLogin(data))
         setTimeout(() => {
             setButtonDi(false)
@@ -69,32 +63,22 @@ function Login() {
     }
 
     // ''''''''''''''''''''''''''modal =============================
-
     function closeModal() {
-        
         setIsOpen(false);
     }
     function openModal() {
-        
         setIsOpen(true);
     }
 
     // ============================= otp function =========================
     const forgetOTp = useSelector(state => state.login)
-    
-
     const isVerefied = useSelector(state => state.login)
-    
     const [OTP, setOTP] = useState("");
     const [pass, setPass] = useState('')
     const [confirmPass, setConfirmPass] = useState('')
-    
-
     const forgetPasswordHandle = (e) => {
         e.preventDefault()
-
         dispatch(forgetPassword(email))
-
     }
 
     const verifyOtps = () => {
@@ -103,43 +87,27 @@ function Login() {
             'email': forgetOTp.result.email,
             otp: OTP,
         }
-        
         if (OTP.length !== 6) {
             toast.warning("Please enter 6 digit Otp")
         }
         else {
-            
-            
             dispatch(verifyOtp(data))
             // setResPass(true)
-
         }
-
     }
-
-
     useEffect(() => {
         // isOtpVerified
         if (forgetOTp?.result?.isOtpVerified) {
             setResPass(true)
         }
-        
         if (forgetOTp?.result?.adminId) {
             setForgetDiv(false)
         }
-
         if (forgetOTp.result?.isPasswordReset) {
-            
             setIsOpen(true);
             setResPass(true)
-           
-
         }
-
     }, [forgetOTp.result])
-
-    
-    
     const handleCreatePassword = (e) => {
         e.preventDefault()
         const data = {
@@ -147,38 +115,27 @@ function Login() {
             adminName: forgetOTp?.result.adminName,
             adminStatus: forgetOTp?.result.adminStatus,
             password: pass,
-            isPasswordReset:false,
+            isPasswordReset: false,
         }
-        
         if (pass == confirmPass) {
-            
-
             dispatch(resetPassword(data))
         } else {
             toast.warning('password did not match')
         }
-
-
     }
 
     const showPass = () => {
         setPassShow(!passShow)
     }
-
-
-
     return (
         <>
             <ToastContainer />
             <div className="grid grid-cols-1 md:grid-cols-2  h-screen font-serif  ">
                 <div className="hidden md:block">
-
-
                     <img className='inline ' src='/images/Ellipse83.png' width="50%" alt="empty" />
                     <div className='flex flex-col  items-center relative -top-20'>
                         <img className='' src='/images/sanatandark.png' width='40%' alt="empty" />
                         <img className='' src='/images/Sanatanhindi.png' width='50%' alt='empty'></img>
-
                     </div>
                 </div>
                 <div className="  flex items-center bg-[] "  >
@@ -200,28 +157,17 @@ function Login() {
                                 {/* <input class="shadow appearance-none border rounded w-full py-2 px-3 bg-gray-50 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="******************" required /> */}
 
                                 {/* ---------------------------- */}
-
-
-
                                 <div class="relative flex w-full flex-wrap items-stretch mb-3">
-
                                     <input class="px-3  placeholder-slate-500 text-slate-600 relative 
                                      rounded  border-0 shadow outline-none  w-full pr-10"
                                         type={!passShow ? `password` : 'text'}
-
-
                                         placeholder="Password"
                                         required value={password} onChange={(e) => setPassword(e.target.value)} />
                                     <span class="z-10 h-full leading-snug font-normal cursor-pointer  text-center text-slate-300 absolute bg-transparent rounded text-base items-center justify-center w-8 right-0 pr-3 py-3">
-
                                         {passShow ? <><BiShow className='text-gray-500' onClick={showPass} /></> : <>    <BiHide className='text-gray-500' onClick={showPass} /></>}
-
-
-
                                     </span>
                                 </div>
                                 {/* ---------------------------- */}
-
                             </div>
                             <div class="flex items-center justify-between">
                                 <button class="bg-orange-500 hover:bg-red-700 text-white font-bold  px-5 rounded focus:outline-none focus:shadow-outline
@@ -229,25 +175,17 @@ function Login() {
                                     type="submit" disabled={buttonDi}>
                                     Sign In
                                 </button>
-
-
                                 <p className="inline-block align-baseline font-bold text-sm text-orange-500 hover:text-red-800 cursor-pointer" onClick={openModal}>
                                     Forgot Password?
                                 </p>
                             </div>
                         </form>
-
                     </div>
                 </div>
                 <div className='absolute -z-10  bottom-0 w-full'>
                     <img src='/images/DesignLogin.png' alt='empty' className='w-full'></img>
                 </div>
-
-
-
             </div>
-
-
             {/* ========================open close modal============================ */}
             <Modal
                 isOpen={modalIsOpen}
@@ -256,11 +194,8 @@ function Login() {
                 style={customStyles}
                 contentLabel="Example Modal"
                 className=""
-
             >
-
                 {forgetDiv ? <>
-
                     <div class="w-full  bg-white p-5 rounded-lg lg:rounded-l-none shadow">
                         <AiOutlineClose onClick={closeModal} className="relative top-0 left-[95%] shadow text-red-500 cursor-pointer" size={25} />
                         <div class="px-8 mb-4 text-center">
@@ -316,8 +251,6 @@ function Login() {
                     </div>
 
                 </> : <>
-
-
                     {!resetPass ? <>
                         <div class="container">
                             <div class="row justify-content-md-center">
@@ -327,23 +260,16 @@ function Login() {
                                             <div class="text-2xl mb-5 font-bold">
                                                 Verify OTP
                                             </div>
-
                                             <div className=' mx-10 p-2 rounded-xl bg-gray-100 shadow'>
-
-
                                                 <OTPInput value={OTP} onChange={setOTP}
                                                     style={{ display: 'flex', justifyContent: 'center', padding: '20px 5px ' }}
-
                                                     inputStyles={{
-
                                                         border: "1px solid red",
-
                                                     }}
                                                     autoFocus OTPLength={6} otpType="number" disabled={false} secure />
                                                 {/* <ResendOTP onResendClick={() => 
                                                     style={{ justifyContent: 'space-evenly', padding: '10px  38px ' }}
                                                 /> */}
-
                                                 <div className='text-center py-2'>
                                                     <button
                                                         class=" w-[30%] text-white bg-gradient-to-r from-orange-500 

@@ -16,7 +16,7 @@ function SingleViewHistory() {
     const dispatch = useDispatch()
     const BlogHistory = useSelector((state) => state.BlogsHistory)
     const BlogContent = useSelector((state) => state.BlogsHistory)
-    sessionStorage.setItem("blog", JSON.stringify(BlogHistory?.resultSingleView.content))
+    // sessionStorage.setItem("blog", JSON.stringify(BlogHistory?.resultSingleView.content))
     var loggedAdminId = sessionStorage.getItem("adminId")
     var authorId = BlogHistory?.resultSingleView.adminId
     var superAdminId = 86;

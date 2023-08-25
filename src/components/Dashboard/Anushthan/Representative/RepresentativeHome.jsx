@@ -10,6 +10,7 @@ const RepresentativeHome = () => {
     const navigate = useNavigate();
     const isModuleAuth = JSON.parse(sessionStorage.getItem('user'))
     const isSuperAdmin = isModuleAuth?.role.some(data => data == 'SuperAdmin')
+    const isPseudoAdmin = isModuleAuth?.role.some(data => data == 'PseudoAdmin')
     const userModuleAuth = isModuleAuth?.role.some(data => data == 'Users')
     const articlesModuleAuth = isModuleAuth?.role.some(data => data == 'Articles')
     const HitsModuleAuth = isModuleAuth?.role.some(data => data == 'Hits')
@@ -43,7 +44,7 @@ const RepresentativeHome = () => {
 
                             <div className='grid grid-cols-5 gap-6 mt-10 '>
                                 <div className='rounded-lg bg-gray-50/20 blurr  grid place-content-center   shadow     h-[175px] ' >
-                                    {BlogsPosttModuleAuth || isSuperAdmin ? <>
+                                    {BlogsPosttModuleAuth || isSuperAdmin || isPseudoAdmin ? <>
                                         <Link to='/UserCallsQueries'>
                                             <h1 class=" cursor-pointer uppercase font-medium
                                  hover:scale-110 duration-500    ">
@@ -57,8 +58,8 @@ const RepresentativeHome = () => {
 
                                 </div>
                                 <div className='rounded-lg bg-gray-50/20 blurr  grid place-content-center   shadow     h-[175px] ' >
-                                    {BlogsPosttModuleAuth || isSuperAdmin ? <>
-                                        <Link to='/UserCallsQueries'>
+                                    {BlogsPosttModuleAuth || isSuperAdmin || isPseudoAdmin ? <>
+                                        <Link to='/interstedCallsList'>
                                             <h1 class=" cursor-pointer uppercase font-medium
                                  hover:scale-110 duration-500    ">
                                                 Interested Users
@@ -71,7 +72,7 @@ const RepresentativeHome = () => {
 
                                 </div>
                                 <div className='rounded-lg bg-gray-50/20  blurr grid place-content-center   shadow     h-[175px] ' >
-                                    {BlogsCategoryModuleAuth || isSuperAdmin ? <>
+                                    {BlogsCategoryModuleAuth || isSuperAdmin || isPseudoAdmin ? <>
                                         <Link to='/ClientList'>
                                             <h1 class=" cursor-pointer uppercase font-medium
                                hover:scale-110 duration-500    ">
@@ -87,7 +88,7 @@ const RepresentativeHome = () => {
 
                                 </div>
                                 <div className='rounded-lg bg-gray-50/20 blurr  grid place-content-center   shadow     h-[175px] ' >
-                                    {BlogsReviewModuleAuth || isSuperAdmin ? <>
+                                    {BlogsReviewModuleAuth || isSuperAdmin || isPseudoAdmin ? <>
                                         <Link to='/AnushthanRunningtatus'>
                                             <h1 class=" cursor-pointer uppercase font-medium
                                      hover:scale-110 duration-500    ">

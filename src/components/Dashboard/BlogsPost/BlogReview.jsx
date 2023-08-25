@@ -9,6 +9,7 @@ function BlogReview() {
     const navigate = useNavigate();
     const isModuleAuth = JSON.parse(sessionStorage.getItem('user'))
     const isSuperAdmin = isModuleAuth?.role.some(data => data == 'SuperAdmin')
+    const isPseudoAdmin = isModuleAuth?.role.some(data => data == 'PseudoAdmin')
     const userModuleAuth = isModuleAuth?.role.some(data => data == 'Users')
     const articlesModuleAuth = isModuleAuth?.role.some(data => data == 'Articles')
     const HitsModuleAuth = isModuleAuth?.role.some(data => data == 'Hits')
@@ -42,7 +43,7 @@ function BlogReview() {
 
                             <div className='grid grid-cols-5 gap-6 mt-10 '>
                                 <div className='rounded-lg bg-gray-50/20 blurr  grid place-content-center   shadow     h-[175px] ' >
-                                    {BlogsPosttModuleAuth || isSuperAdmin ? <>
+                                    {BlogsPosttModuleAuth || isSuperAdmin || isPseudoAdmin ? <>
                                         <Link to='/blogsPost'>
                                             <h1 class=" cursor-pointer uppercase font-medium
                                  hover:scale-110 duration-500    ">
@@ -56,7 +57,7 @@ function BlogReview() {
 
                                 </div>
                                 <div className='rounded-lg bg-gray-50/20  blurr grid place-content-center   shadow     h-[175px] ' >
-                                    {BlogsCategoryModuleAuth || isSuperAdmin ? <>
+                                    {BlogsCategoryModuleAuth || isSuperAdmin || isPseudoAdmin ? <>
                                         <Link to='/blogCategory'>
                                             <h1 class=" cursor-pointer uppercase font-medium
                                hover:scale-110 duration-500    ">
@@ -72,7 +73,7 @@ function BlogReview() {
 
                                 </div>
                                 <div className='rounded-lg bg-gray-50/20 blurr  grid place-content-center   shadow     h-[175px] ' >
-                                    {BlogsReviewModuleAuth || isSuperAdmin ? <>
+                                    {BlogsReviewModuleAuth || isSuperAdmin || isPseudoAdmin ? <>
                                         <Link to='/blogReview'>
                                             <h1 class=" cursor-pointer uppercase font-medium
                                                   hover:scale-110 duration-500    ">
@@ -130,7 +131,7 @@ function BlogReview() {
                                                 Blogs Search
                                             </h1>
                                         </Link>
-                                    {/* {BlogsReviewModuleAuth || isSuperAdmin ? <>
+                                    {/* {BlogsReviewModuleAuth || isSuperAdmin || isPseudoAdmin ? <>
                                         <Link to='/blogSearchAll'>
                                             <h1 class=" cursor-pointer uppercase font-medium
                                                   hover:scale-110 duration-500    ">

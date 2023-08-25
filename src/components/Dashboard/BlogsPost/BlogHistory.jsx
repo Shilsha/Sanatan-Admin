@@ -43,6 +43,7 @@ function BlogHistory() {
     const AdminId = JSON.parse(sessionStorage.getItem('adminId'))
     const isModuleAuth = JSON.parse(sessionStorage.getItem('user'))
     const HistoryAuth = isModuleAuth?.role.some(data => data == 'History')
+    const isPseudoAdmin = isModuleAuth?.role.some(data => data == 'PseudoAdmin')
     return (
         <>
             <ToastContainer />
@@ -115,7 +116,7 @@ function BlogHistory() {
                                     <tbody>
                                         {History.loading ? <Loader /> : <>
 
-                                            {AdminId == "86" || HistoryAuth ? <>
+                                            {AdminId == "86" || HistoryAuth || isPseudoAdmin? <>
                                                 {History.result?.map((data, index) => {
                                                     {/* {History.result.map((data, index) => { */ }
                                                     return <>
@@ -161,7 +162,7 @@ function BlogHistory() {
                                                     {History.result?.map((data, index) => {
                                                         {/* {History.result.map((data, index) => { */ }
                                                         return <>
-                                                            {data.adminId == AdminId ?
+                                                            {data.adminId == AdminId || isPseudoAdmin ?
                                                                 <tr key={index} className={` text-gray-500 text-start`}>
                                                                     <td class=" py-3 pl-2 ">{data.articleId}</td>
                                                                     <td class="  "> <td class=" ">

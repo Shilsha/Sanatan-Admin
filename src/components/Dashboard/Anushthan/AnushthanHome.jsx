@@ -9,6 +9,7 @@ function AnushthanHome() {
     const navigate = useNavigate();
     const isModuleAuth = JSON.parse(sessionStorage.getItem('user'))
     const isSuperAdmin = isModuleAuth?.role.some(data => data == 'SuperAdmin')
+    const isPseudoAdmin = isModuleAuth?.role.some(data => data == 'PseudoAdmin')
     const userModuleAuth = isModuleAuth?.role.some(data => data == 'Users')
     const articlesModuleAuth = isModuleAuth?.role.some(data => data == 'Articles')
     const HitsModuleAuth = isModuleAuth?.role.some(data => data == 'Hits')
@@ -48,7 +49,7 @@ function AnushthanHome() {
                                                 Representative
                                             </h1>
                                         </Link>
-                                    {/* {BlogsPosttModuleAuth || isSuperAdmin ? <>
+                                    {/* {BlogsPosttModuleAuth || isSuperAdmin || isPseudoAdmin ? <>
                                         <Link to='/blogsPost'>
                                             <h1 class=" cursor-pointer uppercase font-medium
                                  hover:scale-110 duration-500    ">
@@ -69,7 +70,7 @@ function AnushthanHome() {
                                             </h1>
 
                                         </Link>
-                                    {/* {BlogsCategoryModuleAuth || isSuperAdmin ? <>
+                                    {/* {BlogsCategoryModuleAuth || isSuperAdmin || isPseudoAdmin ? <>
                                         <Link to='/blogCategory'>
                                             <h1 class=" cursor-pointer uppercase font-medium
                                hover:scale-110 duration-500    ">
@@ -91,7 +92,7 @@ function AnushthanHome() {
                                                 Add Anushthan
                                             </h1>
                                         </Link>
-                                    {/* {BlogsReviewModuleAuth || isSuperAdmin ? <>
+                                    {/* {BlogsReviewModuleAuth || isSuperAdmin || isPseudoAdmin ? <>
                                         <Link to='/blogReview'>
                                             <h1 class=" cursor-pointer uppercase font-medium
                                                   hover:scale-110 duration-500    ">

@@ -1,32 +1,24 @@
-import React, { useEffect,useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Navbar from '../../../Navbar/Navbar'
 import Sidebar from '../../../Sidebar/Sidebar'
 import { ToastContainer } from 'react-toastify'
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { useDispatch, useSelector } from 'react-redux'
+import { getQueryByID } from '../../../../Redux/Fetures/Reducers/Anushthan Reducers/Queries/GetQueryByIDSlice'
+
+
 
 
 const ViewProfile = () => {
     const { id } = useParams();
-    const [profileData, setProfileData] = useState("")
-
+    const dispatch = useDispatch()
+    const QueryById = useSelector((state) => state.QueryById.result)
     useEffect(() => {
-        let OPTIONS = {
-
-            url: `${import.meta.env.VITE_BASE_URL}/api/getUserQueryById?queryId=${id}`,
-            method: "get",
-            headers: {
-                "content-type": "application/json",
-            },
-        };
-        axios(OPTIONS)
-            .then((res) => {
-                // console.log(res.data.data)
-                setProfileData(res?.data?.data)
-               
-                
-            })
+        dispatch(getQueryByID(id))
     }, [])
+
+
     return (
         <>
             <ToastContainer />
@@ -40,26 +32,26 @@ const ViewProfile = () => {
                             <div className="div border-r-2 border-black">
                                 <div class="grid md:grid-cols-2 md:gap-6 p-2">
                                     <div>
-                                      Query  ID
+                                        Query  ID
                                     </div>
                                     <div>
-                                        {profileData.queryId}
+                                        {QueryById.queryId}
                                     </div>
                                 </div>
-                                <div class="grid md:grid-cols-2 md:gap-6 p-2">
+                                {/* <div class="grid md:grid-cols-2 md:gap-6 p-2">
                                     <div>
                                       User  ID
                                     </div>
                                     <div>
                                     {profileData.userId}
                                     </div>
-                                </div>
+                                </div> */}
                                 <div class="grid md:grid-cols-2 md:gap-6 p-2">
                                     <div>
                                         Name
                                     </div>
                                     <div>
-                                    {profileData.firstName}
+                                        {QueryById.firstName}
                                     </div>
                                 </div>
                                 <div class="grid md:grid-cols-2 md:gap-6 p-2">
@@ -67,7 +59,7 @@ const ViewProfile = () => {
                                         Gender
                                     </div>
                                     <div>
-                                    {profileData.gender}
+                                        {QueryById.gender}
                                     </div>
                                 </div>
                                 <div class="grid md:grid-cols-2 md:gap-6 p-2">
@@ -75,7 +67,7 @@ const ViewProfile = () => {
                                         Contact No.
                                     </div>
                                     <div>
-                                    {profileData.mobileNo}
+                                        {QueryById.mobileNo}
                                     </div>
                                 </div>
                                 <div class="grid md:grid-cols-2 md:gap-6 p-2">
@@ -83,7 +75,7 @@ const ViewProfile = () => {
                                         Email Address
                                     </div>
                                     <div>
-                                    {profileData.email}
+                                        {QueryById.email}
                                     </div>
                                 </div>
                                 <div class="grid md:grid-cols-2 md:gap-6 p-2">
@@ -91,15 +83,15 @@ const ViewProfile = () => {
                                         User Message
                                     </div>
                                     <div>
-                                    {profileData.message}                                 
-                                       </div>
+                                        {QueryById.message}
+                                    </div>
                                 </div>
                                 <div class="grid md:grid-cols-2 md:gap-6 p-2">
                                     <div>
                                         Query Raise Date
                                     </div>
                                     <div>
-                                    {profileData.createdDate}
+                                        {QueryById.createdDate}
                                     </div>
                                 </div>
                                 <div class="grid md:grid-cols-2 md:gap-6 p-2">
@@ -107,7 +99,7 @@ const ViewProfile = () => {
                                         Preferred Timing
                                     </div>
                                     <div>
-                                    {profileData.preferredTiming}
+                                        {QueryById.preferredTiming}
                                     </div>
                                 </div>
                                 <div class="grid md:grid-cols-2 md:gap-6 p-2">
@@ -115,7 +107,7 @@ const ViewProfile = () => {
                                         Status
                                     </div>
                                     <div>
-                                    {profileData.queryStatus}
+                                        {QueryById.queryStatus}
                                     </div>
                                 </div>
                                 <div class="grid md:grid-cols-2 md:gap-6 p-2">
@@ -123,7 +115,7 @@ const ViewProfile = () => {
                                         Representative Name
                                     </div>
                                     <div>
-                                    {profileData.representativeName}
+                                        {QueryById.representativeName}
                                     </div>
                                 </div>
                             </div>

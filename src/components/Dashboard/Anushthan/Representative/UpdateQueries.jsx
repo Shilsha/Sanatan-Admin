@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import { ToastContainer } from 'react-toastify'
+import { useDispatch, useSelector } from 'react-redux'
+
 import Modal from 'react-modal';
 import { AiOutlinePlus, AiFillDelete, AiTwotoneEdit, AiOutlineClose, AiOutlineWarning } from 'react-icons/ai'
 import axios from "axios";
-
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { getQueryByID } from '../../../../Redux/Fetures/Reducers/Anushthan Reducers/Queries/GetQueryByIDSlice'
+import { getAllRepresentative } from '../../../../Redux/Fetures/Reducers/Anushthan Reducers/Representative/RepresentativeListSlice'
+
+
 const customStyles = {
     content: {
         top: '50%',
@@ -14,28 +19,48 @@ const customStyles = {
         bottom: 'auto',
         marginRight: '-50%',
         transform: 'translate(-50%, -50%)',
-
         width: '40%',
         height: 'auto',
         background: "white",
         position: 'relative',
         border: 'none',
-
-
     },
 
 };
-const AllocateRep = (props) => {
-   
-    const [form, setForm] = useState({
+const UpdateQueries = (props) => {
+       const [form, setForm] = useState({
     })
     const [gender, setGender] = useState("Male")
     const [repList, setRepList] = useState([])
     const [rep, setRep] = useState([])
-
-
     const [date, setDate] = useState(new Date())
     const [modalIsOpen, setIsOpen] = React.useState(false);
+    const dispatch = useDispatch()
+    const QueryById = useSelector((state) => state.QueryById.result)
+    const RepresentativeList = useSelector((state) => state.AllRepresentative)
+   
+
+const queryEffect=()=>{
+    setIsOpen(true);
+    dispatch(getQueryByID(props.queryId))
+    dispatch(getAllRepresentative())
+   
+    let OPTIONS = {
+
+        url: `${import.meta.env.VITE_BASE_URL}/api/get-representatives`,
+        method: "get",
+        headers: {
+            "content-type": "application/json",
+        },
+    };
+    axios(OPTIONS)
+        .then((res) => {
+            setRepList(res.data.data)   
+           
+        })
+        console.log(RepresentativeList,"RepresentativeList")
+}
+
     function openModal() {
         setIsOpen(true);
     }
@@ -54,41 +79,9 @@ const AllocateRep = (props) => {
         { value: "3PM-6PM", label: 4 },
 
     ];
-    const queryEffect=()=>{
-        setIsOpen(true);
-        // dispatch(getQueryByID(props.queryId))
-        // dispatch(getAllRepresentative())
+    useEffect(() => {
        
-        let OPTIONS = {
-    
-            url: `${import.meta.env.VITE_BASE_URL}/api/get-representatives`,
-            method: "get",
-            headers: {
-                "content-type": "application/json",
-            },
-        };
-        axios(OPTIONS)
-            .then((res) => {
-                setRepList(res.data.data)   
-               
-            })
-           
-    }
-    // useEffect(() => {
-    //     let OPTIONS = {
-
-    //         url: `${import.meta.env.VITE_BASE_URL}/api/get-representatives`,
-    //         method: "get",
-    //         headers: {
-    //             "content-type": "application/json",
-    //         },
-    //     };
-    //     axios(OPTIONS)
-    //         .then((res) => {
-    //             setRepList(res.data.data)   
-               
-    //         })
-    // }, [])
+    }, [])
     const handleChange = (event) => {
         setRep(event.target.value);
     };
@@ -114,10 +107,12 @@ const AllocateRep = (props) => {
 
             })
     }
-    return (
+
+   
+              return (
         <div>
             <ToastContainer />
-            <a onClick={queryEffect}>Allocate Rep.</a>
+            <a onClick={queryEffect}>Update Query</a>
             <Modal
                 isOpen={modalIsOpen}
                 // onAfterOpen={afterOpenModal}
@@ -135,7 +130,7 @@ const AllocateRep = (props) => {
                                 <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
                                     Query ID
                                 </label>
-                                <h4>{props.queryId}</h4>
+                                <h4>{QueryById.queryId}</h4>
                                 {/* <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="adminName" type="text" placeholder="ID" required name='adminName' value={form.adminName} onChange={handleChangeInput}
                                 /> */}
                             </div>
@@ -143,7 +138,7 @@ const AllocateRep = (props) => {
                                 <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
                                     Query Raise
                                 </label>
-                                <h4>{props.createdDate}</h4>
+                                <h4>{QueryById.createdDate}</h4>
 
                                 {/* <DatePicker className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" selected={date} onChange={(date) => setDate(date)} dateFormat="dd/MM/yyyy" /> */}
                             </div>
@@ -153,7 +148,7 @@ const AllocateRep = (props) => {
                                 <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
                                     Username
                                 </label>
-                                <h4>{props.firstName}</h4>
+                                <h4>{QueryById.firstName}</h4>
                                 {/* <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="adminName" type="text" placeholder="Name" required name='adminName' value={form.adminName} onChange={handleChangeInput}
                                 /> */}
                                 {/* {errors.phoneNumber && (<p className='text-red-500 text-sm pt-1'>{errors.phoneNumber}</p>)} */}
@@ -162,7 +157,7 @@ const AllocateRep = (props) => {
                                 <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
                                     Contact Number
                                 </label>
-                                <h4>{props.contactNo}</h4>
+                                <h4>{QueryById.mobileNo}</h4>
                                 {/* <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="adminName" type="number" placeholder="Mobile Number" required name='phoneNumber' value={form.phoneNumber} onChange={handleChangeInput}
                                 />     */}
                             </div>
@@ -172,7 +167,7 @@ const AllocateRep = (props) => {
                                 <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
                                     Email
                                 </label>
-                                <h4>{props.contactNo}</h4>
+                                <h4>{QueryById.contactNo}</h4>
                                 {/* <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="adminEmail" type="email" placeholder="Email" required name='email' value={form.email} onChange={handleChangeInput}
                                 /> */}
                                 {/* {resError && (<p className='text-red-500 text-sm pt-1'>{resError}</p>)} */}
@@ -198,7 +193,7 @@ const AllocateRep = (props) => {
                                 <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
                                     Message
                                 </label>
-                                <h4>{props.message}</h4>
+                                <h4>{QueryById.message}</h4>
 
                                 {/* <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="adminEmail" type="email" placeholder="Hello welcome to Sanatan Jyoti" required name='email' value={form.email} onChange={handleChangeInput}
                                 /> */}
@@ -253,4 +248,4 @@ const AllocateRep = (props) => {
         </div>
     )
 }
-export default AllocateRep
+export default UpdateQueries

@@ -1,7 +1,10 @@
 import React, { useState } from 'react'
-import { useEffect } from 'react'
 import { BsThreeDotsVertical } from 'react-icons/bs';
 
+import { BiShowAlt } from 'react-icons/bi';
+import { FaUserEdit } from 'react-icons/fa';
+import { AiOutlineDelete } from 'react-icons/ai';
+import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { ToastContainer } from 'react-toastify'
 import Navbar from '../../../Navbar/Navbar'
@@ -11,21 +14,58 @@ import Loader from '../../../Loader/Loader'
 import { BsSearch } from 'react-icons/bs'
 import { BiShow } from 'react-icons/bi'
 import { Link, useNavigate } from 'react-router-dom'
-function CallNotes() {
+import AddInterestedCalls from './AddInterestedCalls'
+import AllocateRep from './AllocateRep'
+import axios from "axios";
+import { getAllInterestedUsers } from '../../../../Redux/Fetures/Reducers/Anushthan Reducers/InterstedUsers/InterestedUsersSlice'
+
+
+
+function InterstedCallsList() {
     const navigate = useNavigate();
     const [type, setType] = useState('PUBLISH')
     const [page, setPage] = useState(0)
+    const [queries, setQueries] = useState([])
     const [FilterSearch, setFilterSearch] = useState('')
-    const History = useSelector((state) => state.BlogsHistory)
+    const [repList, setRepList] = useState("")
+    const dispatch = useDispatch()
+    const AllInterested = useSelector((state) => state.InterestedUsers)
     const data = {
         type: type,
         page: page,
         keyword: FilterSearch
     }
-    const dispatch = useDispatch()
     useEffect(() => {
-        dispatch(getBlogHistory(data))
-    }, [page, FilterSearch])
+        dispatch(getAllInterestedUsers(FilterSearch))
+    }, [FilterSearch])
+    // useEffect(() => {
+    //     let OPTIONS = {
+
+    //         url: `${import.meta.env.VITE_BASE_URL}/api/getInterestedUserQueryList?userIdentity=AnushthanUser&enabled=true&anushthanMobileOtpVerified=true&search=${FilterSearch}&representativeId=`,
+    //         method: "get",
+    //         headers: {
+    //             "content-type": "application/json",
+    //         },
+    //     };
+    //     axios(OPTIONS)
+    //         .then((res) => {
+
+    //             setQueries(res?.data)
+
+
+    //         })
+    // }, [FilterSearch])
+
+
+
+    useEffect(() => {
+
+    }, [])
+    // console.log(queries)
+    // useEffect(() => {
+    //     dispatch(getBlogHistory(data))
+
+    // }, [page, FilterSearch])
     const nextPage = () => {
         setPage(page + 1)
     }
@@ -39,25 +79,46 @@ function CallNotes() {
             return str;
         }
     };
-    const deleteBlog = (ids) => {
-        dispatch(deleteBlogHistoryView(ids))
-    }
+    // const deleteBlog = (ids) => {
+    //     dispatch(deleteBlogHistoryView(ids))
+    // }
     const AdminId = JSON.parse(sessionStorage.getItem('adminId'))
+
+    // const MarkInterested = (id) => {
+
+
+    //     let OPTIONS = {
+    //         url: `${import.meta.env.VITE_BASE_URL}/api/addInterestedUser?userQueryId=${id}`,
+    //         method: "Get",
+
+    //         headers: {
+    //             "content-type": "application/json",
+    //         },
+
+    //     };
+    //     axios(OPTIONS)
+    //         .then((res) => {
+
+    //             location.reload();
+
+
+    //         })
+    // }
     const isModuleAuth = JSON.parse(sessionStorage.getItem('user'))
     const isPseudoAdmin = isModuleAuth?.role.some(data => data == 'PseudoAdmin')
     return (
         <>
             <ToastContainer />
             <div className='   w-[100%]  min-h-screen flex flex-col-2 gap-4 bgGradient  '>
-                {/* <Sidebar /> */}
+                <Sidebar />
 
                 <div className=' w-full  '>
-                    {/* <Navbar /> */}
+                    <Navbar />
                     <div className=' my-4 pr-4 '>
                         {/*================ */}
-                        {/* <button class="bg-transparent my-4 hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded-full" onClick={() => navigate(-1)}>
+                        <button class="bg-transparent my-4 hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded-full" onClick={() => navigate(-1)}>
                             Back
-                        </button> */}
+                        </button>
                         <div className='flex justify-between items-center my-2'>
                             <div className=' w-[400px]   '>
                                 <div class=" relative w-full  text-gray-600 ">
@@ -71,18 +132,21 @@ function CallNotes() {
                                 </div>
                             </div>
                             <div>
-                                {/* <h1 type="button" class="inline-flex items-center text-white bg-gradient-to-r
+                                <h1 type="button" class="inline-flex items-center text-white bg-gradient-to-r
                                  from-orange-500  to-yellow-400  font-medium rounded-lg text-lg px-4 py-1 text-center mr-40 mb-2">
 
-                                    Anushthan Running Status
-                                </h1> */}
+                                    Interested Users
+                                </h1>
 
                             </div>
 
                             <div className='flex justify-center items-center '>
-                                <div className='text-green-500 mx-2 font-medium'>
-                                    {/* {type === 'PUBLISH' ? 'PUBLISH' : 'OPEN'} */}
-                                </div>
+                                {/* <div className='text-green-500 mx-2 font-medium'>
+                                  
+                                    <button class="bg-orange-500 hover:bg-orange-600 text-white font-medium py-1 shadow-xl  px-5 text-lg rounded-full focus:outline-none focus:shadow-outline" type="submit">
+                                        {<AddInterestedCalls />}
+                                    </button>
+                                </div> */}
 
 
                             </div>
@@ -97,11 +161,16 @@ function CallNotes() {
                                     <thead className=''>
                                         <tr className=' bg-blue-100  text-start '>
                                             <td class="py-3 pl-2 ">ID</td>
-                                            <td class="   ">Yajman Name</td>
+                                            <td class="   ">Query Raise</td>
+                                            <td class="  ">Preferred Timing</td>
+                                            <td class="  ">Name</td>
+                                            <td class="  ">Gender</td>
                                             <td class="  ">Contact No.</td>
-                                            <td class="  ">Call Date</td>
-                                            <td class="  ">Call Time</td>
-                                            <td class="  ">Representative Reply</td>
+                                            <td class="  ">User Message</td>
+                                            <td class="  ">Representative Name</td>
+                                            <td class="  ">Query Status</td>
+                                            {/* <td class="  ">Representative Reply</td> */}
+                                            <td class="  ">Action</td>
 
 
 
@@ -112,19 +181,39 @@ function CallNotes() {
                                         {History.loading ? <Loader /> : <>
 
                                             {AdminId == "86" || isPseudoAdmin ? <>
-                                                {History.result?.map((data, index) => {
+                                                {AllInterested.result?.map((data, index) => {
                                                     {/* {History.result.map((data, index) => { */ }
                                                     return <>
 
                                                         <tr key={index} className={` text-gray-500 text-start`}>
+                                                            <td class="py-3 pl-2 ">{data.queryId}</td>
+                                                            <td class="   ">{data.createdDate}</td>
+                                                            <td class="  ">{data.preferredTiming}</td>
+                                                            <td class="  ">{data.firstName}</td>
+                                                            <td class="  ">{data.gender}</td>
+                                                            <td class="  ">+{data.mobileNo}</td>
+                                                            <td class="  ">{data.message}</td>
+                                                            <td class="  ">{data.representativeName}</td>
+                                                            <td class="  ">{data.queryStatus}</td>
+                                                            {/* <td class="  ">Hello{data.}</td> */}
+                                                            {/* <td>
+                                                                <select name="cars" id="cars">
+                                                                    <option value=""></option>
+                                                                    <option value="Profie">View Profile</option>
+                                                                    <option value="Join Meet">Edit</option>
+                                                                    <option value="Join Meet"> {<AddClient />}</option>
 
-                                                            <td class="py-3 pl-2 ">123</td>
-                                                            <td class="   ">Aman</td>
-                                                            <td class="  ">9910499956</td>
-                                                            <td class="  ">09/07/2023</td>
-                                                            <td class="  ">02:00 PM</td>
-                                                            <td class="  ">Hello Customer</td>
+                                                                </select>
+                                                            </td> */}
+                                                            {/* <td>{<AllocateRep />}</td> */}
+                                                            <td>
 
+
+
+
+
+
+                                                            </td>
 
                                                         </tr>
 
@@ -136,20 +225,21 @@ function CallNotes() {
                                                     {History.result?.map((data, index) => {
                                                         {/* {History.result.map((data, index) => { */ }
                                                         return <>
-                                                            {data.adminId == AdminId || isPseudoAdmin?
+                                                            {data.adminId == AdminId || isPseudoAdmin ?
                                                                 <tr key={index} className={` text-gray-500 text-start`}>
-                                                                    <tr key={index} className={` text-gray-500 text-start`}>
-                                                                        <td class="py-3 pl-2 ">123</td>
-                                                                        <td class="   ">Aman</td>
-                                                                        <td class="  ">9910499956</td>
-                                                                        <td class="  ">Rudra Abhishek</td>
-                                                                        <td class="  ">17/07/2023</td>
-                                                                        <td class="  ">27/07/2021</td>
-                                                                        <td class="  ">Ram Narayan</td>
-                                                                        <td class="  ">51000</td>
-                                                                        <td class="  ">Processing</td>
-                                                                        <td><BsThreeDotsVertical /></td>
-                                                                    </tr>
+                                                                    <td class="py-3 pl-2 ">1234</td>
+                                                                    <td class="   ">21/04/2023</td>
+                                                                    <td class="  ">2PM - 3PM </td>
+                                                                    <td class="  ">Aman</td>
+                                                                    <td class="  ">Male</td>
+                                                                    <td class="  ">9910499956</td>
+                                                                    <td class="  ">Message Hello</td>
+                                                                    <td class="  ">Processing</td>
+                                                                    <td class="  ">Hello</td>
+                                                                    <td><BsThreeDotsVertical /> </td>
+
+
+
                                                                 </tr>
                                                                 : ""}
 
@@ -239,4 +329,4 @@ function CallNotes() {
     )
 }
 
-export default CallNotes
+export default InterstedCallsList

@@ -41,6 +41,7 @@ function BlogInactive() {
     const AdminId = JSON.parse(sessionStorage.getItem('adminId'))
     const isModuleAuth = JSON.parse(sessionStorage.getItem('user'))
     const InactiveAuth = isModuleAuth?.role.some(data => data == 'Inactive')
+    const isPseudoAdmin = isModuleAuth?.role.some(data => data == 'PseudoAdmin')
 
     return (
         <>
@@ -100,7 +101,7 @@ function BlogInactive() {
                                     </thead>
                                     <tbody>
                                         {History.loading ? <Loader /> : <>
-                                            {AdminId == "86" || InactiveAuth ? <>
+                                            {AdminId == "86" || InactiveAuth || isPseudoAdmin ? <>
                                                 {(History.result.filter(data => data.title?.toLowerCase().includes(FilterSearch)))?.map((data, index) => {
                                                     {/* {History.result.map((data, index) => { */ }
                                                     return <>
@@ -134,7 +135,7 @@ function BlogInactive() {
                                                 {(History.result.filter(data => data.title?.toLowerCase().includes(FilterSearch)))?.map((data, index) => {
                                                     {/* {History.result.map((data, index) => { */ }
                                                     return <>
-                                                      {data.adminId == AdminId ?
+                                                      {data.adminId == AdminId || isPseudoAdmin?
                                                         <tr key={index} className={` text-gray-500 text-start`}>
                                                             <td class=" py-3 pl-2 ">{data.articleId}</td>
                                                             <td class="  "> <td class=" ">

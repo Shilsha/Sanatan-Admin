@@ -91,6 +91,7 @@ function Sidebar() {
     // =============================== give permission =======================================
     const [permission, setPermission] = useState([
         { name: "Users" },
+        { name: "PseudoAdmin" },
         { name: "Hits" },
         { name: "Customers" },
         { name: "Queries" },
@@ -130,6 +131,7 @@ function Sidebar() {
 
     //   *****************************************Module access***********************************************************
     const isModuleAuth = JSON.parse(sessionStorage.getItem('user'))
+    const isPseudoAdmin = isModuleAuth?.role.some(data => data == 'PseudoAdmin')
     const isSuperAdmin = isModuleAuth?.role.some(data => data == 'SuperAdmin')
     const customerModuleAuth = isModuleAuth?.role.some(data => data == 'Customers')
     const articlesModuleAuth = isModuleAuth?.role.some(data => data == 'Articles')
@@ -140,7 +142,7 @@ function Sidebar() {
     const BroadcastModuleAuth = isModuleAuth?.role.some(data => data == 'Broadcast')
     const BlogsPosttModuleAuth = isModuleAuth?.role.some(data => data == 'BlogPost')
     // 
-    const unAutherizedHndle = () => {
+    const unAuthorizedHandle = () => {
         toast.error('You are not authorized for this module')
     }
     //   *****************************************Module access***********************************************************
@@ -239,7 +241,7 @@ function Sidebar() {
                             </NavLink>
                         </li>
                         <li>
-                            {UserListModuleAuth || isSuperAdmin ? <>
+                            {UserListModuleAuth || isSuperAdmin || isPseudoAdmin ? <>
                                 <NavLink to='/adminlists'>
 
                                     <div class="grid md:grid-cols-2">
@@ -267,7 +269,7 @@ function Sidebar() {
                             </> : <>
 
 
-                                <a onClick={unAutherizedHndle} >
+                                <a onClick={unAuthorizedHandle} >
                                 <div class="grid md:grid-cols-2">
                                         <div class="">
                                             <MdOutlineGroupAdd className=' ' size={25} />
@@ -284,7 +286,7 @@ function Sidebar() {
                         </li>
 
                         <li>
-                            {customerModuleAuth || isSuperAdmin ? <>
+                            {customerModuleAuth || isSuperAdmin || isPseudoAdmin ? <>
 
                                 <NavLink to='/users'>
                                 <div class="grid md:grid-cols-2">
@@ -300,7 +302,7 @@ function Sidebar() {
 
                                 </NavLink>
                             </> : <>
-                                <a onClick={unAutherizedHndle} >
+                                <a onClick={unAuthorizedHandle} >
                                 <div class="grid md:grid-cols-2">
                                         <div class="">
                                         <HiClipboardDocumentList className=' ' size={25} />
@@ -318,7 +320,7 @@ function Sidebar() {
 
                         <li>
 
-                            {QueriesListModuleAuth || isSuperAdmin ? <>
+                            {QueriesListModuleAuth || isSuperAdmin || isPseudoAdmin ? <>
 
                                 <NavLink to='/queries'>
                                 <div class="grid md:grid-cols-2">
@@ -335,7 +337,7 @@ function Sidebar() {
                                 </NavLink>
 
                             </> : <>
-                                <a onClick={unAutherizedHndle}>
+                                <a onClick={unAuthorizedHandle}>
                                 <div class="grid md:grid-cols-2">
                                         <div class="">
                                         <BsQuestionOctagonFill className=' ' size={25} />
@@ -353,7 +355,7 @@ function Sidebar() {
 
                         </li>
                         <li>
-                            {LogstModuleAuth || isSuperAdmin ? <>
+                            {LogstModuleAuth || isSuperAdmin || isPseudoAdmin ? <>
                                 <NavLink to='/logs'>
                                 <div class="grid md:grid-cols-2">
                                         <div class="">
@@ -369,7 +371,7 @@ function Sidebar() {
                                 </NavLink>
                             </> : <>
 
-                                <a onClick={unAutherizedHndle}>
+                                <a onClick={unAuthorizedHandle}>
                                 <div class="grid md:grid-cols-2">
                                         <div class="">
                                         <BsClipboardData className=' ' size={25} />
@@ -386,7 +388,7 @@ function Sidebar() {
 
                         </li>
                         <li>
-                            {BroadcastModuleAuth || isSuperAdmin ? <>
+                            {BroadcastModuleAuth || isSuperAdmin || isPseudoAdmin ? <>
 
                                 <NavLink to='/broadcast'>
                                 <div class="grid md:grid-cols-2">
@@ -402,7 +404,7 @@ function Sidebar() {
 
                                 </NavLink>
                             </> : <>
-                                <a onClick={unAutherizedHndle}>
+                                <a onClick={unAuthorizedHandle}>
                                 <div class="grid md:grid-cols-2">
                                         <div class="">
                                         <VscBroadcast className=' ' size={25} />
@@ -418,7 +420,7 @@ function Sidebar() {
 
                         </li>
                         <li>
-                            {BlogsPosttModuleAuth || isSuperAdmin ? <>
+                            {BlogsPosttModuleAuth || isSuperAdmin || isPseudoAdmin ? <>
                                 <NavLink to='/blog'>
                                 <div class="grid md:grid-cols-2">
                                         <div class="">
@@ -433,7 +435,7 @@ function Sidebar() {
 
                                 </NavLink>
                             </> : <>
-                                <a onClick={unAutherizedHndle}>
+                                <a onClick={unAuthorizedHandle}>
                                 <div class="grid md:grid-cols-2">
                                         <div class="">
                                         <SiBloglovin className=' ' size={25} />
@@ -466,7 +468,7 @@ function Sidebar() {
 
                             </NavLink>
                             {/* </> : <>
-                                <a onClick={unAutherizedHndle}>
+                                <a onClick={unAuthorizedHandle}>
                                     <SiBloglovin className=' ' size={25} />
                                     <strong>Representative Management</strong>
                                 </a>
@@ -611,6 +613,7 @@ function Sidebar() {
                                     <label className="text-xs px-2 ">{user.name}</label>
                                 </div>
                             ))}
+                            
                             {errors.role && (<p className='text-red-500 text-sm pt-1'>{errors.role}</p>)}
 
                         </div>
